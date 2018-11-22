@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For the best Salons, Barber shop in town</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="w3.css" rel="stylesheet"/>
+    <link href="css/loginsignup.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="FAQs.css">
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="salon-style.css">    <!-- adding css styling -->
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-grid.css">
+
+
+
+    <link rel="stylesheet" type="text/css" href="fontawesome/fontawesome.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="javascript/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="javascript/javascript.js"></script>
+    <script src="javascript/scroll-horizontal.js"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+
+    <!-- start menu -->
+    <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="js/megamenu.js"></script>
+    <script>$(document).ready(function () {
+        $(".megamenu").megamenu();
+    });</script>
+    <!-- end menu -->
+    <!-- top scrolling -->
+    <script type="text/javascript" src="javascript/move-top.js"></script>
+    <script type="text/javascript" src="javascript/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1200);
+            });
+        });
+
+    </script>
+
+   <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<script
+    src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+</script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+   <script type="text/javascript">
+        $(document).ready(function(){
+            $("#myModal").modal('show');
+        });
+    </script>
+
+</head>
+
+<body id="body" style="background-color: whitesmoke">
+
+    <div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="inner">Very Important Notices</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body w3-card-4" >
+                <p><b>1. This is a work in progress we just want to give you a feel of what you will enjoy on our platform
+                  once we have officially lauched Hairways on 30th Nov 2018. As of such every idea in here is subjected to
+                <span class="w3-tag w3-red w3-round">international Copyright act 1891.</span></b></p>
+                <p><b>2. Upon launching we will give one month free for every salon.</b></p>
+
+                <p><b>3. Also find time to go through our <span class="w3-tag w3-teal w3-round"><a href="Terms_and_Conditions" style="color:white;"> Tearms of services</a></span> and <span class="w3-tag w3-teal w3-round"><a href="FAQs.html" style="color:white;">Freequently asked questions</a></pan></b></p>
+
+                <p><b>4. Finally if you wish to be one of our agents in any of the major cities please Contact
+                us on <span class="w3-tag w3-teal w3-round"> 0792799958 | 0717771518</span><b/></p>
+            </div>
+            <footer class="Copyright w3-footer">
+            <p></p>
+            <p></p>
+            <p></p>
+                <p style="padding-left:30%">Copyright &copy; 2018 | Powered By <a href="#" target="_blank">Ariyans Techies</a>.</>
+            </footer>
+        </div>
+    </div>
+</div>
+
+    <!--Navigation bar -->
+    <!-- This one is shown on large screens and hidden on small screens -->
+    <div class="w3-bar w3-card-4 w3-xlarge " style="background-color: #11AFF2; height: 50px">
+  <p href="#" class="w3-bar-item w3-button">Hairways.co.ke</p>
+    <a href="FAQs.html" class="w3-bar-item w3-button w3-hide-small w3-right">FAQs</a>
+    <a href="About_us.html" class="w3-bar-item w3-button w3-right w3-hide-small">About</a>
+  <a href="salonist.php" class="w3-bar-item w3-button w3-right w3-hide-small">Login</a>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
+</div>
+
+    <!-- This one is shown on small screens and hidden on large screens -->
+<div id="demo" class="w3-bar-block w3-hide w3-hide-large w3-mobile w3-hide-medium"  style="background-color: #11AFF2">
+  <a href="About_us.html" class="w3-bar-item w3-button">About Us</a>
+  <a href="FAQs.html" class="w3-bar-item w3-button">FQAs</a>
+  <a href="salonist.php" class="w3-bar-item w3-button">Login</a>
+</div>
+
+<!-- RANKING SALONS IN SLIDER -->
+<section class="salon-rank">
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="images/34.jpg" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 style="color: #11AFF2; font-weight: bold;">Tuskys Salon</h5>
+                    <p style="color: #000">For the best and latest cuts</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img class="d-block w-100" src="images/cover1.jpg" alt="Second slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 style="color: #11AFF2; font-weight: bold;">Tuskys Salon</h5>
+                    <p style="color: #000;">For the best and latest cuts</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img class="d-block w-100" src="images/salon.jpg" alt="Third slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 style="color: #11AFF2; font-weight: bold;">Tuskys Salon</h5>
+                    <p style="color: #000;">For the best and latest cuts</p>
+                </div>
+            </div>
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</section>
+
+<!-- Getting a splited screen for  -->
+<div>
+    <div class="w3-row-padding  w3-metro-darken ">
+        <div class="w3-col w3-third   w3-mobile" style="width:25%">
+
+            <h2>Find a Saloon</h2>
+
+            <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for names..">
+            <div class="w3-panel w3-card-4 w3-center" style="width:100%">
+                <span style="font-size:90px">&#10077;</span><br>
+
+                <p style="margin-top:-30px">
+                <h4>About Hairways</h4>
+                <p><i><b>Hairways is here to bridge the gap between Salon owners and their prospective Customers
+                    We do this by providing Salons a platform where their customers can find them. Customers can find salons, rank them,
+                    and comment or write a short review of Salons they have visited.
+                    They can also book for Salon services with their Salon of choice.</b></i></p>
+
+                <p>See our <a href="pricing_page.html">pricing page</a> or <a href="FAQs.html">freequently asked questions</a> for more informantion</p>
+
+            </div>
+
+            <div class="w3-panel w3-card-4 w3-hide-small w3-center" style="width:100%">
+                <span style="font-size:50px">&#10077;</span><br>
+
+                <p style="margin-top:-20px">
+                <h4><b>Testimonials</b></h4>
+                <p><i>Hairways is here to bridge the gap between Salon owners and their prospective Customers
+                    We do this by providing Salons a platform where their customers can find them. Customers can find salons, rank them,
+                    and comment or write a short review of Saloons they have visited.
+                    They can also book for Saloon services with their Salon of choice.</i></p>
+            </div>
+
+            <div class="clear"><p></p></div>
+            <div class="clear"><p></p></div>
+
+        </div>
+
+        <div class="w3-col w3-third w3-container   w3-mobile" style="width:75%">
+
+            <div class="main">
+                <div class="wrap">
+
+                    <div class="content-bottom">
+                        <p><b>Most Visited</b></p>
+                        <div class="box1 " id="most_visited">
+                            <div class="col_1_of_3 span_1_of_3">
+                                <button class="w3-btn" href="moreInfo.php">
+                                    <div class="view view-fifth">
+                                        <div class="top_box">
+                                            <h3 class="m_1" id="title">Hairways Salon</h3>
+                                            <p class="m_2" id="services">Salon and Spa</p>
+                                            <div class="grid_img">
+                                                <div class="css3"><img id="dispaly_image" src="images/1.jpg" alt=""/></div>
+                                            </div>
+                                            <div class="location"><h5 id="location"  style="margin-bottom: 2px">Mega city</h5></div>
+                                        </div>
+                                    </div>
+
+                                    <a href="moreInfo.php" class="w3-btn w3-block w3-blue">See more</a>
+                                    <div class="clear"><p></p></div>
+                                    <p>Likes <span class="w3-badge w3-green">6</span>
+                                        <span style="padding-left: 16px"><a href="#">Comments</a> </span>
+                                        <span class="w3-badge w3-red">8</span></p>
+
+                                    <div class="clear"></div>
+
+                                </button>
+                            </div>
+                            <div class="col_1_of_3 span_1_of_3">
+                                <button class="w3-btn" href="moreInfo.php">
+                                    <div class="view view-fifth">
+                                        <div class="top_box">
+                                            <h3 class="m_1">Better Cutz</h3>
+                                            <p class="m_2">Barber shop</p>
+                                            <div class="grid_img">
+                                                <div class="css3"><img src="images/2.jpg" alt=""/></div>
+                                                <div class="mask">
+                                                    <div class="info">Book appoinyment</div>
+                                                </div>
+                                            </div>
+                                            <div class="location"><h5>Mega city</h5></div>
+                                        </div>
+
+                                        <a href="moreInfo.php" class="w3-btn w3-block w3-blue">See more</a>
+                                        <div class="clear"><p></p></div>
+                                        <p>Likes <span class="w3-badge w3-green">0</span><span
+                                                style="padding-left: 16px">Comments </span> <span
+                                                class="w3-badge w3-red">8</span></p>
+
+                                    </div>
+
+
+                                    <div class="clear"></div>
+                                </button>
+                            </div>
+                            <div class="col_1_of_3 span_1_of_3">
+                                <button class="w3-btn" href="moreInfo.php">
+                                    <div class="view view-fifth">
+                                        <div class="top_box">
+                                            <h3 class="m_1">Hair clinic</h3>
+                                            <p class="m_2">Tuskys</p>
+                                            <div class="grid_img">
+                                                <div class="css3"><img src="images/3.jpg" alt=""/></div>
+                                                <div class="mask">
+                                                    <div class="info">Book appoinment</div>
+                                                </div>
+                                            </div>
+                                            <div class="location"><h5>Mega city</h5></div>
+                                        </div>
+
+                                        <a href="moreInfo.php" class="w3-btn w3-block w3-blue">See more</a>
+                                        <div class="clear"><p></p></div>
+
+                                        <p>Likes <span class="w3-badge w3-green">6</span><span
+                                                style="padding-left: 16px">Comments </span> <span
+                                                class="w3-badge w3-red">8</span></p>
+                                    </div>
+
+
+                                    <div class="clear"></div>
+                                </button>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <p><b>Trending This week</b></p>
+                        <div class="box1">
+                            <div class="col_1_of_3 span_1_of_3">
+                                <button class="w3-btn" href="moreInfo.php">
+                                    <div class="view view-fifth">
+                                        <div class="top_box">
+                                            <h3 class="m_1">Your beauty</h3>
+                                            <p class="m_2">Salon and spa</p>
+                                            <div class="grid_img">
+                                                <div class="css3"><img src="images/4.jpg" alt=""/></div>
+                                                <div class="mask">
+                                                    <div class="info">Book appointment</div>
+                                                </div>
+                                            </div>
+                                            <div class="location"><h5>Mega city</h5></div>
+                                        </div>
+
+                                        <a href="moreInfo.php" class="w3-btn w3-block w3-blue">See more</a>
+                                        <div class="clear"><p></p></div>
+
+                                        <p>Likes <span class="w3-badge w3-green">6</span><span
+                                                style="padding-left: 16px">Comments </span> <span
+                                                class="w3-badge w3-red">8</span></p>
+                                    </div>
+
+
+                                    <div class="clear"></div>
+                                </button>
+                            </div>
+                            <div class="col_1_of_3 span_1_of_3">
+                                <button class="w3-btn" href="moreInfo.php">
+                                    <div class="view view-fifth">
+                                        <div class="top_box">
+                                            <h3 class="m_1">Smart Barbershop</h3>
+                                            <p class="m_2">Barber shop</p>
+                                            <div class="grid_img">
+                                                <div class="css3"><img src="images/5.jpg" alt=""/></div>
+                                                <div class="mask">
+                                                    <div class="info">Book appointment</div>
+                                                </div>
+                                            </div>
+                                            <div class="location"><h5>Mega city</h5></div>
+                                        </div>
+                                        <a href="moreInfo.php" class="w3-btn w3-block w3-blue">See more</a>
+                                        <div class="clear"><p></p></div>
+
+                                        <p>Likes <span class="w3-badge w3-green">6</span><span
+                                                style="padding-left: 16px">Comments </span> <span
+                                                class="w3-badge w3-red">8</span></p>
+                                    </div>
+
+
+                                    <div class="clear"></div>
+                                </button>
+                            </div>
+                            <div class="col_1_of_3 span_1_of_3">
+                                <button class="w3-btn" href="moreInfo.php">
+                                    <div class="view view-fifth">
+                                        <div class="top_box">
+                                            <h3 class="m_1">We make salon</h3>
+                                            <p class="m_2">Salon</p>
+                                            <div class="grid_img">
+                                                <div class="css3"><img src="images/6.jpg" alt=""/></div>
+                                                <div class="mask">
+                                                    <div class="info">Book appointment</div>
+                                                </div>
+                                            </div>
+                                            <div class="location"><h5>Mega city</h5></div>
+                                        </div>
+                                        <a href="moreInfo.php" class="w3-btn w3-block w3-blue">See more</a>
+                                        <div class="clear"><p></p></div>
+
+                                        <p>Likes <span class="w3-badge w3-green">6</span><span
+                                                style="padding-left: 16px">Comments </span> <span
+                                                class="w3-badge w3-red">8</span></p>
+                                    </div>
+
+
+                                    <div class="clear"></div>
+                                </button>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <p><b>Recomended For you</b></p>
+                        <div class="box1">
+                            <div class="col_1_of_3 span_1_of_3">
+                                <button class="w3-btn" href="moreInfo.php">
+                                    <div class="view view-fifth">
+                                        <div class="top_box">
+                                            <h3 class="m_1">Your beauty</h3>
+                                            <p class="m_2">Salon and spa</p>
+                                            <div class="grid_img">
+                                                <div class="css3"><img src="images/4.jpg" alt=""/></div>
+                                                <div class="mask">
+                                                    <div class="info">Book appointment</div>
+                                                </div>
+                                            </div>
+                                            <div class="location"><h5>Mega city</h5></div>
+                                        </div>
+                                        <a href="moreInfo.php" class="w3-btn w3-block w3-blue">See more</a>
+                                        <div class="clear"><p></p></div>
+
+                                        <p>Likes <span class="w3-badge w3-green">6</span><span
+                                                style="padding-left: 16px">Comments </span> <span
+                                                class="w3-badge w3-red">8</span></p>
+                                    </div>
+
+
+                                    <div class="clear"></div>
+                                </button>
+                            </div>
+                            <div class="col_1_of_3 span_1_of_3">
+                                <button class="w3-btn" href="moreInfo.php">
+                                    <div class="view view-fifth">
+                                        <div class="top_box">
+                                            <h3 class="m_1">Smart Barbershop</h3>
+                                            <p class="m_2">Barber shop</p>
+                                            <div class="grid_img">
+                                                <div class="css3"><img src="images/5.jpg" alt=""/></div>
+                                                <div class="mask">
+                                                    <div class="info">Book appointment</div>
+                                                </div>
+                                            </div>
+                                            <div class="location"><h5>Mega city</h5></div>
+                                        </div>
+                                        <a href="moreInfo.php" class="w3-btn w3-block w3-blue">See more</a>
+                                        <div class="clear"><p></p></div>
+
+                                        <p>Likes <span class="w3-badge w3-green">6</span><span
+                                                style="padding-left: 16px">Comments </span> <span
+                                                class="w3-badge w3-red">8</span></p>
+                                    </div>
+
+
+                                    <div class="clear"></div>
+                                </button>
+                            </div>
+                            <div class="col_1_of_3 span_1_of_3">
+                                <button class="w3-btn" href="moreInfo.php">
+                                    <div class="view view-fifth">
+                                        <div class="top_box">
+                                            <h3 class="m_1">We make salon</h3>
+                                            <p class="m_2">Salon</p>
+                                            <div class="grid_img">
+                                                <div class="css3"><img src="images/6.jpg" alt=""/></div>
+                                                <div class="mask">
+                                                    <div class="info">Book appointment</div>
+                                                </div>
+                                            </div>
+                                            <div class="location"><h5>Mega city</h5></div>
+                                        </div>
+                                        <a href="moreInfo.php" class="w3-btn w3-block w3-blue">See more</a>
+                                        <div class="clear"><p></p></div>
+                                        <p>Likes <span class="w3-badge w3-green">6</span><span
+                                                style="padding-left: 16px">Comments </span> <span
+                                                class="w3-badge w3-red">8</span></p>
+                                    </div>
+
+
+                                    <div class="clear"></div>
+                                </button>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- Testimonies on small devices  -->
+<div class="w3-panel w3-card-4 w3-hide-large w3-center" style="width:100%">
+    <span style="font-size:50px">&#10077;</span><br>
+
+    <p style="margin-top:-20px">
+    <h4><b>Testimonials</b></h4>
+    <i>Hairways is here to bridge the gap between Saloon owners and their (prospective)Castomers
+        We do this by providing Saloons a platform to be found by their castumers.Castomers can see ranked
+        Saloons and comment or write a short review of Saloons they have visited.
+        They can also book for Saloon services from their Saloon of choice.</i></p>
+</div>
+
+<div class="footer" style="background-color: gray">
+
+
+    <div class="footer-bottom" style="padding: 50px 0px 50px 0px">
+        <div class="wrap">
+            <div class="section group">
+                <div class="col_1_of_5 span_1_of_5">
+                    <h3 class="m_9">Home</h3>
+
+
+                </div>
+                <div class="col_1_of_5 span_1_of_5">
+                    <h3 class="m_9">Beauty Blog</h3>
+
+                </div>
+                <div class="col_1_of_5 span_1_of_5">
+                    <h3 class="m_9">Contact us</h3>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<footer class="Copyright">
+    <p>Copyright &copy; 2018 | Powered By <a href="#" target="_blank">Ariyans Techies</a>.</p>
+</footer>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("demo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".dropdown img.flag").addClass("flagvisibility");
+
+        $(".dropdown dt a").click(function () {
+            $(".dropdown dd ul").toggle();
+        });
+
+        $(".dropdown dd ul li a").click(function () {
+            var text = $(this).html();
+            $(".dropdown dt a span").html(text);
+            $(".dropdown dd ul").hide();
+            $("#result").html("Selected value is: " + getSelectedValue("sample"));
+        });
+
+        function getSelectedValue(id) {
+            return $("#" + id).find("dt a span.value").html();
+        }
+
+        $(document).bind('click', function (e) {
+            var $clicked = $(e.target);
+            if (!$clicked.parents().hasClass("dropdown"))
+                $(".dropdown dd ul").hide();
+        });
+
+
+        $("#flagSwitcher").click(function () {
+            $(".dropdown img.flag").toggleClass("flagvisibility");
+        });
+    });
+</script>
+
+</body>
+
+</html>

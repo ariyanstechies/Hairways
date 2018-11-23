@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+  <title>For the best Salons, Barber shop in town</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link href="{% static 'css/w3.css' %}" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap-grid.css' %}">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <!-- Adding custom css styling -->
+  <link href="{% static 'css/loginsignup.css' %}" rel="stylesheet"/>
+  <link rel="stylesheet" href="{% static 'css/faqs.css' %}">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/salon-style.css' %}">
+
+  <script src="{% static 'css/javascript/jquery.js' %}"></script>
+  <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
+  <script src="{% static 'css/javascript/javascript.js' %}"></script>
+  <script src="{% static 'css/javascript/scroll-horizontal.js' %}"></script>
+
+  <!-- start menu -->
+  <!-- <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all"/> -->
+  <!-- <script type="text/javascript" src="js/megamenu.js"></script> -->
+  <!-- <script>$(document).ready(function () {
+  $(".megamenu").megamenu();
+});</script> -->
+<!-- end menu -->
+<!-- top scrolling -->
+<!-- <script type="text/javascript" src="javascript/move-top.js"></script> -->
+<!-- <script type="text/javascript" src="javascript/easing.js"></script> -->
+<!-- <script type="text/javascript">
+jQuery(document).ready(function ($) {
+$(".scroll").click(function (event) {
+event.preventDefault();
+$('html,body').animate({scrollTop: $(this.hash).offset().top}, 1200);
+});
+});
+
+</script> -->
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#myModal").modal('show');
+  });
+</script>
+
+</head>
+<body id="body" style="background-color: whitesmoke">
+  <div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="inner">
+            Very Important Notices
+          </h3>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body w3-card-4" >
+          <p>
+            <b>1. This is a work in progress we just want to give you a feel of what you will enjoy on our platform
+              once we have officially lauched Hairways on 30th Nov 2018. As of such every idea in here is subjected to
+              <span class="w3-tag w3-red w3-round">international Copyright act 1891.</span>
+            </b>
+          </p>
+          <p>
+            <b>2. Upon launching we will give one month free for every salon.</b></p>
+            <p>
+              <b>3. Also find time to go through our
+                <span class="w3-tag w3-teal w3-round">
+                  <a href="Terms_and_Conditions/" style="color:white;">
+                    Tearms of services</a>
+                  </span> and <span class="w3-tag w3-teal w3-round">
+                    <a href="faqs.html" style="color:white;">
+                      Freequently asked questions
+                    </a>
+                  </span>
+                </b>
+              </p>
+              <p>
+                <b>4. Finally if you wish to be one of our agents in any of the major cities please Contact
+                  us on <span class="w3-tag w3-teal w3-round"> 0792799958 | 0717771518</span><b/></p>
+                </div>
+                <footer class="Copyright w3-footer">
+                  <p></p>
+                  <p></p>
+                  <p></p>
+                  <p style="padding-left:30%">Copyright &copy; 2018 | Powered By <a href="#" target="_blank">Ariyans Techies</a>.</>
+                  </footer>
+                </div>
+              </div>
+            </div>
+            <!--Navigation bar -->
+            <!-- This one is shown on large screens and hidden on small screens -->
+            <div class="w3-bar w3-card-4 w3-xlarge " style="background-color: #11AFF2; height: 50px">
+              <p href="#" class="w3-bar-item w3-button">Hairways.co.ke</p>
+              <a href="/faqs" class="w3-bar-item w3-button w3-hide-small w3-right">Faqs</a>
+              <a href="/about" class="w3-bar-item w3-button w3-right w3-hide-small">About</a>
+              <a href="/login" class="w3-bar-item w3-button w3-right w3-hide-small">Login</a>
+              <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
+            </div>
+
+            <!-- This one is shown on small screens and hidden on large screens -->
+            <div id="demo" class="w3-bar-block w3-hide w3-hide-large w3-mobile w3-hide-medium"  style="background-color: #11AFF2">
+              <a href="/about" class="w3-bar-item w3-button">About Us</a>
+              <a href="/faqs" class="w3-bar-item w3-button">FQAs</a>
+              <a href="/login" class="w3-bar-item w3-button">Login</a>
+            </div>
+            <main>
+              {% block content %}
+              {% endblock %}
+            </main>
+            <footer class="Copyright">
+              <p>Copyright &copy; 2018 | Powered By <a href="#" target="_blank">Ariyans Techies</a>.</p>
+            </footer>
+
+            <script>
+              function myFunction() {
+                var x = document.getElementById("demo");
+                if (x.className.indexOf("w3-show") == -1) {
+                  x.className += " w3-show";
+                } else {
+                  x.className = x.className.replace(" w3-show", "");
+                }
+              }
+            </script>
+
+
+            <script type="text/javascript">
+              $(document).ready(function () {
+                $(".dropdown img.flag").addClass("flagvisibility");
+
+                $(".dropdown dt a").click(function () {
+                  $(".dropdown dd ul").toggle();
+                });
+
+                $(".dropdown dd ul li a").click(function () {
+                  var text = $(this).html();
+                  $(".dropdown dt a span").html(text);
+                  $(".dropdown dd ul").hide();
+                  $("#result").html("Selected value is: " + getSelectedValue("sample"));
+                });
+
+                function getSelectedValue(id) {
+                  return $("#" + id).find("dt a span.value").html();
+                }
+
+                $(document).bind('click', function (e) {
+                  var $clicked = $(e.target);
+                  if (!$clicked.parents().hasClass("dropdown"))
+                  $(".dropdown dd ul").hide();
+                });
+
+
+                $("#flagSwitcher").click(function () {
+                  $(".dropdown img.flag").toggleClass("flagvisibility");
+                });
+              });
+            </script>
+
+          </body>
+
+          </html>

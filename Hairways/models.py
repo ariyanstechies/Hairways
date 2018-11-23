@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 
 
@@ -60,8 +61,11 @@ class Salons(models.Model):
 
 
 class Users(models.Model):
-    UserId = models.ForeignKey(Appoiments, on_delete=models.CASCADE)
-    UserName = models.TextField()
-    Email = models.TextField()
-    Phone = models.IntegerField()
-    Location = models.TextField()
+    # userId = models.ForeignKey(Appoiments, on_delete=models.CASCADE, null=True, blank=True)
+    username = models.OneToOneField(User, on_delete=models.CASCADE)
+    password = models.CharField(max_length=16)
+    phone = models.IntegerField()
+    joined_date = models.DateTimeField(
+        blank=True, null=True
+        )
+    location = models.TextField()

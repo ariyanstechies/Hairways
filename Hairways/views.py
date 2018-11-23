@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from Hairways.forms import SignUpForm
 
 
-def index(request):
+def home(request):
     return render(request, "index.html")
 
 
@@ -13,10 +13,6 @@ def faqs(request):
 
 def about(request):
     return render(request, "about.html")
-
-
-# def login(request):
-#     return render(request, "login.php")
 
 
 def signup(request):

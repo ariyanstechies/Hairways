@@ -21,16 +21,16 @@ class Comments(models.Model):
 
 class Owners(models.Model):
     OwnerId = models.IntegerField(primary_key=True)
-    OwnerName = models.TextField()
+    OwnerName = models.CharField(max_length=100)
     Email = models.TextField()
-    Phone = models.IntegerField()
+    Phone = models.PositiveIntegerField()
     Password = models.CharField(max_length=50)
 
 
 class Services(models.Model):
     ServiceId = models.IntegerField(primary_key=True)
-    ServiceName = models.TextField()
-    ServiceCost = models.TextField()
+    ServiceName = models.CharField(max_length=100)
+    ServiceCost = models.CharField(max_length=50)
     ServiceDuration = models.TextField()
     ServiceBookings = models.IntegerField()
     Availability = models.BooleanField(default=True)
@@ -38,7 +38,7 @@ class Services(models.Model):
 
 class Appoiments(models.Model):
     AppoimentsId = models.CharField(max_length=100, primary_key=True)
-    AppoimentsStatus = models.TextField()
+    AppoimentsStatus = models.BooleanField()
     ServicesID = models.ForeignKey(Services, on_delete=models.CASCADE)
     TotalCost = models.IntegerField()
     UserID = models.TextField()
@@ -50,13 +50,13 @@ class Salons(models.Model):
     Description = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     OwnerId = models.ForeignKey(Owners, on_delete=models.CASCADE)
-    Likes = models.IntegerField()
-    CommentsId = models.ForeignKey(Comments, on_delete=models.CASCADE)
-    Views = models.IntegerField()
+    Likes = models.IntegerField(null=True, blank=True)
+    CommentsId = models.ForeignKey(Comments, null=True, blank=True, on_delete=models.CASCADE)
+    Views = models.IntegerField(null=True, blank=True)
     Status = models.BooleanField(default=True)
     appoinmentsId = models.ForeignKey(Appoiments, on_delete=models.CASCADE)
-    ServiceId = models.ForeignKey(Services, on_delete=models.CASCADE)
-    Paybill = models.TextField()
+    ServiceId = models.ForeignKey(Services, null=True, blank=True, on_delete=models.CASCADE)
+    Paybill = models.TextField(null=True, blank=True)
 
 
 class Users(models.Model):

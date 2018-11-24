@@ -3,7 +3,6 @@
 {% block content %}
 <!-- RANKING SALONS IN SLIDER -->
 <section class="salon-rank">
-
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -50,81 +49,105 @@
 <!-- Getting a splited screen for  -->
 <div>
   <div class="w3-row-padding  w3-metro-darken ">
-    <div class="w3-col w3-third   w3-mobile" style="width:25%">
-      <h2>Find a Saloon</h2>
-      <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for names..">
-      <div class="w3-panel w3-card-4 w3-center" style="width:100%">
-        <span style="font-size:90px">&#10077;</span><br>
-        <p style="margin-top:-30px">
-          <h4>About Hairways</h4>
-          <p>
-            <i>
-              <b>Hairways is here to bridge the gap between Salon owners and their prospective Customers
-                We do this by providing Salons a platform where their customers can find them. Customers can find salons, rank them,
-                and comment or write a short review of Salons they have visited.
-                They can also book for Salon services with their Salon of choice.
-              </b>
-            </i>
-          </p>
-          <p>See our <a href="pricing_page/">pricing page</a> or <a href="faqs/">freequently asked questions</a> for more informantion</p>
+    <div class="w3-col w3-third w3-container w3-mobile" style="width:100%">
+      <div class="main">
+        <div class="wrap">
 
-        </div>
+          <div class="content-bottom">
+            <p><b>Most Visited</b></p>
+            <div class="box1 " id="most_visited">
+              <div class="col_1_of_3 span_1_of_3">
+                <button class="w3-btn" href="moreinfo/">
+                  <div class="view view-fifth">
+                    <div class="top_box">
+                      <h3 class="m_1" id="title">Hairways Salon</h3>
+                      <p class="m_2" id="services">Salon and Spa</p>
+                      <div class="grid_img">
+                        <div class="css3"><img id="dispaly_image" src="{% static 'css/images/1.jpg' %}" alt=""/></div>
+                      </div>
+                      <div class="location"><h5 id="location"  style="margin-bottom: 2px">Mega city</h5></div>
+                    </div>
+                  </div>
 
-        <div class="w3-panel w3-card-4 w3-hide-small w3-center" style="width:100%">
-          <span style="font-size:50px">&#10077;</span><br>
-          <p style="margin-top:-20px">
-            <h4><b>Testimonials</b></h4>
-            <p>
-              <i>Hairways is here to bridge the gap between Salon owners and their prospective Customers
-                We do this by providing Salons a platform where their customers can find them. Customers can find salons, rank them,
-                and comment or write a short review of Saloons they have visited.
-                They can also book for Saloon services with their Salon of choice.
-              </i>
-            </p>
-          </div>
-          <div class="clear"><p></p></div>
-          <div class="clear"><p></p></div>
-        </div>
-        <div class="w3-col w3-third w3-container w3-mobile" style="width:75%">
-          <div class="main">
-            <div class="wrap">
+                  <a href="moreinfo/" class="w3-btn w3-block w3-blue">See more</a>
+                  <div class="clear"><p></p></div>
+                  <p>Likes <span class="w3-badge w3-green">6</span>
+                    <span style="padding-left: 16px"><a href="#">Comments</a> </span>
+                    <span class="w3-badge w3-red">8</span></p>
 
-              <div class="content-bottom">
-                <p><b>Most Visited</b></p>
-                <div class="box1 " id="most_visited">
-                  <div class="col_1_of_3 span_1_of_3">
-                    <button class="w3-btn" href="moreinfo/">
-                      <div class="view view-fifth">
-                        <div class="top_box">
-                          <h3 class="m_1" id="title">Hairways Salon</h3>
-                          <p class="m_2" id="services">Salon and Spa</p>
-                          <div class="grid_img">
-                            <div class="css3"><img id="dispaly_image" src="{% static 'css/images/1.jpg' %}" alt=""/></div>
+                    <div class="clear"></div>
+
+                  </button>
+                </div>
+                <div class="col_1_of_3 span_1_of_3">
+                  <button class="w3-btn" href="moreinfo/">
+                    <div class="view view-fifth">
+                      <div class="top_box">
+                        <h3 class="m_1">Better Cutz</h3>
+                        <p class="m_2">Barber shop</p>
+                        <div class="grid_img">
+                          <div class="css3"><img src="{% static 'css/images/2.jpg' %}" alt=""/></div>
+                          <div class="mask">
+                            <div class="info">Book appoinyment</div>
                           </div>
-                          <div class="location"><h5 id="location"  style="margin-bottom: 2px">Mega city</h5></div>
                         </div>
+                        <div class="location"><h5>Mega city</h5></div>
                       </div>
 
                       <a href="moreinfo/" class="w3-btn w3-block w3-blue">See more</a>
                       <div class="clear"><p></p></div>
-                      <p>Likes <span class="w3-badge w3-green">6</span>
-                        <span style="padding-left: 16px"><a href="#">Comments</a> </span>
-                        <span class="w3-badge w3-red">8</span></p>
+                      <p>Likes <span class="w3-badge w3-green">0</span><span
+                        style="padding-left: 16px">Comments </span> <span
+                        class="w3-badge w3-red">8</span></p>
+
+                      </div>
+
+
+                      <div class="clear"></div>
+                    </button>
+                  </div>
+                  <div class="col_1_of_3 span_1_of_3">
+                    <button class="w3-btn" href="moreinfo/">
+                      <div class="view view-fifth">
+                        <div class="top_box">
+                          <h3 class="m_1">Hair clinic</h3>
+                          <p class="m_2">Tuskys</p>
+                          <div class="grid_img">
+                            <div class="css3"><img src="{% static 'css/images/3.jpg' %}" alt=""/></div>
+                            <div class="mask">
+                              <div class="info">Book appoinment</div>
+                            </div>
+                          </div>
+                          <div class="location"><h5>Mega city</h5></div>
+                        </div>
+
+                        <a href="moreinfo/" class="w3-btn w3-block w3-blue">See more</a>
+                        <div class="clear"><p></p></div>
+
+                        <p>Likes <span class="w3-badge w3-green">6</span><span
+                          style="padding-left: 16px">Comments </span> <span
+                          class="w3-badge w3-red">8</span></p>
+                        </div>
+
 
                         <div class="clear"></div>
-
                       </button>
                     </div>
+                    <div class="clear"></div>
+                  </div>
+
+                  <p><b>Trending This week</b></p>
+                  <div class="box1">
                     <div class="col_1_of_3 span_1_of_3">
                       <button class="w3-btn" href="moreinfo/">
                         <div class="view view-fifth">
                           <div class="top_box">
-                            <h3 class="m_1">Better Cutz</h3>
-                            <p class="m_2">Barber shop</p>
+                            <h3 class="m_1">Your beauty</h3>
+                            <p class="m_2">Salon and spa</p>
                             <div class="grid_img">
-                              <div class="css3"><img src="{% static 'css/images/2.jpg' %}" alt=""/></div>
+                              <div class="css3"><img src="{% static 'css/images/4.jpg' %}" alt=""/></div>
                               <div class="mask">
-                                <div class="info">Book appoinyment</div>
+                                <div class="info">Book appointment</div>
                               </div>
                             </div>
                             <div class="location"><h5>Mega city</h5></div>
@@ -132,10 +155,10 @@
 
                           <a href="moreinfo/" class="w3-btn w3-block w3-blue">See more</a>
                           <div class="clear"><p></p></div>
-                          <p>Likes <span class="w3-badge w3-green">0</span><span
+
+                          <p>Likes <span class="w3-badge w3-green">6</span><span
                             style="padding-left: 16px">Comments </span> <span
                             class="w3-badge w3-red">8</span></p>
-
                           </div>
 
 
@@ -146,17 +169,16 @@
                         <button class="w3-btn" href="moreinfo/">
                           <div class="view view-fifth">
                             <div class="top_box">
-                              <h3 class="m_1">Hair clinic</h3>
-                              <p class="m_2">Tuskys</p>
+                              <h3 class="m_1">Smart Barbershop</h3>
+                              <p class="m_2">Barber shop</p>
                               <div class="grid_img">
-                                <div class="css3"><img src="{% static 'css/images/3.jpg' %}" alt=""/></div>
+                                <div class="css3"><img src="{% static 'css/images/5.jpg' %}" alt=""/></div>
                                 <div class="mask">
-                                  <div class="info">Book appoinment</div>
+                                  <div class="info">Book appointment</div>
                                 </div>
                               </div>
                               <div class="location"><h5>Mega city</h5></div>
                             </div>
-
                             <a href="moreinfo/" class="w3-btn w3-block w3-blue">See more</a>
                             <div class="clear"><p></p></div>
 
@@ -169,26 +191,20 @@
                             <div class="clear"></div>
                           </button>
                         </div>
-                        <div class="clear"></div>
-                      </div>
-
-                      <p><b>Trending This week</b></p>
-                      <div class="box1">
                         <div class="col_1_of_3 span_1_of_3">
                           <button class="w3-btn" href="moreinfo/">
                             <div class="view view-fifth">
                               <div class="top_box">
-                                <h3 class="m_1">Your beauty</h3>
-                                <p class="m_2">Salon and spa</p>
+                                <h3 class="m_1">We make salon</h3>
+                                <p class="m_2">Salon</p>
                                 <div class="grid_img">
-                                  <div class="css3"><img src="{% static 'css/images/4.jpg' %}" alt=""/></div>
+                                  <div class="css3"><img src="{% static 'css/images/6.jpg' %}" alt=""/></div>
                                   <div class="mask">
                                     <div class="info">Book appointment</div>
                                   </div>
                                 </div>
                                 <div class="location"><h5>Mega city</h5></div>
                               </div>
-
                               <a href="moreinfo/" class="w3-btn w3-block w3-blue">See more</a>
                               <div class="clear"><p></p></div>
 
@@ -201,14 +217,19 @@
                               <div class="clear"></div>
                             </button>
                           </div>
+                          <div class="clear"></div>
+                        </div>
+
+                        <p><b>Recomended For you</b></p>
+                        <div class="box1">
                           <div class="col_1_of_3 span_1_of_3">
                             <button class="w3-btn" href="moreinfo/">
                               <div class="view view-fifth">
                                 <div class="top_box">
-                                  <h3 class="m_1">Smart Barbershop</h3>
-                                  <p class="m_2">Barber shop</p>
+                                  <h3 class="m_1">Your beauty</h3>
+                                  <p class="m_2">Salon and spa</p>
                                   <div class="grid_img">
-                                    <div class="css3"><img src="{% static 'css/images/5.jpg' %}" alt=""/></div>
+                                    <div class="css3"><img src="{% static 'css/images/4.jpg' %}" alt=""/></div>
                                     <div class="mask">
                                       <div class="info">Book appointment</div>
                                     </div>
@@ -231,10 +252,10 @@
                               <button class="w3-btn" href="moreinfo/">
                                 <div class="view view-fifth">
                                   <div class="top_box">
-                                    <h3 class="m_1">We make salon</h3>
-                                    <p class="m_2">Salon</p>
+                                    <h3 class="m_1">Smart Barbershop</h3>
+                                    <p class="m_2">Barber shop</p>
                                     <div class="grid_img">
-                                      <div class="css3"><img src="{% static 'css/images/6.jpg' %}" alt=""/></div>
+                                      <div class="css3"><img src="{% static 'css/images/5.jpg' %}" alt=""/></div>
                                       <div class="mask">
                                         <div class="info">Book appointment</div>
                                       </div>
@@ -253,19 +274,14 @@
                                   <div class="clear"></div>
                                 </button>
                               </div>
-                              <div class="clear"></div>
-                            </div>
-
-                            <p><b>Recomended For you</b></p>
-                            <div class="box1">
                               <div class="col_1_of_3 span_1_of_3">
                                 <button class="w3-btn" href="moreinfo/">
                                   <div class="view view-fifth">
                                     <div class="top_box">
-                                      <h3 class="m_1">Your beauty</h3>
-                                      <p class="m_2">Salon and spa</p>
+                                      <h3 class="m_1">We make salon</h3>
+                                      <p class="m_2">Salon</p>
                                       <div class="grid_img">
-                                        <div class="css3"><img src="{% static 'css/images/4.jpg' %}" alt=""/></div>
+                                        <div class="css3"><img src="{% static 'css/images/6.jpg' %}" alt=""/></div>
                                         <div class="mask">
                                           <div class="info">Book appointment</div>
                                         </div>
@@ -274,7 +290,6 @@
                                     </div>
                                     <a href="moreinfo/" class="w3-btn w3-block w3-blue">See more</a>
                                     <div class="clear"><p></p></div>
-
                                     <p>Likes <span class="w3-badge w3-green">6</span><span
                                       style="padding-left: 16px">Comments </span> <span
                                       class="w3-badge w3-red">8</span></p>
@@ -284,104 +299,40 @@
                                     <div class="clear"></div>
                                   </button>
                                 </div>
-                                <div class="col_1_of_3 span_1_of_3">
-                                  <button class="w3-btn" href="moreinfo/">
-                                    <div class="view view-fifth">
-                                      <div class="top_box">
-                                        <h3 class="m_1">Smart Barbershop</h3>
-                                        <p class="m_2">Barber shop</p>
-                                        <div class="grid_img">
-                                          <div class="css3"><img src="{% static 'css/images/5.jpg' %}" alt=""/></div>
-                                          <div class="mask">
-                                            <div class="info">Book appointment</div>
-                                          </div>
-                                        </div>
-                                        <div class="location"><h5>Mega city</h5></div>
-                                      </div>
-                                      <a href="moreinfo/" class="w3-btn w3-block w3-blue">See more</a>
-                                      <div class="clear"><p></p></div>
-
-                                      <p>Likes <span class="w3-badge w3-green">6</span><span
-                                        style="padding-left: 16px">Comments </span> <span
-                                        class="w3-badge w3-red">8</span></p>
-                                      </div>
-
-
-                                      <div class="clear"></div>
-                                    </button>
-                                  </div>
-                                  <div class="col_1_of_3 span_1_of_3">
-                                    <button class="w3-btn" href="moreinfo/">
-                                      <div class="view view-fifth">
-                                        <div class="top_box">
-                                          <h3 class="m_1">We make salon</h3>
-                                          <p class="m_2">Salon</p>
-                                          <div class="grid_img">
-                                            <div class="css3"><img src="{% static 'css/images/6.jpg' %}" alt=""/></div>
-                                            <div class="mask">
-                                              <div class="info">Book appointment</div>
-                                            </div>
-                                          </div>
-                                          <div class="location"><h5>Mega city</h5></div>
-                                        </div>
-                                        <a href="moreinfo/" class="w3-btn w3-block w3-blue">See more</a>
-                                        <div class="clear"><p></p></div>
-                                        <p>Likes <span class="w3-badge w3-green">6</span><span
-                                          style="padding-left: 16px">Comments </span> <span
-                                          class="w3-badge w3-red">8</span></p>
-                                        </div>
-
-
-                                        <div class="clear"></div>
-                                      </button>
-                                    </div>
-                                    <div class="clear"></div>
-                                  </div>
-                                </div>
+                                <div class="clear"></div>
                               </div>
                             </div>
-
-
                           </div>
- </div>
-</div>
-
-<!-- Testimonies on small devices  -->
-<div class="w3-panel w3-card-4 w3-hide-large w3-center" style="width:100%">
-  <span style="font-size:50px">&#10077;</span><br>
-
-  <p style="margin-top:-20px">
-    <h4><b>Testimonials</b></h4>
-    <i>
-      Hairways is here to bridge the gap between Saloon owners and their (prospective)Castomers
-      We do this by providing Saloons a platform to be found by their castumers.Castomers can see ranked
-      Saloons and comment or write a short review of Saloons they have visited.
-      They can also book for Saloon services from their Saloon of choice.
-    </i>
-  </p>
-  </div>
-<div class="footer" style="background-color: gray">
-  <div class="footer-bottom" style="padding: 50px 0px 50px 0px">
-    <div class="wrap">
-      <div class="section group">
-        <div class="col_1_of_5 span_1_of_5">
-          <h3 class="m_9">Home</h3>
+                        </div>
 
 
-        </div>
-        <div class="col_1_of_5 span_1_of_5">
-          <h3 class="m_9">Beauty Blog</h3>
+                      </div>
+                    </div>
+                  </div>
 
-        </div>
-        <div class="col_1_of_5 span_1_of_5">
-          <h3 class="m_9">Contact us</h3>
+              
+            <div class="footer" style="background-color: gray">
+              <div class="footer-bottom" style="padding: 50px 0px 50px 0px">
+                <div class="wrap">
+                  <div class="section group">
+                    <div class="col_1_of_5 span_1_of_5">
+                      <h3 class="m_9">Home</h3>
 
-        </div>
+
+                    </div>
+                    <div class="col_1_of_5 span_1_of_5">
+                      <h3 class="m_9">Beauty Blog</h3>
+
+                    </div>
+                    <div class="col_1_of_5 span_1_of_5">
+                      <h3 class="m_9">Contact us</h3>
+
+                    </div>
 
 
-      </div>
-    </div>
-  </div>
+                  </div>
+                </div>
+              </div>
 
-</div>
-{% endblock %}
+            </div>
+            {% endblock %}

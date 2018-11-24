@@ -9,7 +9,6 @@
   <link rel="stylesheet" type="text/css" media="screen"
   href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap-grid.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome/fontawesome.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/salon-style.css' %}">
   <script src="{% static 'css/javascript/jquery.js' %}"></script>
   <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
@@ -30,7 +29,7 @@
   <div class="content">
     <div class="container-fluid" style="width: 100%">
 
-      <a href="index/ #search-results"><button class="back btn btn-primary" style="margin: 10px 0px 20px 30px;">Back</button></a>
+      <a href="/home/"><button class="back btn btn-primary" style="margin: 10px 0px 20px 30px;">Back</button></a>
 
       <div class="content">
         <div class="container-fluid">
@@ -38,7 +37,7 @@
             <div class="col-md-7" style="margin-bottom: 30px;">
               <div class="card">
 
-                <div class="card-body" style="background-image: url(images/1.jpg); background-size: cover; height: 400px">
+                <div class="card-body" style="background-image: url({% static 'css/images/1.jpg' %}); background-size: cover; height: 400px">
 
                 </div>
               </div>

@@ -12,7 +12,7 @@ $(document).ready(function(){
 
     // If the checkbox is checked, display the output text
     if (checkBox.checked == true){
-      document.getElementById("text").append(('<div>'+ text +'</div>'));
+      document.getElementById("text").innerHTML += '<div>'+ text +'</div>'+'<br>';
     } else {
       // document.getElementById("text").innerHTML -= text;
     }
@@ -29,12 +29,10 @@ $(document).ready(function(){
     var date = document.getElementById('Time').value;
     document.getElementById('Time').innerHTML = date;
   }
-  // <!--  Google Maps Plugin    -->
-  // Initialize and add the map
 
-    $('#datetimepicker').datetimepicker({
-      format: 'dd/MM/yyyy hh:mm:ss',
-      language: 'en'
-    });
-
+  $('#datetimepicker').datetimepicker({
+    format: 'dd/MM/yyyy hh:mm:ss',
+    language: 'en'
   });
+
+});

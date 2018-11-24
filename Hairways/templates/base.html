@@ -47,148 +47,106 @@ $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1200);
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#myModal").modal('show');
-  });
+$(document).ready(function(){
+  $("#myModal").modal('show');
+});
 </script>
 
 </head>
 <body id="body" style="background-color: whitesmoke">
-  <div id="myModal" class="modal fade">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="inner">
-            Very Important Notices
-          </h3>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+  <!--Navigation bar -->
+  <!-- This one is shown on large screens and hidden on small screens -->
+  <div class="w3-bar w3-card-4 w3-xlarge " style="background-color: #11AFF2; height: 50px">
+    <p href="#" class="w3-bar-item w3-button">Hairways.co.ke</p>
+    <a href="/faqs" class="w3-bar-item w3-button w3-hide-small w3-right">Faqs</a>
+    <a href="/about" class="w3-bar-item w3-button w3-right w3-hide-small">About</a>
+    <a href="/login" class="w3-bar-item w3-button w3-right w3-hide-small">Login</a>
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
+  </div>
+
+  <!-- This one is shown on small screens and hidden on large screens -->
+  <div id="demo" class="w3-bar-block w3-hide w3-hide-large w3-mobile w3-hide-medium"  style="background-color: #11AFF2">
+    <a href="/about" class="w3-bar-item w3-button">About Us</a>
+    <a href="/faqs" class="w3-bar-item w3-button">FQAs</a>
+    <a href="/login" class="w3-bar-item w3-button">Login</a>
+  </div>
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+  <div class="footer" style="background-color: gray">
+    <div class="footer-bottom" style="padding: 50px 0px 50px 0px">
+      <div class="wrap">
+        <div class="section group">
+          <div class="col_1_of_5 span_1_of_5">
+            <h3 class="m_9">Home</h3>
+
+
+          </div>
+          <div class="col_1_of_5 span_1_of_5">
+            <h3 class="m_9">Beauty Blog</h3>
+
+          </div>
+          <div class="col_1_of_5 span_1_of_5">
+            <h3 class="m_9">Contact us</h3>
+
+          </div>
+
+
         </div>
-        <div class="modal-body w3-card-4" >
-          <p>
-            <b>1. This is a work in progress we just want to give you a feel of what you will enjoy on our platform
-              once we have officially lauched Hairways on 30th Nov 2018. As of such every idea in here is subjected to
-              <span class="w3-tag w3-red w3-round">international Copyright act 1891.</span>
-            </b>
-          </p>
-          <p>
-            <b>2. Upon launching we will give one month free for every salon.</b></p>
-            <p>
-              <b>3. Also find time to go through our
-                <span class="w3-tag w3-teal w3-round">
-                  <a href="Terms_and_Conditions/" style="color:white;">
-                    Tearms of services</a>
-                  </span> and <span class="w3-tag w3-teal w3-round">
-                    <a href="faqs.html" style="color:white;">
-                      Freequently asked questions
-                    </a>
-                  </span>
-                </b>
-              </p>
-              <p>
-                <b>4. Finally if you wish to be one of our agents in any of the major cities please Contact
-                  us on <span class="w3-tag w3-teal w3-round"> 0792799958 | 0717771518</span><b/></p>
-                </div>
-                <footer class="Copyright w3-footer">
-                  <p></p>
-                  <p></p>
-                  <p></p>
-                  <p style="padding-left:30%">Copyright &copy; 2018 | Powered By <a href="#" target="_blank">Ariyans Techies</a>.</>
-                  </footer>
-                </div>
-              </div>
-            </div>
-            <!--Navigation bar -->
-            <!-- This one is shown on large screens and hidden on small screens -->
-            <div class="w3-bar w3-card-4 w3-xlarge " style="background-color: #11AFF2; height: 50px">
-              <p href="#" class="w3-bar-item w3-button">Hairways.co.ke</p>
-              <a href="/faqs" class="w3-bar-item w3-button w3-hide-small w3-right">Faqs</a>
-              <a href="/about" class="w3-bar-item w3-button w3-right w3-hide-small">About</a>
-              <a href="/login" class="w3-bar-item w3-button w3-right w3-hide-small">Login</a>
-              <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
-            </div>
+      </div>
+    </div>
 
-            <!-- This one is shown on small screens and hidden on large screens -->
-            <div id="demo" class="w3-bar-block w3-hide w3-hide-large w3-mobile w3-hide-medium"  style="background-color: #11AFF2">
-              <a href="/about" class="w3-bar-item w3-button">About Us</a>
-              <a href="/faqs" class="w3-bar-item w3-button">FQAs</a>
-              <a href="/login" class="w3-bar-item w3-button">Login</a>
-            </div>
-            <main>
-              {% block content %}
-              {% endblock %}
-            </main>
-            <div class="footer" style="background-color: gray">
-              <div class="footer-bottom" style="padding: 50px 0px 50px 0px">
-                <div class="wrap">
-                  <div class="section group">
-                    <div class="col_1_of_5 span_1_of_5">
-                      <h3 class="m_9">Home</h3>
+  </div>
+  <footer class="Copyright">
+    <p>Copyright &copy; 2018 | Powered By <a href="#" target="_blank">Ariyans Techies</a>.</p>
+  </footer>
+
+  <script>
+  function myFunction() {
+    var x = document.getElementById("demo");
+    if (x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+    } else {
+      x.className = x.className.replace(" w3-show", "");
+    }
+  }
+  </script>
 
 
-                    </div>
-                    <div class="col_1_of_5 span_1_of_5">
-                      <h3 class="m_9">Beauty Blog</h3>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    $(".dropdown img.flag").addClass("flagvisibility");
 
-                    </div>
-                    <div class="col_1_of_5 span_1_of_5">
-                      <h3 class="m_9">Contact us</h3>
+    $(".dropdown dt a").click(function () {
+      $(".dropdown dd ul").toggle();
+    });
 
-                    </div>
+    $(".dropdown dd ul li a").click(function () {
+      var text = $(this).html();
+      $(".dropdown dt a span").html(text);
+      $(".dropdown dd ul").hide();
+      $("#result").html("Selected value is: " + getSelectedValue("sample"));
+    });
 
+    function getSelectedValue(id) {
+      return $("#" + id).find("dt a span.value").html();
+    }
 
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <footer class="Copyright">
-              <p>Copyright &copy; 2018 | Powered By <a href="#" target="_blank">Ariyans Techies</a>.</p>
-            </footer>
-
-            <script>
-              function myFunction() {
-                var x = document.getElementById("demo");
-                if (x.className.indexOf("w3-show") == -1) {
-                  x.className += " w3-show";
-                } else {
-                  x.className = x.className.replace(" w3-show", "");
-                }
-              }
-            </script>
+    $(document).bind('click', function (e) {
+      var $clicked = $(e.target);
+      if (!$clicked.parents().hasClass("dropdown"))
+      $(".dropdown dd ul").hide();
+    });
 
 
-            <script type="text/javascript">
-              $(document).ready(function () {
-                $(".dropdown img.flag").addClass("flagvisibility");
+    $("#flagSwitcher").click(function () {
+      $(".dropdown img.flag").toggleClass("flagvisibility");
+    });
+  });
+  </script>
 
-                $(".dropdown dt a").click(function () {
-                  $(".dropdown dd ul").toggle();
-                });
+</body>
 
-                $(".dropdown dd ul li a").click(function () {
-                  var text = $(this).html();
-                  $(".dropdown dt a span").html(text);
-                  $(".dropdown dd ul").hide();
-                  $("#result").html("Selected value is: " + getSelectedValue("sample"));
-                });
-
-                function getSelectedValue(id) {
-                  return $("#" + id).find("dt a span.value").html();
-                }
-
-                $(document).bind('click', function (e) {
-                  var $clicked = $(e.target);
-                  if (!$clicked.parents().hasClass("dropdown"))
-                  $(".dropdown dd ul").hide();
-                });
-
-
-                $("#flagSwitcher").click(function () {
-                  $(".dropdown img.flag").toggleClass("flagvisibility");
-                });
-              });
-            </script>
-
-          </body>
-
-          </html>
+</html>

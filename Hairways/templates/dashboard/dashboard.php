@@ -1,46 +1,3 @@
-<?php
-
-require '../password_hash_compatibilty.php';
-
-  session_start();
-
-  if(isset($_POST['signin'])) {
-
-  include 'connectDb.php';
-
-   // Escape user inputs for security
-  $signinuser = mysqli_real_escape_string($conn, $_REQUEST['signinuser']);
-   $signinpass = mysqli_real_escape_string($conn, $_REQUEST['signinpass']);
-
-   $sql = "SELECT * FROM salonist WHERE username LIKE '$signinuser'";
-   $result = mysqli_query($conn, $sql);
-   $resultCheck = mysqli_num_rows($result);
-   if($resultCheck < 1){
-      header("Location: ../salonist.php?login=userdoesnotexist");
-          exit();
-   }else{
-      if($row = mysqli_fetch_assoc($result)){
-        $passwordCheck = password_verify($signinpass, $row['pass']);
-        if ($passwordCheck == false) {
-          header("Location: ../salonist.php?login=error");
-          exit();
-        }elseif($passwordCheck == true){
-          // LOgin user
-          $_SESSION['username'] = $row['username'];
-          $_SESSION['firstname'] = $row['firstname'];
-          $_SESSION['lastname'] = $row['lastname'];
-          $_SESSION['email'] = $row['email'];
-           header("Location: dashboard.php");
-
-          exit();
-        }
-      }
-
-    }
-  }
-
- //end
-?>
 
 <!DOCTYPE html>
 {% load staticfiles %}
@@ -59,7 +16,7 @@ require '../password_hash_compatibilty.php';
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="{% static 'css/assets/css/material-dashboard.css?v=2.1.0' %}" rel="stylesheet" />
+  <link href="{% static 'css/assets/css/material-dashboard.css' %}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
 <!--   <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
 </head>
@@ -479,22 +436,22 @@ require '../password_hash_compatibilty.php';
         <li class="header-title">Images</li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-1.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-1.jpg' %}" alt="">
           </a>
         </li>
         <li class="active">
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-2.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-2.jpg' %}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-3.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-3.jpg' %}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-4.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-4.jpg' %}" alt="">
           </a>
         </li>
 
@@ -502,23 +459,23 @@ require '../password_hash_compatibilty.php';
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="{% static 'css/assets/js/core/jquery.min.js' %}"></script>
+  <script src="{% static 'css/assets/js/core/popper.min.js' %}"></script>
+  <script src="{% static 'css/assets/js/core/bootstrap-material-design.min.js' %}"></script>
   <script src="https://unpkg.com/default-passive-events"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="{% static 'css/assets/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chartist JS -->
-  <script src="../assets/js/plugins/chartist.min.js"></script>
+  <script src="{% static 'css/assets/js/plugins/chartist.min.js' %}"></script>
   <!--  Notifications Plugin    -->
-  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <script src="{% static 'css/assets/js/plugins/bootstrap-notify.js' %}"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
+  <script src="{% static 'css/assets/js/material-dashboard.js' %}"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
+  <script src="{% static 'css/assets/demo/demo.js' %}"></script>
   <script>
     $(document).ready(function() {
       $().ready(function() {

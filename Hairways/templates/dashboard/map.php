@@ -17,7 +17,7 @@
   <!-- CSS Files -->
   <link href="{% static 'css/assets/css/material-dashboard.css' %}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-<!--   <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
+  <!--<link href="../assets/demo/demo.css" rel="stylesheet" />-->
 </head>
 
   <div class="wrapper ">
@@ -36,43 +36,43 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/dashboard/">
+            <a class="nav-link" href="./dashboard.php">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="/user/">
+            <a class="nav-link" href="./user.php">
               <i class="material-icons">person</i>
               <p>User Profile</p>
             </a>
           </li>
           <li class="nav-item ">
-             <a class="nav-link" href="/productsServices/">
+             <a class="nav-link" href="./products-services.php">
               <i class="material-icons">content_paste</i>
               <p>Products & Services</p>
             </a>
           </li>
           <li class="nav-item ">
-             <a class="nav-link" href="/staffClients/">
+             <a class="nav-link" href="./staff-clients.php">
               <i class="material-icons">library_books</i>
               <p>Staff & Clients</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="/map/">
+            <a class="nav-link" href="./map.php">
               <i class="material-icons">location_ons</i>
               <p>Map your Salon</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="/calendar/">
+            <a class="nav-link" href="./calendar.php">
               <i class="material-icons">notifications</i>
               <p>Calendar</p>
             </a>
 
           <li class="nav-item active-pro ">
-                <a class="nav-link" href="/upgrade/">
+                <a class="nav-link" href="./upgrade.php">
                     <i class="material-icons">unarchive</i>
                     <p>Premium Services</p>
                 </a>
@@ -213,6 +213,7 @@ function initMap() {
   <script src="{% static 'css/assets/js/material-dashboard.js' %}"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="{% static 'css/assets/demo/demo.js' %}"></script>
+  <script>
   <!-- Active classes JS -->
   <script>
    $(document).ready(function(){

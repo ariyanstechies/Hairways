@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ca1f079-d2a8-417f-9da5-af9bb3727c2f" name="Default Changelist" comment="" />
+    <list default="true" id="4ca1f079-d2a8-417f-9da5-af9bb3727c2f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Hairways/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Hairways/templates/index.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,9 +73,28 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-1939798837">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.42" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Hairways/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="81" column="9" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -128,18 +149,34 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="Hairways" type="b2602c69:ProjectViewProjectNode" />
+              <item name="first_programe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="first_programe" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="first_programe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="first_programe" type="462c0819:PsiDirectoryNode" />
+              <item name="Base" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="first_programe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="first_programe" type="462c0819:PsiDirectoryNode" />
               <item name="Hairways" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="first_programe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="first_programe" type="462c0819:PsiDirectoryNode" />
+              <item name="Hairways" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -255,12 +292,11 @@
     <option name="totallyTimeSpent" value="40430000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1366" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16515152" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16443452" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -273,12 +309,13 @@
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3295082" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.67704916" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32843137" />
-      <window_info anchor="right" id="R Graphics" />
-      <window_info anchor="right" id="R Packages" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="R Graphics" order="4" />
+      <window_info anchor="right" id="R Packages" order="5" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,5 +346,12 @@
     <entry file="file://$PROJECT_DIR$/w3.css" />
     <entry file="file://$PROJECT_DIR$/verify.php" />
     <entry file="file://$PROJECT_DIR$/moreInfo.php" />
+    <entry file="file://$PROJECT_DIR$/Hairways/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="81" column="9" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

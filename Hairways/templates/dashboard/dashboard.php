@@ -49,31 +49,31 @@
             </a>
           </li>
           <li class="nav-item ">
-             <a class="nav-link" href="./products-services.php">
+             <a class="nav-link" href="/productsServices/">
               <i class="material-icons">content_paste</i>
               <p>Products & Services</p>
             </a>
           </li>
           <li class="nav-item ">
-             <a class="nav-link" href="./staff-clients.php">
+             <a class="nav-link" href="/staffClients/">
               <i class="material-icons">library_books</i>
               <p>Staff & Clients</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./map.php">
+            <a class="nav-link" href="/map/">
               <i class="material-icons">location_ons</i>
               <p>Map your Salon</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./calendar.php">
+            <a class="nav-link" href="/calendar/">
               <i class="material-icons">notifications</i>
               <p>Calendar</p>
             </a>
 
           <li class="nav-item active-pro ">
-                <a class="nav-link" href="./upgrade.php">
+                <a class="nav-link" href="/upgrade/">
                     <i class="material-icons">unarchive</i>
                     <p>Premium Services</p>
                 </a>

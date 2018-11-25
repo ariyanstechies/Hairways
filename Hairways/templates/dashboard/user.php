@@ -1,96 +1,4 @@
-
- <?php 
-    include_once 'connectDb.php';
-
-    session_start();
-
-    $user = $_SESSION['username'];
-
-    $connect = mysqli_select_db($conn,'hairways');
-
-    $sql = "SELECT * FROM salonist WHERE username = '$user';" ;
-     $result = mysqli_query ($conn, $sql);
-     $resultCheck = mysqli_num_rows($result);
-
-if($resultCheck > 0){
-  while ($row = mysqli_fetch_assoc($result)){
-      $fname = $row['fname'];
-      $lname = $row['lname'];
-      $username = $row['username'];
-      $email = $row['email'];
-      $salonName = $row['salonName'];
-      $salonDescription = $row['salonDescription'];
-      $salonLocation = $row['location'];
-      $phoneNo = $row['phoneNo'];
-      $password = $row['pass'];
-    
-  }
-}
-
-
-    
-  ?>
-
-
-  <?php
-
-  include_once 'connectDb.php';
-
-  $user = $_SESSION['username'];
-
-  echo $user;
-
-if(isset($_POST['updateprofile'])) {
-
-  require 'password_hash_compatibilty.php';
-
-  
-
-  // Escape user inputs for security
-  $firstname = mysqli_real_escape_string($conn, $_REQUEST['firstname']);
-  $lastname = mysqli_real_escape_string($conn, $_REQUEST['lastname']);
-  $username = mysqli_real_escape_string($conn, $_REQUEST['username']);
-  $email = mysqli_real_escape_string($conn, $_REQUEST['email']);
-  $salonName = mysqli_real_escape_string($conn, $_REQUEST['salonName']);
-  $salonDescription = mysqli_real_escape_string($conn, $_REQUEST['salonDescription']);
-  $salonLocation = mysqli_real_escape_string($conn, $_REQUEST['salonLocation']);
-  $phoneNo = mysqli_real_escape_string($conn, $_REQUEST['password']);
-  $password = mysqli_real_escape_string($conn, $_REQUEST['password']);
- 
-
-      $hashedpass = password_hash($password, PASSWORD_DEFAULT);
-   
-   $sql = "UPDATE `salonist` SET `fname` = '$firstname',
-`lname` = '$lastname', `username` = '$username', `email` = '$email', `salonName` = '$salonName',
-`salonDescription` = '$salonDescription',
-`location` = '$salonLocation', `phoneNo` = '$phoneNo', `pass` = '$hashedpass' WHERE username = '$user'";
-
-
-// Attempt insert query execution
-/*$sql = "INSERT INTO salonist (id ,fname, lname, username, email, pass, registerDate, activatehash, active) VALUES (NULL, '$firstname', '$lastname', '$username', '$email', '$hashedpass', NOW(), '$hash', '0')";*/
-if(mysqli_query($conn, $sql)){
-  $sql = "SELECT * FROM salonist";
-     $result = mysqli_query ($conn, $sql);
-     $resultCheck = mysqli_num_rows($result);
-
-     $_SESSION['username'] = $row['username'];
-
-     echo $_SESSION['username'];
-
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-}
-}
-
-
-// Close connection
-mysqli_close($conn);
-
-  // Returns user to sign up page if submit button was never clicked
-
- 
-?>
-
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -99,17 +7,17 @@ mysqli_close($conn);
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-   <title>
-    Hairways Salon Management Software | Manage your salon, customer appointments and be ranked as one of the best salons in town
+  <title>
+    Hairways Salon Management Software | Manage your salon, customer appointments and to be ranked as one of the best salons in town
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <link href="{% static 'css/assets/css/material-dashboard.css' %}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
+<!--   <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
 
   <style>
   .card-body .show-profile input{
@@ -122,20 +30,20 @@ mysqli_close($conn);
     color: gray;
     font-weight: bold;
     margin-right: 10px;
-  }  
+  }
 
   .card-body .edit-profile input{
     margin-left: 10px;
-    border-radius: 20px;
-    border: 1px solid purple;
+    border: none;
+    border-bottom: 2px solid purple;
     padding-left: 20px;
   }
 
   .card-body .edit-profile label{
     color: black;
     font-weight: bold;
-  }  
-  
+  }
+
 </style>
 
 </head>
@@ -143,7 +51,7 @@ mysqli_close($conn);
 
 <body class="light-edition">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="black" data-image="{% static 'css/assets/img/sidebar-2.jpg' %}">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -157,43 +65,43 @@ mysqli_close($conn);
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="./dashboard.php">
+            <a class="nav-link" href="/dashboard/">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./user.php">
+            <a class="nav-link" href="/user/">
               <i class="material-icons">person</i>
               <p>User Profile</p>
             </a>
           </li>
           <li class="nav-item ">
-             <a class="nav-link" href="./products-services.php">
+             <a class="nav-link" href="/productsServices/">
               <i class="material-icons">content_paste</i>
               <p>Products & Services</p>
             </a>
           </li>
           <li class="nav-item ">
-             <a class="nav-link" href="./staff-clients.php">
+             <a class="nav-link" href="/staffClients/">
               <i class="material-icons">library_books</i>
               <p>Staff & Clients</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./map.php">
+            <a class="nav-link" href="/map/">
               <i class="material-icons">location_ons</i>
               <p>Map your Salon</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./calendar.php">
+            <a class="nav-link" href="/calendar/">
               <i class="material-icons">notifications</i>
               <p>Calendar</p>
             </a>
-          </li> 
+
           <li class="nav-item active-pro ">
-                <a class="nav-link" href="./upgrade.php">
+                <a class="nav-link" href="/upgrade/">
                     <i class="material-icons">unarchive</i>
                     <p>Premium Services</p>
                 </a>
@@ -215,10 +123,10 @@ mysqli_close($conn);
             <span class="navbar-toggler-icon icon-bar"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end">
-            
+
             <ul class="navbar-nav">
-             
-              
+
+
               <li class="nav-item">
                 <a class="nav-link" href="dashboard.php">
                   <i class="material-icons">dashboard</i>
@@ -237,7 +145,7 @@ mysqli_close($conn);
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="user.php">User profile</a>
                   <a class="dropdown-item" href="../index.html">Log out</a>
-                  
+
                 </div>
                 </a>
               </li>
@@ -248,7 +156,7 @@ mysqli_close($conn);
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
-          
+
           <div class="row">
             <div class="col-md-12">
               <div class="card">
@@ -256,7 +164,7 @@ mysqli_close($conn);
                   <h4 class="card-title">Profile</h4>
                   <p class="card-category">Profile your salon</p>
                 </div>
-               
+
                 <div class="card-body">
                   <button style="float: right;" name="editprofile" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-round btn-fill btn-info">Edit Profile</button></td>
 
@@ -264,7 +172,7 @@ mysqli_close($conn);
                               <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                  <div class="modal-body"> 
+                                  <div class="modal-body">
 
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
@@ -359,11 +267,11 @@ mysqli_close($conn);
                   <i><b>**************</b></i>
                 </p>
                 </div>
-         
+
                 </div>
               </div>
             </div>
-            
+
           </div>
         </div>
       </div>
@@ -422,49 +330,49 @@ mysqli_close($conn);
         <li class="header-title">Images</li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-1.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-1.jpg' %}" alt="">
           </a>
         </li>
         <li class="active">
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-2.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-2.jpg' %}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-3.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-3.jpg' %}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-4.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-4.jpg' %}" alt="">
           </a>
         </li>
-         
+
       </ul>
     </div>
   </div>
 
  <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
-  <script src="https://unpkg.com/default-passive-events"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!-- Place this tag in your head or just before your close body tag. -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Chartist JS -->
-  <script src="../assets/js/plugins/chartist.min.js"></script>
-  <!--  Notifications Plugin    -->
-  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
-  <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
+ <script src="{% static 'css/assets/js/core/jquery.min.js' %}"></script>
+ <script src="{% static 'css/assets/js/core/popper.min.js' %}"></script>
+ <script src="{% static 'css/assets/js/core/bootstrap-material-design.min.js' %}"></script>
+ <script src="https://unpkg.com/default-passive-events"></script>
+ <script src="{% static 'css/assets/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
+ <!-- Place this tag in your head or just before your close body tag. -->
+ <script async defer src="https://buttons.github.io/buttons.js"></script>
+ <!--  Google Maps Plugin    -->
+ <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+ <!-- Chartist JS -->
+ <script src="{% static 'css/assets/js/plugins/chartist.min.js' %}"></script>
+ <!--  Notifications Plugin    -->
+ <script src="{% static 'css/assets/js/plugins/bootstrap-notify.js' %}"></script>
+ <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+ <script src="{% static 'css/assets/js/material-dashboard.js' %}"></script>
+ <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+ <script src="{% static 'css/assets/demo/demo.js' %}"></script>
 
-  
+
   <!-- Change profile pic -->
 
   <script>
@@ -486,14 +394,14 @@ mysqli_close($conn);
         });
       return false;
       });
-   
+
 
   </script>
   <script>
       function changeprofilepic(){
         var image = document.getElementById('profile-pic');
         var src = document.getElementById('')
-        image.src="../assets/img/faces/avatar.jpg"
+        image.src="{% static 'css/assets/img/faces/avatar.jpg' %}"
       }
   </script>
   <script>
@@ -661,9 +569,3 @@ mysqli_close($conn);
 </body>
 
 </html>
-
-
-
-
-
-

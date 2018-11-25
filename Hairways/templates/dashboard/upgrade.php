@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,14 +15,14 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <link href="{% static 'css/assets/css/material-dashboard.css' %}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
+<!--   <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
 </head>
 
 <body class="light-edition">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="black" data-image="{% static 'css/assets/img/sidebar-2.jpg' %}">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -35,43 +36,43 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="./dashboard.php">
+            <a class="nav-link" href="/dashboard/">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./user.php">
+            <a class="nav-link" href="/user/">
               <i class="material-icons">person</i>
               <p>User Profile</p>
             </a>
           </li>
           <li class="nav-item ">
-             <a class="nav-link" href="./products-services.php">
+             <a class="nav-link" href="/productsServices/">
               <i class="material-icons">content_paste</i>
               <p>Products & Services</p>
             </a>
           </li>
           <li class="nav-item ">
-             <a class="nav-link" href="./staff-clients.php">
+             <a class="nav-link" href="/staffClients/">
               <i class="material-icons">library_books</i>
               <p>Staff & Clients</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./map.php">
+            <a class="nav-link" href="/map/">
               <i class="material-icons">location_ons</i>
               <p>Map your Salon</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./calendar.php">
+            <a class="nav-link" href="/calendar/">
               <i class="material-icons">notifications</i>
               <p>Calendar</p>
             </a>
-        
+
           <li class="nav-item active-pro ">
-                <a class="nav-link" href="./upgrade.php">
+                <a class="nav-link" href="/upgrade/">
                     <i class="material-icons">unarchive</i>
                     <p>Premium Services</p>
                 </a>
@@ -93,10 +94,10 @@
             <span class="navbar-toggler-icon icon-bar"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end">
-            
+
           <ul class="navbar-nav">
-             
-              
+
+
               <li class="nav-item">
                 <a class="nav-link" href="dashboard.php">
                   <i class="material-icons">dashboard</i>
@@ -115,7 +116,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="user.php">User profile</a>
                   <a class="dropdown-item" href="../index.html">Log out</a>
-                  
+
                 </div>
                 </a>
               </li>
@@ -136,46 +137,46 @@
                 <div class="card-body">
                   <div class="table-responsive table-upgrade">
                     <table class="table">
-                      
+
                       <tbody>
                         <tr>
                           <td><b style="font-size: 30px; text-align: center;">Basic Plan</b></td>
-                         
+
                         </tr>
                         <tr>
                           <td>Plugins</td>
-                     
+
                         </tr>
                         <tr>
                           <td>Example Pages</td>
-                         
+
                         </tr>
                         <tr>
                           <td>Login, Register, Pricing, Lock Pages</td>
-                         
+
                         </tr>
                         <tr>
                           <td>DataTables, VectorMap, SweetAlert, Wizard, jQueryValidation, FullCalendar etc...</td>
-                        
+
                         </tr>
                         <tr>
                           <td>Mini Sidebar</td>
-                       
+
                         </tr>
                         <tr>
                           <td>Premium Support</td>
-                         
+
                         </tr>
                         <tr>
-                         
-                          
+
+
                           <td> <button style="float: right;" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-round btn-fill btn-info">Get Basic plan</button></td>
 
                            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                  <div class="modal-body"> 
+                                  <div class="modal-body">
 
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
@@ -190,7 +191,7 @@
                   </div>
                         </tr>
                         <tr>
-                          
+
                           <!-- <td class="text-center">
                             <a target="_blank" href="http://www.creative-tim.com/product/material-dashboard-pro/?ref=md-free-upgrade-live" class="btn btn-round btn-fill btn-info">Upgrade to PRO</a>
                           </td> -->
@@ -206,7 +207,7 @@
                               <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                  <div class="modal-body"> 
+                                  <div class="modal-body">
 
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
@@ -276,46 +277,46 @@
         <li class="header-title">Images</li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-1.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-1.jpg' %}" alt="">
           </a>
         </li>
         <li class="active">
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-2.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-1.jpg' %}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-3.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-1.jpg' %}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-4.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-1.jpg' %}" alt="">
           </a>
         </li>
-         
+
       </ul>
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="{% static 'css/assets/js/core/jquery.min.js' %}"></script>
+  <script src="{% static 'css/assets/js/core/popper.min.js' %}"></script>
+  <script src="{% static 'css/assets/js/core/bootstrap-material-design.min.js' %}"></script>
   <script src="https://unpkg.com/default-passive-events"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="{% static 'css/assets/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chartist JS -->
-  <script src="../assets/js/plugins/chartist.min.js"></script>
+  <script src="{% static 'css/assets/js/plugins/chartist.min.js' %}"></script>
   <!--  Notifications Plugin    -->
-  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <script src="{% static 'css/assets/js/plugins/bootstrap-notify.js' %}"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
+  <script src="{% static 'css/assets/js/material-dashboard.js' %}"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
+  <script src="{% static 'css/assets/demo/demo.js' %}"></script>
   <script>
     $(document).ready(function() {
       $().ready(function() {

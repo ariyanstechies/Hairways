@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
+from django.views.generic import UpdateView
 from Hairways.forms import SignUpForm
+from Hairways.models import Users
 
 
 def home(request):
@@ -13,6 +15,12 @@ def faqs(request):
 
 def about(request):
     return render(request, "about.html")
+
+
+class SignUpcreateView(UpdateView):
+    model = Users
+    form_class = SignUpForm
+    template_name = 'Hairways/signup.html'
 
 
 def signup(request):

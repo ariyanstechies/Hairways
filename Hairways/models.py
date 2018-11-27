@@ -35,7 +35,10 @@ class Services(models.Model):
 
 class Users(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=16)
+    last_name = models.CharField(max_length=16)
     password = models.CharField(max_length=16)
+    email = models.CharField(max_length=16)
     phone = models.IntegerField()
     joined_date = models.DateTimeField(
         blank=True, null=True

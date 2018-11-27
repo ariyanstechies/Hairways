@@ -3,7 +3,7 @@
   {% block content %}
   <!-- RANKING SALONS IN SLIDER -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <section class="salon-rank">
+  <section class="salon-rank w3-border">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -50,28 +50,50 @@
   <!-- Getting a splited screen for left and right-->
   <!--<the outer container containing both left and right -->
   <div class=" w3-row w3-border ">
-      <div class="w3-container w3-quarter ">
+      <div class="w3-container w3-quarter " style="padding-top:5px">
+        <div class="w3-container">
+              <h3 >Quick Search</h3><br><br>
+              <div class="fakeimg">Most Visited</div><br>
+              <div class="fakeimg">Near me</div><br>
+              <div class="fakeimg">Recommended</div><br>
+              <div class="fakeimg">Recommended</div><br>
 
-        <div class="w3-content" style="max-width:400px">
+            </div>
+            <hr>
+<!--Advertisements -->
+        <div class="w3-content w3-container " style="max-width:400px">
           <div class="mySlides w3-container w3-red">
-            <h1><b>Did You Know?</b></h1>
-            <h1><i>We plan to sell hire 5m peole at hairways.</i></h1>
+            <h1><b>Hurry!!!</b></h1>
+            <h1><i>Get your salon Known</i></h1>
           </div>
 
 
-        <div class="mySlides w3-container  w3-white w3-card-4">
+        <div class="mySlides w3-container  w3-white">
           <p><span class="w3-tag w3-yellow">New!</span>
-          <p>Hair salon just opened in kisumu</p>
-          <p>Only Ksh.99 !!!</p>
+          <p>Get one month free on hairways</p>
         </div>
 
       </div>
 
-  </div>
+</div>
             <!--The right container containing to cards -->
       <div class="w3-container w3-rest  ">
+
+                      <!--search button by salon names-->
+                      <div align="center">
+                        <input class="button" placeholder="Search..." />
+                        <select class="button" name="option" style="width:150px">
+                          <option value="" disabled selected>Location</option>
+                          <option value="1">Kisumu</option>
+                          <option value="2">Nairobi</option>
+                          <option value="3">Samburu</option>
+                        </select>
+
+                        </div>
+
         <div class=" w3-row  w3-stretch  ">
             <div class="w3-container w3-half ">
+
               <div class="blog-card">
                 <div class="meta">
                   <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>

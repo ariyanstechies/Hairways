@@ -10,13 +10,7 @@
   href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap-grid.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/salon-style.css' %}">
-  <script src="{% static 'css/javascript/jquery.js' %}"></script>
-  <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
-  <script src="{% static 'css/javascript/javascript.js' %}"></script>
-  <script src="{% static 'css/javascript/moreinfo.js' %}"></script>
-
-  <script src="{% static 'css/javascript/scroll-horizontal.js' %}"></script>
-  <style>
+    <style>
   .form-group input{
     height: 30px;
   }
@@ -69,20 +63,20 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr id="tdid">
-                        <td><input type="checkbox" id="check" class="custom-control-input" name="haircut" onclick="myFunction()"></td>
+                      <tr>
+                        <td><input type="checkbox"  id="check" class="custom-control-input" name="haircut"></td>
                         <td>Hair cut</td>
                         <td>30</td>
                         <td>100</td>
                       </tr>
                       <tr>
-                        <td><input type="checkbox" id="check1" class="custom-control-input" name="haircut" onclick="myFunction1()"></td>
+                        <td><input type="checkbox"  id="check" class="custom-control-input" name="haircut"></td>
                         <td>Blow dry</td>
                         <td>45</td>
                         <td>300</td>
                       </tr>
                       <tr>
-                        <td><input type="checkbox" id="check2" class="custom-control-input" name="haircut" onclick="myFunction2()"></td>
+                        <td><input type="checkbox"  class="custom-control-input" name="haircut"></td>
                         <td>Manicure</td>
                         <td>25</td>
                         <td>200</td>
@@ -94,7 +88,7 @@
               <div class="col-md-5" style="margin-bottom: 30px; height: auto;">
                 <div class="card card-profile" style="padding: 50px 0px 20px 40px"; >
                   <h5>Services booked for:</h5>
-                  <p id="text"></p>
+                  <div id="text"></div>
                   <p id="total"></p>
                   <div id="datetimepicker" class="input-append date" style="padding: 30px 0px 50px 0px">
                     <input id="appointmentTime" style="height: 30px" type="text"></input>
@@ -146,20 +140,27 @@
       </div>
     </div>
   </section>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2wqe1uDfotYB_e-YIq8anlmLIxcy3Yhs&callback=initMap"
-  async defer></script>
-  <script type="text/addjavascript"
-  src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-  </script>
-  <script type="text/javascript"
-  src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
-  </script>
-  <script type="text/javascript"
-  src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-  </script>
-  <script type="text/javascript"
-  src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
-  </script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2wqe1uDfotYB_e-YIq8anlmLIxcy3Yhs&callback=initMap" async defer></script>
+  <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"> </script>
+  <script src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js"></script>
+<script type="text/javascript">
+function initMap() {
+  // The location of Uluru
+  var salon = {lat: -0.103971, lng: 34.752286};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+    document.getElementById('map'), {zoom: 16, center: salon});
+    // The marker, positioned at Uluru
+    var marker = new google.maps.Marker({position: salon, map: map});
+  }
+</script>
+  <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
+  <script src="{% static 'css/javascript/javascript.js' %}"></script>
+  <script src="{% static 'css/javascript/moreinfo.js' %}"></script>
+
+  <script src="{% static 'css/javascript/scroll-horizontal.js' %}"></script>
 </body>
 <footer>
 </footer>

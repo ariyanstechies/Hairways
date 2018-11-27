@@ -1,14 +1,44 @@
-{% extends 'base.html' %}
-{% block content %}
-<h2>Sign up</h2>
-<form method="post">
-  {% csrf_token %}
-  {% for field in form %}
-  <div class="fieldWrapper">
-    {{ field.errors }}
-    {{ field.label_tag }} {{ field }}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login to Hairways</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+</head>
+<body style="background-color: #666666;">
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100">
+        <form class="login100-form validate-form" method="post">
+          {% csrf_token %}
+          <span class="login100-form-title p-b-43">
+            Sign Up to continue
+          </span>
+          <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <span class="focus-input100"></span>
+            {{ form.username|as_crispy_field }}
+            <!-- <span class="label-input100">Username</span> -->
+          </div>
+          <div class="wrap-input100 validate-input" data-validate="Password is required">
+            {{ form.password|as_crispy_field }}
+            <span class="focus-input100"></span>
+            <!-- <span class="label-input100">Password</span> -->
+          </div>
+          <div class="container-login100-form-btn">
+            <button class="login100-form-btn">
+              Sign up
+            </button>
+          </div>
+        </form>
+        <div class="login100-more" style="background-image: url({% static 'css/images/bg-01.jpg' %});">
+        </div>
+      </div>
+    </div>
   </div>
-  {% endfor %}
-  <button class="btn btn-success" type="submit">Sign up</button>
-</form>
-{% endblock %}
+  <script src="{% static 'css/javascript/main.js' %}"></script>
+</body>
+</html>

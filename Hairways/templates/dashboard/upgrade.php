@@ -126,11 +126,14 @@
       </nav>
       <!-- End Navbar -->
       <div class="content">
+        <div class="row">
+          <div class="col-md-6">
+
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-8 ml-auto mr-auto">
+            <div class="col-md-10 ml-auto mr-auto">
               <div class="card">
-                <div class="card-header card-header-primary">
+                <div class="card-header card-header-primary" style="background-color: red">
                   <h4 class="card-title">Hairways Premium Plans</h4>
                   <p class="card-category">Get the best out of Hairways Salon Management Software</p>
                 </div>
@@ -222,6 +225,112 @@
                   </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-10 ml-auto mr-auto">
+          <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">Hairways Premium Plans</h4>
+              <p class="card-category">Get the best out of Hairways Salon Management Software</p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive table-upgrade">
+                <table class="table">
+
+                  <tbody>
+                    <tr>
+                      <td><b style="font-size: 30px; text-align: center;">Basic Plan</b></td>
+
+                    </tr>
+                    <tr>
+                      <td>Plugins</td>
+
+                    </tr>
+                    <tr>
+                      <td>Example Pages</td>
+
+                    </tr>
+                    <tr>
+                      <td>Login, Register, Pricing, Lock Pages</td>
+
+                    </tr>
+                    <tr>
+                      <td>DataTables, VectorMap, SweetAlert, Wizard, jQueryValidation, FullCalendar etc...</td>
+
+                    </tr>
+                    <tr>
+                      <td>Mini Sidebar</td>
+
+                    </tr>
+                    <tr>
+                      <td>Premium Support</td>
+
+                    </tr>
+                    <tr>
+
+
+                      <td> <button style="float: right;" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-round btn-fill btn-info">Get Basic plan</button></td>
+
+                       <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                              <div class="modal-body">
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="container">
+                                  <p><b>You are currently on the one month free offer. We will notify you when your need to subscribe for the plan</b></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+                    </tr>
+                    <tr>
+
+                      <!-- <td class="text-center">
+                        <a target="_blank" href="http://www.creative-tim.com/product/material-dashboard-pro/?ref=md-free-upgrade-live" class="btn btn-round btn-fill btn-info">Upgrade to PRO</a>
+                      </td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <a target="_blank"  data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-round btn-fill btn-info">Upgrade to PRO</a>
+
+           <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                              <div class="modal-body">
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="container">
+                                  <p><b>You are currently on the basic plan. <b>Pro</b> services will be rolled out soon</b></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
         </div>
       </div>
         <footer class="footer">

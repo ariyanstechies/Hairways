@@ -1,7 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from Hairways.forms import SignUpForm
+from django.views.generic import TemplateView, ListView, CreateView
+from Hairways.models import Users
+from django.core.files.storage import FileSystemStorage
+from django.urls import reverse_lazy
 
+from .forms import BookForm
+from .models import Book
 
 def home(request):
     return render(request, "index.html")
@@ -56,3 +62,33 @@ def pricing(request):
 
 def moreinfo(request):
     return render(request, "moreinfo.php")
+
+
+def upload(request):
+    context = {}
+    if request.method == 'POST':
+        uploaded_file = request.FILES['document']
+        fs = FileSystemStorage()
+        name = fs.save(uploaded_file.name, uploaded_file)
+        context['url'] = fs.url(name)
+    return render(request, 'upload.html', context)
+
+
+def book_list(request):
+    books = Book.objects.all()
+    return render(request, 'book_list.html', {
+        'books': books
+    })
+
+
+def delete_book(request, pk):
+    if request.method == 'POST':
+        book = Book.objects.get(pk=pk)
+        book.delete()
+    return redirect('book_list')
+
+
+class BookListView(ListView):
+    model = Book
+    template_name = 'class_book_list.html'
+    context_object_name = 'books'

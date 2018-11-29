@@ -1,148 +1,4 @@
-<?php
-  
-  include_once 'connectDb.php';
-
-  session_start();
-
-  $name = $_SESSION['username'];
-
-/*  if(isset($_POST['product']) && isset($_POST['solditems']) && isset($_POST['price']) && isset($_POST['productsales'])){
-*/
-if(isset($_POST['addproduct'])) {
-
-  echo "Hello";
-  
-echo $name;
-
-
-  // Escape user inputs for security
-$name = mysqli_real_escape_string($conn, $name);
-$product = mysqli_real_escape_string($conn, $_REQUEST['product']);
-$price = mysqli_real_escape_string($conn, $_REQUEST['price']);
-$totalproducts = mysqli_real_escape_string($conn, $_REQUEST['totalproducts']);
- 
-
-// Attempt insert query execution
-$sql = "INSERT INTO salonproducts (`id`, `username`, `product`, `price`, `totalproducts`) VALUES (NULL, '$name', '$product', '$price', '$totalproducts')";
-if(mysqli_query($conn, $sql)){
-    echo "Records added successfully.";
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-}
- 
- }
-
-
-if(isset($_POST['addproductrecords'])) {
-
-  echo "Hello";
-  
-echo $name;
-
-  // Escape user inputs for security
-$name = mysqli_real_escape_string($conn, $name);
-$product = mysqli_real_escape_string($conn, $_REQUEST['product']);
-$sold = mysqli_real_escape_string($conn, $_REQUEST['sold']);
-$price = mysqli_real_escape_string($conn, $_REQUEST['price']);
-$itemproductsales = mysqli_real_escape_string($conn, $_REQUEST['itemproductsales']);
- 
-  $duct = "mpoo";
-
-echo $product;
-
-// Attempt insert query execution
-$sql ="UPDATE `hairways`.`salonproducts` SET `product` = '$product', `sold` = '$sold', `price` = '$price', `itemproductsales` = '$itemproductsales' WHERE `salonproducts`.`product` = '$duct'";
-if(mysqli_query($conn, $sql)){
-    echo "Records added successfully.";
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-}
- 
- }
-
- if(isset($_POST['addservice'])) {
-
-  echo "Hello";
-  
-echo $name;
-
-
-  // Escape user inputs for security
-$name = mysqli_real_escape_string($conn, $name);
-$service = mysqli_real_escape_string($conn, $_REQUEST['service']);
-$duration = mysqli_real_escape_string($conn, $_REQUEST['duration']);
-$cost = mysqli_real_escape_string($conn, $_REQUEST['cost']);
- 
-
-// Attempt insert query execution
-$sql = "INSERT INTO salonservices (`id`, `username`, `service`, `duration`, `cost`) VALUES (NULL, '$name', '$service', '$duration', '$cost')";
-if(mysqli_query($conn, $sql)){
-    echo "Records added successfully.";
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-}
- 
- }
-
-if(isset($_POST['addservicerecords'])) {
-
-  echo "Hello";
-  
-echo $name;
-
-  // Escape user inputs for security
-$name = mysqli_real_escape_string($conn, $name);
-$service = mysqli_real_escape_string($conn, $_REQUEST['service']);
-$clients = mysqli_real_escape_string($conn, $_REQUEST['clients']);
-$cost = mysqli_real_escape_string($conn, $_REQUEST['cost']);
-$serviceincome = mysqli_real_escape_string($conn, $_REQUEST['serviceincome']);
- 
-  $serv = "shave";
-
-echo $service;
-
-// Attempt insert query execution
-$sql ="UPDATE `hairways`.`salonservices` SET `service` = '$service', `clients` = '$clients', `cost` = '$cost', `serviceincome` = '$serviceincome' WHERE `salonservices`.`service` = '$serv'";
-if(mysqli_query($conn, $sql)){
-    echo "Records added successfully.";
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-}
- 
- }
-
-
-// Close connection
-/*mysqli_close($conn);*/
-
-  /*session_start();
-
-  $username = $_SESSION['username'];
-
-  echo $username;
-
-  // Escape user inputs for security
-  $username = mysqli_real_escape_string($conn, $username);
-  $product = mysqli_real_escape_string($conn, $_REQUEST['product']);
-  $solditems = mysqli_real_escape_string($conn, $_REQUEST['solditems']);
-  $price = mysqli_real_escape_string($conn, $_REQUEST['price']);
-  $productsales = mysqli_real_escape_string($conn, $_REQUEST['productsales']);
-
-  $sql = "INSERT INTO salonproducts (id ,username, product, sold, price, itemproductsales) VALUES (NULL, '$username', '$product', '$solditems', '$productprice', '$productsales')";
-
-if(mysqli_query($conn, $sql)){
-  echo "inserted";
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-}
-
-}*/
-
-
-
-?>
-
-
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -159,17 +15,16 @@ if(mysqli_query($conn, $sql)){
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <link href="{% static 'css/assets/css/material-dashboard.css' %}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="salon-style.css">
+<!--   <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
 
   <style>
     .card-body form input{
       margin: 5px;
     width: 140px;
-    border-radius: 20px;
-    border: 1px solid purple;
+    border: none;
+    border-bottom: 2px solid purple;
     padding-left: 20px;
     }
 
@@ -179,7 +34,7 @@ if(mysqli_query($conn, $sql)){
 
 <body class="light-edition">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
+    <div class="sidebar"ata-color="purple" data-background-color="black" data-image="{% static 'css/assets/img/sidebar-2.jpg' %}">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -193,43 +48,43 @@ if(mysqli_query($conn, $sql)){
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="./dashboard.php">
+            <a class="nav-link" href="/dashboard/">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./user.php">
+            <a class="nav-link" href="/user/">
               <i class="material-icons">person</i>
               <p>User Profile</p>
             </a>
           </li>
           <li class="nav-item ">
-             <a class="nav-link" href="./products-services.php">
+             <a class="nav-link" href="/productsServices/">
               <i class="material-icons">content_paste</i>
               <p>Products & Services</p>
             </a>
           </li>
           <li class="nav-item ">
-             <a class="nav-link" href="./staff-clients.php">
+             <a class="nav-link" href="/staffClients/">
               <i class="material-icons">library_books</i>
               <p>Staff & Clients</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./map.php">
+            <a class="nav-link" href="/map/">
               <i class="material-icons">location_ons</i>
               <p>Map your Salon</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./calendar.php">
+            <a class="nav-link" href="/calendar/">
               <i class="material-icons">notifications</i>
               <p>Calendar</p>
             </a>
-        
+
           <li class="nav-item active-pro ">
-                <a class="nav-link" href="./upgrade.php">
+                <a class="nav-link" href="/upgrade/">
                     <i class="material-icons">unarchive</i>
                     <p>Premium Services</p>
                 </a>
@@ -242,7 +97,7 @@ if(mysqli_query($conn, $sql)){
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">Products and Services</a>
+            <a class="navbar-brand" href="javascript:void(0)">Staffs and Clients</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>
@@ -251,10 +106,10 @@ if(mysqli_query($conn, $sql)){
             <span class="navbar-toggler-icon icon-bar"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end">
-            
+
+
             <ul class="navbar-nav">
-             
-              
+
               <li class="nav-item">
                 <a class="nav-link" href="dashboard.php">
                   <i class="material-icons">dashboard</i>
@@ -273,10 +128,11 @@ if(mysqli_query($conn, $sql)){
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="user.php">User profile</a>
                   <a class="dropdown-item" href="../index.html">Log out</a>
-                  
+
                 </div>
                 </a>
               </li>
+            </ul>
             </ul>
           </div>
         </div>
@@ -288,96 +144,57 @@ if(mysqli_query($conn, $sql)){
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Products</h4>
-                  <p class="card-category">Your products and its sales</p>
-                  <h4 style="float: right;">Daily Total sales: <b> 2500/=</b></h4>
-                 
+                  <h4 class="card-title mt-0">Clients</h4>
+                  <p class="card-category"> Know your clients</p>
                 </div>
-                
-
                 <div class="card-body">
-                  <form method="POST" action="products-services.php">
-                               
-                    <input type="text" name="service" required placeholder="Service">
-                                
-                    <input type="number" name="duration" required placeholder="Duration">
-                                
-                    <input type="number" name="cost" required placeholder="Service Cost">
-                               
-                    <input style="border-radius: 5px; float: right;" class="btn btn-info" type="submit" value="Add product" name="addservice">
-                         
-                      </form>
-                    
-                    
-                  </div>
 
-                <div class="card-body">
-                  <form method="POST" action="products-services.php">
-                               
-                    <input type="text" name="service" required placeholder="Service">
-                               
-                    <input type="number" name="clients" required  placeholder="Clients">
-                                
-                    <input type="number" name="cost" required placeholder="Cost">
-                                
-                    <input type="number" name="serviceincome" required placeholder="Service Income">
-                               
-                    <input style="border-radius: 5px; float: right;" class="btn btn-info" type="submit" value="Add product record" name="addservicerecords">
-                         
-                      </form>
-                    
-                    
-                  </div>
 
+                       <form method="POST" action="staff-clients.php">
+
+                    <input type="text" name="client" required placeholder="Client Name">
+                    <input type="email" name="email" required placeholder="Email">
+                    <input type="number" name="phoneNo" required placeholder="phone Number">
+                    <input type="text" name="favouriteservice" required placeholder="favourite Service">
+
+                    <input style="border-radius: 5px; float: right;" class="btn btn-info" type="submit" value="Add client" name="addclient">
+
+                      </form>
+
+
+                </div>
+              </div>
             </div>
+
+
+
 
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title mt-0">Services</h4>
-                  <p class="card-category"> Manage services you offer</p>
+                  <h4 class="card-title mt-0">Staff</h4>
+                  <p class="card-category"> Manage your staff</p>
                 </div>
-
                 <div class="card-body">
-                  <form method="POST" action="products-services.php">
-                               
-                    <input type="text" name="product" required placeholder="Product">
-                                
-                    <input type="number" name="price" required placeholder="Price">
-                                
-                    <input type="number" name="totalproducts" required placeholder="Products in Stock">
-                               
-                    <input style="border-radius: 5px; float: right;" class="btn btn-info" type="submit" value="Add product" name="addproduct">
-                         
-                      </form>
-                    
-                    
-                  </div>
+                      <form method="POST" action="staff-clients.php">
 
-                <div class="card-body">
-                  <form method="POST" action="products-services.php">
-                               
-                    <input type="text" name="product" required placeholder="Product">
-                               
-                    <input type="number" name="sold" required  placeholder="Sold Items">
-                                
-                    <input type="number" name="price" required placeholder="Price">
-                                
-                    <input type="number" name="itemproductsales" required placeholder="Product Sales">
-                               
-                    <input style="border-radius: 5px; float: right;" class="btn btn-info" type="submit" value="Add product record" name="addproductrecords">
-                         
+                    <input type="text" name="staff" required placeholder="Staff">
+                    <input type="email" name="email" required placeholder="Email">
+                    <input type="number" name="phoneNo" required placeholder="phone Number">
+                    <input type="text" name="salary" required placeholder="Salary">
+                    <input type="date" name="datestartedwork" required placeholder="Date Started Working">
+
+                    <input style="border-radius: 5px; float: right;" class="btn btn-info" type="submit" value="Add staff" name="addstaff">
+
                       </form>
-                    
-                    
-                  </div>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-       <footer class="footer">
+        <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
             <ul>
@@ -392,7 +209,7 @@ if(mysqli_query($conn, $sql)){
                 </a>
               </li>
               <li>
-                <a href="blog.php">
+                <a href="#">
                   Blog
                 </a>
               </li>
@@ -430,62 +247,46 @@ if(mysqli_query($conn, $sql)){
         <li class="header-title">Images</li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-1.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-1.jpg' %}" alt="">
           </a>
         </li>
         <li class="active">
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-2.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-2.jpg' %}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-3.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-3.jpg' %}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-4.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-4.jpg' %}" alt="">
           </a>
         </li>
-         
+
       </ul>
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="{% static 'css/assets/js/core/jquery.min.js' %}"></script>
+  <script src="{% static 'css/assets/js/core/popper.min.js' %}"></script>
+  <script src="{% static 'css/assets/js/core/bootstrap-material-design.min.js' %}"></script>
   <script src="https://unpkg.com/default-passive-events"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="{% static 'css/assets/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chartist JS -->
-  <script src="../assets/js/plugins/chartist.min.js"></script>
+  <script src="{% static 'css/assets/js/plugins/chartist.min.js' %}"></script>
   <!--  Notifications Plugin    -->
-  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <script src="{% static 'css/assets/js/plugins/bootstrap-notify.js' %}"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
+  <script src="{% static 'css/assets/js/material-dashboard.js' %}"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
-  <script>
-$(function(){
-    $('#addMore').on('click', function() {
-              var data = $("#tb tr:eq(1)").clone(true).appendTo("#tb");
-              data.find("input").val('');
-     });
-     $(document).on('click', '.remove', function() {
-         var trIndex = $(this).closest("tr").index();
-            if(trIndex>1) {
-             $(this).closest("tr").remove();
-           } else {
-             alert("Sorry!! Can't remove first row!");
-           }
-      });
-});      
-</script>
+  <script src="{% static 'css/assets/demo/demo.js' %}"></script>
   <script>
     $(document).ready(function() {
       $().ready(function() {
@@ -651,5 +452,3 @@ $(function(){
 </body>
 
 </html>
-
-

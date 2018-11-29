@@ -56,6 +56,18 @@ class Appointments(models.Model):
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 
+class Pictures(models.Model):
+    salonId = models.ForeignKey(Salons, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='image/', blank=True, null=True)
+
+    def __str__(self):
+        return self.salonId
+
+    def delete(self, *args, **kwargs):
+        self.image.delete()
+        super().delete(*args, **kwargs)
+
+
 class Comments(models.Model):
     commentId = models.IntegerField()
     salons = models.ForeignKey(Salons, on_delete=models.CASCADE)

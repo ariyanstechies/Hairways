@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 
 <head>
@@ -14,79 +15,78 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <link href="{% static 'css/assets/css/material-dashboard.css' %}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../assets/demo/demo.css" rel="stylesheet" />
 </head>
 
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="black" data-image="{% static 'css/assets/img/sidebar-2.jpg' %}">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
         Tip 2: you can also add an image using data-image tag
     -->
-      <div class="logo">
-        <a href="index.html" class="simple-text logo-normal">
-          Hairways
-        </a>
-      </div>
-
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="./dashboard.php">
-              <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./user.php">
-              <i class="material-icons">person</i>
-              <p>User Profile</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-             <a class="nav-link" href="./products-services.php">
-              <i class="material-icons">content_paste</i>
-              <p>Products & Services</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-             <a class="nav-link" href="./staff-clients.php">
-              <i class="material-icons">library_books</i>
-              <p>Staff & Clients</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./map.php">
-              <i class="material-icons">location_ons</i>
-              <p>Map your Salon</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./calendar.php">
-              <i class="material-icons">notifications</i>
-              <p>Calendar</p>
-            </a>
-        
-          <li class="nav-item active-pro ">
-                <a class="nav-link" href="./upgrade.php">
-                    <i class="material-icons">unarchive</i>
-                    <p>Premium Services</p>
-                </a>
-            </li>
-        </ul>
-      </div>
+    <div class="logo">
+      <a href="index/" class="simple-text logo-normal">
+        Hairways
+      </a>
     </div>
-    <div class="main-panel">
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard/">
+            <i class="material-icons">dashboard</i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="/user/">
+            <i class="material-icons">person</i>
+            <p>User Profile</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+           <a class="nav-link" href="/productsServices/">
+            <i class="material-icons">content_paste</i>
+            <p>Products & Services</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+           <a class="nav-link" href="/staffClients/">
+            <i class="material-icons">library_books</i>
+            <p>Staff & Clients</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="/map/">
+            <i class="material-icons">location_ons</i>
+            <p>Map your Salon</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="/calendar/">
+            <i class="material-icons">notifications</i>
+            <p>Calendar</p>
+          </a>
+
+        <li class="nav-item active-pro ">
+              <a class="nav-link" href="/upgrade/">
+                  <i class="material-icons">unarchive</i>
+                  <p>Premium Services</p>
+              </a>
+          </li>
+      </ul>
+    </div>
+  </div>
+  <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <a class="navbar-brand" href="javascript:void(0)">Map</a>
           </div>
-        
+
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
@@ -94,10 +94,10 @@
             <span class="navbar-toggler-icon icon-bar"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end">
-            
+
             <ul class="navbar-nav">
-             
-              
+
+
               <li class="nav-item">
                 <a class="nav-link" href="dashboard.php">
                   <i class="material-icons">dashboard</i>
@@ -116,7 +116,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="user.php">User profile</a>
                   <a class="dropdown-item" href="../index.html">Log out</a>
-                  
+
                 </div>
                 </a>
               </li>
@@ -131,7 +131,7 @@
           <input type="hidden" id="lng" name="lng">
           <input type="button" name="salonposition" id="salonposition">
         </form>
-        
+
       </div>
     </div>
   </div>
@@ -157,34 +157,34 @@
         <li class="header-title">Images</li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-1.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-1.jpg' %}" alt="">
           </a>
         </li>
         <li class="active">
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-2.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-2.jpg' %}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-3.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-3.jpg' %}" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-4.jpg" alt="">
+            <img src="{% static 'css/assets/img/sidebar-4.jpg' %}" alt="">
           </a>
         </li>
-         
+
       </ul>
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="{% static 'css/assets/js/core/jquery.min.js' %}"></script>
+  <script src="{% static 'css/assets/js/core/popper.min.js' %}"></script>
+  <script src="{% static 'css/assets/js/core/bootstrap-material-design.min.js' %}"></script>
   <script src="https://unpkg.com/default-passive-events"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="{% static 'css/assets/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!--  Google Maps Plugin    -->
@@ -205,13 +205,13 @@ function initMap() {
     async defer></script>
 
   <!-- Chartist JS -->
-  <script src="../assets/js/plugins/chartist.min.js"></script>
+  <script src="{% static 'css/assets/js/plugins/chartist.min.js' %}"></script>
   <!--  Notifications Plugin    -->
-  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <script src="{% static 'css/assets/js/plugins/bootstrap-notify.js' %}"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
+  <script src="{% static 'css/assets/js/material-dashboard.js' %}"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
+  <script src="{% static 'css/assets/demo/demo.js' %}"></script>
   <!-- Active classes JS -->
   <script>
    $(document).ready(function(){
@@ -219,10 +219,10 @@ function initMap() {
     $('li a').removeClass("active");
     $(this).addClass("active");
 });
-}); 
+});
   </script>
 
-  
+
   <script>
     $(document).ready(function() {
       $().ready(function() {
@@ -237,7 +237,7 @@ function initMap() {
         window_width = $(window).width();
 
         $('.fixed-plugin a').click(function(event) {
-          
+
           if ($(this).hasClass('switch-trigger')) {
             if (event.stopPropagation) {
               event.stopPropagation();

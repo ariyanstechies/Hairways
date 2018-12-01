@@ -1,13 +1,9 @@
-
-
-
-
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
 @font-face {
   font-family: Poppins-Regular;
-  src: url('../fonts/poppins/Poppins-Regular.ttf');
+  src: url("fonts/poppins/Poppins-Regular.ttf");
 }
 
 @font-face {
@@ -331,16 +327,14 @@ input.form-control {
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
-/* overring userStylesheet */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
-    -webkit-transition-delay: 9999s;
-}
-/*---------------------------------------------*/
 
+/*---------------------------------------------*/
+.form-group, .form-group > div {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
 .focus-input100 {
   position: absolute;
   display: block;

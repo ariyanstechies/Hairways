@@ -7,6 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}"> -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
 </head>
 <body style="background-color: #666666;">
@@ -18,7 +19,7 @@
           <span class="login100-form-title p-b-43">
             Signup to Continue
           </span>
-        <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+          <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
             <span class="focus-input100"></span>
             {{ form.username|as_crispy_field }}
           </div>

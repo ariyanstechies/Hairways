@@ -7,7 +7,7 @@ from Hairways.models import Users
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = Users
-        fields = ('username', 'first_name', 'password', 'last_name', 'email', 'phone')
+        fields = ('username', 'email', 'phone', 'password', 'confirm_Password')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

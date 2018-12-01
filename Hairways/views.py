@@ -42,6 +42,7 @@ def signup(request):
 def dashboard(request):
     return render(request, "dashboard/dashboard.php")
 
+
 def user(request):
     return render(request, "dashboard/user.php")
 

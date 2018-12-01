@@ -34,12 +34,11 @@ class Services(models.Model):
 
 
 class Users(models.Model):
-    username = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=16)
-    last_name = models.CharField(max_length=16)
-    password = models.CharField(max_length=16)
+    username = models.CharField(max_length=25)
     email = models.CharField(max_length=16)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=16)
+    password = models.CharField(max_length=16)
+    confirm_Password = models.CharField(max_length=16)
     joined_date = models.DateTimeField(
         blank=True, null=True
         )

@@ -260,7 +260,6 @@ iframe {
   min-height: 100vh;
   display: block;
   background-color: #f7f7f7;
-  padding: 173px 55px 55px 55px;
 }
 
 .login100-form-title {
@@ -294,7 +293,7 @@ iframe {
   margin-bottom: 10px;
 }
 
-.label-input100 {
+.col-form-label {
   font-family: Montserrat-Regular;
   font-size: 18px;
   color: #999999;
@@ -314,7 +313,7 @@ iframe {
   transition: all 0.4s;
 }
 
-div input {
+.form-control{
   display: block;
   width: 100%;
   background: transparent;
@@ -325,14 +324,21 @@ div input {
   padding: 0 26px;
 }
 
-div input{
+input.form-control {
   height: 100%;
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
-
+/* overring userStylesheet */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+    -webkit-transition-delay: 9999s;
+}
 /*---------------------------------------------*/
 
 .focus-input100 {
@@ -361,7 +367,7 @@ div input{
   transform: scaleX(1.1) scaleY(1.3);
 }
 
-.input100:focus + .focus-input100 {
+.form-control:focus + .focus-input100 {
   visibility: visible;
   opacity: 1;
 
@@ -383,11 +389,11 @@ div input{
   transform: scale(1);
 }
 
-.input100:focus {
+.form-control:focus {
   height: 48px;
 }
 
-.input100:focus + .focus-input100 + .label-input100 {
+.form-control:focus + .focus-input100 + .col-form-label {
   top: 14px;
   font-size: 13px;
 }
@@ -396,7 +402,7 @@ div input{
   height: 48px !important;
 }
 
-.has-val + .focus-input100 + .label-input100 {
+.has-val + .focus-input100 + .col-form-label {
   top: 14px;
   font-size: 13px;
 }

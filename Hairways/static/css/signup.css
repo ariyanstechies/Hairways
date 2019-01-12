@@ -1,13 +1,9 @@
-
-
-
-
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
 @font-face {
   font-family: Poppins-Regular;
-  src: url('../fonts/poppins/Poppins-Regular.ttf');
+  src: url("fonts/poppins/Poppins-Regular.ttf");
 }
 
 @font-face {
@@ -260,7 +256,6 @@ iframe {
   min-height: 100vh;
   display: block;
   background-color: #f7f7f7;
-  padding: 173px 55px 55px 55px;
 }
 
 .login100-form-title {
@@ -294,7 +289,7 @@ iframe {
   margin-bottom: 10px;
 }
 
-.label-input100 {
+.col-form-label {
   font-family: Montserrat-Regular;
   font-size: 18px;
   color: #999999;
@@ -314,7 +309,7 @@ iframe {
   transition: all 0.4s;
 }
 
-div input {
+.form-control{
   display: block;
   width: 100%;
   background: transparent;
@@ -325,7 +320,7 @@ div input {
   padding: 0 26px;
 }
 
-div input{
+input.form-control {
   height: 100%;
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -334,7 +329,12 @@ div input{
 }
 
 /*---------------------------------------------*/
-
+.form-group, .form-group > div {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
 .focus-input100 {
   position: absolute;
   display: block;
@@ -361,7 +361,7 @@ div input{
   transform: scaleX(1.1) scaleY(1.3);
 }
 
-.input100:focus + .focus-input100 {
+.form-control:focus + .focus-input100 {
   visibility: visible;
   opacity: 1;
 
@@ -383,11 +383,11 @@ div input{
   transform: scale(1);
 }
 
-.input100:focus {
+.form-control:focus {
   height: 48px;
 }
 
-.input100:focus + .focus-input100 + .label-input100 {
+.form-control:focus + .focus-input100 + .col-form-label {
   top: 14px;
   font-size: 13px;
 }
@@ -396,7 +396,7 @@ div input{
   height: 48px !important;
 }
 
-.has-val + .focus-input100 + .label-input100 {
+.has-val + .focus-input100 + .col-form-label {
   top: 14px;
   font-size: 13px;
 }

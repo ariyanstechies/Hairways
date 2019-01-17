@@ -18,9 +18,15 @@
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
   <!-- Adding custom css styling -->
   <link href="{% static 'css/loginsignup.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/footerstyle.css' %}" rel="stylesheet"/>
   <link rel="stylesheet" href="{% static 'css/faqs.css' %}">
   <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
   <link rel="stylesheet" type="text/css" href="{% static 'css/salon-style.css' %}">
+
+  <!-- Stylesheets for footer -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
   <script src="{% static 'css/javascript/jquery.js' %}"></script>
   <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
@@ -78,33 +84,95 @@ $(document).ready(function(){
     {% block content %}
     {% endblock %}
   </main>
-  <div class="footer" style="background-color: gray">
-    <div class="footer-bottom" style="padding: 50px 0px 50px 0px">
-      <div class="wrap">
-        <div class="section group">
-          <div class="col_1_of_5 span_1_of_5">
-            <h3 class="m_9">Home</h3>
+  
+
+<footer class="footer">
+<div class="container bottom_border">
+<div class="row">
+<div class=" col-sm-4 col-md col-sm-4  col-12 col">
+<h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
+<!--headin5_amrc-->
+<p class="mb10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+<p><i class="fa fa-location-arrow"></i> 9878/25 sec 9 rohini 35 </p>
+<p><i class="fa fa-phone"></i>  +91-9999878398  </p>
+<p><i class="fa fa fa-envelope"></i> info@example.com  </p>
 
 
-          </div>
-          <div class="col_1_of_5 span_1_of_5">
-            <h3 class="m_9">Beauty Blog</h3>
-
-          </div>
-          <div class="col_1_of_5 span_1_of_5">
-            <h3 class="m_9">Contact us</h3>
-
-          </div>
+</div>
 
 
-        </div>
-      </div>
-    </div>
+<div class=" col-sm-4 col-md  col-6 col">
+<h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
+<!--headin5_amrc-->
+<ul class="footer_ul_amrc">
+<li><a href="http://kalarikendramdelhi.com">Image Rectoucing</a></li><br>
+<li><a href="http://kalarikendramdelhi.com">Clipping Path</a></li><br>
+<li><a href="http://kalarikendramdelhi.com">Hollow Man Montage</a></li><br>
+<li><a href="http://kalarikendramdelhi.com">Ebay & Amazon</a></li><br>
+<li><a href="http://kalarikendramdelhi.com">Hair Masking/Clipping</a></li><br>
+<li><a href="http://kalarikendramdelhi.com">Image Cropping</a></li>
+</ul>
+<!--footer_ul_amrc ends here-->
+</div>
 
-  </div>
-  <footer class="Copyright">
-    <p>Copyright &copy; 2018 | Powered By <a href="#" target="_blank">Ariyans Techies</a>.</p>
-  </footer>
+
+<div class=" col-sm-4 col-md  col-6 col">
+<h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
+<!--headin5_amrc-->
+<ul class="footer_ul_amrc">
+<li><a href="http://kalarikendramdelhi.com">Remove Background</a></li><br>
+<li><a href="http://kalarikendramdelhi.com">Shadows & Mirror Reflection</a></li><br>
+<li><a href="http://kalarikendramdelhi.com">Logo Design</a></li><br>
+<li><a href="http://kalarikendramdelhi.com">Vectorization</a></li><br>
+<li><a href="http://kalarikendramdelhi.com">Hair Masking/Clipping</a></li><br>
+<li><a href="http://kalarikendramdelhi.com">Image Cropping</a></li>
+</ul>
+<!--footer_ul_amrc ends here-->
+</div>
+
+
+<div class=" col-sm-4 col-md  col-12 col">
+<h5 class="headin5_amrc col_white_amrc pt2">Follow us</h5>
+<!--headin5_amrc ends here-->
+
+<ul class="footer_ul2_amrc">
+<li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...<a href="#">https://www.lipsum.com/</a></p></li>
+<li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...<a href="#">https://www.lipsum.com/</a></p></li>
+<li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...<a href="#">https://www.lipsum.com/</a></p></li>
+</ul>
+<!--footer_ul2_amrc ends here-->
+</div>
+</div>
+</div>
+
+
+<div class="container">
+<ul class="foote_bottom_ul_amrc">
+<li><a href="http://kalarikendramdelhi.com">Home</a></li>
+<li><a href="http://kalarikendramdelhi.com">About</a></li>
+<li><a href="http://kalarikendramdelhi.com">Services</a></li>
+<li><a href="http://kalarikendramdelhi.com">Pricing</a></li>
+<li><a href="http://kalarikendramdelhi.com">Blog</a></li>
+<li><a href="http://kalarikendramdelhi.com">Contact</a></li>
+</ul>
+<!--foote_bottom_ul_amrc ends here-->
+<p class="text-center">Copyright @2017 | Powered by <a style="color: #5E28AB" href="#"><b>Ariyans Techies</b></a></p>
+
+<ul class="social_footer_ul">
+<li><a href="http://kalarikendramdelhi.com"><i class="fab fa-facebook-f"></i></a></li>
+<li><a href="http://kalarikendramdelhi.com"><i class="fab fa-twitter"></i></a></li>
+<li><a href="http://kalarikendramdelhi.com"><i class="fab fa-linkedin"></i></a></li>
+<li><a href="http://kalarikendramdelhi.com"><i class="fab fa-instagram"></i></a></li>
+</ul>
+<!--social_footer_ul ends here-->
+</div>
+
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
   <script>
   function myFunction() {

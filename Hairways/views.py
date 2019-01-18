@@ -46,27 +46,33 @@ def dashboard(request):
 def user(request):
     return render(request, "dashboard/user.php")
 
+
 def productsServices(request):
     return render(request, "dashboard/productsServices.php")
+
 
 def staffClients(request):
     return render(request, "dashboard/staffClients.php")
 
+
 def map(request):
     return render(request, "dashboard/map.php")
+
 
 def calendar(request):
     return render(request, "dashboard/calendar.php")
 
+
 def upgrade(request):
     return render(request, "dashboard/upgrade.php")
+
 
 def pricing(request):
     return render(request, "pricing.html")
 
+
 def moreinfo(request):
     return render(request, "moreinfo.php")
-
 
 
 def upload(request):

@@ -1,0 +1,14 @@
+.container {
+    background-color: #929292;
+    padding: 30px 10px 30px 10px;
+
+}
+
+.footer{
+	background-color: #929292;
+	/* /padding-bottom: 50px;/ */
+}
+
+.footer_ul2_amrc p{
+	color: #282923;
+}

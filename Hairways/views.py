@@ -4,10 +4,23 @@ from django.views.generic import UpdateView
 from django.core.files.storage import FileSystemStorage
 from Hairways.forms import SignUpForm
 from Hairways.models import Users
+from Hairways.models import Salons
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def home(request):
-    return render(request, "index.html")
+
+    items = Salons.objects.all()
+ # for pagination
+    page = request.GET.get('page', 1)
+    paginator = Paginator(items,10)
+    try:
+        salons = paginator.page(page)
+    except PageNotAnInteger:
+        salons = paginator.page(1)
+    except EmptyPage:
+        salons = paginator.page(paginator.num_pages)
+    return render(request, 'index.html', {'salons': salons})
 
 
 def faqs(request):

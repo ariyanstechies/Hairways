@@ -3,6 +3,7 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from django.urls import path
 
 urlpatterns = [
     url(r'^$|^home/$', views.home, name='home'),
@@ -13,7 +14,9 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^pricing/$', views.pricing, name='pricing'),
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
-    url(r'^moreinfo/$', views.moreinfo, name='moreinfo'),
+    # url(r'^moreinfo/$', views.moreinfo, name='moreinfo'),
+    path('Salon/<int:id>/', views.moreinfo, name='moreinfo'),
+    path('Salon/<int:id>/', views.services, name='moreinfo'),
     url(r'^user/$', views.user, name='user'),
     url(r'^productsServices/$', views.productsServices, name='productsServices'),
     url(r'^staffClients/$', views.staffClients, name='staffClients'),

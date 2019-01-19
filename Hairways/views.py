@@ -87,6 +87,10 @@ def pricing(request):
 def moreinfo(request):
     return render(request, "moreinfo.php")
 
+def services(request, id):
+    services=Services.objects.all(salons=id)
+    return render(request, "moreinfo.php",{'services':services})
+
 
 def upload(request):
     context = {}

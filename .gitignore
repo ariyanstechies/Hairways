@@ -1,7 +1,9 @@
 *.pyc
-*~
-__pycache__
+__ pycache __
 myvenv
 db.sqlite3
 /static
 .DS_Store
+.vscode
+.idea
+__pycache__/__init__.cpython-36.pyc

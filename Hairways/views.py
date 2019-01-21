@@ -65,8 +65,9 @@ def pricing(request):
     return render(request, "pricing.html")
 
 
-def moreinfo(request):
-    return render(request, "moreinfo.php")
+def moreinfo(request, id):
+    salon=Salons.objects.get(id=id)
+    return render(request, "moreinfo.php", {'salon':salon})
 
 def services(request, id):
     services=Services.objects.all(salons=id)

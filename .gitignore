@@ -6,4 +6,4 @@ db.sqlite3
 .DS_Store
 .vscode
 .idea
-Hairways/migrations/__pycache__/__init__.cpython-36.pyc
+__pycache__/__init__.cpython-36.pyc

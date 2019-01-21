@@ -1,7 +1,42 @@
-*.pyc
+# Byte-compiled / optimized / DLL files*.pyc
 *~
-__pycache__
+_pycache_/
+
+# virtualenv
+.myvenv/
 myvenv
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Django stuff:
+*.log
+local_settings.py
+
+# Database stuff
+*.sqlite3
+migrations/
 db.sqlite3
-/static
+
+# Atom config file
+.editorconfig
+
+# Other unwanted stuff
+.idea
 .DS_Store
+.DS_STORE

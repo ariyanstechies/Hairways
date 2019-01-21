@@ -1,11 +1,24 @@
 from django.shortcuts import render
 from django.views.generic import CreateView
 from django.core.files.storage import FileSystemStorage
+from Hairways.models import Salons
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from Hairways.models import ClientLogin
 
 
 def home(request):
-    return render(request, "index.html")
+
+    items = Salons.objects.all()
+    # for pagination
+    page = request.GET.get('page', 1)
+    paginator = Paginator(items,10)
+    try:
+        salons = paginator.page(page)
+    except PageNotAnInteger:
+        salons = paginator.page(1)
+    except EmptyPage:
+        salons = paginator.page(paginator.num_pages)
+    return render(request, 'index.html', {'salons': salons})
 
 
 def faqs(request):
@@ -15,12 +28,10 @@ def faqs(request):
 def about(request):
     return render(request, "about.html")
 
-
 class UserCreateView(CreateView):
     model = ClientLogin
     fields = ('email', 'password')
     template_name = 'clientlogin.html'
-
 
 def dashboard(request):
     return render(request, "dashboard/dashboard.php")
@@ -56,6 +67,10 @@ def pricing(request):
 
 def moreinfo(request):
     return render(request, "moreinfo.php")
+
+def services(request, id):
+    services=Services.objects.all(salons=id)
+    return render(request, "moreinfo.php",{'services':services})
 
 
 def upload(request):

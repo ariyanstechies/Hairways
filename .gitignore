@@ -3,6 +3,7 @@ __ pycache __
 myvenv
 db.sqlite3
 /static
+migrations
 .DS_Store
 .vscode
 .idea

@@ -2,6 +2,7 @@ from django.conf.urls import url
 # from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+from Hairways.views import UserCreateView
 from . import views
 
 urlpatterns = [
@@ -18,6 +19,7 @@ urlpatterns = [
     url(r'^upgrade/$', views.upgrade, name='upgrade'),
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^faqs/$', views.faqs, name='faqs'),
+    url(r'^login/$', UserCreateView.as_view())
     ]
 
 if settings.DEBUG:

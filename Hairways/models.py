@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils import timezone
 
 
@@ -33,16 +32,17 @@ class Services(models.Model):
     svailability = models.BooleanField(default=True)
 
 
-class Users(models.Model):
-    username = models.CharField(max_length=25)
-    email = models.CharField(max_length=16)
-    phone = models.CharField(max_length=16)
-    password = models.CharField(max_length=16)
-    confirm_Password = models.CharField(max_length=16)
-    joined_date = models.DateTimeField(
-        blank=True, null=True
-        )
-    location = models.TextField()
+class User(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(blank=True)
+    password = models.CharField(max_length=50)
+
+    # Might be activated later
+    # phone = models.CharField(max_length=16)
+    # joined_date = models.DateTimeField(
+    #     blank=True, null=True
+    #     )
+    # location = models.TextField()
 
 
 class Appointments(models.Model):
@@ -52,7 +52,6 @@ class Appointments(models.Model):
     AppointmentsStatus = models.BooleanField()
     date_time = models.DateTimeField()
     totalCost = models.IntegerField()
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 
 class Pictures(models.Model):
@@ -70,7 +69,6 @@ class Pictures(models.Model):
 class Comments(models.Model):
     commentId = models.IntegerField()
     salons = models.ForeignKey(Salons, on_delete=models.CASCADE)
-    users = models.ForeignKey(Users, on_delete=models.CASCADE)
     text = models.TextField(max_length=100)
     created_date = models.DateTimeField(
         default=timezone.now

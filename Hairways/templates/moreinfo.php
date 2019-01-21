@@ -19,6 +19,9 @@
 
 </head>
 <body>
+
+
+
   <section class="main">
     <div class="content">
       <div class="container-fluid" style="width: 100%">
@@ -53,6 +56,9 @@
                       </div>
                     </div>
                   </div>
+
+<p>{{ salon.saloonName }}</p>
+
                   <table class="table table-striped">
                     <thead>
                       <tr>

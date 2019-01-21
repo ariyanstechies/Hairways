@@ -1,9 +1,5 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from django.views.generic import UpdateView
+from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
-from Hairways.forms import SignUpForm
-from Hairways.models import Users
 from Hairways.models import Salons
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -11,7 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def home(request):
 
     items = Salons.objects.all()
- # for pagination
+    # for pagination
     page = request.GET.get('page', 1)
     paginator = Paginator(items,10)
     try:
@@ -29,27 +25,6 @@ def faqs(request):
 
 def about(request):
     return render(request, "about.html")
-
-
-class SignUpcreateView(UpdateView):
-    model = Users
-    form_class = SignUpForm
-    template_name = 'Hairways/signup.html'
-
-
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
 
 
 def dashboard(request):

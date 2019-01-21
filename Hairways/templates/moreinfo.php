@@ -26,7 +26,7 @@
     <div class="content">
       <div class="container-fluid" style="width: 100%">
         <a href="/">
-          <button class="back btn btn-primary" style="margin: 10px 0px 20px 30px;">Back
+          <button class="back btn btn-primary" style="margin: 10px 0px 20px 30px;">Back home
           </button>
         </a>
         <div class="content">

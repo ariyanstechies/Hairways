@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.views.generic import CreateView
 from django.core.files.storage import FileSystemStorage
 from Hairways.models import Salons
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from Hairways.models import ClientLogin
 
 
 def home(request):
@@ -26,6 +28,10 @@ def faqs(request):
 def about(request):
     return render(request, "about.html")
 
+class UserCreateView(CreateView):
+    model = ClientLogin
+    fields = ('email', 'password')
+    template_name = 'clientlogin.html'
 
 def dashboard(request):
     return render(request, "dashboard/dashboard.php")

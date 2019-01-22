@@ -70,24 +70,36 @@ $(document).ready(function(){
   <!--Navigation bar -->
   <!-- This one is shown on large screens and hidden on small screens -->
   <div class="w3-bar w3-card-4 w3-xlarge " style="background-color: #11AFF2; height: 50px">
-    <p href="#" class="w3-bar-item w3-button">Hairways.co.ke</p>
-    <a href="/faqs" class="w3-bar-item w3-button w3-hide-small w3-right">Faqs</a>
-    <a href="/about" class="w3-bar-item w3-button w3-right w3-hide-small">About</a>
-    <a href="/login" class="w3-bar-item w3-button w3-right w3-hide-small">Login</a>
+    <p href="{% url 'home' %}" class="w3-bar-item w3-button">Hairways.co.ke</p>
+    <a href="{% url 'faqs' %}" class="w3-bar-item w3-button w3-hide-small w3-right">Faqs</a>
+    <a href="{% url 'about' %}" class="w3-bar-item w3-button w3-right w3-hide-small">About</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'password_change' %}" class="w3-bar-item w3-button w3-right w3-hide-small">Change Password</a>
+    <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-right w3-hide-small">Logout</a>
+    {% else %}
+    <a href="{% url 'signup' %}" class="w3-bar-item w3-button w3-right w3-hide-small">SignUp</a>
+    <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-right w3-hide-small">Login</a>
+    {% endif %}
     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
   </div>
 
   <!-- This one is shown on small screens and hidden on large screens -->
   <div id="demo" class="w3-bar-block w3-hide w3-hide-large w3-mobile w3-hide-medium"  style="background-color: #11AFF2">
-    <a href="/about" class="w3-bar-item w3-button">About Us</a>
-    <a href="/faqs" class="w3-bar-item w3-button">FQAs</a>
-    <a href="/login" class="w3-bar-item w3-button">Login</a>
+    <a href="{% url 'about' %}" class="w3-bar-item w3-button">About Us</a>
+    <a href="{% url 'faqs' %}" class="w3-bar-item w3-button">FAQs</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}" class="w3-bar-item w3-button">Logout</a>
+    <a href="{% url 'password_change' %}" class="w3-bar-item w3-button">Change Password</a>
+    {% else %}
+    <a href="{% url 'login' %}" class="w3-bar-item w3-button">Login</a>
+    <a href="{% url 'signup' %}" class="w3-bar-item w3-button">SignUp</a>
+    {% endif %}
   </div>
   <main>
     {% block content %}
     {% endblock %}
   </main>
-  
+
 
 <footer class="footer">
 <div class="footer-container-top container bottom_border">

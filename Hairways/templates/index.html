@@ -10,8 +10,12 @@
 </style>
 <!-- RANKING SALONS IN SLIDER -->
 
-
+<!-- Stylesheet -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- fonts -->
+<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+
 <section class="salon-rank w3-border">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -21,7 +25,7 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="{% static 'css/images/slide1.jpg' %}" alt="First slide">
+                <img class="d-block w-100" src="{% static 'css/images/34.jpg' %}" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
                     <h5 style="color: #11AFF2; font-weight: bold;">Tuskys Salon</h5>
                     <p style="color: #000">For the best and latest cuts</p>
@@ -37,7 +41,7 @@
             </div>
 
             <div class="carousel-item">
-                <img class="d-block w-100" src="{% static 'css/images/slide2.jpg' %}" alt="Third slide">
+                <img class="d-block w-100" src="{% static 'css/images/salon.jpg' %}" alt="Third slide">
                 <div class="carousel-caption d-none d-md-block">
                     <h5 style="color: #11AFF2; font-weight: bold;">Tuskys Salon</h5>
                     <p style="color: #000;">For the best and latest cuts</p>
@@ -60,16 +64,50 @@
 <!--<the outer container containing both left and right -->
 <div class=" w3-row w3-border ">
     <div class="w3-container w3-quarter " style="padding-top:5px">
-        <div class="w3-container">
-            <h3>Quick Search</h3><br><br>
-            <div class="fakeimg">Most Visited</div>
-            <br>
-            <div class="fakeimg">Near me</div>
-            <br>
-            <div class="fakeimg">Recommended</div>
-            <br>
-            <div class="fakeimg">Recommended</div>
-            <br>
+        <div class="w3-container" style="line-height: 30px; font-family: 'Kanit', sans-serif;
+">
+            <h4 style="margin-bottom: 20px;">Filter Salons</h4>
+            <div class="fakeimg"><i class="fas fa-fire"></i>  Popular</div>
+            
+            <div class="fakeimg"><i class="fas fa-search-location"></i> Near me</div>
+            
+            <div class="fakeimg"><i class="far fa-thumbs-up"></i> Recommended</div>
+            
+            <div class="fakeimg"><i class="fas fa-gift"></i> Offers</div>
+
+            <div>
+                    <!-- Commented out Symmo dropdown -->
+
+                <!-- <select class="button" name="option" style="width:100px">
+                <option value="" disabled selected>Location</option>
+                <option value="1"> <a href="javascript:void(0)" onclick="openMenu(event, 'Drinks');"></a>Kisumu</option>
+                <option value="2">Nairobi</option>
+                <option value="3">Samburu</option>
+                </select> -->
+
+                <!-- New dropdown -->
+                <div class="dropdown" >
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: 1px solid #80BDFF; color: #000">
+                    Salon location
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" type="button">Kisumu</button>
+                    <button class="dropdown-item" type="button">CBD</button>
+                    <button class="dropdown-item" type="button">Nyamasaria</button>
+                    <button class="dropdown-item" type="button">Milimani</button>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item" type="button" style="background-color: #C3C3C3">Nairobi</button>
+                    <button class="dropdown-item" type="button">CBD</button>
+                    <button class="dropdown-item" type="button">Westlands</button>
+                    <button class="dropdown-item" type="button">Kileleshwa</button>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item" type="button" style="background-color: #C3C3C3">Mombasa</button>
+                    <button class="dropdown-item" type="button">CBD</button>
+                  </div>
+                </div>               
+
+            </div>
+            
 
         </div>
         <hr>
@@ -93,14 +131,12 @@
     <div class="w3-container w3-rest  ">
 
         <!--search button by salon names-->
-        <div align="center">
-            <input class="button" placeholder="Search..."/>
-            <select class="button" name="option" style="width:150px">
-                <option value="" disabled selected>Location</option>
-                <option value="1"> <a href="javascript:void(0)" onclick="openMenu(event, 'Drinks');"></a>Kisumu</option>
-                <option value="2">Nairobi</option>
-                <option value="3">Samburu</option>
-            </select>
+        <div align="right">
+            <input class="search-input btn" placeholder="Search salon ..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;"> 
+            
+
+            <!-- <i align="left" class="fas fa-search" style="margin-left: 0px"></i> -->
+
 
         </div>
 

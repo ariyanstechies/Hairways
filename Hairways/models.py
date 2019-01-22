@@ -21,6 +21,9 @@ class Salons(models.Model):
     status = models.BooleanField(default=True)
     paybill = models.TextField(null=True, blank=True, max_length=12)
 
+    def __str__(self):
+        return self.saloonName
+
 
 class Services(models.Model):
     serviceId = models.IntegerField(primary_key=True)

@@ -9,6 +9,22 @@
 	/* /padding-bottom: 50px;/ */
 }
 
-.footer_ul2_amrc p{
+.footer_ul2_amrc li p{
 	color: #282923;
+}
+
+.resize{
+	font-size: 15px;
+}
+
+.foote_bottom_ul_amrc{
+	padding-top: 5px;
+}
+
+.footer-container-bottom{
+	padding-top: 5px;  
+}
+
+.footer{
+	background-color: #32353A;
 }

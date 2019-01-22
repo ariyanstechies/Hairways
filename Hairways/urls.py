@@ -22,7 +22,8 @@ urlpatterns = [
     url(r'^upgrade/$', views.upgrade, name='upgrade'),
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^faqs/$', views.faqs, name='faqs'),
-    url(r'^login/$', UserCreateView.as_view())
+    url(r'^login/$', UserCreateView.as_view()),
+    url(r'^signup/$', views.signup, name="signup"),
     ]
 
 if settings.DEBUG:

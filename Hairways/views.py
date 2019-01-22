@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView
+from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
 from Hairways.models import Salons
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -30,14 +30,10 @@ def about(request):
     return render(request, "about.html")
 
 
-class UserCreateView(CreateView):
-    model = ClientLogin
-    fields = ('email', 'password')
-    template_name = 'clientlogin.html'
-
-
 def signup(request):
-    return render(request, 'registration/signup.html')
+    form = UserCreationForm()
+    return render(request, 'registration/signup.html', {
+        "form": form})
 
 
 @login_required

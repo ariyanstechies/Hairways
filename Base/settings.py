@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Hairways',
+    'Hairways.Hairways',
     'crispy_forms',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -46,7 +46,7 @@ ROOT_URLCONF = 'Base.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'Hairways/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

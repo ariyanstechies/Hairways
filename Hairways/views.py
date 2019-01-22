@@ -3,6 +3,7 @@ from django.views.generic import CreateView
 from django.core.files.storage import FileSystemStorage
 from Hairways.models import Salons
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 from Hairways.models import ClientLogin
 
 
@@ -28,11 +29,18 @@ def faqs(request):
 def about(request):
     return render(request, "about.html")
 
+
 class UserCreateView(CreateView):
     model = ClientLogin
     fields = ('email', 'password')
     template_name = 'clientlogin.html'
 
+
+def signup(request):
+    return render(request, 'registration/signup.html')
+
+
+@login_required
 def dashboard(request):
     return render(request, "dashboard/dashboard.php")
 

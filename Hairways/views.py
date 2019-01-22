@@ -33,10 +33,6 @@ class UserCreateView(CreateView):
     fields = ('email', 'password')
     template_name = 'clientlogin.html'
 
-def moreinfo(request, id):
-    salon = Salons.objects.get(id=id)
-    return render(request, "moreinfo.html", {'salon': salon})
-
 def dashboard(request):
     return render(request, "dashboard/dashboard.php")
 
@@ -68,6 +64,10 @@ def upgrade(request):
 def pricing(request):
     return render(request, "pricing.html")
 
+
+def moreinfo(request, id):
+    salon = Salons.objects.get(id=id)
+    return render(request, "moreinfo.html", {'salon': salon})
 
 
 def services(request, id):

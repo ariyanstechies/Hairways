@@ -20,6 +20,10 @@ def home(request):
         salons = paginator.page(paginator.num_pages)
     return render(request, 'index.html', {'salons': salons})
 
+def moreinfo(request, id):
+    salon=Salons.objects.get(id=id)
+    return render(request, "moreinfo.html", {'salon':salon})
+
 
 def faqs(request):
     return render(request, "faqs.html")
@@ -65,9 +69,6 @@ def pricing(request):
     return render(request, "pricing.html")
 
 
-def moreinfo(request, id):
-    salon=Salons.objects.get(id=id)
-    return render(request, "moreinfo.php", {'salon':salon})
 
 def services(request, id):
     services=Services.objects.all(salons=id)

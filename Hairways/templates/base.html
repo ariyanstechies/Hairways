@@ -33,26 +33,7 @@
   <script src="{% static 'css/javascript/javascript.js' %}"></script>
   <script src="{% static 'css/javascript/scroll-horizontal.js' %}"></script>
 
-  <!-- start menu -->
-  <!-- <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all"/> -->
-  <!-- <script type="text/javascript" src="js/megamenu.js"></script> -->
-  <!-- <script>$(document).ready(function () {
-  $(".megamenu").megamenu();
-});</script> -->
-<!-- end menu -->
-<!-- top scrolling -->
-<!-- <script type="text/javascript" src="javascript/move-top.js"></script> -->
-<!-- <script type="text/javascript" src="javascript/easing.js"></script> -->
-<!-- <script type="text/javascript">
-jQuery(document).ready(function ($) {
-$(".scroll").click(function (event) {
-event.preventDefault();
-$('html,body').animate({scrollTop: $(this.hash).offset().top}, 1200);
-});
-});
-
-</script> -->
-<!-- Optional theme -->
+  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <script type="text/javascript">
@@ -61,13 +42,15 @@ $(document).ready(function(){
 });
 </script>
 
+
 </head>
 <body id="body" style="background-color: whitesmoke">
 
   <!--Navigation bar -->
   <!-- This one is shown on large screens and hidden on small screens -->
   <div class="w3-bar w3-card-4 w3-xlarge " style="background-color: #11AFF2; height: 50px">
-    <p href="#" class="w3-bar-item w3-button">Hairways.co.ke</p>
+    <p href="/" class="w3-bar-item w3-button">Hairways.co.ke</p>
+    <a href="/" class="w3-bar-item w3-button w3-hide-small w3-right">Home</a>
     <a href="/faqs" class="w3-bar-item w3-button w3-hide-small w3-right">Faqs</a>
     <a href="/about" class="w3-bar-item w3-button w3-right w3-hide-small">About</a>
     <a href="/login" class="w3-bar-item w3-button w3-right w3-hide-small">Login</a>

@@ -1,50 +1,13 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load staticfiles %}
-<html>
-<head>
-  <title>For the best Salons, Barber shop in town</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" media="screen"
-  href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap-grid.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/salon-style.css' %}">
-    <style>
-  .form-group input{
-    height: 30px;
-  }
+{% block content %}
 
-  </style>
+  {% comment %}  Salon name {% endcomment %}
+<div class="w3-center">
+  <h2> {{ salon.saloonName }} </h2>
+</div>     
+<!--end of salon name -->
 
-</head>
-<body>
-
-
-
-  <section class="main">
-    <div class="content">
-      <div class="container-fluid" style="width: 100%">
-        <a href="/">
-          <button class="back btn btn-primary" style="margin: 10px 0px 20px 30px;">Back home
-          </button>
-        </a>
-        <div class="content">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-7" style="margin-bottom: 30px;">
-                <div class="card">
-                  <div class="card-body" style="background-image: url({% static 'css/images/1.jpg' %}); background-size: cover; height: 400px">
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-5" style="margin-bottom: 30px;">
-                <div class="card card-profile" style="height: 400px" id="map">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="content">
           <div class="container-fluid">
             <div class="row">
@@ -56,8 +19,6 @@
                       </div>
                     </div>
                   </div>
-
-<p>{{ salon.saloonName }}</p>
 
                   <table class="table table-striped">
                     <thead>
@@ -167,7 +128,7 @@ function initMap() {
   <script src="{% static 'css/javascript/moreinfo.js' %}"></script>
 
   <script src="{% static 'css/javascript/scroll-horizontal.js' %}"></script>
-</body>
+
 <footer>
 </footer>
-</html>
+ {% endblock %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from Hairways.models import Salons
+from Hairways.models import Salons, Services
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 
@@ -11,7 +11,7 @@ def home(request):
     items = Salons.objects.all()
     # for pagination
     page = request.GET.get('page', 1)
-    paginator = Paginator(items,10)
+    paginator = Paginator(items, 10)
     try:
         salons = paginator.page(page)
     except PageNotAnInteger:
@@ -42,7 +42,8 @@ def signup(request):
         "form": form})
 
 
-@login_required  # protecting views you can't just access dashboard without logging
+# protecting views you can't just access dashboard without logging
+@login_required
 def dashboard(request):
     return render(request, "dashboard/dashboard.php")
 
@@ -56,18 +57,22 @@ def productsServices(request):
     return render(request, "dashboard/productsServices.php")
 
 
+@login_required
 def staffClients(request):
     return render(request, "dashboard/staffClients.php")
 
 
+@login_required
 def map(request):
     return render(request, "dashboard/map.php")
 
 
+@login_required
 def calendar(request):
     return render(request, "dashboard/calendar.php")
 
 
+@login_required
 def upgrade(request):
     return render(request, "dashboard/upgrade.php")
 
@@ -79,9 +84,11 @@ def pricing(request):
 def moreinfo(request):
     return render(request, "moreinfo.php")
 
+
 def services(request, id):
-    services=Services.objects.all(salons=id)
-    return render(request, "moreinfo.php",{'services':services})
+    services = Services.objects.all(salons=id)
+    return render(request, "moreinfo.php", {
+        'services': services})
 
 
 def upload(request):
@@ -94,7 +101,7 @@ def upload(request):
     return render(request, 'upload.html', context)
 
 
-#   TO BE RIVIEWWD DISPLAYS IMAGES
+#   TO BE REVIEWED DISPLAYS IMAGES
 # def book_list(request):
 #     books = Book.objects.all()
 #     return render(request, 'book_list.html', {

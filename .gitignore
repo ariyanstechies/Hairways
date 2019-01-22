@@ -6,3 +6,4 @@ db.sqlite3
 .DS_Store
 .vscode
 .idea
+__pycache__/__init__.cpython-36.pyc

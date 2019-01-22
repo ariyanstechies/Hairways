@@ -42,12 +42,12 @@ def signup(request):
         "form": form})
 
 
-@login_required
+@login_required  # protecting views you can't just access dashboard without logging
 def dashboard(request):
     return render(request, "dashboard/dashboard.php")
 
 
-@login_required
+@login_required  # protecting views
 def user(request):
     return render(request, "dashboard/user.php")
 

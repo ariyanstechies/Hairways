@@ -1,10 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
 from Hairways.models import Salons
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-from Hairways.models import ClientLogin
 
 
 def home(request):
@@ -31,7 +30,14 @@ def about(request):
 
 
 def signup(request):
-    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = UserCreationForm()
+
     return render(request, 'registration/signup.html', {
         "form": form})
 
@@ -41,6 +47,7 @@ def dashboard(request):
     return render(request, "dashboard/dashboard.php")
 
 
+@login_required
 def user(request):
     return render(request, "dashboard/user.php")
 

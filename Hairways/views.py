@@ -71,8 +71,8 @@ def moreinfo(request, id):
 
 
 def services(request, id):
-    services=Services.objects.all(salons=id)
-    return render(request, "moreinfo.php",{'services':services})
+    salon = Salons.objects.get(id=id)
+    return render(request, "moreinfo.html", {'salon': salon})
 
 
 def upload(request):

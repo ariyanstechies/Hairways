@@ -20,10 +20,6 @@ def home(request):
         salons = paginator.page(paginator.num_pages)
     return render(request, 'index.html', {'salons': salons})
 
-def moreinfo(request, id):
-    salon=Salons.objects.get(id=id)
-    return render(request, "moreinfo.html", {'salon':salon})
-
 
 def faqs(request):
     return render(request, "faqs.html")

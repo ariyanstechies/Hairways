@@ -12,9 +12,9 @@ $(document).ready(function(){
 
     // If the checkbox is checked, display the output text
     if (checkBox.checked == true){
-      console.log(text);
+      document.getElementById("text").innerHTML += '<div>'+ text +'</div>'+'<br>';
     } else {
-      document.getElementById("text").innerHTML += "block";
+      // document.getElementById("text").innerHTML -= text;
     }
   }
 
@@ -29,20 +29,10 @@ $(document).ready(function(){
     var date = document.getElementById('Time').value;
     document.getElementById('Time').innerHTML = date;
   }
-  // <!--  Google Maps Plugin    -->
-  // Initialize and add the map
-  function initMap() {
-    // The location of Uluru
-    var salon = {lat: -0.103971, lng: 34.752286};
-    // The map, centered at Uluru
-    var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 16, center: salon});
-      // The marker, positioned at Uluru
-      var marker = new google.maps.Marker({position: salon, map: map});
-    }
-    $('#datetimepicker').datetimepicker({
-      format: 'dd/MM/yyyy hh:mm:ss',
-      language: 'en'
-    });
 
+  $('#datetimepicker').datetimepicker({
+    format: 'dd/MM/yyyy hh:mm:ss',
+    language: 'en'
   });
+
+});

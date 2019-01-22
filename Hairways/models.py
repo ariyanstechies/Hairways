@@ -35,23 +35,6 @@ class Services(models.Model):
     svailability = models.BooleanField(default=True)
 
 
-class ClientLogin(models.Model):
-    email = models.EmailField(blank=True)
-    password = models.CharField(max_length=50)
-
-
-class ClientSignUp(models.Model):
-    FirstName = models.CharField(max_length=100)
-    LastName = models.CharField(max_length=100)
-    email = models.EmailField(blank=True)
-    password = models.CharField(max_length=50)
-    phone = models.CharField(max_length=16)
-    joined_date = models.DateTimeField(
-        blank=True, null=True
-        )
-    location = models.TextField(blank=True)
-
-
 class Appointments(models.Model):
     AppointmentsId = models.CharField(max_length=100, primary_key=True)
     services = models.ForeignKey(Services, on_delete=models.CASCADE)

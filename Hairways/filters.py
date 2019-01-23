@@ -1,6 +1,5 @@
-from django.contrib.auth.models import User
-import django_filters
 from .models import Salons
+import django_filters
 
 
 class LocationFilter(django_filters.FilterSet):

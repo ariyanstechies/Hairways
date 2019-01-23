@@ -4,6 +4,7 @@ from django.core.files.storage import FileSystemStorage
 from Hairways.models import Salons, Services
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from Hairways.filters import LocationFilter
 
 
 def home(request):
@@ -18,7 +19,15 @@ def home(request):
         salons = paginator.page(1)
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
+
     return render(request, 'index.html', {'salons': salons})
+
+
+def filterSalons(request):
+    selected_location = request.GET.get()
+    all_salons = Salons.objects.all()
+    filtered_salons = LocationFilter(request.GET, queryset=all_salons)
+    return render(request, 'index.html', {'filtered_salons': filtered_salons})
 
 
 def faqs(request):

@@ -4,234 +4,229 @@
 
 
 <style>
-  .checked {
-    color: orange;
-  }
+.checked {
+  color: orange;
+}
 </style>
 <!-- RANKING SALONS IN SLIDER -->
+
+<!-- Stylesheet -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- fonts -->
 <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
 <section class="salon-rank w3-border">
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img class="d-block w-100" src="{% static 'css/images/34.jpg' %}" alt="First slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5 style="color: #11AFF2; font-weight: bold;">Tuskys Salon</h5>
-          <p style="color: #000">For the best and latest cuts</p>
-        </div>
-      </div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="{% static 'css/images/34.jpg' %}" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 style="color: #11AFF2; font-weight: bold;">Tuskys Salon</h5>
+                    <p style="color: #000">For the best and latest cuts</p>
+                </div>
+            </div>
 
-      <div class="carousel-item">
-        <img class="d-block w-100" src="{% static 'css/images/cover1.jpg' %}" alt="Second slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5 style="color: #11AFF2; font-weight: bold;">Tuskys Salon</h5>
-          <p style="color: #000;">For the best and latest cuts</p>
-        </div>
-      </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{% static 'css/images/cover1.jpg' %}" alt="Second slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 style="color: #11AFF2; font-weight: bold;">Tuskys Salon</h5>
+                    <p style="color: #000;">For the best and latest cuts</p>
+                </div>
+            </div>
 
-      <div class="carousel-item">
-        <img class="d-block w-100" src="{% static 'css/images/salon.jpg' %}" alt="Third slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5 style="color: #11AFF2; font-weight: bold;">Tuskys Salon</h5>
-          <p style="color: #000;">For the best and latest cuts</p>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{% static 'css/images/salon.jpg' %}" alt="Third slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 style="color: #11AFF2; font-weight: bold;">Tuskys Salon</h5>
+                    <p style="color: #000;">For the best and latest cuts</p>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
 </section>
 
 <!-- Getting a splited screen for left and right-->
 <!--<the outer container containing both left and right -->
 <div class=" w3-row w3-border ">
-  <div class="w3-container w3-quarter " style="padding-top:5px">
-    <div class="w3-container" style="line-height: 30px; font-family: 'Kanit', sans-serif;
-    ">
-    <h4 style="margin-bottom: 20px;">Filter Salons</h4>
-    <div class="fakeimg"><i class="fas fa-fire"></i>  Popular</div>
+    <div class="w3-container w3-quarter " style="padding-top:5px">
+        <div class="w3-container" style="line-height: 30px; font-family: 'Kanit', sans-serif;">
+            <h4 style="margin-bottom: 20px;">Filter Salons</h4>
+            <div class="fakeimg"><i class="fas fa-fire" style="color: #11AEF1"></i> Popular</div>
 
-    <div class="fakeimg"><i class="fas fa-search-location"></i> Near me</div>
+            <div class="fakeimg"><i class="fas fa-search-location" style="color: #11AEF1"></i> Near me</div>
 
-    <div class="fakeimg"><i class="far fa-thumbs-up"></i> Recommended</div>
+            <div class="fakeimg"><i class="far fa-thumbs-up" style="color: #11AEF1"></i> Recommended</div>
 
-    <div class="fakeimg"><i class="fas fa-gift"></i> Offers</div>
+            <div class="fakeimg"><i class="fas fa-gift" style="color: #11AEF1"></i> Offers</div>
 
-    <div>
-      <!-- Commented out Symmo dropdown -->
+            <div>
+                    <!-- Commented out Symmo dropdown -->
 
-      <!-- <select class="button" name="option" style="width:100px">
-      <option value="" disabled selected>Location</option>
-      <option value="1"> <a href="javascript:void(0)" onclick="openMenu(event, 'Drinks');"></a>Kisumu</option>
-      <option value="2">Nairobi</option>
-      <option value="3">Samburu</option>
-    </select> -->
+                <!-- <select class="button" name="option" style="width:100px">
+                <option value="" disabled selected>Location</option>
+                <option value="1"> <a href="javascript:void(0)" onclick="openMenu(event, 'Drinks');"></a>Kisumu</option>
+                <option value="2">Nairobi</option>
+                <option value="3">Samburu</option>
+                </select> -->
 
-    <!-- New dropdown -->
-    <div class="" >
-      <div class="dropdown input-group mb-3">
-        <input type="text" class="form-control" placeholder="All Locations" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      </div>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button class="dropdown-item" type="button">Kisumu</button>
-        <button class="dropdown-item" type="button">CBD</button>
-        <button class="dropdown-item" type="button">Nyamasaria</button>
-        <button class="dropdown-item" type="button">Milimani</button>
-        <div class="dropdown-divider"></div>
-        <button class="dropdown-item" type="button" style="background-color: #C3C3C3">Nairobi</button>
-        <button class="dropdown-item" type="button">CBD</button>
-        <button class="dropdown-item" type="button">Westlands</button>
-        <button class="dropdown-item" type="button">Kileleshwa</button>
-        <div class="dropdown-divider"></div>
-        <button class="dropdown-item" type="button" style="background-color: #C3C3C3">Mombasa</button>
-        <button class="dropdown-item" type="button">CBD</button>
-      </div>
-    </div>
+                <!-- New dropdown -->
+                <div class="input-group mb-3">
 
-  </div>
-</div>
-<hr>
-<!--Advertisements -->
-<div class="w3-content w3-container " style="max-width:400px">
-  <div class="mySlides w3-container w3-red">
-    <h1><b>Hurry!!!</b></h1>
-    <h1><i>Get your salon Known</i></h1>
-  </div>
+                  <select class="custom-select" id="inputGroupSelect01" style="font-weight: bold">
+                    <option selected>All locations</option>
+                    <option value="Nairobi">Nairobi</option>
+                    <option value="Mombasa">Mombasa</option>
+                    <option value="Kisumu">Kisumu</option>
+                    <option value="Eldoret">Eldoret</option>
+                    <option value="Thika">Thika</option>
+                  </select>
+                </div>
+
+            </div>
 
 
-  <div class="mySlides w3-container  w3-white">
-    <p><span class="w3-tag w3-yellow">New!</span>
-      <p>Get one month free on hairways</p>
-    </div>
-
-  </div>
-
-</div>
-<!--The right container containing to cards -->
-<div class="w3-container w3-rest  ">
-
-  <!--search button by salon names-->
-  <div align="right">
-    <input class="search-input btn" placeholder="Search salon ..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;">
-
-
-    <!-- <i align="left" class="fas fa-search" style="margin-left: 0px"></i> -->
-
-
-  </div>
-
-  {% for each_salon in salons %}
-  <div class=" w3-col s6   w3-mobile" style="padding-left:10px">
-    <div class="blog-card" style="height:250px">
-      <div class="meta">
-        <div class="photo" style="background-image: url({% static 'css/images/cover1.jpg' %})"></div>
-        <ul class="details">
-
-          <li class="author"><a href="#"></a></li>
-
-          <li class="date">ratings 7/20</li>
-          <li class="tags">
-            <ul>
-              <li><a href="#">Kisumu</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div class="description">
-
-        <h1> {{ each_salon.saloonName }} </h1>
-
-        <h2>{{each_salon.location}}</h2>
-        <p> {{each_salon.description}}</p>
-        <p class="read-more">
-          {% comment %} Star Rating {% endcomment %}
-          <span style="padding-right:32px">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-          </span>
-          <a href="{% url 'moreinfo' id=each_salon.id %}" class="top-menu">Find More</a>
-
-        </p>
+        </div>
         <hr>
-        <ul class="icons">
-          <li><i class="fa fa-eye fa-2x">{{each_salon.views}}</i></li>
-          <li><i class="fa fa-heart-o fa-2x">{{each_salon.likes}}</i></li>
-          <li><i class="fa fa-envelope-o fa-2x">9</i></li>
-          <li><i class="fa fa-share-alt fa-2x">7</i></li>
-        </ul>
-      </div>
+        <!--Advertisements -->
+        <div class="w3-content w3-container " style="max-width:400px">
+            <div class="mySlides w3-container w3-red">
+                <h1><b>Hurry!!!</b></h1>
+                <h1><i>Get your salon Known</i></h1>
+            </div>
+
+
+            <div class="mySlides w3-container  w3-white">
+                <p><span class="w3-tag w3-yellow">New!</span>
+                <p>Get one month free on hairways</p>
+            </div>
+
+        </div>
+
     </div>
-  </div>
-  {% endfor %}
+    <!--The right container containing to cards -->
+    <div class="w3-container w3-rest  ">
 
-  <br>
-  {% if salons.has_other_pages %}
-  <div class="w3-center " >
-    <div class="w3-bar w3-xlarge w3-border w3-round">
-      {% if salons.has_previous %}
-      <a href="?page={{ salons.previous_page_number }}" class="w3-button">&laquo;</a>
-      {% else %}
-      <a href="#" class="w3-button w3-disabled">&laquo;</a>
-      {% endif %}
-
-      {% for i in salons.paginator.page_range %}
-      {% if salons.number == i %}
-      <a  class="w3-button w3-pale-green">{{ i }} </a>
-      {% else %}
-      <a href="?page={{ i }}" class="w3-button">{{ i }}</a>
-      {% endif %}
-      {% endfor %}
-      {% if salons.has_next %}
-      <a href="?page={{ salons.next_page_number }}" class="w3-button">&raquo;</a>
-      {% else %}
-      <a href="" class="w3-button w3-disabled">&raquo;</a>
-      {% endif %}
-    </div>
-  </div>
-  {% endif %}
-  <!-- : ende of leftv  -->
+        <!--search button by salon names-->
+        <div align="right">
+            <input class="search-input btn" placeholder="Search salon ..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;">
 
 
+            <!-- <i align="left" class="fas fa-search" style="margin-left: 0px"></i> -->
+
+
+        </div>
+
+                {% for each_salon in salons %}
+            <div class=" w3-col s6   w3-mobile" style="padding-left:10px">
+                <div class="blog-card" style="height:250px">
+                    <div class="meta">
+                        <div class="photo" style="background-image: url({% static 'css/images/cover1.jpg' %})"></div>
+                        <ul class="details">
+
+                            <li class="author"><a href="#"></a></li>
+
+                            <li class="date">ratings 7/20</li>
+                            <li class="tags">
+                                <ul>
+                                    <li><a href="#">Kisumu</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="description">
+
+                        <h1> {{ each_salon.saloonName }} </h1>
+
+                        <h2>{{each_salon.location}}</h2>
+                        <p> {{each_salon.description}}</p>
+                        <p class="read-more">
+                        {% comment %} Star Rating {% endcomment %}
+                       <span style="padding-right:32px">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </span>
+                            <a href="{% url 'moreinfo' id=each_salon.id %}" class="top-menu">Find More</a>
+
+                        </p>
+                        <hr>
+                        <ul class="icons">
+                            <li><i class="fa fa-eye fa-2x">{{each_salon.views}}</i></li>
+                            <li><i class="fa fa-heart-o fa-2x">{{each_salon.likes}}</i></li>
+                            <li><i class="fa fa-envelope-o fa-2x">9</i></li>
+                            <li><i class="fa fa-share-alt fa-2x">7</i></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+                {% endfor %}
+
+        <br>
+        {% if salons.has_other_pages %}
+        <div class="w3-center " >
+        <div class="w3-bar w3-xlarge w3-border w3-round">
+            {% if salons.has_previous %}
+        <a href="?page={{ salons.previous_page_number }}" class="w3-button">&laquo;</a>
+            {% else %}
+        <a href="#" class="w3-button w3-disabled">&laquo;</a>
+            {% endif %}
+
+            {% for i in salons.paginator.page_range %}
+            {% if salons.number == i %}
+        <a  class="w3-button w3-pale-green">{{ i }} </a>
+            {% else %}
+            <a href="?page={{ i }}" class="w3-button">{{ i }}</a>
+            {% endif %}
+            {% endfor %}
+            {% if salons.has_next %}
+        <a href="?page={{ salons.next_page_number }}" class="w3-button">&raquo;</a>
+            {% else %}
+        <a href="" class="w3-button w3-disabled">&raquo;</a>
+            {% endif %}
+        </div>
+        </div>
+        {% endif %}
+                    <!-- : ende of leftv  -->
 
 
 
-  <script>
-    var slideIndex = 0;
-    carousel();
-
-    function carousel() {
-      var i;
-      var x = document.getElementsByClassName("mySlides");
-      for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-      }
-      slideIndex++;
-      if (slideIndex > x.length) {slideIndex = 1}
-      x[slideIndex-1].style.display = "block";
-      setTimeout(carousel, 2000);
-    }
 
 
-  </script>
+        <script>
+                    var slideIndex = 0;
+                    carousel();
+
+                    function carousel() {
+                        var i;
+                        var x = document.getElementsByClassName("mySlides");
+                        for (i = 0; i < x.length; i++) {
+                          x[i].style.display = "none";
+                        }
+                        slideIndex++;
+                        if (slideIndex > x.length) {slideIndex = 1}
+                        x[slideIndex-1].style.display = "block";
+                        setTimeout(carousel, 2000);
+                    }
 
 
-  {% endblock %}
+        </script>
+
+
+        {% endblock %}

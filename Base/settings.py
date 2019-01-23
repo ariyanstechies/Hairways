@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'Hairways',
     'crispy_forms',
     'django_filters',
-    'bootstrapform',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [

@@ -1,8 +1,8 @@
-from django.contrib.auth.models import User
+from .models import Salons
 import django_filters
-from .models import 
+
 
 class LocationFilter(django_filters.FilterSet):
     class Meta:
-        model = Location
+        model = Salons
         fields = ['location']

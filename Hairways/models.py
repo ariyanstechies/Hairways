@@ -12,7 +12,6 @@ class Owners(models.Model):
 
 class Salons(models.Model):
     saloonName = models.CharField(max_length=20)
-    location = models.CharField(max_length=30)
     description = models.TextField(max_length=50)
     created_date = models.DateTimeField(default=timezone.now)
     ownerId = models.ForeignKey(Owners, on_delete=models.CASCADE)
@@ -20,6 +19,7 @@ class Salons(models.Model):
     views = models.IntegerField(null=True, blank=True)
     status = models.BooleanField(default=True)
     paybill = models.TextField(null=True, blank=True, max_length=12)
+    location = models.CharField(max_length=30)
 
     def __str__(self):
         return self.saloonName
@@ -33,23 +33,6 @@ class Services(models.Model):
     serviceDuration = models.CharField(max_length=20)
     serviceBookings = models.IntegerField()
     svailability = models.BooleanField(default=True)
-
-
-class ClientLogin(models.Model):
-    email = models.EmailField(blank=True)
-    password = models.CharField(max_length=50)
-
-
-class ClientSignUp(models.Model):
-    FirstName = models.CharField(max_length=100)
-    LastName = models.CharField(max_length=100)
-    email = models.EmailField(blank=True)
-    password = models.CharField(max_length=50)
-    phone = models.CharField(max_length=16)
-    joined_date = models.DateTimeField(
-        blank=True, null=True
-        )
-    location = models.TextField(blank=True)
 
 
 class Appointments(models.Model):

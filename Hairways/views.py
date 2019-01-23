@@ -6,6 +6,26 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from Hairways.filters import LocationFilter
 
+# customer signup imports
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+
+# customer signup function
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')    # redirect to home and session created to allow customer to rate and comment on salons plus show message: LOGGED IN
+    else:
+        form = UserCreationForm()
+    return render(request, 'index.html', {'salons': salons})    # redirect to home but dont allow rating and commenting on salons show message: NOT LOGGED IN
+
 
 def home(request):
 
@@ -92,12 +112,12 @@ def pricing(request):
 
 def moreinfo(request, id):
     salon = Salons.objects.get(id=id)
-    return render(request, "moreinfo.php", {'salon': salon})
+    return render(request, "moreinfo.html", {'salon': salon})
 
 
 def services(request, id):
     services = Services.objects.all(salons=id)
-    return render(request, "moreinfo.php", {
+    return render(request, "moreinfo.html", {
         'services': services})
 
 

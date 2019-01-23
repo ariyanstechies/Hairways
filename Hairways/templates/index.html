@@ -67,13 +67,13 @@
         <div class="w3-container" style="line-height: 30px; font-family: 'Kanit', sans-serif;
 ">
             <h4 style="margin-bottom: 20px;">Filter Salons</h4>
-            <div class="fakeimg"><i class="fas fa-fire"></i>  Popular</div>
-            
-            <div class="fakeimg"><i class="fas fa-search-location"></i> Near me</div>
-            
-            <div class="fakeimg"><i class="far fa-thumbs-up"></i> Recommended</div>
-            
-            <div class="fakeimg"><i class="fas fa-gift"></i> Offers</div>
+            <div class="fakeimg"><i class="fas fa-fire" style="color: #11AEF1"></i> Popular</div>
+
+            <div class="fakeimg"><i class="fas fa-search-location" style="color: #11AEF1"></i> Near me</div>
+
+            <div class="fakeimg"><i class="far fa-thumbs-up" style="color: #11AEF1"></i> Recommended</div>
+
+            <div class="fakeimg"><i class="fas fa-gift" style="color: #11AEF1"></i> Offers</div>
 
             <div>
                     <!-- Commented out Symmo dropdown -->
@@ -86,10 +86,22 @@
                 </select> -->
 
                 <!-- New dropdown -->
-                <div class="dropdown" >
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: 1px solid #80BDFF; color: #000">
-                    Salon location
-                  </button>
+                <div class="input-group mb-3">
+
+                  <select class="custom-select" id="inputGroupSelect01" style="font-weight: bold">
+                    <option selected>All locations</option>
+                    <option value="Nairobi">Nairobi</option>
+                    <option value="Mombasa">Mombasa</option>
+                    <option value="Kisumu">Kisumu</option>
+                    <option value="Eldoret">Eldoret</option>
+                    <option value="Thika">Thika</option>
+                  </select>
+                </div>
+
+
+                <!-- <div class="dropdown" >
+                  <input class="btn btn-secondary dropdown-toggle" type="button" placeholder="All locations " id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; width: 200px; border: 2px solid #80BDFF; color: #000">
+
                   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <button class="dropdown-item" type="button">Kisumu</button>
                     <button class="dropdown-item" type="button">CBD</button>
@@ -104,10 +116,10 @@
                     <button class="dropdown-item" type="button" style="background-color: #C3C3C3">Mombasa</button>
                     <button class="dropdown-item" type="button">CBD</button>
                   </div>
-                </div>               
+                </div> -->
 
             </div>
-            
+
 
         </div>
         <hr>
@@ -132,8 +144,8 @@
 
         <!--search button by salon names-->
         <div align="right">
-            <input class="search-input btn" placeholder="Search salon ..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;"> 
-            
+            <input class="search-input btn" placeholder="Search salon ..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;">
+
 
             <!-- <i align="left" class="fas fa-search" style="margin-left: 0px"></i> -->
 
@@ -236,6 +248,6 @@
 
 
         </script>
-            
+
 
         {% endblock %}

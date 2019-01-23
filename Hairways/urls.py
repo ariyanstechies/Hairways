@@ -1,26 +1,25 @@
-from django.conf.urls import url
-from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from django.urls import path, include
 
 urlpatterns = [
-    url(r'^$|^home/$', views.home, name='home'),
-    url(r'^faqs/$', views.faqs, name='faqs'),
-    url(r'^about/$', views.about, name='about'),
-    # url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
-    # url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
-    url(r'^signup/$', views.signup, name='signup'),
-    url(r'^pricing/$', views.pricing, name='pricing'),
-    url(r'^dashboard/$', views.dashboard, name='dashboard'),
-    url(r'^moreinfo/$', views.moreinfo, name='moreinfo'),
-    url(r'^user/$', views.user, name='user'),
-    url(r'^productsServices/$', views.productsServices, name='productsServices'),
-    url(r'^staffClients/$', views.staffClients, name='staffClients'),
-    url(r'^map/$', views.map, name='map'),
-    url(r'^calendar/$', views.calendar, name='calendar'),
-    url(r'^upgrade/$', views.upgrade, name='upgrade'),
-    url(r'^upload/$', views.upload, name='upload'),
+    path('', views.home, name='home'),
+    path('about/', views.about, name='about'),
+    path('pricing/', views.pricing, name='pricing'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('Salon/<int:id>/', views.moreinfo, name='moreinfo'),
+    path('Salon/<int:id>/', views.services, name='moreinfo'),
+    path('user/', views.user, name='user'),
+    path('productsServices/', views.productsServices, name='productsServices'),
+    path('staffClients/', views.staffClients, name='staffClients'),
+    path('map/', views.map, name='map'),
+    path('calendar/', views.calendar, name='calendar'),
+    path('upgrade/', views.upgrade, name='upgrade'),
+    path('upload/', views.upload, name='upload'),
+    path('faqs/', views.faqs, name='faqs'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('signup/', views.signup, name="signup"),
     ]
 
 if settings.DEBUG:

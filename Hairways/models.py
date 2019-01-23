@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils import timezone
 
 
@@ -13,7 +12,6 @@ class Owners(models.Model):
 
 class Salons(models.Model):
     saloonName = models.CharField(max_length=20)
-    location = models.CharField(max_length=30)
     description = models.TextField(max_length=50)
     created_date = models.DateTimeField(default=timezone.now)
     ownerId = models.ForeignKey(Owners, on_delete=models.CASCADE)
@@ -21,6 +19,10 @@ class Salons(models.Model):
     views = models.IntegerField(null=True, blank=True)
     status = models.BooleanField(default=True)
     paybill = models.TextField(null=True, blank=True, max_length=12)
+    location = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.saloonName
 
 
 class Services(models.Model):
@@ -33,18 +35,6 @@ class Services(models.Model):
     svailability = models.BooleanField(default=True)
 
 
-class Users(models.Model):
-    username = models.CharField(max_length=25)
-    email = models.CharField(max_length=16)
-    phone = models.CharField(max_length=16)
-    password = models.CharField(max_length=16)
-    confirm_Password = models.CharField(max_length=16)
-    joined_date = models.DateTimeField(
-        blank=True, null=True
-        )
-    location = models.TextField()
-
-
 class Appointments(models.Model):
     AppointmentsId = models.CharField(max_length=100, primary_key=True)
     services = models.ForeignKey(Services, on_delete=models.CASCADE)
@@ -52,7 +42,6 @@ class Appointments(models.Model):
     AppointmentsStatus = models.BooleanField()
     date_time = models.DateTimeField()
     totalCost = models.IntegerField()
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 
 class Pictures(models.Model):
@@ -70,7 +59,6 @@ class Pictures(models.Model):
 class Comments(models.Model):
     commentId = models.IntegerField()
     salons = models.ForeignKey(Salons, on_delete=models.CASCADE)
-    users = models.ForeignKey(Users, on_delete=models.CASCADE)
     text = models.TextField(max_length=100)
     created_date = models.DateTimeField(
         default=timezone.now

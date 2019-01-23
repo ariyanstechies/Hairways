@@ -16,7 +16,7 @@ class SignUpForm(forms.ModelForm):
         self.helper.add_input(Submit('submit', 'Sign Up'))
 
 
-class LoginForm(forms.ModelForm):
+class ClientLoginForm(forms.ModelForm):
     class Meta:
         model = Users
         fields = ('username', 'password')

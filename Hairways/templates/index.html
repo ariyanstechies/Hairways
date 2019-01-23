@@ -61,48 +61,41 @@
 <!-- Getting a splited screen for left and right-->
 <!--<the outer container containing both left and right -->
 <div class=" w3-row w3-border ">
-  <div class="w3-container w3-quarter " style="padding-top:5px">
-    <div class="w3-container" style="line-height: 30px; font-family: 'Kanit', sans-serif;
-    ">
-    <h4 style="margin-bottom: 20px;">Filter Salons</h4>
-    <div class="fakeimg"><i class="fas fa-fire"></i>  Popular</div>
+    <div class="w3-container w3-quarter " style="padding-top:5px">
+        <div class="w3-container" style="line-height: 30px; font-family: 'Kanit', sans-serif;">
+            <h4 style="margin-bottom: 20px;">Filter Salons</h4>
+            <div class="fakeimg"><i class="fas fa-fire" style="color: #11AEF1"></i> Popular</div>
 
-    <div class="fakeimg"><i class="fas fa-search-location"></i> Near me</div>
+            <div class="fakeimg"><i class="fas fa-search-location" style="color: #11AEF1"></i> Near me</div>
 
-    <div class="fakeimg"><i class="far fa-thumbs-up"></i> Recommended</div>
+            <div class="fakeimg"><i class="far fa-thumbs-up" style="color: #11AEF1"></i> Recommended</div>
 
-    <div class="fakeimg"><i class="fas fa-gift"></i> Offers</div>
+            <div class="fakeimg"><i class="fas fa-gift" style="color: #11AEF1"></i> Offers</div>
 
-    <div>
-      <!-- Commented out Symmo dropdown -->
+            <div>
+                    <!-- Commented out Symmo dropdown -->
 
-      <!-- <select class="button" name="option" style="width:100px">
-      <option value="" disabled selected>Location</option>
-      <option value="1"> <a href="javascript:void(0)" onclick="openMenu(event, 'Drinks');"></a>Kisumu</option>
-      <option value="2">Nairobi</option>
-      <option value="3">Samburu</option>
-    </select> -->
+                <!-- <select class="button" name="option" style="width:100px">
+                <option value="" disabled selected>Location</option>
+                <option value="1"> <a href="javascript:void(0)" onclick="openMenu(event, 'Drinks');"></a>Kisumu</option>
+                <option value="2">Nairobi</option>
+                <option value="3">Samburu</option>
+                </select> -->
 
-    <!-- New dropdown -->
-    <div class="" >
-      <div class="dropdown input-group mb-3">
-        <input type="text" class="form-control" placeholder="All Locations" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      </div>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button class="dropdown-item" type="button">Kisumu</button>
-        <button class="dropdown-item" type="button">CBD</button>
-        <button class="dropdown-item" type="button">Nyamasaria</button>
-        <button class="dropdown-item" type="button">Milimani</button>
-        <div class="dropdown-divider"></div>
-        <button class="dropdown-item" type="button" style="background-color: #C3C3C3">Nairobi</button>
-        <button class="dropdown-item" type="button">CBD</button>
-        <button class="dropdown-item" type="button">Westlands</button>
-        <button class="dropdown-item" type="button">Kileleshwa</button>
-        <div class="dropdown-divider"></div>
-        <button class="dropdown-item" type="button" style="background-color: #C3C3C3">Mombasa</button>
-        <button class="dropdown-item" type="button">CBD</button>
-      </div>
-    </div>
+                <!-- New dropdown -->
+                <div class="input-group mb-3">
+
+                  <select class="custom-select" id="inputGroupSelect01" style="font-weight: bold">
+                    <option selected>All locations</option>
+                    <option value="Nairobi">Nairobi</option>
+                    <option value="Mombasa">Mombasa</option>
+                    <option value="Kisumu">Kisumu</option>
+                    <option value="Eldoret">Eldoret</option>
+                    <option value="Thika">Thika</option>
+                  </select>
+                </div>
+
+            </div>
 
   </div>
 </div>
@@ -126,9 +119,11 @@
 <!--The right container containing to cards -->
 <div class="w3-container w3-rest  ">
 
-  <!--search button by salon names-->
-  <div align="right">
-    <input class="search-input btn" placeholder="Search salon ..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;">
+        <!--search button by salon names-->
+        <div align="right">
+            <input class="search-input btn" placeholder="Search salon ..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;">
+
+
 
 
     <!-- <i align="left" class="fas fa-search" style="margin-left: 0px"></i> -->
@@ -232,6 +227,5 @@
 
 
   </script>
-
 
   {% endblock %}

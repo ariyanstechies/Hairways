@@ -9,17 +9,19 @@
   <body>
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-10">
-          <h1 class="mt-2">Login Section</h1>
-          <hr class="mt-0 mb-4">
-
-            <form method="POST">
-              {% csrf_token %}
-              {{ form|crispy }}
-              <button type="submit" class="btn btn-success">Login</button>
-              <a href="{% url 'password_reset' %}">Forgot Password?</a>
-            </form>
-
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <h1 class="mt-2">Login Section</h1>
+              <hr class="mt-0 mb-4">
+              <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-success">Login</button>
+                <a href="{% url 'password_reset' %}">Forgot Password?</a>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>

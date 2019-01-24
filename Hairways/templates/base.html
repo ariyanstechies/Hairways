@@ -21,7 +21,7 @@
   <link href="{% static 'css/footerstyle.css' %}" rel="stylesheet"/>
   <link rel="stylesheet" href="{% static 'css/faqs.css' %}">
   <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/salon-style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}">
 
   <!-- New index styling  -->
   <link href="{% static 'css/indexstyle.css' %}" rel="stylesheet"/>
@@ -36,22 +36,25 @@
   <script src="{% static 'css/javascript/javascript.js' %}"></script>
   <script src="{% static 'css/javascript/scroll-horizontal.js' %}"></script>
 
-  
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-<script type="text/javascript">
-$(document).ready(function(){
-  $("#myModal").modal('show');
-});
-</script>
+
 
 
 </head>
 <body id="body" style="background-color: whitesmoke">
 
   <!--Navigation bar -->
+
+
+
+
+
+
+
   <!-- This one is shown on large screens and hidden on small screens -->
-  <div class="w3-bar w3-card-4 w3-xlarge " style="background-color: #11AFF2; height: 50px">
+  <!-- <div class="w3-bar w3-card-4 w3-xlarge " style="background-color: #11AFF2; height: 50px">
     <p href="{% url 'home' %}" class="w3-bar-item w3-button">Hairways.co.ke</p>
     <a href="{% url 'faqs' %}" class="w3-bar-item w3-button w3-hide-small w3-right">Faqs</a>
     <a href="{% url 'about' %}" class="w3-bar-item w3-button w3-right w3-hide-small">About</a>
@@ -63,7 +66,7 @@ $(document).ready(function(){
     <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-right w3-hide-small">Login</a>
     {% endif %}
     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
-  </div>
+  </div> -->
 
   <!-- This one is shown on small screens and hidden on large screens -->
   <div id="demo" class="w3-bar-block w3-hide w3-hide-large w3-mobile w3-hide-medium"  style="background-color: #11AFF2">
@@ -165,6 +168,8 @@ $(document).ready(function(){
 </div>
 
 </footer>
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

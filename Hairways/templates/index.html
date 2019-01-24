@@ -7,6 +7,73 @@
 .checked {
   color: orange;
 }
+
+#nav {
+  height: 50px;
+  background: transparent;
+  /* // Transparent initial setting */
+  display: block;
+  position: fixed;
+  width: 100%;
+  z-index: 99999;
+  transition: all ease .5s;
+  color: #1A73E8;
+  font-weight: bold;
+  padding: 10px 10px 0px 10px;
+}
+
+#nav a{
+  float: right;
+  padding-right: 10px;
+  color: #1A73E8;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#nav a:hover{
+  color: #fff;
+}
+
+#logo {
+  color: red;
+  padding: 20px;
+  font-size: 18px;
+  transition: all ease .5s;
+  background: transparent;
+}
+
+#nav.shrink {
+  height: 50px;
+  transition: all ease .5s;
+  background: #1A73E8;
+  color: #fff;
+  opacity: .9;
+
+}
+
+#nav.shrink a{
+  color: #fff;
+}
+
+#nav.shrink #logo {
+  padding: 10px;
+  transition: all ease .5s;
+  color: blue;
+}
+
+.nav-links{
+  border: 1px solid gray;
+  border-radius: 25px;
+  padding: 2px 7px 2px 7px;
+  margin: 0px 6px 0px 6px;
+}
+
+.nav-links:hover{
+  border: 1px solid white;
+  background-color: #1A73E8;
+  color: white;
+}
+
 </style>
 <!-- RANKING SALONS IN SLIDER -->
 
@@ -16,7 +83,26 @@
 <!-- fonts -->
 <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
-<section class="salon-rank w3-border">
+<section class="salon-rank">
+
+    <nav id="nav">
+
+    <b href="{% url 'home' %}" >Hairways.co.ke</b>
+    <a style="margin-top: 5px" href="{% url 'faqs' %}" >Faqs</a>
+    <a style="margin-top: 5px" href="{% url 'about' %}" >About</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'password_change' %}" >Change Password</a>
+    <a href="{% url 'logout' %}" >Logout</a>
+    {% else %}
+    <a  class="nav-links" href="{% url 'signup' %}" >Sign Up</a>
+    <a class="nav-links" href="{% url 'login' %}" >Login</a>
+    {% endif %}
+
+</nav>
+
+
+
+
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -196,6 +282,20 @@
         {% endif %}
                     <!-- : ende of leftv  -->
 
+
+                    <!-- javascript for sticky navbar -->
+                    <script>
+                      $(document).ready(function() {
+                      $(window).scroll(function() {
+                        if($(document).scrollTop() > 200) {
+                          $('#nav').addClass('shrink');
+                        }
+                        else {
+                        $('#nav').removeClass('shrink');
+                        }
+                      });
+                      });
+                    </script>
 
 
 

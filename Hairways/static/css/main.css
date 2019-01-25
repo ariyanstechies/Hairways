@@ -80,6 +80,9 @@ nav ul li a:active {
     background: #000;
 
   }
+  .salon-rank {
+    margin: 4em auto;
+  }
   nav.black ul {
     background: #000;
 

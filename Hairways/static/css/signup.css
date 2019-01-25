@@ -1,13 +1,11 @@
-form{
-
-
-  margin: 0px 100px 10px 100px;
-}
-
 #hint_id_username{
   display: none;
 }
 
 #hint_id_password1{
   display: none;
+}
+
+#hint_id_password2{
+ display: none;
 }

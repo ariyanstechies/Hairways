@@ -10,10 +10,18 @@
   <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
-  <form method="POST" novalidate>
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <h1 class="mt-2">Sign up</h1>
+        <hr class="mt-0 mb-4">
+        <form method="POST" novalidate>
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

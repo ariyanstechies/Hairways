@@ -17,11 +17,12 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap-grid.css' %}">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
   <!-- Adding custom css styling -->
-  <link href="{% static 'css/loginsignup.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/main.css' %}" rel="stylesheet"/>
   <link href="{% static 'css/footerstyle.css' %}" rel="stylesheet"/>
   <link rel="stylesheet" href="{% static 'css/faqs.css' %}">
   <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}">
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
   <!-- New index styling  -->
   <link href="{% static 'css/indexstyle.css' %}" rel="stylesheet"/>
@@ -37,149 +38,131 @@
   <script src="{% static 'css/javascript/scroll-horizontal.js' %}"></script>
 
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-<script type="text/javascript">
-$(document).ready(function(){
-  $("#myModal").modal('show');
-});
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $("#myModal").modal('show');
+  });
 </script>
 </head>
 <body id="body" style="background-color: whitesmoke">
 
   <!--Navigation bar -->
-
-
-
-
-
-
-
-  <!-- This one is shown on large screens and hidden on small screens -->
-  <!-- <div class="w3-bar w3-card-4 w3-xlarge " style="background-color: #11AFF2; height: 50px">
-    <p href="{% url 'home' %}" class="w3-bar-item w3-button">Hairways.co.ke</p>
-    <a href="{% url 'faqs' %}" class="w3-bar-item w3-button w3-hide-small w3-right">Faqs</a>
-    <a href="{% url 'about' %}" class="w3-bar-item w3-button w3-right w3-hide-small">About</a>
-    {% if user.is_authenticated %}
-    <a href="{% url 'password_change' %}" class="w3-bar-item w3-button w3-right w3-hide-small">Change Password</a>
-    <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-right w3-hide-small">Logout</a>
-    {% else %}
-    <a href="{% url 'signup' %}" class="w3-bar-item w3-button w3-right w3-hide-small">SignUp</a>
-    <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-right w3-hide-small">Login</a>
-    {% endif %}
-    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
-  </div>
-
-   This one is shown on small screens and hidden on large screens
-  <div id="demo" class="w3-bar-block w3-hide w3-hide-large w3-mobile w3-hide-medium"  style="background-color: #11AFF2">
-    <a href="{% url 'about' %}" class="w3-bar-item w3-button">About Us</a>
-    <a href="{% url 'faqs' %}" class="w3-bar-item w3-button">FAQs</a>
-    {% if user.is_authenticated %}
-    <a href="{% url 'logout' %}" class="w3-bar-item w3-button">Logout</a>
-    <a href="{% url 'password_change' %}" class="w3-bar-item w3-button">Change Password</a>
-    {% else %}
-    <a class="btn btn-success" href="{% url 'login' %}" class="w3-bar-item w3-button">Login</a>
-    <a href="{% url 'signup' %}" class="w3-bar-item w3-button">SignUp</a>
-    {% endif %}
-  </div> -->
-
-  
+  <nav>
+    <div class="brand">HAIRWAYS</div>
+    <div class="menu-icon">
+      <i class="fa fa-bars fa-2x"></i>
+    </div>
+    <div class="menu">
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'faqs' %}">Faqs</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'password_change' %}" >Change Password</a></li>
+        <li><a href="{% url 'logout' %}" >Logout</a></li>
+        {% else %}
+        <li><a class="active" href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'signup' %}">Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
   <main>
-
-
     {% block content %}
 
     {% endblock %}
   </main>
-<footer class="footer">
-<div class="footer-container-top container bottom_border">
-<div class="row">
-<div class=" col-sm-4 col-md col-sm-4  col-12 col">
-<h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
-<!--headin5_amrc-->
-<p class="mb10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-<p><i class="fa fa-location-arrow"></i> 9878/25 sec 9 rohini 35 </p>
-<p><i class="fa fa-phone"></i>  +91-9999878398  </p>
-<p><i class="fa fa fa-envelope"></i> info@example.com  </p>
+  <footer class="footer">
+    <div class="footer-container-top container bottom_border">
+      <div class="row">
+        <div class=" col-sm-4 col-md col-sm-4  col-12 col">
+          <h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
+          <!--headin5_amrc-->
+          <p class="mb10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+          <p><i class="fa fa-location-arrow"></i> 9878/25 sec 9 rohini 35 </p>
+          <p><i class="fa fa-phone"></i>  +91-9999878398  </p>
+          <p><i class="fa fa fa-envelope"></i> info@example.com  </p>
 
 
-</div>
+        </div>
 
 
-<div class="col-sm-4 col-md  col-6 col">
-<h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
-<!--headin5_amrc-->
-<ul class="footer_ul_amrc">
-<li><a class="resize" href="http://kalarikendramdelhi.com">Image Rectoucing</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Clipping Path</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Hollow Man Montage</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Ebay & Amazon</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Hair Masking/Clipping</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Image Cropping</a></li>
-</ul>
-<!--footer_ul_amrc ends here-->
-</div>
+        <div class="col-sm-4 col-md  col-6 col">
+          <h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
+          <!--headin5_amrc-->
+          <ul class="footer_ul_amrc">
+            <li><a class="resize" href="http://kalarikendramdelhi.com">Image Rectoucing</a></li><br>
+            <li><a class="resize" href="http://kalarikendramdelhi.com">Clipping Path</a></li><br>
+            <li><a class="resize" href="http://kalarikendramdelhi.com">Hollow Man Montage</a></li><br>
+            <li><a class="resize" href="http://kalarikendramdelhi.com">Ebay & Amazon</a></li><br>
+            <li><a class="resize" href="http://kalarikendramdelhi.com">Hair Masking/Clipping</a></li><br>
+            <li><a class="resize" href="http://kalarikendramdelhi.com">Image Cropping</a></li>
+          </ul>
+          <!--footer_ul_amrc ends here-->
+        </div>
 
 
-<div class="col-sm-4 col-md  col-6 col">
-<h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
-<!--headin5_amrc-->
-<ul class="footer_ul_amrc">
-<li><a class="resize" href="http://kalarikendramdelhi.com">Remove Background</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Shadows & Mirror Reflection</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Logo Design</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Vectorization</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Hair Masking/Clipping</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Image Cropping</a></li>
-</ul>
-<!--footer_ul_amrc ends here-->
-</div>
+        <div class="col-sm-4 col-md  col-6 col">
+          <h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
+          <!--headin5_amrc-->
+          <ul class="footer_ul_amrc">
+            <li><a class="resize" href="http://kalarikendramdelhi.com">Remove Background</a></li><br>
+            <li><a class="resize" href="http://kalarikendramdelhi.com">Shadows & Mirror Reflection</a></li><br>
+            <li><a class="resize" href="http://kalarikendramdelhi.com">Logo Design</a></li><br>
+            <li><a class="resize" href="http://kalarikendramdelhi.com">Vectorization</a></li><br>
+            <li><a class="resize" href="http://kalarikendramdelhi.com">Hair Masking/Clipping</a></li><br>
+            <li><a class="resize" href="http://kalarikendramdelhi.com">Image Cropping</a></li>
+          </ul>
+          <!--footer_ul_amrc ends here-->
+        </div>
 
 
-<div class="col-sm-4 col-md  col-12 col">
-<h5 class="headin5_amrc col_white_amrc pt2">Follow us</h5>
-<!--headin5_amrc ends here-->
+        <div class="col-sm-4 col-md  col-12 col">
+          <h5 class="headin5_amrc col_white_amrc pt2">Follow us</h5>
+          <!--headin5_amrc ends here-->
 
-<ul class="footer_ul2_amrc">
-<li><a class="resize" href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...</p></li>
-<li><a class="resize" href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...</p></li>
-<li><a class="resize" href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...</p></li>
-</ul>
-<!--footer_ul2_amrc ends here-->
-</div>
-</div>
-</div>
-
-
-<div class="footer-container-bottom container">
-<ul class="foote_bottom_ul_amrc">
-<li><a href="http://kalarikendramdelhi.com">Home</a></li>
-<li><a href="http://kalarikendramdelhi.com">About</a></li>
-<li><a href="http://kalarikendramdelhi.com">Services</a></li>
-<li><a href="http://kalarikendramdelhi.com">Pricing</a></li>
-<li><a href="http://kalarikendramdelhi.com">Blog</a></li>
-<li><a href="http://kalarikendramdelhi.com">Contact</a></li>
-</ul>
-<!--foote_bottom_ul_amrc ends here-->
-<p class="text-center">Copyright @2017 | Powered by <a style="color: #5E28AB" href="#"><b>Ariyans Techies</b></a></p>
-
-<ul class="social_footer_ul">
-<li><a href="http://kalarikendramdelhi.com"><i class="fab fa-facebook-f"></i></a></li>
-<li><a href="http://kalarikendramdelhi.com"><i class="fab fa-twitter"></i></a></li>
-<li><a href="http://kalarikendramdelhi.com"><i class="fab fa-linkedin"></i></a></li>
-<li><a href="http://kalarikendramdelhi.com"><i class="fab fa-instagram"></i></a></li>
-</ul>
-<!--social_footer_ul ends here-->
-</div>
-
-</footer>
+          <ul class="footer_ul2_amrc">
+            <li><a class="resize" href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...</p></li>
+            <li><a class="resize" href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...</p></li>
+            <li><a class="resize" href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...</p></li>
+          </ul>
+          <!--footer_ul2_amrc ends here-->
+        </div>
+      </div>
+    </div>
 
 
+    <div class="footer-container-bottom container">
+      <ul class="foote_bottom_ul_amrc">
+        <li><a href="http://kalarikendramdelhi.com">Home</a></li>
+        <li><a href="http://kalarikendramdelhi.com">About</a></li>
+        <li><a href="http://kalarikendramdelhi.com">Services</a></li>
+        <li><a href="http://kalarikendramdelhi.com">Pricing</a></li>
+        <li><a href="http://kalarikendramdelhi.com">Blog</a></li>
+        <li><a href="http://kalarikendramdelhi.com">Contact</a></li>
+      </ul>
+      <!--foote_bottom_ul_amrc ends here-->
+      <p class="text-center">Copyright @2017 | Powered by <a style="color: #5E28AB" href="#"><b>Ariyans Techies</b></a></p>
+
+      <ul class="social_footer_ul">
+        <li><a href="http://kalarikendramdelhi.com"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="http://kalarikendramdelhi.com"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="http://kalarikendramdelhi.com"><i class="fab fa-linkedin"></i></a></li>
+        <li><a href="http://kalarikendramdelhi.com"><i class="fab fa-instagram"></i></a></li>
+      </ul>
+      <!--social_footer_ul ends here-->
+    </div>
+
+  </footer>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
   <script>
   function myFunction() {

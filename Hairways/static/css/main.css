@@ -1,0 +1,57 @@
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999px;
+  width: 100%;
+  height: 70px;
+  padding: 10px 100px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+nav.black {
+  background: rgba(0,0,0, 0.8);
+  height: 70px;
+  padding: 10px 100px;
+}
+nav .brand{
+  padding: 22px 20px;
+  height: 50px;
+  float: left;
+  font-size: 24px;
+  transition: 0.3s;
+}
+nav.black .brand a{
+  color: #fff;
+}
+/* styling unordered list */
+nav ul{
+  list-style: none;
+  float: right;
+  padding:  0;
+  margin: 0;
+  display: flex;
+}
+nav ul li{
+  list-style: none;
+}
+nav ul li a {
+  line-height: 80px;
+  color: #151515;
+  padding: 12px 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+
+}
+nav.black ul li a{
+  color: #fff;
+}
+nav ul li a:focus {
+  outline: none;
+}
+nav ul li a:active {
+  background: #E2472F;
+  color: #fff;
+  border-radius: 6px;
+}
+/* end of navbar styling  */

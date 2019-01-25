@@ -74,7 +74,8 @@ def signup(request):
 # protecting views you can't just access dashboard without logging
 @login_required
 def dashboard(request):
-    return render(request, "dashboard/dashboard.php")
+    
+    return render(request, "dashboard/dashboard.html")
 
 
 @login_required  # protecting views

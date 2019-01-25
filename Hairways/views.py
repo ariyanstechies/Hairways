@@ -53,13 +53,12 @@ def signup(request):
 # protecting views you can't just access dashboard without logging
 @login_required
 def dashboard(request):
-    
     return render(request, "dashboard/dashboard.html")
 
 
 @login_required  # protecting views
 def user(request):
-    return render(request, "dashboard/user.php")
+    return render(request, "dashboard/user.html")
 
 
 def productsServices(request):

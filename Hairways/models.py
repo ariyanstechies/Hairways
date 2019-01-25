@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from django.conf import settings
 
 class Owners(models.Model):
     ownerId = models.IntegerField(primary_key=True)
@@ -14,6 +14,7 @@ class Salons(models.Model):
     saloonName = models.CharField(max_length=20)
     description = models.TextField(max_length=50)
     created_date = models.DateTimeField(default=timezone.now)
+    Owner = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
     ownerId = models.ForeignKey(Owners, on_delete=models.CASCADE)
     likes = models.IntegerField(null=True, blank=True)
     views = models.IntegerField(null=True, blank=True)

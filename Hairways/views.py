@@ -8,7 +8,6 @@ from Hairways.filters import LocationFilter
 
 
 def home(request):
-
     items = Salons.objects.all()
     # for pagination
     page = request.GET.get('page', 1)
@@ -43,7 +42,7 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('home')
     else:
         form = UserCreationForm()
 

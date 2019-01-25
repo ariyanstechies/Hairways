@@ -39,9 +39,11 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-
-
-
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#myModal").modal('show');
+});
+</script>
 </head>
 <body id="body" style="background-color: whitesmoke">
 
@@ -86,10 +88,9 @@
 
 
     {% block content %}
+
     {% endblock %}
   </main>
-
-
 <footer class="footer">
 <div class="footer-container-top container bottom_border">
 <div class="row">

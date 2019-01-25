@@ -8,12 +8,12 @@ nav {
   padding: 10px 100px;
   box-sizing: border-box;
   transition: 0.3s;
+  font-family: Quicksand;
 
 }
 nav.black {
   background: rgba(0,0,0, 0.8);
   height: 70px;
-  padding: 10px 100px;
 }
 nav .brand{
   padding: 22px 20px;
@@ -29,11 +29,13 @@ nav.black .brand a{
 nav ul{
   list-style: none;
   float: right;
+  overflow: hidden;
   padding:  0;
   margin: 0;
   display: flex;
 }
 nav ul li{
+  display: inline-block;
   list-style: none;
 }
 nav ul li a {
@@ -42,6 +44,15 @@ nav ul li a {
   padding: 12px 30px;
   text-decoration: none;
   text-transform: uppercase;
+
+}
+.menu-icon {
+  width: 100%;
+  text-align: right;
+  box-sizing: border-box;
+  padding: 15px 24px;
+  cursor: pointer;
+  display: none;
 
 }
 nav.black ul li a{
@@ -54,5 +65,35 @@ nav ul li a:active {
   background: #E2472F;
   color: #fff;
   border-radius: 6px;
+}
+@media (max-width: 580px) {
+  .brand {
+  position: fixed;
+  top: 0;
+  margin-top: 16px;
+  }
+  nav ul {
+    max-height: 0px;
+    background: #000;
+
+  }
+  nav.black ul {
+    background: #000;
+
+  }
+  .showing {
+  max-height: 20em;
+  }
+  nav ul li {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 24px 0;
+    text-align: center;
+
+  }
+  .menu-icon {
+    display: block;
+  }
+
 }
 /* end of navbar styling  */

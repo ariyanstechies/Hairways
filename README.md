@@ -1,2 +1,2 @@
-Best Saloon Website :wink:
+Best Salon Website :wink:
 Developed by Hardcore Developers.

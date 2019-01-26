@@ -20,6 +20,11 @@
               <a href="{% url 'password_reset' %}" class="btn btn-link">Forgot your Password?</a>
             </form>
 
+            <!-- GOOGLE AUTHENTICATION -->
+            <br>
+            <p><strong>-- OR --</strong></p>
+            <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+
         </div>
       </div>
     </div>

@@ -20,6 +20,7 @@ urlpatterns = [
     path('faqs/', views.faqs, name='faqs'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', views.signup, name="signup"),
+    path('auth/', include('social_django.urls', namespace='social')),      # GOOGLE & FACEBOOK OAUTH
     ]
 
 if settings.DEBUG:

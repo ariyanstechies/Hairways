@@ -9,7 +9,7 @@ from Hairways.filters import LocationFilter
 # customer signup imports
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+
 
 # customer signup function
 

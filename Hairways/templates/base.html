@@ -176,31 +176,6 @@
   </script>
 
 
-    <!-- SCRIPT FOR LOADING FACEBOOK SDK FOR SIGNIN WITH FACEBOOK -->
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '{2433015110276197}',
-      cookie     : true,
-      xfbml      : true,
-      version    : '{api-version}'
-    });
-
-    FB.AppEvents.logPageView();
-
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-      <!-- END OF FCEBOOK SCRIPT -->
-
   <script type="text/javascript">
   $(document).ready(function () {
     $(".dropdown img.flag").addClass("flagvisibility");

@@ -8,7 +8,6 @@ from Hairways.filters import LocationFilter
 
 
 def home(request):
-
     items = Salons.objects.all()
     # for pagination
     page = request.GET.get('page', 1)
@@ -43,7 +42,7 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('home')
     else:
         form = UserCreationForm()
 
@@ -54,12 +53,12 @@ def signup(request):
 # protecting views you can't just access dashboard without logging
 @login_required
 def dashboard(request):
-    return render(request, "dashboard/dashboard.php")
+    return render(request, "dashboard/dashboard.html")
 
 
 @login_required  # protecting views
 def user(request):
-    return render(request, "dashboard/user.php")
+    return render(request, "dashboard/user.html")
 
 
 def productsServices(request):

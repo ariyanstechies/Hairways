@@ -6,32 +6,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from Hairways.filters import LocationFilter
 
-# customer signup imports
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
-
-
-# customer signup function
-
-# JAYMOHS SIGNUP ....TO BE DELETED
-
-# def signup(request):
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data.get('username')
-#             raw_password = form.cleaned_data.get('password1')
-#             user = authenticate(username=username, password=raw_password)
-#             login(request, user)
-#             return redirect('home')    # redirect to home and session created to allow customer to rate and comment on salons plus show message: LOGGED IN
-#     else:
-#         form = UserCreationForm()
-#     return render(request, 'index.html', {'salons': salons})    # redirect to home but dont allow rating and commenting on salons show message: NOT LOGGED IN
-
 
 def home(request):
-
     items = Salons.objects.all()
     # for pagination
     page = request.GET.get('page', 1)
@@ -66,7 +42,7 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('home')
     else:
         form = UserCreationForm()
 
@@ -77,12 +53,12 @@ def signup(request):
 # protecting views you can't just access dashboard without logging
 @login_required
 def dashboard(request):
-    return render(request, "dashboard/dashboard.php")
+    return render(request, "dashboard/dashboard.html")
 
 
 @login_required  # protecting views
 def user(request):
-    return render(request, "dashboard/user.php")
+    return render(request, "dashboard/user.html")
 
 
 def productsServices(request):

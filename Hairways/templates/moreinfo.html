@@ -77,7 +77,7 @@
       <div class="card col-11" style="border: none; margin: 0 auto; background-color: rgb(62,60,71,0.9);">
         <div class="card-body" style="color: whitesmoke;">
           <div class="row">
-          <h3 style="font-family: 'Ubuntu', sans-serif; color: whitesmoke; margin-bottom: 0px; font-weight: bold; font-size: 1.5em">{{ salon }}</h3>
+          <h3 style="font-family: 'Ubuntu', sans-serif; color: whitesmoke; margin-bottom: 0px; font-weight: bold; font-size: 1.5em">{{ salon.saloonName }}</h3>
           <i align=right class="far fa-heart col-11"></i> <i class="fas fa-ellipsis-h"></i>
           </div>
 
@@ -110,6 +110,7 @@
     <div class="card col-8 all-Services" style="border: none">
       <div class="card-body">
         Services we offer
+        {{ salon.serviceName }}
       </div>
     </div>
 

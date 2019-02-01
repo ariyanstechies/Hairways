@@ -105,16 +105,40 @@
 
   </section>
 
-  <section class="Services">
+  <section class="Services" style="padding: 0px 15px 0px 15px">
     <div class="row">
-    <div class="card col-8 all-Services" style="border: none">
+    <div class="card col-9 all-Services" style="border: none">
+      <h3 style="font-family: 'Ubuntu', sans-serif; margin: 10px 0px 0px 10px;   color: #000; margin-bottom: 0px; font-weight: bold; font-size: 1.5em">Our Services</h3>
       <div class="card-body">
-        Services we offer
-        {{ salon.serviceName }}
+        <table class="table table-borderless table-sm">
+          <thead style="background-color: #55C9AF; color: #fff; font-weight: bold;">
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Service</th>
+              <th scope="col">Cost</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Availabilty</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border: none">
+              {% for each in services %}
+              <td scope="row"><input type="checkbox" id="exampleCheck1"></td>
+              <td>{{ each.serviceName }}</td>
+              <td>{{ each.serviceCost }}</td>
+              <td>{{ each.serviceDuration }}</td>
+              <td>{{ each.svailability }}</td>
+            </tr>
+            {% endfor %}
+
+  </tbody>
+</table>
+
+
       </div>
     </div>
 
-    <div class="card col-4 selected-Services" style="margin: 0px 0px 0px -20px">
+    <div class="card col-3 selected-Services" style="margin: 0px 0px 0px -20px">
       <div class="card-body">
       Services selected<br><br><br>
       </div>
@@ -124,7 +148,7 @@
 
   <section>
 
-      <div class="card payout" align=center style="border: none">
+      <div class="card payout" align=center style="border: none; margin: 20px 0px 20px 0px">
         <div class="card-body">
           <button style="margin-right: 5px" class="btn btn-success">Lipa na M-pesa</button>
           <button style="margin-right: 5px" class="btn btn-primary">Pay after service</button>
@@ -135,7 +159,7 @@
     </section>
 
     <section>
-      <div class="card" align=center>
+      <div class="card" align=center style="background-color: #CCEFE7">
         <div class="card-body">
           <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
              <ol class="carousel-indicators">

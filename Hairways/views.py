@@ -91,8 +91,8 @@ def pricing(request):
 
 def moreinfo(request, id):
     salon = Salons.objects.get(id=id)
-    services = Services.objects.get(salons=id)
-    return render(request, "moreinfo.html", {'salon': salon})
+    services = Services.objects.all()
+    return render(request, "moreinfo.html", {'salon': salon, 'services' : services})
 
 def upload(request):
     context = {}

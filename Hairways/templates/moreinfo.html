@@ -6,16 +6,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'css/moreinfostyle.css' %}">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <!-- GOogle fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
     <title>For the best salons in town</title>
   </head>
   <body>
 
-    <section class="salon-header" style="padding: 0px 15px 0px 15px">
-      <div class="row">
-        <div class="card col-8" style="padding: 0px; margin: 0px">
+    <section class="salon-header" style="padding: 0px 15px 0px 15px;">
+      <div class="row" style="height: height: 10px">
+        <div class="card col-9" style="padding: 0px; margin: 0px; border: none">
           <div class="card-body" style="padding: 0px; margin: 0px">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                <ol class="carousel-indicators">
@@ -58,92 +65,134 @@
           </div>
         </div>
 
-        <div class="card col-4" style="padding: 0px; margin: 0px">
+        <div class="card col-3" style="padding: 0px; margin: 0px">
           <div class="card-body" style="padding: 0px; margin: 0px">
-            This is some text within a card body.
+            Map
           </div>
         </div>
       </div>
     </section>
 
-    <section class="services-container" style="padding: 0px 15px 0px 15px">
-      <div class="row" style=" height: 300px; background-color: whitesmoke;">
-      <div class="card col-9" style="margin: 0px; border: none; background-color: transparent">
+    <section class="salon-description">
+      <div class="card col-11" style="border: none; margin: 0 auto; background-color: rgb(62,60,71,0.9);">
+        <div class="card-body" style="color: whitesmoke;">
+          <div class="row">
+          <h3 style="font-family: 'Ubuntu', sans-serif; color: whitesmoke; margin-bottom: 0px; font-weight: bold; font-size: 1.5em">{{ salon.saloonName }}</h3>
+          <i align=right class="far fa-heart col-11"></i> <i class="fas fa-ellipsis-h"></i>
+          </div>
+
+            <i>{{ salon.description }}</i><br>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+          <i style="color: #00AF87; padding-right: 6px" class="fas fa-map-marker-alt"></i> <b>{{ salon.location }}</b><br>
+          <i style="color: #00AF87; padding-right: 4px" class="far fa-thumbs-up"></i> {{ salon.likes }} Likes<br>
+          <i style="color: #00AF87; padding-right: 12px" class="fas fa-level-up-alt"></i>{{ salon.views }} Page visits<br>
+          </div>
+
+          <div>
+            <i style="color: #00AF87; padding-right: 6px" class="fas fa-map-marker-alt"></i> <b>{{ salon.location }}</b><br>
+            <i style="color: #00AF87; padding-right: 4px" class="far fa-thumbs-up"></i> {{ salon.likes }} Likes<br>
+            <i style="color: #00AF87; padding-right: 12px" class="fas fa-level-up-alt"></i>{{ salon.views }} Page visits<br>
+          </div>
+
+          <div style="margin-bottom: 20px;" align=right class="social col-11"><i class="fab fa-facebook"></i> <i class="fab fa-youtube"></i> <i class="fab fa-instagram"></i>  <i class="fab fa-twitter"></i></div>
+
+      </div>
+    </div>
+  </div>
+
+  </section>
+
+  <section class="Services" style="padding: 0px 15px 0px 15px">
+    <div class="row">
+    <div class="card col-9 all-Services" style="border: none">
+      <h3 style="font-family: 'Ubuntu', sans-serif; margin: 10px 0px 0px 10px;   color: #000; margin-bottom: 0px; font-weight: bold; font-size: 1.5em">Our Services</h3>
+      <div class="card-body">
+        <table class="table table-borderless table-sm">
+          <thead style="background-color: #55C9AF; color: #fff; font-weight: bold;">
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Service</th>
+              <th scope="col">Cost</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Availabilty</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border: none">
+              {% for each in services %}
+              <td scope="row"><input type="checkbox" id="exampleCheck1"></td>
+              <td>{{ each.serviceName }}</td>
+              <td>{{ each.serviceCost }}</td>
+              <td>{{ each.serviceDuration }}</td>
+              <td>{{ each.svailability }}</td>
+            </tr>
+            {% endfor %}
+
+  </tbody>
+</table>
+
+
+      </div>
+    </div>
+
+    <div class="card col-3 selected-Services" style="margin: 0px 0px 0px -20px; padding: 0px 0px 0px 0px ">
+      <div class="card-header" style="color: #55C9AF">
+      Services selected
+    </div>
+      <div class="card-body">
+
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <section>
+
+      <div class="card payout" align=center style="border: none; margin: 20px 0px 20px 0px">
         <div class="card-body">
-          This is some text within a card body.
+          <button style="margin-right: 5px" class="btn btn-success">Lipa na M-pesa</button>
+          <button style="margin-right: 5px" class="btn btn-primary">Pay after service</button>
         </div>
       </div>
 
-      <div class="card col-3" style="margin: 7px 0px 7px 0px">
-        <div class="card-body">
-          This is some text with.
-        </div>
-      </div>
-    </div>
 
-    </div>
+    </section>
 
-    <div class="services-selected">
-      <div class="row">
-      <div class="container-fluid col-9" style="margin: 10px 0px 10px 0px">
-        jkkjjjjkjjks<br><br><br><br><br><br>
-      </div>
-
-      <div class="card col-3" style="margin: 7px 0px 7px 0px; width: 30%; height: auto; float: right;">
-        <div class="card-body">
-          This is some text with.
-        </div>
-      </div>
-    </div>
-
-    <div class="card" style="margin: 7px 0px 7px 0px">
-      <div class="card-body" align=center>
-        <button type="button" class="btn btn-success">Lipa na Mpesa</button>
-        <button type="button" class="btn btn-primary">Pay after service</button>
-      </div>
-    </div>
-
-
-    </div>
-
-    <section class="salon-reviews">
-      <div class="card">
+    <section>
+      <div class="card" align=center style="background-color: #CCEFE7">
         <div class="card-body">
           <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-              <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselIndicators" data-slide-to="1"></li>
-              <li data-target="#carouselIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-              <div class="carousel-item active" align=center>
-                <p>cm,./,mcm,.mm</p>
-              </div>
-              <div class="carousel-item" align=center>
-                <p>ryuewioqpwoeiu</p>
-              </div>
-              <div class="carousel-item" align=center>
-                <p>jkdsjdfl;sjfl</p>
-              </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-          <div align=center>
-              <button type="button" class="btn btn-info">Leave a review</button>
+             <ol class="carousel-indicators">
+                <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselIndicators" data-slide-to="2"></li>
+             </ol>
+             <div class="carousel-inner" style="padding: 50px 0px 50px 0px ">
+                <div class="carousel-item active">
+                   <p>Best salon ever</p>
+                </div>
+                <div class="carousel-item">
+                   <p>Good prices</p>
+                </div>
+                <div class="carousel-item">
+                   <p>Quality Services</p>
+                </div>
+             </div>
+             <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+             <span class="sr-only">Previous</span>
+             </a>
+             <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+             <span class="sr-only">Next</span>
+             </a>
           </div>
         </div>
       </div>
     </section>
-
-    <footer></footer>
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,5 +1,5 @@
-.col{
-  margin: 0px;
-  padding: 0px;
-  width: 
+.salon-description{
+  background-image: url("/static/css/images/6.jpg");
+  background-size: cover;
+  margin: 10px 0px 10px 0px;
 }

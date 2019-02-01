@@ -6,8 +6,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'css/moreinfostyle.css' %}">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <!-- GOogle fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
     <title>For the best salons in town</title>
   </head>
@@ -67,15 +74,35 @@
     </section>
 
     <section class="salon-description">
-      <div class="card col-8" style="border: none">
-        <div class="card-body">
-          {{ salon }}<br>
-          {{ salon.description }}<br>
-          {{ salon.location }}<br>
-          {{ salon.likes }} Likes<br>
-          {{ salon.views }} Page visits<br>
-        </div>
+      <div class="card col-11" style="border: none; margin: 0 auto; background-color: rgb(62,60,71,0.9);">
+        <div class="card-body" style="color: whitesmoke;">
+          <div class="row">
+          <h3 style="font-family: 'Ubuntu', sans-serif; color: whitesmoke; margin-bottom: 0px; font-weight: bold; font-size: 1.5em">{{ salon }}</h3>
+          <i align=right class="far fa-heart col-11"></i> <i class="fas fa-ellipsis-h"></i>
+          </div>
+
+            <i>{{ salon.description }}</i><br>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+          <i style="color: #00AF87; padding-right: 6px" class="fas fa-map-marker-alt"></i> <b>{{ salon.location }}</b><br>
+          <i style="color: #00AF87; padding-right: 4px" class="far fa-thumbs-up"></i> {{ salon.likes }} Likes<br>
+          <i style="color: #00AF87; padding-right: 12px" class="fas fa-level-up-alt"></i>{{ salon.views }} Page visits<br>
+          </div>
+
+          <div>
+            <i style="color: #00AF87; padding-right: 6px" class="fas fa-map-marker-alt"></i> <b>{{ salon.location }}</b><br>
+            <i style="color: #00AF87; padding-right: 4px" class="far fa-thumbs-up"></i> {{ salon.likes }} Likes<br>
+            <i style="color: #00AF87; padding-right: 12px" class="fas fa-level-up-alt"></i>{{ salon.views }} Page visits<br>
+          </div>
+
+          <div style="margin-bottom: 20px;" align=right class="social col-11"><i class="fab fa-facebook"></i> <i class="fab fa-youtube"></i> <i class="fab fa-instagram"></i>  <i class="fab fa-twitter"></i></div>
+
       </div>
+    </div>
+  </div>
+
   </section>
 
   <section class="Services">

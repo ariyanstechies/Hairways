@@ -103,3 +103,20 @@ nav ul li a:active {
 
 }
 /* end of navbar styling  */
+.search-input{
+	margin: 10px 0px 10px 0px;
+	width: 250px;
+	color: #fff;
+	border: 2px solid #80BDFF;
+	color: #000;
+	font-weight: bold;
+}
+
+.search-input:focus{
+	width: 300px;
+	transition: 0.25s ease-out;
+}
+
+.fakeimage{
+	cursor: pointer;
+}

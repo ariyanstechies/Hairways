@@ -67,13 +67,8 @@ class TypedReactDemo extends React.Component {
 }
 
 ReactDOM.render(
-  <TypedReactDemo
-  strings={[
-    'Some <i>strings</i> are slanted',
-    'Some <strong>strings</strong> are bold',
-    'HTML characters &times; &copy;'
-  ]}
-  />,
+  <TypedReactDemo  strings={[ 'Some <i>strings</i> are slanted', 'Some <strong>strings</strong> are bold',
+    'HTML characters &times; &copy;' ]} />,
   document.getElementById('react-root')
 );
 

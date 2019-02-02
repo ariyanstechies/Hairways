@@ -8,7 +8,9 @@ from Hairways.filters import LocationFilter
 
 
 def home(request):
-    items = Salons.objects.all()
+    selected_location = request.GET.get('location', None)
+    print("selected_location is %s" % selected_location)
+    items = Salons.objects.all().order_by('likes')
     # for pagination
     page = request.GET.get('page', 1)
     paginator = Paginator(items, 10)

@@ -53,7 +53,7 @@
       <div class="fakeimg"><i class="far fa-thumbs-up" style="color: #11AEF1"></i> Recommended</div>
       <div class="fakeimg"><i class="fas fa-gift" style="color: #11AEF1"></i> Offers</div>
       <div class="input-group mb-3" align="left"  width: 50%">
-        <select class="custom-select" id="selectLocation" style="font-weight: bold">
+        <select class="custom-select" id="location" style="font-weight: bold">
           <option selected>All locations</option>
           <option value="Nairobi">Nairobi</option>
           <option value="Mombasa">Mombasa</option>
@@ -103,7 +103,7 @@
           <h2>{{each_salon.location}}</h2>
           <p> {{each_salon.description}}</p>
           <p class="read-more">
-            {% comment %} Star Rating {% endcomment %}
+            {% block comment %} Star Rating {% endblock%}
             <span style="padding-right:32px">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
@@ -115,8 +115,8 @@
           </p>
           <hr>
           <ul class="icons">
-            <li><i class="fa fa-eye fa-2x">{{each_salon.views}}</i></li>
-            <li><i class="fa fa-heart-o fa-2x">{{each_salon.likes}}</i></li>
+            <li><i class="fa fa-eye fa-2x">{{ each_salon.views }}</i></li>
+            <li><i class="fa fa-heart-o fa-2x">{{ each_salon.likes }}</i></li>
             <li><i class="fa fa-envelope-o fa-2x">9</i></li>
             <li><i class="fa fa-share-alt fa-2x">7</i></li>
           </ul>
@@ -185,8 +185,20 @@
 
 </script> -->
 <script>
-  $('#selectLocation').on('change',function() {
-    console.log($(this).val());
+  $('#location').on('change',function() {
+    var location = $(this).val();
+  });
+  $.ajax({
+    url: '/',
+    data: {
+      'location': location
+    },
+    dataType: 'json',
+    success: function (data) {
+      if (data.is_taken) {
+        alert("A user with this username already exists.");
+      }
+    }
   });
 </script>
 {% endblock %}

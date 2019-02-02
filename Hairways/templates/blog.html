@@ -1,22 +1,7 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load staticfiles %}
-<html>
-<head>
-	<title>Get beauty adviice from the best salonists in town and Best beauty experts</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-	<link rel="stylesheet" type="text/css" href="{% static 'css/salon-style.css' %}">    <!-- adding css styling -->
-	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap-grid.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome/fontawesome.css' %}">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-	<script src="{% static 'css/javascript/jquery.js' %}"></script>
-	<script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
-	<script src="{% static 'css/javascript/javascript.js' %}"></script>
-	<script src="{% static 'css/javascript/scroll-horizontal.js' %}"></script>
-</head>
-<body>
+{% block title %} Get beauty adviice from the best salonists in town and Best beauty experts{% endblock %}
+{% block content %}
 	<section class="head">
 		<nav>
 			<ul>

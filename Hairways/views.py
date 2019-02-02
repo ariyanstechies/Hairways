@@ -18,13 +18,13 @@ def home(request):
         salons = paginator.page(1)
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
-
+    # salons = []
     return render(request, 'index.html', {'salons': salons})
 
 
 def filterSalons(request):
-    selected_location = request.GET.get()
-    all_salons = Salons.objects.all()
+    selected_location = request.GET.filter('selectLocation')
+    all_salons = Salons.objects.all(location=selected_location)
     filtered_salons = LocationFilter(request.GET, queryset=all_salons)
     return render(request, 'index.html', {'filtered_salons': filtered_salons})
 

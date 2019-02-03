@@ -20,6 +20,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', views.signup, name="signup"),
     path('blog/', views.blog, name="blog"),
+    path('locations/', views.locations, name="locations"),
     # url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
 
     ]

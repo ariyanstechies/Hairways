@@ -55,7 +55,7 @@
       <div class="input-group mb-3" align="left"  width: 50%">
         <select class="custom-select" id="location" style="font-weight: bold">
           <option selected>All Locations</option>
-          {% for each in items %}
+          {% for each in salons %}
           <option value="{{ each.location }}">{{ each.location }}</option>
           {% endfor %}
         </select>
@@ -185,7 +185,7 @@
   $('#location').on('change',function() {
     var location = $(this).val();
     $.ajax({
-      url: '/',
+      url: '/locations',
       method: "GET",
       data: {
         'location': location

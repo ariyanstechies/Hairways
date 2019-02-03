@@ -108,10 +108,10 @@
   <section class="Services" style="padding: 0px 15px 0px 15px">
     <div class="row">
     <div class="card col-9 all-Services" style="border: none">
-      <h3 style="font-family: 'Ubuntu', sans-serif; margin: 10px 0px 0px 10px;   color: #000; margin-bottom: 0px; font-weight: bold; font-size: 1.5em">Our Services</h3>
+      <h3 style="font-family: 'Ubuntu', sans-serif; margin: 10px 0px 0px 10px;   color: #000; margin-bottom: 0px; font-weight: bold; font-size: 1.5em">Our Services and Products</h3>
       <div class="card-body">
         <div class="row">
-        <table class="table table-borderless table-sm col-6">
+        <table class="table table-borderless table-sm col-8">
           <thead style="background-color: #55C9AF; color: #fff; font-weight: bold;">
             <tr>
               <th scope="col"></th>
@@ -135,24 +135,22 @@
         </tbody>
       </table>
 
-      <table class="table table-borderless table-sm col-6">
+      <table class="table table-borderless table-sm col-4">
         <thead style="background-color: whitesmoke; color: #55C9AF; font-weight: bold;">
           <tr>
             <th scope="col"></th>
-            <th scope="col">Service</th>
-            <th scope="col">Cost</th>
-            <th scope="col">Duration</th>
-            <th scope="col">Availabilty</th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Product Brand</th>
           </tr>
         </thead>
         <tbody>
           <tr style="border: none">
-            {% for each in services %}
+            {% for each in products %}
             <td scope="row"><input type="checkbox" id="exampleCheck1"></td>
-            <td>{{ each.serviceName }}</td>
-            <td>{{ each.serviceCost }}</td>
-            <td>{{ each.serviceDuration }}</td>
-            <td>{{ each.svailability }}</td>
+            <td>{{ each.product }}</td>
+            <td>{{ each.price }}</td>
+            <td>{{ each.product_brand }}</td>
           </tr>
           {% endfor %}
 

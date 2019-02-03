@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from Hairways.models import Salons, Services, Owners
+from Hairways.models import Salons, Services, Owners, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from Hairways.filters import LocationFilter
@@ -94,7 +94,8 @@ def pricing(request):
 def moreinfo(request, id):
     salon = Salons.objects.get(id=id)
     services = Services.objects.all()
-    return render(request, "moreinfo.html", {'salon': salon, 'services' : services})
+    products = Products.objects.all()
+    return render(request, "moreinfo.html", {'salon': salon, 'services' : services, 'products' : products})
 
 def upload(request):
     context = {}

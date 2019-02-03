@@ -4,16 +4,24 @@ from django.core.files.storage import FileSystemStorage
 from Hairways.models import Salons, Services
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-from Hairways.filters import LocationFilter
+from django.http import JsonResponse
 
 
 def home(request):
-    selected_location = request.GET.get('location', None)
-    print("selected_location is %s" % selected_location)
-    items = Salons.objects.all().order_by('likes')
+    # To be revisited
+    filtered_salons = Salons.objects.all().order_by('shares')
+    if request.is_ajax():
+        # For getting Salons within a selected location
+        selected_location = request.GET.get('location', False)
+        if selected_location == "All Locations":
+            filtered_salons = Salons.objects.all().order_by('shares')
+        else:
+            filtered_salons = Salons.objects.filter(location=selected_location).order_by('shares')
+        print("selected_location is %s" % selected_location)
+        print(filtered_salons)
     # for pagination
     page = request.GET.get('page', 1)
-    paginator = Paginator(items, 10)
+    paginator = Paginator(filtered_salons, 10)
     try:
         salons = paginator.page(page)
     except PageNotAnInteger:
@@ -21,14 +29,10 @@ def home(request):
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
     # salons = []
-    return render(request, 'index.html', {'salons': salons})
-
-
-def filterSalons(request):
-    selected_location = request.GET.filter('selectLocation')
-    all_salons = Salons.objects.all(location=selected_location)
-    filtered_salons = LocationFilter(request.GET, queryset=all_salons)
-    return render(request, 'index.html', {'filtered_salons': filtered_salons})
+    return render(request, 'index.html', {
+        'salons': salons,
+        "items": filtered_salons,
+        })
 
 
 def faqs(request):

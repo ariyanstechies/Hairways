@@ -103,6 +103,12 @@ nav ul li a:active {
 
 }
 /* end of navbar styling  */
+/* stars color  */
+span.fa.fa-star.checked {
+  color: darkred;
+}
+/* end of stars color  */
+
 .search-input{
 	margin: 10px 0px 10px 0px;
 	width: 250px;

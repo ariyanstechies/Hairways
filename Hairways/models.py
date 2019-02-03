@@ -19,11 +19,15 @@ class Salons(models.Model):
     likes = models.IntegerField(null=True, blank=True)
     views = models.IntegerField(null=True, blank=True)
     status = models.BooleanField(default=True)
+    shares = models.IntegerField(null=True, blank=True)
     paybill = models.TextField(null=True, blank=True, max_length=12)
     location = models.CharField(max_length=30)
 
     def __str__(self):
         return self.saloonName
+
+    def approved_comments(self):
+        return self.comments.filter(approved_comment=True)
 
 
 class Services(models.Model):
@@ -58,9 +62,9 @@ class Pictures(models.Model):
 
 
 class Comments(models.Model):
-    commentId = models.IntegerField()
-    salons = models.ForeignKey(Salons, on_delete=models.CASCADE)
-    text = models.TextField(max_length=100)
+    salon = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name='comments')
+    author = models.CharField(max_length=200)
+    reply = models.TextField(max_length=250)
     created_date = models.DateTimeField(
         default=timezone.now
     )
@@ -71,4 +75,4 @@ class Comments(models.Model):
         self.save()
 
     def __str__(self):
-        return self.text
+        return self.reply

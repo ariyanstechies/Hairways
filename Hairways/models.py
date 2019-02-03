@@ -45,9 +45,19 @@ class Services(models.Model):
     def __str__(self):
         return self.serviceName
 
+class Products(models.Model):
+    productId = models.IntegerField(primary_key=True)
+    product = models.CharField(max_length=100)
+    price = models.IntegerField()
+    product_brand = models.CharField(max_length=100)
+    salons = models.ForeignKey(Salons, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.product
+
 
 class Appointments(models.Model):
-    AppointmentsId = models.CharField(max_length=100, primary_key=True)
+    AppointmentsId = models.IntegerField(primary_key=True)
     services = models.ForeignKey(Services, on_delete=models.CASCADE)
     salons = models.ForeignKey(Salons, on_delete=models.CASCADE)
     AppointmentsStatus = models.BooleanField()

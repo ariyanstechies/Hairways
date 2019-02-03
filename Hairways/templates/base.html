@@ -61,6 +61,7 @@
         <li><a href="{% url 'faqs' %}">Faqs</a></li>
         {% if user.is_authenticated %}
         <li><a href="{% url 'password_change' %}" >Change Password</a></li>
+        <li><a href="{% url 'dashboard' id=user.id %}" >Dashboard</a></li>
         <li><a href="{% url 'logout' %}" >Logout</a></li>
         {% else %}
         <li><a class="active" href="{% url 'login' %}">Login</a></li>

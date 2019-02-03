@@ -19,22 +19,219 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
 <!--   <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
 
-  <style>
-    .card-body form input{
-      margin: 5px;
-    width: 140px;
-    border: none;
-    border-bottom: 2px solid purple;
-    padding-left: 20px;
-    }
+<style type="text/css">
+  body {
+      color: #566787;
+  background: #f5f5f5;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 13px;
+}
+.table-wrapper {
+      background: #fff;
+      padding: 20px 25px;
+      margin: 30px 0;
+  border-radius: 3px;
+      box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
 
-  </style>
+.table-title .btn {
+  color: #fff;
+  float: right;
+  font-size: 13px;
+  border: none;
+  min-width: 50px;
+  border-radius: 2px;
+  border: none;
+  outline: none !important;
+  margin-left: 10px;
+}
+.table-title .btn i {
+  float: left;
+  font-size: 21px;
+  margin-right: 5px;
+}
+.table-title .btn span {
+  float: left;
+  margin-top: 2px;
+}
+  table.table tr th, table.table tr td {
+      border-color: #e9e9e9;
+  padding: 12px 15px;
+  vertical-align: middle;
+  }
+table.table tr th:first-child {
+  width: 60px;
+}
+table.table tr th:last-child {
+  width: 100px;
+}
+  table.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fcfcfc;
+}
+table.table-striped.table-hover tbody tr:hover {
+  background: #f5f5f5;
+}
+  table.table th i {
+      font-size: 13px;
+      margin: 0 5px;
+      cursor: pointer;
+  }
+  table.table td:last-child i {
+  opacity: 0.9;
+  font-size: 22px;
+      margin: 0 5px;
+  }
+table.table td a {
+  font-weight: bold;
+  color: #566787;
+  display: inline-block;
+  text-decoration: none;
+  outline: none !important;
+}
+table.table td a:hover {
+  color: #2196F3;
+}
+table.table td a.edit {
+      color: #FFC107;
+  }
+  table.table td a.delete {
+      color: #F44336;
+  }
+  table.table td i {
+      font-size: 19px;
+  }
+table.table .avatar {
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+  .pagination {
+      float: right;
+      margin: 0 0 5px;
+  }
+  .pagination li a {
+      border: none;
+      font-size: 13px;
+      min-width: 30px;
+      min-height: 30px;
+      color: #999;
+      margin: 0 2px;
+      line-height: 30px;
+      border-radius: 2px !important;
+      text-align: center;
+      padding: 0 6px;
+  }
+  .pagination li a:hover {
+      color: #666;
+  }
+  .pagination li.active a, .pagination li.active a.page-link {
+      background: #03A9F4;
+  }
+  .pagination li.active a:hover {
+      background: #0397d6;
+  }
+.pagination li.disabled i {
+      color: #ccc;
+  }
+  .pagination li i {
+      font-size: 16px;
+      padding-top: 6px
+  }
+  .hint-text {
+      float: left;
+      margin-top: 10px;
+      font-size: 13px;
+  }
+/* Custom checkbox */
+.custom-checkbox {
+  position: relative;
+}
+.custom-checkbox input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  margin: 5px 0 0 3px;
+  z-index: 9;
+}
+.custom-checkbox label:before{
+  width: 18px;
+  height: 18px;
+}
+.custom-checkbox label:before {
+  content: '';
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: text-top;
+  background: white;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+.custom-checkbox input[type="checkbox"]:checked + label:after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 3px;
+  width: 6px;
+  height: 11px;
+  border: solid #000;
+  border-width: 0 3px 3px 0;
+  transform: inherit;
+  z-index: 3;
+  transform: rotateZ(45deg);
+}
+.custom-checkbox input[type="checkbox"]:checked + label:before {
+  border-color: #03A9F4;
+  background: #03A9F4;
+}
+.custom-checkbox input[type="checkbox"]:checked + label:after {
+  border-color: #fff;
+}
+.custom-checkbox input[type="checkbox"]:disabled + label:before {
+  color: #b8b8b8;
+  cursor: auto;
+  box-shadow: none;
+  background: #ddd;
+}
+/* Modal styles */
+.modal .modal-dialog {
+  max-width: 400px;
+}
+.modal .modal-header, .modal .modal-body, .modal .modal-footer {
+  padding: 20px 30px;
+}
+.modal .modal-content {
+  border-radius: 3px;
+}
+.modal .modal-footer {
+  background: #ecf0f1;
+  border-radius: 0 0 3px 3px;
+}
+  .modal .modal-title {
+      display: inline-block;
+  }
+.modal .form-control {
+  border-radius: 2px;
+  box-shadow: none;
+  border-color: #dddddd;
+}
+.modal textarea.form-control {
+  resize: vertical;
+}
+.modal .btn {
+  border-radius: 2px;
+  min-width: 100px;
+}
+.modal form label {
+  font-weight: normal;
+}
+</style>
 
 </head>
 
 <body class="light-edition">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="black" data-image="{% static 'css/assets/img/sidebar-2.jpg' %}">
+    <div class="sidebar"ata-color="purple" data-background-color="black" data-image="{% static 'css/assets/img/sidebar-2.jpg' %}">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -97,7 +294,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">Products and Services</a>
+            <a class="navbar-brand" href="javascript:void(0)">Staffs and Clients</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>
@@ -107,8 +304,8 @@
           </button>
           <div class="collapse navbar-collapse justify-content-end">
 
-            <ul class="navbar-nav">
 
+            <ul class="navbar-nav">
 
               <li class="nav-item">
                 <a class="nav-link" href="dashboard.php">
@@ -133,6 +330,7 @@
                 </a>
               </li>
             </ul>
+            </ul>
           </div>
         </div>
       </nav>
@@ -140,99 +338,480 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12">     <!--   // START OF SERVICES SECTION -->
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Products</h4>
-                  <p class="card-category">Your products and its sales</p>
-                  <h4 style="float: right;">Daily Total sales: <b> 2500/=</b></h4>
-
+                  <div class="table-title">
+                      <div class="row">
+                          <div class="col-sm-7">
+                						<h2>Manage <b>Services</b></h2>
+                					</div>
+                					<div class="col-sm-5">
+                						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Service</span></a>
+                						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+                					</div>
+                      </div>
+                  </div>
                 </div>
 
-
                 <div class="card-body">
-                  <form method="POST" action="products-services.php">
+                  <div class="container">
+                    <div class="table-wrapper">
+                        <table class="table table-striped table-hover">
+                          <thead>
+                            <tr>
+                  						<th>
+                  							<span class="custom-checkbox">
+                  								<input type="checkbox" id="selectAll">
+                  								<label for="selectAll"></label>
+                  							</span>
+                  						</th>
+                              <th>Name</th>
+                              <th>Email</th>
+            						      <th>Address</th>
+                              <th>Phone</th>
+                              <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+            						        <td>
+                    							<span class="custom-checkbox">
+                    								<input type="checkbox" id="checkbox1" name="options[]" value="1">
+                    								<label for="checkbox1"></label>
+                    							</span>
+            						        </td>
+                                <td>Thomas Hardy</td>
+                                <td>thomashardy@mail.com</td>
+            						        <td>89 Chiaroscuro Rd, Portland, USA</td>
+                                <td>(171) 555-2222</td>
+                                <td>
+                                  <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                </td>
+                              </tr>
+                              <tr>
+            						        <td>
+                    							<span class="custom-checkbox">
+                    								<input type="checkbox" id="checkbox2" name="options[]" value="1">
+                    								<label for="checkbox2"></label>
+                    							</span>
+                    						</td>
+                                  <td>Dominique Perrier</td>
+                                  <td>dominiqueperrier@mail.com</td>
+            						          <td>Obere Str. 57, Berlin, Germany</td>
+                                  <td>(313) 555-5735</td>
+                                  <td>
+                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                  </td>
+                              </tr>
+                    					<tr>
+                    						<td>
+                    							<span class="custom-checkbox">
+                    								<input type="checkbox" id="checkbox3" name="options[]" value="1">
+                    								<label for="checkbox3"></label>
+                    							</span>
+                    						</td>
+                                <td>Maria Anders</td>
+                                <td>mariaanders@mail.com</td>
+            						        <td>25, rue Lauriston, Paris, France</td>
+                                <td>(503) 555-9931</td>
+                                <td>
+                                  <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                </td>
+                              </tr>
+                              <tr>
+            						        <td>
+            							        <span class="custom-checkbox">
+            								        <input type="checkbox" id="checkbox4" name="options[]" value="1">
+            								        <label for="checkbox4"></label>
+                    							</span>
+                    						</td>
+                                <td>Fran Wilson</td>
+                                <td>franwilson@mail.com</td>
+            						        <td>C/ Araquil, 67, Madrid, Spain</td>
+                                <td>(204) 619-5731</td>
+                                <td>
+                                  <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                </td>
+                              </tr>
+                    					<tr>
+                    						<td>
+                    							<span class="custom-checkbox">
+                    								<input type="checkbox" id="checkbox5" name="options[]" value="1">
+                    								<label for="checkbox5"></label>
+                    							</span>
+                    						</td>
+                                  <td>Martin Blank</td>
+                                  <td>martinblank@mail.com</td>
+            						          <td>Via Monte Bianco 34, Turin, Italy</td>
+                                  <td>(480) 631-2097</td>
+                                  <td>
+                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <input type="text" name="service" required placeholder="Service">
-
-                    <input type="number" name="duration" required placeholder="Duration">
-
-                    <input type="number" name="cost" required placeholder="Service Cost">
-
-                    <input style="border-radius: 5px; float: right;" class="btn btn-info" type="submit" value="Add service" name="addservice">
-
-                      </form>
-
-
+            			<div class="clearfix">
+                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                      <ul class="pagination">
+                        <li class="page-item disabled"><a href="#">Previous</a></li>
+                        <li class="page-item"><a href="#" class="page-link">1</a></li>
+                        <li class="page-item"><a href="#" class="page-link">2</a></li>
+                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                        <li class="page-item"><a href="#" class="page-link">4</a></li>
+                        <li class="page-item"><a href="#" class="page-link">5</a></li>
+                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                      </ul>
+                    </div>
                   </div>
+                </div>
 
-                <div class="card-body">
-                  <form method="POST" action="products-services.php">
+  <!-- Edit Modal HTML -->
+              	<div id="addEmployeeModal" class="modal fade">
+              		<div class="modal-dialog">
+              			<div class="modal-content">
+              				<form>
+              					<div class="modal-header">
+              						<h4 class="modal-title">Add Service</h4>
+              						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              					</div>
+              					<div class="modal-body">
+              						<div class="form-group">
+              							<label>Name</label>
+              							<input type="text" class="form-control" required>
+              						</div>
+              						<div class="form-group">
+              							<label>Email</label>
+              							<input type="email" class="form-control" required>
+              						</div>
+              						<div class="form-group">
+              							<label>Address</label>
+              							<textarea class="form-control" required></textarea>
+              						</div>
+              						<div class="form-group">
+              							<label>Phone</label>
+              							<input type="text" class="form-control" required>
+              						</div>
+              					</div>
+              					<div class="modal-footer">
+              						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+              						<input type="submit" class="btn btn-success" value="Add">
+              					</div>
+              				</form>
+              			</div>
+              		</div>
+              	</div>
 
-                    <input type="text" name="service" required placeholder="Service">
+              	<!-- Edit Modal HTML -->
+              	<div id="editEmployeeModal" class="modal fade">
+              		<div class="modal-dialog">
+              			<div class="modal-content">
+              				<form>
+              					<div class="modal-header">
+              						<h4 class="modal-title">Edit Service</h4>
+              						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              					</div>
+              					<div class="modal-body">
+              						<div class="form-group">
+              							<label>Name</label>
+              							<input type="text" class="form-control" required>
+              						</div>
+              						<div class="form-group">
+              							<label>Email</label>
+              							<input type="email" class="form-control" required>
+              						</div>
+              						<div class="form-group">
+              							<label>Address</label>
+              							<textarea class="form-control" required></textarea>
+              						</div>
+              						<div class="form-group">
+              							<label>Phone</label>
+              							<input type="text" class="form-control" required>
+              						</div>
+              					</div>
+              					<div class="modal-footer">
+              						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+              						<input type="submit" class="btn btn-info" value="Save">
+              					</div>
+              				</form>
+              			</div>
+              		</div>
+              	</div>
 
-                    <input type="number" name="clients" required  placeholder="Clients">
-
-                    <input type="number" name="cost" required placeholder="Cost">
-
-                    <input type="number" name="serviceincome" required placeholder="Service Income">
-
-                    <input style="border-radius: 5px; float: right;" class="btn btn-info" type="submit" value="Add service record" name="addservicerecords">
-
-                      </form>
-
-
-                  </div>
-
+              	<!-- Delete Modal HTML -->
+              	<div id="deleteEmployeeModal" class="modal fade">
+              		<div class="modal-dialog">
+              			<div class="modal-content">
+              				<form>
+              					<div class="modal-header">
+              						<h4 class="modal-title">Delete Service</h4>
+              						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              					</div>
+              					<div class="modal-body">
+              						<p>Are you sure you want to delete these Records?</p>
+              						<p class="text-warning"><small>This action cannot be undone.</small></p>
+              					</div>
+              					<div class="modal-footer">
+              						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+              						<input type="submit" class="btn btn-danger" value="Delete">
+              					</div>
+              				</form>
+              			</div>
+              		</div>
+              	</div>
+              </div>
             </div>
+          </div>
 
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title mt-0">Services</h4>
-                  <p class="card-category"> Manage services you offer</p>
+          <!-- END OF SERVICES SECTION -->
+
+
+          <!-- START OF PRODUCT SECTION -->
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header card-header-primary">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-7">
+                          <h2>Manage <b>Products</b></h2>
+                        </div>
+                        <div class="col-sm-5">
+                          <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
+                          <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+                        </div>
+                    </div>
                 </div>
+              </div>
 
-                <div class="card-body">
-                  <form method="POST" action="products-services.php">
+              <div class="card-body">
+                <div class="container">
+                  <div class="table-wrapper">
+                      <table class="table table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th>
+                              <span class="custom-checkbox">
+                                <input type="checkbox" id="selectAll">
+                                <label for="selectAll"></label>
+                              </span>
+                            </th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Actions</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <span class="custom-checkbox">
+                                  <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                  <label for="checkbox1"></label>
+                                </span>
+                              </td>
+                              <td>Thomas Hardy</td>
+                              <td>thomashardy@mail.com</td>
+                              <td>89 Chiaroscuro Rd, Portland, USA</td>
+                              <td>(171) 555-2222</td>
+                              <td>
+                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <span class="custom-checkbox">
+                                  <input type="checkbox" id="checkbox2" name="options[]" value="1">
+                                  <label for="checkbox2"></label>
+                                </span>
+                              </td>
+                                <td>Dominique Perrier</td>
+                                <td>dominiqueperrier@mail.com</td>
+                                <td>Obere Str. 57, Berlin, Germany</td>
+                                <td>(313) 555-5735</td>
+                                <td>
+                                  <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <span class="custom-checkbox">
+                                  <input type="checkbox" id="checkbox3" name="options[]" value="1">
+                                  <label for="checkbox3"></label>
+                                </span>
+                              </td>
+                              <td>Maria Anders</td>
+                              <td>mariaanders@mail.com</td>
+                              <td>25, rue Lauriston, Paris, France</td>
+                              <td>(503) 555-9931</td>
+                              <td>
+                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <span class="custom-checkbox">
+                                  <input type="checkbox" id="checkbox4" name="options[]" value="1">
+                                  <label for="checkbox4"></label>
+                                </span>
+                              </td>
+                              <td>Fran Wilson</td>
+                              <td>franwilson@mail.com</td>
+                              <td>C/ Araquil, 67, Madrid, Spain</td>
+                              <td>(204) 619-5731</td>
+                              <td>
+                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <span class="custom-checkbox">
+                                  <input type="checkbox" id="checkbox5" name="options[]" value="1">
+                                  <label for="checkbox5"></label>
+                                </span>
+                              </td>
+                                <td>Martin Blank</td>
+                                <td>martinblank@mail.com</td>
+                                <td>Via Monte Bianco 34, Turin, Italy</td>
+                                <td>(480) 631-2097</td>
+                                <td>
+                                  <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                </td>
+                              </tr>
+                          </tbody>
+                      </table>
 
-                    <input type="text" name="product" required placeholder="Product">
-
-                    <input type="number" name="price" required placeholder="Price">
-
-                    <input type="number" name="totalproducts" required placeholder="Products in Stock">
-
-                    <input style="border-radius: 5px; float: right;" class="btn btn-info" type="submit" value="Add product" name="addproduct">
-
-                      </form>
-
-
+                <div class="clearfix">
+                  <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                    <ul class="pagination">
+                      <li class="page-item disabled"><a href="#">Previous</a></li>
+                      <li class="page-item"><a href="#" class="page-link">1</a></li>
+                      <li class="page-item"><a href="#" class="page-link">2</a></li>
+                      <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                      <li class="page-item"><a href="#" class="page-link">4</a></li>
+                      <li class="page-item"><a href="#" class="page-link">5</a></li>
+                      <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                    </ul>
                   </div>
+                </div>
+              </div>
 
-                <div class="card-body">
-                  <form method="POST" action="products-services.php">
+<!-- Edit Modal HTML -->
+              <div id="addEmployeeModal" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form>
+                      <div class="modal-header">
+                        <h4 class="modal-title">Add Product</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <label>Name</label>
+                          <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                          <label>Email</label>
+                          <input type="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                          <label>Address</label>
+                          <textarea class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label>Phone</label>
+                          <input type="text" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-success" value="Add">
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
 
-                    <input type="text" name="product" required placeholder="Product">
+              <!-- Edit Modal HTML -->
+              <div id="editEmployeeModal" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form>
+                      <div class="modal-header">
+                        <h4 class="modal-title">Edit Product</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <label>Name</label>
+                          <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                          <label>Email</label>
+                          <input type="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                          <label>Address</label>
+                          <textarea class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label>Phone</label>
+                          <input type="text" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-info" value="Save">
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
 
-                    <input type="number" name="sold" required  placeholder="Sold Items">
-
-                    <input type="number" name="price" required placeholder="Price">
-
-                    <input type="number" name="itemproductsales" required placeholder="Product Sales">
-
-                    <input style="border-radius: 5px; float: right;" class="btn btn-info" type="submit" value="Add product record" name="addproductrecords">
-
-                      </form>
-
-
+              <!-- Delete Modal HTML -->
+              <div id="deleteEmployeeModal" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form>
+                      <div class="modal-header">
+                        <h4 class="modal-title">Delete Product</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to delete these Records?</p>
+                        <p class="text-warning"><small>This action cannot be undone.</small></p>
+                      </div>
+                      <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- END OF PRODUCT SECTION -->
+
+          </div>
+        </div>
       </div>
-       <footer class="footer">
+
+
+        <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
             <ul>
@@ -247,7 +826,7 @@
                 </a>
               </li>
               <li>
-                <a href="blog.php">
+                <a href="#">
                   Blog
                 </a>
               </li>
@@ -256,6 +835,38 @@
           <div class="copyright float-right" id="date">
         </div>
       </footer>
+
+      <!-- SCRIPT FOR NEW TABLE -->
+
+      <script type="text/javascript">
+$(document).ready(function(){
+	// Activate tooltip
+	$('[data-toggle="tooltip"]').tooltip();
+
+	// Select/Deselect checkboxes
+	var checkbox = $('table tbody input[type="checkbox"]');
+	$("#selectAll").click(function(){
+		if(this.checked){
+			checkbox.each(function(){
+				this.checked = true;
+			});
+		} else{
+			checkbox.each(function(){
+				this.checked = false;
+			});
+		}
+	});
+	checkbox.click(function(){
+		if(!this.checked){
+			$("#selectAll").prop("checked", false);
+		}
+	});
+});
+</script>
+
+      <!-- END OF TABLE SCRIPT -->
+
+
       <script>
         const x = new Date().getFullYear();
         let date = document.getElementById('date');
@@ -325,22 +936,6 @@
   <script src="{% static 'css/assets/js/material-dashboard.js' %}"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="{% static 'css/assets/demo/demo.js' %}"></script>
-  <script>
-$(function(){
-    $('#addMore').on('click', function() {
-              var data = $("#tb tr:eq(1)").clone(true).appendTo("#tb");
-              data.find("input").val('');
-     });
-     $(document).on('click', '.remove', function() {
-         var trIndex = $(this).closest("tr").index();
-            if(trIndex>1) {
-             $(this).closest("tr").remove();
-           } else {
-             alert("Sorry!! Can't remove first row!");
-           }
-      });
-});
-</script>
   <script>
     $(document).ready(function() {
       $().ready(function() {

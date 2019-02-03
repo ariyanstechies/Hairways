@@ -7,9 +7,9 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('pricing/', views.pricing, name='pricing'),
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/<int:id>/', views.dashboard, name='dashboard'),
     path('Salon/<int:id>/', views.moreinfo, name='moreinfo'),
-    path('user/', views.user, name='user'),
+    path('user/<int:id>/', views.user, name='user'),
     path('productsServices/', views.productsServices, name='productsServices'),
     path('staffClients/', views.staffClients, name='staffClients'),
     path('map/', views.map, name='map'),
@@ -22,7 +22,7 @@ urlpatterns = [
     path('blog/', views.blog, name="blog"),
     path('locations/', views.locations, name="locations"),
     # url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
-
+    path('auth/', include('social_django.urls', namespace='social')),      # GOOGLE & FACEBOOK OAUTH
     ]
 
 if settings.DEBUG:

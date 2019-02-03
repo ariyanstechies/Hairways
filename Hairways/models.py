@@ -9,6 +9,9 @@ class Owners(models.Model):
     phone = models.PositiveIntegerField()
     password = models.CharField(max_length=25)
 
+    def __str__(self):
+        return self.ownerName
+
 
 class Salons(models.Model):
     saloonName = models.CharField(max_length=20)
@@ -38,6 +41,9 @@ class Services(models.Model):
     serviceDuration = models.CharField(max_length=20)
     serviceBookings = models.IntegerField()
     svailability = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.serviceName
 
 
 class Appointments(models.Model):

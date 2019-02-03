@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from Hairways.models import Salons, Services
+from Hairways.models import Salons, Services, Owners
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
@@ -89,13 +89,15 @@ def signup(request):
 
 # protecting views you can't just access dashboard without logging
 @login_required
-def dashboard(request):
-    return render(request, "dashboard/dashboard.html")
-
+def dashboard(request, id):
+    owner = Salons.objects.get(id=id)
+    return render(request, "dashboard/dashboard.html", {'owner': owner})
 
 @login_required  # protecting views
-def user(request):
-    return render(request, "dashboard/user.html")
+def user(request, id):
+    user_details = Owners.objects.get(ownerId=id)
+    salon_details = Salons.objects.get(ownerId=id)
+    return render(request, "dashboard/user.html", {'user_details': user_details, 'salon_details' : salon_details})
 
 
 def productsServices(request):
@@ -128,14 +130,8 @@ def pricing(request):
 
 def moreinfo(request, id):
     salon = Salons.objects.get(id=id)
-    return render(request, "moreinfo.html", {'salon': salon})
-
-
-def services(request, id):
-    services = Services.objects.all(salons=id)
-    return render(request, "moreinfo.html", {
-        'services': services})
-
+    services = Services.objects.all()
+    return render(request, "moreinfo.html", {'salon': salon, 'services' : services})
 
 def upload(request):
     context = {}

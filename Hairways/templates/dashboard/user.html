@@ -231,7 +231,10 @@
                     </div>
                     <div class="show-profile">
                       <p>
-                        <label>First name:</label>
+
+
+
+                      <br>  <label>First name:</label>
                         <i><b><?php echo $fname; ?></b></i>
                       </p>
                       <p>
@@ -240,31 +243,31 @@
                       </p>
                       <p>
                         <label>Username:</label>
-                        <i><b><?php echo $username; ?></b></i>
+                        <i><b> {{ user_details.ownerName }} </b></i>
                       </p>
                       <p>
                         <label>email:</label>
-                        <i><b><?php echo $email; ?></b></i>
+                        <i><b> {{ user_details.email }} </b></i>
                       </p>
                       <p>
                         <label>Salon Name:</label>
-                        <i><b><?php echo $salonName; ?></b></i>
+                        <i><b> {{ salon_details.saloonName }} </b></i>
                       </p>
                       <p>
                         <label>Salon Description:</label>
-                        <i><b><?php echo $salonDescription; ?></b></i>
+                        <i><b> {{ salon_details.description }} </b></i>
                       </p>
                       <p>
                         <label>Salon Location:</label>
-                        <i><b><?php echo $salonLocation; ?></b></i>
+                        <i><b> {{ salon_details.location}} </b></i>
                       </p>
                       <p>
                         <label>Phone No:</label>
-                        <i><b><?php echo $phoneNo; ?></b></i>
+                        <i><b> 0{{user_details.phone }} </b></i>
                       </p>
                       <p>
                         <label>Password:</label>
-                        <i><b>**************</b></i>
+                        <i><b> {{ user_details.password }} </b></i>
                       </p>
                     </div>
 

@@ -1,36 +1,7 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load staticfiles %}
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <title>Hairways|FQAs</title>
-  <link rel="stylesheet" href="{% static 'css/w3.css' %}">
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="{% static 'css/faqs.css' %}">
-</head>
-<body>
-
-  <section class="head">
-
-    <!--Navigation bar -->
-    <!-- This one is shown on large screens and hidden on small screens -->
-    <div class="w3-bar w3-card-4 w3-large  " style="background-color: #11AFF2">
-      <p href="#" class="w3-bar-item ">Hairways.co.ke</p>
-      <a href="dashboard/" class="w3-button w3-hide-small  w3-right ">Login</a>
-      <a href="index/" class="w3-bar-item w3-button  w3-right w3-hide-small">Home</a>
-      <a href="about/" class="w3-bar-item w3-button  w3-right w3-hide-small">About</a>
-      <a href="index/" class="w3-bar-item w3-button  w3-right w3-hide-small">Contact us</a>
-      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
-      onclick="myFunction()">&#9776;</a>
-    </div>
-    <!-- This one is shown on small screens and hidden on large screens -->
-    <div id="demo" class="w3-bar-block w3.card-4 w3-light-grey  w3-hide w3-hide-large w3-hide-medium">
-      <a onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-hide-small  w3-right ">Login</a>
-      <a href="faqs/" class="w3-bar-item w3-button">Faqs</a>
-    </div>
-  </section>
-
+{% block faqs %}<link rel="stylesheet" href="{% static 'css/faqs.css' %}"> {% endblock %}
+{% block content %}
   <div class="w3-container intro  w3-center"> <!--Start of FQAs body -->
     <h2>Hairways frequently asked questions.</h2>
     <p class="answer">We at hairways have tried our best to make our system easy to use,the following are
@@ -82,10 +53,4 @@
             that salon. However anyone can view all the above anytime.
           </p>
         </div><!--end of inner questions and answers -->
-
-        <footer class="Copyright">
-          <p>Copyright &copy; 2018 | Powered By <a href="#" target="_blank">Ariyans Techies</a>.</p>
-        </footer>
-
-      </body>
-      </html>
+{% endblock %}

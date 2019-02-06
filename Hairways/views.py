@@ -29,7 +29,7 @@ def home(request):
 
 def locations(request):
     print("I was activated")
-    filtered_salons = Salons.objects.all().order_by('shares')
+    # filtered_salons = Salons.objects.all().order_by('shares')
     if request.method == 'GET' and request.is_ajax():
         # For getting Salons within a selected location
         selected_location = request.GET.get('location', False)

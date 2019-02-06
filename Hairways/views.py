@@ -6,19 +6,15 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
 from rest_framework import status
+from django.http import HttpResponse
+import collections
+import json
+from django.core import serializers
 
 
 def home(request):
     # To be revisited
     filtered_salons = Salons.objects.all().order_by('shares')
-    # if request.is_ajax():
-    #     # For getting Salons within a selected location
-    #     selected_location = request.GET.get('location', False)
-    #     if selected_location == "All Locations":
-    #         filtered_salons = Salons.objects.all().order_by('shares')
-    #     else:
-    #         filtered_salons = Salons.objects.filter(location=selected_location).order_by('shares')
-    #     print("selected_location is %s" % selected_location)
     # for pagination
     page = request.GET.get('page', 1)
     paginator = Paginator(filtered_salons, 10)
@@ -28,23 +24,22 @@ def home(request):
         salons = paginator.page(1)
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
-    return render(request, 'index.html', {
-        'salons': salons,
-
-        })
+    return render(request, 'index.html', {"salons": salons})
 
 
 def locations(request):
-    # To be revisited
+    print("I was activated")
     filtered_salons = Salons.objects.all().order_by('shares')
-    if request.is_ajax():
+    if request.method == 'GET' and request.is_ajax():
         # For getting Salons within a selected location
         selected_location = request.GET.get('location', False)
         if selected_location == "All Locations":
             filtered_salons = Salons.objects.all().order_by('shares')
+            print("selected_location is %s" % selected_location)
         else:
-            filtered_salons = Salons.objects.filter(location=selected_location).order_by('shares')
-        print("selected_location is %s" % selected_location)
+            filtered_salons = Salons.objects.filter(
+                location=selected_location).order_by('shares')
+            print("selected_location is again %s" % selected_location)
     # for pagination
     page = request.GET.get('page', 1)
     paginator = Paginator(filtered_salons, 10)
@@ -54,8 +49,14 @@ def locations(request):
         salons = paginator.page(1)
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
-    salons = {"salons": salons}
-    return Response(salons, status=status.HTTP_200_OK)
+    # some wired error happens if use json.dumps() directly.
+    JsonInfoData = serializers.serialize("json", salons)
+
+    # tmp = collections.OrderedDict()
+
+    # change the str format to json format.
+    # tmp['salons'] = json.loads(JsonInfoData)
+    return HttpResponse(json.dumps(json.loads(JsonInfoData)))
 
 
 def faqs(request):

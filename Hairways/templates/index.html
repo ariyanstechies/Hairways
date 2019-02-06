@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
+{% block location %}<script src="{% static 'js/filter_salons.js' %}"></script>{% endblock %}
 <!-- RANKING SALONS IN SLIDER -->
 <section class="salon-rank">
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -90,7 +91,7 @@
             <li class="date">Rank: {{ each_salon.likes }}/10</li>
             <li class="tags">
               <ul>
-                <li><a href="#">{{ each_salon.location }}</a></li>
+                <li><a href="#" id="salon_location">{{ each_salon.location }}</a></li>
               </ul>
             </li>
           </ul>
@@ -98,7 +99,7 @@
         <div class="description">
           <h1> {{ each_salon.saloonName }} </h1>
           <h2>{{each_salon.location}}</h2>
-          <p> {{each_salon.description}}</p>
+          <p class="salon_descri"> {{each_salon.description}}</p>
           <p class="read-more">
             {% block comment %} Star Rating {% endblock%}
             <span style="padding-right:32px">
@@ -145,7 +146,7 @@
       </div>
     </div>
     {% endif %}
-    <!-- : ende of leftv  -->
+    <!-- : end of left -->
     <!-- Adding black theme on navbar on scroll -->
     <script>
       $(document).ready(function() {
@@ -178,26 +179,5 @@
   x[slideIndex-1].style.display = "block";
   setTimeout(carousel, 2000);
 }
-
-
 </script> -->
-<script>
-  $('#location').on('change',function() {
-    var location = $(this).val();
-    $.ajax({
-      url: '/locations',
-      method: "GET",
-      data: {
-        'location': location
-      },
-      dataType: 'json',
-      success: function (data) {
-        if (data.is_taken) {
-          console.log(data) // check out how data is structured
-        }
-      }
-    });
-
-  });
-</script>
 {% endblock %}

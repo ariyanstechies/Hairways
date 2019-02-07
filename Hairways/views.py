@@ -4,23 +4,14 @@ from django.core.files.storage import FileSystemStorage
 from Hairways.models import Salons, Services, Owners, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.decorators import api_view, renderer_classes
-from rest_framework.renderers import TemplateHTMLRenderer
+from django.http import HttpResponse
+import json
+from django.core import serializers
 
 
 def home(request):
     # To be revisited
     filtered_salons = Salons.objects.all().order_by('shares')
-    if request.is_ajax():
-        # For getting Salons within a selected location
-        selected_location = request.GET.get('location', False)
-        if selected_location == "All Locations":
-            filtered_salons = Salons.objects.all().order_by('shares')
-        else:
-            filtered_salons = Salons.objects.filter(location=selected_location).order_by('shares')
-        print("selected_location is %s" % selected_location)
     # for pagination
     page = request.GET.get('page', 1)
     paginator = Paginator(filtered_salons, 10)
@@ -30,25 +21,22 @@ def home(request):
         salons = paginator.page(1)
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
-    return render(request, 'index.html', {
-        'salons': salons,
-
-        })
+    return render(request, 'index.html', {"salons": salons})
 
 
-@api_view(['GET', 'POST', ])
-@renderer_classes((TemplateHTMLRenderer,))
 def locations(request):
-    # To be revisited
-    filtered_salons = Salons.objects.all().order_by('shares')
-    if request.is_ajax():
+    print("I was activated")
+    # filtered_salons = Salons.objects.all().order_by('shares')
+    if request.method == 'GET' and request.is_ajax():
         # For getting Salons within a selected location
         selected_location = request.GET.get('location', False)
         if selected_location == "All Locations":
             filtered_salons = Salons.objects.all().order_by('shares')
+            print("selected_location is %s" % selected_location)
         else:
-            filtered_salons = Salons.objects.filter(location=selected_location).order_by('shares')
-        print("selected_location is %s" % selected_location)
+            filtered_salons = Salons.objects.filter(
+                location=selected_location).order_by('shares')
+            print("selected_location is again %s" % selected_location)
     # for pagination
     page = request.GET.get('page', 1)
     paginator = Paginator(filtered_salons, 10)
@@ -58,8 +46,14 @@ def locations(request):
         salons = paginator.page(1)
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
-    salons = {"salons": salons}
-    return Response(salons, status=status.HTTP_200_OK, template_name='index.html')
+    # some wired error happens if use json.dumps() directly.
+    JsonInfoData = serializers.serialize("json", salons)
+
+    # tmp = collections.OrderedDict()
+
+    # change the str format to json format.
+    # tmp['salons'] = json.loads(JsonInfoData)
+    return HttpResponse(json.dumps(json.loads(JsonInfoData)))
 
 
 def faqs(request):
@@ -92,6 +86,7 @@ def signup(request):
 def dashboard(request, id):
     owner = Salons.objects.get(id=id)
     return render(request, "dashboard/dashboard.html", {'owner': owner})
+
 
 @login_required  # protecting views
 def user(request, id):
@@ -133,6 +128,7 @@ def moreinfo(request, id):
     services = Services.objects.all()
     products = Products.objects.all()
     return render(request, "moreinfo.html", {'salon': salon, 'services' : services, 'products' : products})
+
 
 def upload(request):
     context = {}

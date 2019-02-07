@@ -81,8 +81,9 @@
       <input class="search-input" placeholder="Search salon..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;">
       <!-- <i align="left" class="fas fa-search" style="margin-left: 0px"></i> -->
     </div>
+    <div class="salon_wrapper">
     {% for each_salon in salons %}
-    <div class=" w3-col s6   w3-mobile" style="padding-left:10px">
+    <div class="w3-col s6 w3-mobile" style="padding-left:10px">
       <div class="blog-card" style="height:250px">
         <div class="meta">
           <div class="photo" style="background-image: url({% static 'css/images/cover1.jpg' %})"></div>
@@ -91,7 +92,7 @@
             <li class="date">Rank: {{ each_salon.likes }}/10</li>
             <li class="tags">
               <ul>
-                <li><a href="#" id="salon_location">{{ each_salon.location }}</a></li>
+                <li><a href="#" class="salon_location">{{ each_salon.location }}</a></li>
               </ul>
             </li>
           </ul>
@@ -124,7 +125,7 @@
     {% endfor %}
     <br>
     {% if salons.has_other_pages %}
-    <div class="w3-center " >
+    <div class="w3-center" >
       <div class="w3-bar w3-xlarge w3-border w3-round">
         {% if salons.has_previous %}
         <a href="?page={{ salons.previous_page_number }}" class="w3-button">&laquo;</a>
@@ -146,6 +147,7 @@
       </div>
     </div>
     {% endif %}
+    </div>
     <!-- : end of left -->
     <!-- Adding black theme on navbar on scroll -->
     <script>
@@ -181,9 +183,46 @@
 }
 </script> -->
 <script type="text/javascript">
+  // Getting filtered salons according to locations
   $('#location').on('change',function() {
-
-
+    var location = $(this).val();
+    if (location == "All Locations") {
+      $(".w3-col, .s6, .w3-mobile").show();
+    }else{
+      var match_location = $(".salon_location");
+      for (var i=0; i<match_location.length; i++){
+        if (location != $(match_location[i]).html()) {
+          $(".w3-col, .s6, .w3-mobile").eq(i).hide();
+        }else {
+          $(".w3-col, .s6, .w3-mobile").eq(i).show();
+        }
+      }
+    }
   });
-  </script>
+  var salonNames = $(".description h1");
+  $(".search-input").on("keyup", function() {
+    var query = $(this).val();
+    checkSalon(query); // call filter method
+  });
+  function checkSalon(starts_with) {
+    salon_list = []
+    // Iterating through each salon
+    for (var y=0; y<salonNames.length; y++){
+      if ($.trim(starts_with).length != 0){ //if there is sth in the input start filtering
+        compare_salon = $(salonNames[y]).html().toLowerCase().trim();
+        // comparing user input and all salon names
+        if(compare_salon.startsWith(starts_with.toLowerCase())){
+          $(".w3-col, .s6, .w3-mobile").eq(y).show();
+          salon_list.push(compare_salon);
+        }
+        else { // if didn't much hide that salon card
+        $(".w3-col, .s6, .w3-mobile").eq(y).hide();
+      }
+    }
+    else { // if input is empty show everything
+      $(".w3-col, .s6, .w3-mobile").eq(y).show();
+    }
+  }
+}
+</script>
 {% endblock %}

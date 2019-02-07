@@ -108,7 +108,10 @@ span.fa.fa-star.checked {
   color: darkred;
 }
 /* end of stars color  */
-
+/* Styling error not found salon */
+.not_found{
+background: url(./images/not_found.png);
+}
 .search-input{
 	margin: 10px 0px 10px 0px;
 	width: 250px;

@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Hairways',
     'crispy_forms',
-    'django_filters',
     'social_django',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

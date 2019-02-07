@@ -4,10 +4,7 @@ from django.core.files.storage import FileSystemStorage
 from Hairways.models import Salons, Services, Owners, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-from rest_framework.response import Response
-from rest_framework import status
 from django.http import HttpResponse
-import collections
 import json
 from django.core import serializers
 

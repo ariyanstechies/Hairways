@@ -2,27 +2,29 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from django.urls import path, include
+from .views import owners, clients, home_views
+
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('about/', views.about, name='about'),
-    path('pricing/', views.pricing, name='pricing'),
-    path('dashboard/<int:id>/', views.dashboard, name='dashboard'),
-    path('Salon/<int:id>/', views.moreinfo, name='moreinfo'),
-    path('user/<int:id>/', views.user, name='user'),
-    path('productsServices/', views.productsServices, name='productsServices'),
-    path('staffClients/', views.staffClients, name='staffClients'),
-    path('map/', views.map, name='map'),
-    path('calendar/', views.calendar, name='calendar'),
-    path('upgrade/', views.upgrade, name='upgrade'),
-    path('upload/', views.upload, name='upload'),
-    path('faqs/', views.faqs, name='faqs'),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('signup/', views.signup, name="signup"),
-    path('blog/', views.blog, name="blog"),
-    path('locations/', views.locations, name="locations"),
+    path('', home_views.home, name='home'),
+    path('about/', home_views.about, name='about'),
+    path('pricing/', home_views.pricing, name='pricing'),
+    path('dashboard/<int:id>/', home_views.dashboard, name='dashboard'),
+    path('Salon/<int:id>/', home_views.moreinfo, name='moreinfo'),
+    path('user/<int:id>/', home_views.user, name='user'),
+    path('productsServices/', home_views.productsServices, name='productsServices'),
+    path('staffClients/', home_views.staffClients, name='staffClients'),
+    path('map/', home_views.map, name='map'),
+    path('calendar/', home_views.calendar, name='calendar'),
+    path('upgrade/', home_views.upgrade, name='upgrade'),
+    path('upload/', home_views.upload, name='upload'),
+    path('faqs/', home_views.faqs, name='faqs'),
+    # path('accounts/', include('django.contrib.auth.urls')),
+    # path('signup/', views.signup, name="signup"),
+    path('blog/', home_views.blog, name="blog"),
+    path('locations/', home_views.locations, name="locations"),
     # url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
-    path('auth/', include('social_django.urls', namespace='social')),      # GOOGLE & FACEBOOK OAUTH
+    # path('auth/', include('social_django.urls', namespace='social')),      # GOOGLE & FACEBOOK OAUTH
     ]
 
 if settings.DEBUG:

@@ -4,9 +4,13 @@ from django.core.files.storage import FileSystemStorage
 from Hairways.models import Salons, Services, Owners, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from ..decorators import client_required
+from ..decorators import owner_required
 from django.http import HttpResponse
 import json
 from django.core import serializers
+from django.views.generic import TemplateView
 
 
 def home(request):
@@ -82,7 +86,7 @@ def signup(request):
 
 
 # protecting views you can't just access dashboard without logging
-@login_required
+@method_decorator([login_required, owner_required], name='dispatch')
 def dashboard(request, id):
     owner = Salons.objects.get(id=id)
     return render(request, "dashboard/dashboard.html", {'owner': owner})
@@ -140,22 +144,14 @@ def upload(request):
     return render(request, 'upload.html', context)
 
 
-#   TO BE REVIEWED DISPLAYS IMAGES
-# def book_list(request):
-#     books = Book.objects.all()
-#     return render(request, 'book_list.html', {
-#         'books': books
-#     })
-#
-#
-# def delete_book(request, pk):
-#     if request.method == 'POST':
-#         book = Book.objects.get(pk=pk)
-#         book.delete()
-#     return redirect('book_list')
-#
-#
-# class BookListView(ListView):
-#     model = Book
-#     template_name = 'class_book_list.html'
-#     context_object_name = 'books'
+class SignUpView(TemplateView):
+    template_name = 'registration/signup.html'
+
+
+# def decider(request):
+#     if request.user.is_authenticated:
+#         if request.user.is_teacher:
+#             return redirect('home_views:dashboard')
+#         else:
+#             return redirect('index.html')
+#     return render(request, 'index.html')

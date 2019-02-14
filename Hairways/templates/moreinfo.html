@@ -111,19 +111,21 @@
                            </tr>
                         </thead>
                         <tbody>
-                           <tr style="border: none">
                              {% if services.count != 0 %}
                               {% for each in services %}
+                              <tr style="border: none">
                                 <td scope="row"><input type="checkbox" id="exampleCheck1"></td>
                                 <td>{{ each.serviceName }}</td>
                                 <td>{{ each.serviceCost }}</td>
                                 <td>{{ each.serviceDuration }}</td>
-                                <td>{{ each.svailability }}</td>
+                                <td>{{ each.availability }}</td>
+                                </tr>
                                 {% endfor %}
                               {% else %} <!-- spanning across the five columns-->
+                              <tr style="border: none">
                               <td colspan="5" align="center">Sorry No Services For Now:)</td>
+                             </tr>
                               {% endif%}
-                           </tr>
 
                         </tbody>
                      </table>
@@ -138,18 +140,21 @@
                            </tr>
                         </thead>
                         <tbody>
-                           <tr style="border: none">
                              {% if services.count != 0 %}
                               {% for each in products %}
+                              <tr style="border: none">
                               <td scope="row"><input type="checkbox" id="exampleCheck1"></td>
                               <td>{{ each.product }}</td>
                               <td>{{ each.price }}</td>
                               <td>{{ each.product_brand }}</td>
+                              </tr>
                               {% endfor %}
                               {% else %} <!-- spanning across the 4 columns-->
+                              <tr style="border: none">
                               <td colspan="4" align="center">No Products Found! :)</td>
+                              </tr>
                               {% endif%}
-                           </tr>
+
                         </tbody>
                      </table>
                   </div>

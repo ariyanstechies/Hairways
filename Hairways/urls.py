@@ -8,7 +8,6 @@ from .views import owners, clients, home_views
 urlpatterns = [
     path('', home_views.home, name='home'),
     path('about/', home_views.about, name='about'),
-    path('pricing/', home_views.pricing, name='pricing'),
     path('dashboard/<int:id>/', home_views.dashboard, name='dashboard'),
     path('Salon/<int:id>/', home_views.moreinfo, name='moreinfo'),
     path('user/<int:id>/', home_views.user, name='user'),
@@ -20,9 +19,7 @@ urlpatterns = [
     path('upload/', home_views.upload, name='upload'),
     path('faqs/', home_views.faqs, name='faqs'),
     # path('accounts/', include('django.contrib.auth.urls')),
-    path('update_views/', home_views.update_views, name="update_views"),
-    path('blog/', home_views.blog, name="blog"),
-    # path('locations/', home_views.locations, name="locations"),
+    path('update_views/', home_views.update_views, name="update
     # url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
     # path('auth/', include('social_django.urls', namespace='social')),      # GOOGLE & FACEBOOK OAUTH
     ]

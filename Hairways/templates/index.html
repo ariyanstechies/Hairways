@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-<!-- {% block location %}<script src="{% static 'js/filter_salons.js' %}"></script>{% endblock %} -->
 <!-- RANKING SALONS IN SLIDER -->
 <section class="salon-rank">
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -182,8 +181,8 @@
   setTimeout(carousel, 2000);
 }
 </script> -->
+<!-- // Getting filtered salons according to locations -->
 <script type="text/javascript">
-  // Getting filtered salons according to locations
   $('#location').on('change',function() {
     var location = $(this).val();
     if (location == "All Locations") {
@@ -224,5 +223,8 @@
     }
   }
 }
+</script>
+<script>
+
 </script>
 {% endblock %}

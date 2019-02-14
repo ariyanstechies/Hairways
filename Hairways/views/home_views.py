@@ -72,23 +72,11 @@ def about(request):
     return render(request, "about.html")
 
 
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = UserCreationForm()
-
-    return render(request, 'registration/signup.html', {
-        "form": form})
-
 
 # protecting views you can't just access dashboard without logging
 @method_decorator([login_required, owner_required], name='dispatch')
-def dashboard(request, id):
-    owner = Salons.objects.get(id=id)
+def dashboard(request):
+    owner = Salons.objects.all()
     return render(request, "dashboard/dashboard.html", {'owner': owner})
 
 
@@ -146,6 +134,17 @@ def upload(request):
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
+
+
+
+from django.views import generic
+
+@method_decorator([login_required, owner_required], name='dispatch')
+class AppointmentListView(generic.ListView):
+    model = Salons
+    context_object_name = 'my_salon'
+    template_name = 'dashboard/dashboard.html'
+
 
 
 # def decider(request):

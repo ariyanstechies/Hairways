@@ -93,13 +93,20 @@ def upgrade(request):
     return render(request, "dashboard/upgrade.php")
 
 
-def pricing(request):
-    return render(request, "pricing.html")
-
 def moreinfo(request, id):
+    """django takes care of joins automatically. When we query everything in Salons
+    we also get any related information by foreign key as well,
+     But the way that we access this in html is a litle different.
+      We have to go through the variable used as the foreign key to access the
+       information associated with that join. e.g
+       {% for x in data %}
+       {{ x.salonName.serviceName }}
+       {{ x.salonName.availability }} etc... easy right? :)
+       {% endfor %}
+       """
     salon = Salons.objects.get(id=id)
-    services = Services.objects.all()
-    products = Products.objects.all()
+    services = Services.objects.filter(salons__salonName=salon.salonName)
+    products = Products.objects.filter(salons__salonName=salon.salonName)
     return render(request, "moreinfo.html", {'salon': salon, 'services' : services, 'products' : products})
 
 @csrf_exempt

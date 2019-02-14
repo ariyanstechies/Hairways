@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
             name='Salons',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('saloonName', models.CharField(max_length=20)),
+                ('salonName', models.CharField(max_length=20)),
                 ('description', models.TextField(max_length=50)),
                 ('created_date', models.DateTimeField(default=django.utils.timezone.now)),
                 ('likes', models.IntegerField(blank=True, null=True)),

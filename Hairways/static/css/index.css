@@ -112,6 +112,11 @@ span.fa.fa-star.checked {
 .not_found{
 background: url(./images/not_found.png);
 }
+/* styling fa fa class */
+.fa {
+  cursor: pointer;
+}
+/* Styling input form for search salon */
 .search-input{
 	margin: 10px 0px 10px 0px;
 	width: 250px;

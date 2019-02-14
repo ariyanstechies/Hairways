@@ -52,7 +52,7 @@ class Services(models.Model):
     serviceCost = models.CharField(max_length=50)
     serviceDuration = models.CharField(max_length=20)
     serviceBookings = models.IntegerField()
-    svailability = models.BooleanField(default=True)
+    availability = models.BooleanField(default=True)
 
     def __str__(self):
         return self.serviceName

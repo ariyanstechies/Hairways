@@ -26,7 +26,9 @@ def home(request):
         salons = paginator.page(1)
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
-    return render(request, 'index.html', {"salons": salons})
+
+    # print("Holly shit %s" % salons.getItems) to be revisted
+    return render(request, 'index.html', {"salons": salons })
 
 def faqs(request):
     return render(request, "faqs.html")

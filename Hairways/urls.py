@@ -20,9 +20,9 @@ urlpatterns = [
     path('upload/', home_views.upload, name='upload'),
     path('faqs/', home_views.faqs, name='faqs'),
     # path('accounts/', include('django.contrib.auth.urls')),
-    # path('signup/', views.signup, name="signup"),
+    path('update_views/', home_views.update_views, name="update_views"),
     path('blog/', home_views.blog, name="blog"),
-    path('locations/', home_views.locations, name="locations"),
+    # path('locations/', home_views.locations, name="locations"),
     # url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
     # path('auth/', include('social_django.urls', namespace='social')),      # GOOGLE & FACEBOOK OAUTH
     ]

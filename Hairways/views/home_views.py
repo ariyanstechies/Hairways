@@ -4,6 +4,7 @@ from django.core.files.storage import FileSystemStorage
 from Hairways.models import Salons, Services, Owners, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from ..decorators import client_required
 from ..decorators import owner_required
@@ -15,7 +16,7 @@ from django.views.generic import TemplateView
 
 def home(request):
     # To be revisited
-    filtered_salons = Salons.objects.all().order_by('shares')
+    filtered_salons = Salons.objects.all().order_by('likes')
     # for pagination
     page = request.GET.get('page', 1)
     paginator = Paginator(filtered_salons, 10)
@@ -26,39 +27,6 @@ def home(request):
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
     return render(request, 'index.html', {"salons": salons})
-
-
-def locations(request):
-    print("I was activated")
-    # filtered_salons = Salons.objects.all().order_by('shares')
-    if request.method == 'GET' and request.is_ajax():
-        # For getting Salons within a selected location
-        selected_location = request.GET.get('location', False)
-        if selected_location == "All Locations":
-            filtered_salons = Salons.objects.all().order_by('shares')
-            print("selected_location is %s" % selected_location)
-        else:
-            filtered_salons = Salons.objects.filter(
-                location=selected_location).order_by('shares')
-            print("selected_location is again %s" % selected_location)
-    # for pagination
-    page = request.GET.get('page', 1)
-    paginator = Paginator(filtered_salons, 10)
-    try:
-        salons = paginator.page(page)
-    except PageNotAnInteger:
-        salons = paginator.page(1)
-    except EmptyPage:
-        salons = paginator.page(paginator.num_pages)
-    # some wired error happens if use json.dumps() directly.
-    JsonInfoData = serializers.serialize("json", salons)
-
-    # tmp = collections.OrderedDict()
-
-    # change the str format to json format.
-    # tmp['salons'] = json.loads(JsonInfoData)
-    return HttpResponse(json.dumps(json.loads(JsonInfoData)))
-
 
 def faqs(request):
     return render(request, "faqs.html")
@@ -126,13 +94,20 @@ def upgrade(request):
 def pricing(request):
     return render(request, "pricing.html")
 
-
 def moreinfo(request, id):
     salon = Salons.objects.get(id=id)
     services = Services.objects.all()
     products = Products.objects.all()
     return render(request, "moreinfo.html", {'salon': salon, 'services' : services, 'products' : products})
 
+@csrf_exempt
+def update_views(request):
+    if request.method == 'POST' and request.is_ajax():
+        get_view = request.POST.get('salonId', False)
+        update_view = Salons.objects.get(id=get_view)
+        update_view.views +=1
+        update_view.save()
+    return HttpResponse("Salon With ID %s Views Was Updated successfully" % update_view.views)
 
 def upload(request):
     context = {}

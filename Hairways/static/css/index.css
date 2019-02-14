@@ -105,7 +105,7 @@ nav ul li a:active {
 /* end of navbar styling  */
 /* stars color  */
 span.fa.fa-star.checked {
-  color: darkred;
+  color: #ffeb3b;
 }
 /* end of stars color  */
 /* Styling error not found salon */

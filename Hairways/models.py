@@ -34,7 +34,7 @@ class Salons(models.Model):
     likes = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     status = models.BooleanField(default=0)
-    shares = models.IntegerField(null=True, blank=True)
+    shares = models.IntegerField(default=0)
     paybill = models.TextField(null=True, blank=True, max_length=12)
     location = models.CharField(max_length=30)
 

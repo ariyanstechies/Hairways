@@ -188,6 +188,17 @@
    </script>
 <!-- // Getting filtered salons according to locations -->
 <script type="text/javascript">
+  // removing duplicate entries on drop down
+  temporary = {};
+  jQuery('.custom-select').children().each(function() {
+    var txt = jQuery(this).attr('value');
+    if (temporary[txt]) {
+        jQuery(this).remove();
+    } else {
+        temporary[txt] = true;
+    }
+  });
+  // Getting selected option from drpdown
    $('#location').on('change',function() {
      var location = $(this).val();
      if (location == "All Locations") {

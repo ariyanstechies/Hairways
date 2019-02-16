@@ -13,11 +13,9 @@ class User(AbstractUser):
 class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     nickname=models.CharField(max_length=30)
-    email= models.CharField(max_length=30, default='myemail@gmail.com')
 
-
-class Owner(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+class Owners(models.Model):
+    ownerId = models.IntegerField(primary_key=True)
     ownerName = models.CharField(max_length=30)
     email = models.TextField(max_length=150)
     phone = models.PositiveIntegerField()
@@ -31,7 +29,8 @@ class Salons(models.Model):
     salonName = models.CharField(max_length=20)
     description = models.TextField(max_length=50)
     created_date = models.DateTimeField(default=timezone.now)
-    Owner = models.ForeignKey(Owner, on_delete=models.CASCADE, related_name='my_salons')
+    Owner = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
+    ownerId = models.ForeignKey(Owners, on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     status = models.BooleanField(default=0)
@@ -47,7 +46,8 @@ class Salons(models.Model):
 
 
 class Services(models.Model):
-    salons = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name='services')
+    serviceId = models.IntegerField(primary_key=True)
+    salons = models.ForeignKey(Salons, on_delete=models.CASCADE)
     serviceName = models.CharField(max_length=100)
     serviceCost = models.CharField(max_length=50)
     serviceDuration = models.CharField(max_length=20)
@@ -57,42 +57,41 @@ class Services(models.Model):
     def __str__(self):
         return self.serviceName
 
+class Products(models.Model):
+    productId = models.IntegerField(primary_key=True)
+    product = models.CharField(max_length=100)
+    price = models.IntegerField()
+    product_brand = models.CharField(max_length=100)
+    salons = models.ForeignKey(Salons, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.product
+
+
 class Appointments(models.Model):
-    client= models.ForeignKey(User, on_delete=models.CASCADE, default=1,related_name='my_appointments')
-    services = models.ManyToManyField(Services)
-    salons = models.ForeignKey(Salons, on_delete=models.CASCADE, default=1, related_name='appointments')
+    AppointmentsId = models.IntegerField(primary_key=True)
+    services = models.ForeignKey(Services, on_delete=models.CASCADE)
+    salons = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name='ppointments')
     AppointmentsStatus = models.BooleanField()
     date_time = models.DateTimeField()
     totalCost = models.IntegerField()
 
 
-class Products(models.Model):
-    product_name = models.CharField(max_length=100)
-    price = models.IntegerField()
-    product_brand = models.CharField(max_length=100)
-    salons = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name='products')
+class Pictures(models.Model):
+    salonId = models.ForeignKey(Salons, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='image/', blank=True, null=True)
 
     def __str__(self):
-        return self.product_name
+        return self.salonId
 
-
-
-
-# class Pictures(models.Model):
-#     salonId = models.ForeignKey(Salons, on_delete=models.CASCADE)
-#     image = models.ImageField(upload_to='image/', blank=True, null=True)
-#
-#     def __str__(self):
-#         return self.salonId
-#
-#     def delete(self, *args, **kwargs):
-#         self.image.delete()
-#         super().delete(*args, **kwargs)
+    def delete(self, *args, **kwargs):
+        self.image.delete()
+        super().delete(*args, **kwargs)
 
 
 class Comments(models.Model):
     salon = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_comments')
+    author = models.CharField(max_length=200)
     reply = models.TextField(max_length=250)
     created_date = models.DateTimeField(
         default=timezone.now

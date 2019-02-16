@@ -1,17 +1,11 @@
 from django.contrib.auth import login
-from django.contrib import messages
 from django.shortcuts import redirect
 from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from ..decorators import client_required
 from ..forms import ClientSignUpForm
-from ..models import User, Client, Appointments, Comments
-from django.views import generic
-from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
-                                  UpdateView)
-from django.views.generic.edit import UpdateView
-from django.shortcuts import get_list_or_404, get_object_or_404
+from ..models import User
 
 class ClientSignUpView(CreateView):
     model = User
@@ -26,50 +20,3 @@ class ClientSignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('home')
-
-@method_decorator([login_required, client_required], name='dispatch')
-class ClientUpdate(UpdateView):
-    model = Client
-    fields = ['nickname','email']
-    template_name =  'clients/client_update_form.html'
-
-    def get_object(self):
-
-        return get_object_or_404(User, pk=self.request.user.id)
-        # TODO: add redirect url or succes_url
-
-@method_decorator([login_required, client_required], name='dispatch')
-class AppointmentListView(ListView):
-    model = Appointments
-    context_object_name = 'my_appointments'
-    template_name = 'clients/dashboard.html'
-
-    def get_queryset(self):
-        queryset = self.request.user.my_appointments \
-            .select_related('client')
-        return queryset
-
-@method_decorator([login_required, client_required], name='dispatch')
-class AppointmentCreateView(CreateView):
-    model = Appointments
-    fields = ('services','salons','AppointmentsStatus','date_time','totalCost' )
-    template_name = 'clients/order_add_form.html'
-
-    def form_valid(self, form):
-        appointment = form.save(commit=False)
-        appointment.client = self.request.user
-        appointment.save()
-        messages.success(self.request, 'The quiz was created with success! Go ahead and add some questions now.')
-        return redirect('client_dashboard')
-
-
-@method_decorator([login_required, client_required], name='dispatch')
-class CommentsListView(ListView):
-    model = Comments
-    context_object_name = 'my_comments'
-    template_name = 'clients/dashboard2.html'
-
-    def get_queryset(self):
-        queryset = self.request.user.my_comments \
-            .select_related('author')
-        return queryset

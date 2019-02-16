@@ -15,6 +15,7 @@
       <link rel="stylesheet" href="{% static 'css/moreinfostyle.css' %}">
       <!--jquery  -->
       <script src="{% static 'js/jquery.js' %}"></script>
+      <script src="{% static 'js/cart.js' %}"></script>
    </head>
    <body>
       <section class="salon-header" style="padding: 0px 15px 0px 15px;">
@@ -110,7 +111,7 @@
                               <th scope="col">Availabilty</th>
                            </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="all_services">
                              {% if services.count != 0 %}
                               {% for each in services %}
                               <tr style="border: none">
@@ -143,7 +144,7 @@
                              {% if products.count != 0 %}
                               {% for each in products %}
                               <tr style="border: none">
-                              <td scope="row"><input type="checkbox" id="exampleCheck1"></td>
+                              <td scope="row"><input type="checkbox"></td>
                               <td>{{ each.product }}</td>
                               <td>{{ each.price }}</td>
                               <td>{{ each.product_brand }}</td>
@@ -166,9 +167,9 @@
                   <i class="fa fa-shopping-cart"></i>
                </div>
                <div class="card-body">
-                  <ul id="items_to_book">
-                    <li></li>
-                  </ul>
+                 <div class="container" id="show_cart">
+                   <!--cart shows up here  -->
+                 </div>
                   <div align="center"><button data-toggle="modal" data-target="" class="btn btn-outline-success">Click to Confirm</button></div>
                </div>
             </div>
@@ -226,6 +227,7 @@
          </div>
       </section>
       <script>
+      // Handling number of views
          $(window).on('load', function(){
              var parent = $(this).parent();
              var salonId= {{salon.id}};
@@ -238,6 +240,31 @@
              });
 
          });
+         // adding and removing items from cart
+         $("tr").on("click", function(e){
+           $("input[type='checkbox']", this).each( function() {
+           $(this).attr('checked', !$(this).attr('checked'));
+              });
+              var isChecked = $(this).find('input:checkbox').prop('checked');
+              item=$(this).children('td').eq(1).html();
+              cost=$(this).children('td').eq(2).html();
+              var elem = '<div class="row show_item">&plus;<div class="col-sm">'+item+'</div><div class="col-sm">'+cost+'</div></div>';
+              if(isChecked){
+                $("#show_cart").append($.parseHTML(elem));
+              }
+              else {
+                // Iterating through each item in cart
+                var cartItems = $(".show_item");
+                 for (var y=0; y<cartItems.length; y++){
+                   get_item1 = $(cartItems[y]).children('div').eq(0).html().trim();
+                   get_item2 = $(cartItems[y]).children('div').eq(1).html().trim();
+                   if (get_item1 == item && get_item2==cost) {
+                     $(cartItems[y]).remove(); //removing current div if match found
+                   }
+              }
+            }
+          });
+
       </script>
    </body>
 </html>

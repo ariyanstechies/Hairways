@@ -26,7 +26,6 @@ urlpatterns = [
     path('update_views/', home_views.update_views, name="update_views"),
     # path('signup/', views.signup, name="signup"),
     path('blog/', home_views.blog, name="blog"),
-    path('locations/', home_views.locations, name="locations"),
     path('appointment/add/', clients.AppointmentCreateView.as_view(), name='appointment_add'),
     path('client/dashboard', clients.AppointmentListView.as_view(), name='client_dashboard'),
     path('dashboard/', home_views.AppointmentListView.as_view(), name='dashboard'),

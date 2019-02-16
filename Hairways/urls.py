@@ -8,6 +8,8 @@ from .views import owners, clients, home_views
 urlpatterns = [
     path('', home_views.home, name='home'),
     path('about/', home_views.about, name='about'),
+    path('client/update/', clients.ClientUpdate.as_view(), name = 'client_update'),
+    # path('dashboard/', home_views.dashboard, name='dashboard'),
     path('dashboard/<int:id>/', home_views.dashboard, name='dashboard'),
     path('Salon/<int:id>/', home_views.moreinfo, name='moreinfo'),
     path('user/<int:id>/', home_views.user, name='user'),

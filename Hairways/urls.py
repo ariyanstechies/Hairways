@@ -13,7 +13,6 @@ urlpatterns = [
     path('dashboard/<int:id>/', home_views.dashboard, name='dashboard'),
     path('Salon/<int:id>/', home_views.moreinfo, name='moreinfo'),
     path('user/<int:id>/', home_views.user, name='user'),
-    #path('appointment/list/', clients.Appointment, name='dashboard2'),
     path('productsServices/', home_views.productsServices, name='productsServices'),
     path('staffClients/', home_views.staffClients, name='staffClients'),
     path('map/', home_views.map, name='map'),
@@ -28,7 +27,6 @@ urlpatterns = [
     path('appointment/add/', clients.AppointmentCreateView.as_view(), name='appointment_add'),
     path('client/dashboard', clients.AppointmentListView.as_view(), name='client_dashboard'),
     path('dashboard/', home_views.AppointmentListView.as_view(), name='dashboard'),
-    path('client/dashboard2', clients.CommentsListView.as_view(), name='client_dashboard2'),
     # url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
     # path('auth/', include('social_django.urls', namespace='social')),      # GOOGLE & FACEBOOK OAUTH
 

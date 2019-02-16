@@ -170,7 +170,10 @@
                  <div class="container" id="show_cart">
                    <!--cart shows up here  -->
                  </div>
-                  <div align="center"><button data-toggle="modal" data-target="" class="btn btn-outline-success">Click to Confirm</button></div>
+                 <div align="center" class="SubTotal">
+                  SubTotal: <span>0</span>
+                 </div>
+                  <div align="center"><button data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-success">Click to Confirm</button></div>
                </div>
             </div>
          </div>
@@ -247,10 +250,13 @@
               });
               var isChecked = $(this).find('input:checkbox').prop('checked');
               item=$(this).children('td').eq(1).html();
-              cost=$(this).children('td').eq(2).html();
+              cost=parseInt($(this).children('td').eq(2).html(),10);
               var elem = '<div class="row show_item">&plus;<div class="col-sm">'+item+'</div><div class="col-sm">'+cost+'</div></div>';
+              var current = parseInt($(".SubTotal span").html(), 10);
               if(isChecked){
                 $("#show_cart").append($.parseHTML(elem));
+                $(".SubTotal span").html(current+=cost);
+
               }
               else {
                 // Iterating through each item in cart
@@ -261,6 +267,9 @@
                    if (get_item1 == item && get_item2==cost) {
                      $(cartItems[y]).remove(); //removing current div if match found
                    }
+              }
+              if (current !=0) {
+                $(".SubTotal span").html(current-=cost)
               }
             }
           });

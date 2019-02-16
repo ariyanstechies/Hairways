@@ -1,0 +1,64 @@
+
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Client Login Section</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <style style="text/style">
+    /* Removing asterick from labels */
+      .asteriskField {
+        display: none;
+      }
+      /* formatting alert message */
+      form .alert ul li {
+        list-style: none;
+      }
+      form .alert ul {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <h1 class="mt-2">Client mini dashboard</h1>
+              <hr class="mt-0 mb-4">
+              <h4>Edit Your depails by clicking the edit profile bellow</h4>
+              <ul>
+                <li>Name:<b>{{ request.user.username}}</b></li>
+                <li>{{ request.user.nickname}}</li>
+                <li><a href="{% url 'client_update'%}">Edit Profile</a></li>
+
+              </ul>
+              <p><a href="{% url 'client_dashboard' %}">Appointments</a>|<a href="#">Comments</a>|<a href="#">Reviews</a></p>
+              <h2>Bellow are your Comments </h2>
+              {% for comment in my_comments %}
+                <p><b>Comment Id:{{comment.id}}
+                  | Salon:{{comment.salons.saloonName}}
+                  | Texts:{{comment.reply}}
+                  | Date: {{comment.date_time}}| Status: {{ comment.approved_comment}}
+                  </b>
+                </p>
+                {% empty %}
+              <li>No comments yet.</li>
+              {% endfor %}
+
+
+            <!-- GOOGLE AUTHENTICATION -->
+            <br>
+
+            <p><a href="{% url 'appointment_add'%}">Make New Appointment</a></p>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

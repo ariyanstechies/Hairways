@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from Hairways.models import Salons, Services, Owners, Products
+from Hairways.models import Salons, Services, Owner, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -82,7 +82,7 @@ def dashboard(request):
 
 @login_required  # protecting views
 def user(request, id):
-    user_details = Owners.objects.get(ownerId=id)
+    user_details = Owner.objects.get(ownerId=id)
     salon_details = Salons.objects.get(ownerId=id)
     return render(request, "dashboard/user.html", {'user_details': user_details, 'salon_details' : salon_details})
 

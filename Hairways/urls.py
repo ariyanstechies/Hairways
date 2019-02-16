@@ -11,6 +11,7 @@ urlpatterns = [
     path('client/update/', clients.ClientUpdate.as_view(), name = 'client_update'),
     path('pricing/', home_views.pricing, name='pricing'),
     # path('dashboard/', home_views.dashboard, name='dashboard'),
+    path('dashboard/<int:id>/', home_views.dashboard, name='dashboard'),
     path('Salon/<int:id>/', home_views.moreinfo, name='moreinfo'),
     path('user/<int:id>/', home_views.user, name='user'),
     #path('appointment/list/', clients.Appointment, name='dashboard2'),
@@ -22,6 +23,7 @@ urlpatterns = [
     path('upload/', home_views.upload, name='upload'),
     path('faqs/', home_views.faqs, name='faqs'),
     # path('accounts/', include('django.contrib.auth.urls')),
+    path('update_views/', home_views.update_views, name="update_views"),
     # path('signup/', views.signup, name="signup"),
     path('blog/', home_views.blog, name="blog"),
     path('locations/', home_views.locations, name="locations"),
@@ -29,9 +31,10 @@ urlpatterns = [
     path('client/dashboard', clients.AppointmentListView.as_view(), name='client_dashboard'),
     path('dashboard/', home_views.AppointmentListView.as_view(), name='dashboard'),
     path('client/dashboard2', clients.CommentsListView.as_view(), name='client_dashboard2'),
-
     # url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
     # path('auth/', include('social_django.urls', namespace='social')),      # GOOGLE & FACEBOOK OAUTH
+
+
     ]
 
 if settings.DEBUG:

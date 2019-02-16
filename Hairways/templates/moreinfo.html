@@ -12,11 +12,19 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
 
     <!-- GOogle fonts -->
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
     <title>For the best salons in town</title>
+
+    <style>
+    .loved{
+      color: red;
+    }
+    </style>
   </head>
   <body>
 
@@ -78,7 +86,7 @@
         <div class="card-body" style="color: whitesmoke;">
           <div class="row">
           <h3 style="font-family: 'Ubuntu', sans-serif; color: whitesmoke; margin-bottom: 0px; font-weight: bold; font-size: 1.5em">{{ salon.saloonName }}</h3>
-          <i align=right class="far fa-heart col-11"></i> <i class="fas fa-ellipsis-h"></i>
+          <i align=right id="love-icon" onclick="love()" style="font-size: 20px" class="fas fa-heart col-11"></i> <i class="fas fa-ellipsis-h"></i>
           </div>
 
             <i>{{ salon.description }}</i><br>
@@ -203,20 +211,16 @@
         <div class="card-body">
           <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
              <ol class="carousel-indicators">
-                <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselIndicators" data-slide-to="0"></li>
                 <li data-target="#carouselIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselIndicators" data-slide-to="2"></li>
              </ol>
-             <div class="carousel-inner" style="padding: 50px 0px 50px 0px ">
-                <div class="carousel-item active">
-                   <p>Best salon ever</p>
-                </div>
-                <div class="carousel-item">
-                   <p>Good prices</p>
-                </div>
-                <div class="carousel-item">
-                   <p>Quality Services</p>
-                </div>
+             <div class="carousel-inner" style="padding: 50px 0px 50px 0px">
+               {% for each in reviews %}
+                  <div class="comments-section carousel-item">
+                    <p>{{ each.reply }}</p>
+                  </div>
+                {% endfor %}
              </div>
              <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -231,10 +235,21 @@
       </div>
     </section>
 
+    <section>
+    <!-- formnnnnnnn    was here -->
+
+    </section>
+
+    <script>
+    function love() {
+      var element = document.getElementById("love-icon");
+      element.classList.toggle("loved");
+    }
+    </script>
+
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-  </body>
+    <script>
+      $('.carousel-inner').find('.comments-section:first').addClass('active');
+    </script>
+    </body>
 </html>

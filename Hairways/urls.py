@@ -23,11 +23,12 @@ urlpatterns = [
     # path('signup/', views.signup, name="signup"),
     path('blog/', home_views.blog, name="blog"),
     path('locations/', home_views.locations, name="locations"),
-
     path('dashboard/', home_views.AppointmentListView.as_view(), name='dashboard'),
 
     # url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
     # path('auth/', include('social_django.urls', namespace='social')),      # GOOGLE & FACEBOOK OAUTH
+
+
     ]
 
 if settings.DEBUG:

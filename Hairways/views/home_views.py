@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from Hairways.models import Salons, Services, Owners, Products
+from Hairways.models import Salons, Services, Owners, Products, Comments
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -12,6 +12,9 @@ import json
 from django.core import serializers
 from django.views.generic import TemplateView
 
+from django.views.generic import CreateView
+
+from ..forms import CommentForm
 
 def home(request):
     # To be revisited
@@ -131,7 +134,29 @@ def moreinfo(request, id):
     salon = Salons.objects.get(id=id)
     services = Services.objects.all()
     products = Products.objects.all()
-    return render(request, "moreinfo.html", {'salon': salon, 'services' : services, 'products' : products})
+    reviews = Comments.objects.filter(salon__id=id)
+
+# Comments form
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            print('valid')
+
+            comment = form.save()
+            comment.author = request.user.username
+
+            comment.save()
+
+            return redirect('moreinfo', id=salon.id)
+
+    form = CommentForm()
+    return render(request, "moreinfo.html", {'salon': salon, 'services' : services, 'products' : products, 'reviews' : reviews, 'counter': 0, 'form': form})
+
+def salonLike(request):
+    salon = get_object_or_404(Client, id=request.POST.get('salon_id'))
+    print(salon_id)
+    salon.likes.add(request.client)
+    return HttpResponseRedirect(post.get_absolute_url())
 
 
 def upload(request):
@@ -140,12 +165,27 @@ def upload(request):
         uploaded_file = request.FILES['document']
         fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
-        context['url'] = fs.url(name)
     return render(request, 'upload.html', context)
+    context['url'] = fs.url(name)
 
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
+
+#       METHOD FOR COMMENT FORM to be reviewed and discarded
+# def moreinfo(request, id):
+#     if request.method == "POST":
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             print('valid')
+#
+#             comm = form.save()
+#             comm.salon = request.salon
+#             comm.save()
+#             return redirect('moreinfo')
+#
+#     form = CommentForm()
+#     return render(request, 'moreinfo.html', {'form': form})
 
 
 # def decider(request):

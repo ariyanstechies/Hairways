@@ -31,7 +31,6 @@ class Salons(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     Owner = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
     ownerId = models.ForeignKey(Owners, on_delete=models.CASCADE)
-    likes = models.IntegerField(null=True, blank=True)
     views = models.IntegerField(null=True, blank=True)
     status = models.BooleanField(default=True)
     shares = models.IntegerField(null=True, blank=True)
@@ -97,10 +96,6 @@ class Comments(models.Model):
         default=timezone.now
     )
     approved_comment = models.BooleanField(default=False)
-
-    def approve(self):
-        self.approved_comment = True
-        self.save()
 
     def __str__(self):
         return self.reply

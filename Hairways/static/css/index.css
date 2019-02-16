@@ -129,3 +129,7 @@ background: url(./images/not_found.png);
 .fakeimage{
 	cursor: pointer;
 }
+
+.unloved{
+  color: green;
+}

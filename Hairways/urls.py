@@ -9,7 +9,6 @@ urlpatterns = [
     path('', home_views.home, name='home'),
     path('about/', home_views.about, name='about'),
     path('client/update/', clients.ClientUpdate.as_view(), name = 'client_update'),
-    path('pricing/', home_views.pricing, name='pricing'),
     # path('dashboard/', home_views.dashboard, name='dashboard'),
     path('dashboard/<int:id>/', home_views.dashboard, name='dashboard'),
     path('Salon/<int:id>/', home_views.moreinfo, name='moreinfo'),

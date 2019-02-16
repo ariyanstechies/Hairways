@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from Hairways.models import Salons, Services, Owners, Products
+from Hairways.models import Salons, Services, Owners, Products, Comments
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -13,6 +13,9 @@ import json
 from django.core import serializers
 from django.views.generic import TemplateView
 
+from django.views.generic import CreateView
+
+from ..forms import CommentForm
 
 def home(request):
     # To be revisited
@@ -42,23 +45,11 @@ def about(request):
     return render(request, "about.html")
 
 
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = UserCreationForm()
-
-    return render(request, 'registration/signup.html', {
-        "form": form})
-
 
 # protecting views you can't just access dashboard without logging
 @method_decorator([login_required, owner_required], name='dispatch')
-def dashboard(request, id):
-    owner = Salons.objects.get(id=id)
+def dashboard(request):
+    owner = Salons.objects.all()
     return render(request, "dashboard/dashboard.html", {'owner': owner})
 
 
@@ -97,7 +88,23 @@ def moreinfo(request, id):
     salon = Salons.objects.get(id=id) # moving to Salons model, and getting salonNameand then filtering it
     services = Services.objects.filter(salons__salonName=salon.salonName)
     products = Products.objects.filter(salons__salonName=salon.salonName)
-    return render(request, "moreinfo.html", {'salon': salon, 'services' : services, 'products' : products})
+    reviews = Comments.objects.filter(salon__id=id)
+
+   # Comments form
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            print('valid')
+
+            comment = form.save()
+            comment.author = request.user.username
+
+            comment.save()
+
+            return redirect('moreinfo', id=salon.id)
+
+    form = CommentForm()
+    return render(request, "moreinfo.html", {'salon': salon, 'services' : services, 'products' : products, 'reviews' : reviews, 'counter': 0, 'form': form})
 
 @csrf_exempt
 def update_views(request):
@@ -114,12 +121,38 @@ def upload(request):
         uploaded_file = request.FILES['document']
         fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
-        context['url'] = fs.url(name)
     return render(request, 'upload.html', context)
+    context['url'] = fs.url(name)
 
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
+
+#       METHOD FOR COMMENT FORM to be reviewed and discarded
+# def moreinfo(request, id):
+#     if request.method == "POST":
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             print('valid')
+#
+#             comm = form.save()
+#             comm.salon = request.salon
+#             comm.save()
+#             return redirect('moreinfo')
+#
+#     form = CommentForm()
+#     return render(request, 'moreinfo.html', {'form': form})
+
+
+
+from django.views import generic
+
+@method_decorator([login_required, owner_required], name='dispatch')
+class AppointmentListView(generic.ListView):
+    model = Salons
+    context_object_name = 'my_salon'
+    template_name = 'dashboard/dashboard.html'
+
 
 
 # def decider(request):

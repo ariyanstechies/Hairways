@@ -71,7 +71,7 @@ class Products(models.Model):
 class Appointments(models.Model):
     AppointmentsId = models.IntegerField(primary_key=True)
     services = models.ForeignKey(Services, on_delete=models.CASCADE)
-    salons = models.ForeignKey(Salons, on_delete=models.CASCADE)
+    salons = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name='ppointments')
     AppointmentsStatus = models.BooleanField()
     date_time = models.DateTimeField()
     totalCost = models.IntegerField()
@@ -97,10 +97,6 @@ class Comments(models.Model):
         default=timezone.now
     )
     approved_comment = models.BooleanField(default=False)
-
-    def approve(self):
-        self.approved_comment = True
-        self.save()
 
     def __str__(self):
         return self.reply

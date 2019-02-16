@@ -15,7 +15,13 @@
       <link rel="stylesheet" href="{% static 'css/moreinfostyle.css' %}">
       <!--jquery  -->
       <script src="{% static 'js/jquery.js' %}"></script>
-      <script src="{% static 'js/cart.js' %}"></script>
+      <script src="{% static 'js/cart.js' %}"></script>  
+    <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
+    <style>
+    .loved{
+      color: red;
+    }
+    </style>
    </head>
    <body>
       <section class="salon-header" style="padding: 0px 15px 0px 15px;">
@@ -155,7 +161,6 @@
                               <td colspan="4" align="center">No Products Found! :)</td>
                               </tr>
                               {% endif%}
-
                         </tbody>
                      </table>
                   </div>
@@ -229,7 +234,23 @@
             </div>
          </div>
       </section>
-      <script>
+    <section>
+    <!-- formnnnnnnn    was here -->
+
+    </section>
+
+    <script>
+    function love() {
+      var element = document.getElementById("love-icon");
+      element.classList.toggle("loved");
+    }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <script>
+      $('.carousel-inner').find('.comments-section:first').addClass('active');
+    </script>
+       <script>
       // Handling number of views
          $(window).on('load', function(){
              var parent = $(this).parent();
@@ -241,8 +262,6 @@
                  'salonId': salonId,
                }
              });
-
-         });
          // adding and removing items from cart
          $("tr").on("click", function(e){
            $("input[type='checkbox']", this).each( function() {
@@ -275,5 +294,6 @@
           });
 
       </script>
-   </body>
+    </body>
+
 </html>

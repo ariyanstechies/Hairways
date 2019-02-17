@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from Hairways.models import Salons, Services, Owners, Products
+from Hairways.models import Salons, Services, Owner, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -72,29 +72,17 @@ def about(request):
     return render(request, "about.html")
 
 
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = UserCreationForm()
-
-    return render(request, 'registration/signup.html', {
-        "form": form})
-
 
 # protecting views you can't just access dashboard without logging
 @method_decorator([login_required, owner_required], name='dispatch')
-def dashboard(request, id):
-    owner = Salons.objects.get(id=id)
+def dashboard(request):
+    owner = Salons.objects.all()
     return render(request, "dashboard/dashboard.html", {'owner': owner})
 
 
 @login_required  # protecting views
 def user(request, id):
-    user_details = Owners.objects.get(ownerId=id)
+    user_details = Owner.objects.get(ownerId=id)
     salon_details = Salons.objects.get(ownerId=id)
     return render(request, "dashboard/user.html", {'user_details': user_details, 'salon_details' : salon_details})
 
@@ -146,6 +134,17 @@ def upload(request):
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
+
+
+
+from django.views import generic
+
+@method_decorator([login_required, owner_required], name='dispatch')
+class AppointmentListView(generic.ListView):
+    model = Salons
+    context_object_name = 'my_salon'
+    template_name = 'dashboard/dashboard.html'
+
 
 
 # def decider(request):

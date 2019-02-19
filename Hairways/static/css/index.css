@@ -105,18 +105,13 @@ nav ul li a:active {
 /* end of navbar styling  */
 /* stars color  */
 span.fa.fa-star.checked {
-  color: #ffeb3b;
+  color: darkred;
 }
 /* end of stars color  */
 /* Styling error not found salon */
 .not_found{
 background: url(./images/not_found.png);
 }
-/* styling fa fa class */
-.fa {
-  cursor: pointer;
-}
-/* Styling input form for search salon */
 .search-input{
 	margin: 10px 0px 10px 0px;
 	width: 250px;
@@ -133,8 +128,4 @@ background: url(./images/not_found.png);
 
 .fakeimage{
 	cursor: pointer;
-}
-
-.unloved{
-  color: green;
 }

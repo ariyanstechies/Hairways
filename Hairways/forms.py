@@ -35,3 +35,8 @@ class OwnerSignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comments
+        fields = ('salon', 'reply')

@@ -28,19 +28,19 @@ class Owner(models.Model):
 
 
 class Salons(models.Model):
-    saloonName = models.CharField(max_length=20)
+    salonName = models.CharField(max_length=20)
     description = models.TextField(max_length=50)
     created_date = models.DateTimeField(default=timezone.now)
     Owner = models.ForeignKey(Owner, on_delete=models.CASCADE, related_name='my_salons')
-    likes = models.IntegerField(null=True, blank=True)
-    views = models.IntegerField(null=True, blank=True)
-    status = models.BooleanField(default=True)
-    shares = models.IntegerField(null=True, blank=True)
+    likes = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
+    status = models.BooleanField(default=0)
+    shares = models.IntegerField(default=0)
     paybill = models.TextField(null=True, blank=True, max_length=12)
     location = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.saloonName
+        return self.salonName
 
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
@@ -52,7 +52,7 @@ class Services(models.Model):
     serviceCost = models.CharField(max_length=50)
     serviceDuration = models.CharField(max_length=20)
     serviceBookings = models.IntegerField()
-    svailability = models.BooleanField(default=True)
+    availability = models.BooleanField(default=True)
 
     def __str__(self):
         return self.serviceName
@@ -99,9 +99,9 @@ class Comments(models.Model):
     )
     approved_comment = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.reply
+    # to be revisited
     def approve(self):
         self.approved_comment = True
         self.save()
-
-    def __str__(self):
-        return self.reply

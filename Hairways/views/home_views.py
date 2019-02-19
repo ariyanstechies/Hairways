@@ -4,6 +4,7 @@ from django.core.files.storage import FileSystemStorage
 from Hairways.models import Salons, Services, Owner, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from ..decorators import client_required
 from ..decorators import owner_required
@@ -12,10 +13,13 @@ import json
 from django.core import serializers
 from django.views.generic import TemplateView
 
+from django.views.generic import CreateView
+
+from ..forms import CommentForm
 
 def home(request):
     # To be revisited
-    filtered_salons = Salons.objects.all().order_by('shares')
+    filtered_salons = Salons.objects.all().order_by('likes')
     # for pagination
     page = request.GET.get('page', 1)
     paginator = Paginator(filtered_salons, 10)
@@ -25,8 +29,10 @@ def home(request):
         salons = paginator.page(1)
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
-    return render(request, 'index.html', {"salons": salons})
 
+
+    # print("Holly shit %s" % salons.getItems) to be revisted
+    return render(request, 'index.html', {"salons": salons })
 
 def locations(request):
     print("I was activated")
@@ -114,13 +120,36 @@ def upgrade(request):
 def pricing(request):
     return render(request, "pricing.html")
 
-
 def moreinfo(request, id):
-    salon = Salons.objects.get(id=id)
-    services = Services.objects.all()
-    products = Products.objects.all()
-    return render(request, "moreinfo.html", {'salon': salon, 'services' : services, 'products' : products})
+    salon = Salons.objects.get(id=id) # moving to Salons model, and getting salonNameand then filtering it
+    services = Services.objects.filter(salons__salonName=salon.salonName)
+    products = Products.objects.filter(salons__salonName=salon.salonName)
+    reviews = Comments.objects.filter(salon__id=id)
 
+   # Comments form
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            print('valid')
+
+            comment = form.save()
+            comment.author = request.user.username
+
+            comment.save()
+
+            return redirect('moreinfo', id=salon.id)
+
+    form = CommentForm()
+    return render(request, "moreinfo.html", {'salon': salon, 'services' : services, 'products' : products, 'reviews' : reviews, 'counter': 0, 'form': form})
+
+@csrf_exempt
+def update_views(request):
+    if request.method == 'POST' and request.is_ajax():
+        get_view = request.POST.get('salonId', False)
+        update_view = Salons.objects.get(id=get_view)
+        update_view.views +=1
+        update_view.save()
+    return HttpResponse("Salon With ID %s Views Was Updated successfully" % update_view.views)
 
 def upload(request):
     context = {}
@@ -130,10 +159,26 @@ def upload(request):
         name = fs.save(uploaded_file.name, uploaded_file)
         context['url'] = fs.url(name)
     return render(request, 'upload.html', context)
+    context['url'] = fs.url(name)
 
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
+
+#       METHOD FOR COMMENT FORM to be reviewed and discarded
+# def moreinfo(request, id):
+#     if request.method == "POST":
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             print('valid')
+#
+#             comm = form.save()
+#             comm.salon = request.salon
+#             comm.save()
+#             return redirect('moreinfo')
+#
+#     form = CommentForm()
+#     return render(request, 'moreinfo.html', {'form': form})
 
 
 

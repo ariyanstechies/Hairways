@@ -15,7 +15,6 @@
       <link rel="stylesheet" href="{% static 'css/moreinfostyle.css' %}">
       <!--jquery  -->
       <script src="{% static 'js/jquery.js' %}"></script>
-      <script src="{% static 'js/cart.js' %}"></script>  
     <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
     <style>
     .loved{
@@ -65,6 +64,7 @@
                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
                      <span class="sr-only">Next</span>
                      </a>
+
                   </div>
                </div>
             </div>
@@ -151,7 +151,7 @@
                               {% for each in products %}
                               <tr style="border: none">
                               <td scope="row"><input type="checkbox"></td>
-                              <td>{{ each.product }}</td>
+                              <td>{{ each.product_name }}</td>
                               <td>{{ each.price }}</td>
                               <td>{{ each.product_brand }}</td>
                               </tr>
@@ -164,6 +164,14 @@
                         </tbody>
                      </table>
                   </div>
+                  <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                  </a>
                </div>
             </div>
             <div class="card col-3 selected-Services" style="margin: 0px 0px 0px -20px; padding: 0px 0px 0px 0px ">
@@ -203,54 +211,36 @@
          </div>
       </div>
       <section>
-         <div class="card" align=center style="background-color: #CCEFE7; margin: 30px 0px 20px 0px">
-            <div class="card-body">
-               <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                     <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
-                     <li data-target="#carouselIndicators" data-slide-to="1"></li>
-                     <li data-target="#carouselIndicators" data-slide-to="2"></li>
-                  </ol>
-                  <div class="carousel-inner" style="padding: 50px 0px 50px 0px ">
-                     <div class="carousel-item active">
-                        <p>Best salon ever</p>
-                     </div>
-                     <div class="carousel-item">
-                        <p>Good prices</p>
-                     </div>
-                     <div class="carousel-item">
-                        <p>Quality Services</p>
-                     </div>
-                  </div>
-                  <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                  </a>
+        <div class="card" align=center style="background-color: #CCEFE7; margin: 30px 0px 20px 0px">
+          <div class="card-body">
+            <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+               <ol class="carousel-indicators">
+                  <li data-target="#carouselIndicators" data-slide-to="0"></li>
+                  <li data-target="#carouselIndicators" data-slide-to="1"></li>
+                  <li data-target="#carouselIndicators" data-slide-to="2"></li>
+               </ol>
+               <div class="carousel-inner" style="padding: 50px 0px 50px 0px">
+                 {% for each in reviews %}
+                    <div class="comments-section carousel-item">
+                      <p>{{ each.reply }}</p>
+                    </div>
+                  {% endfor %}
                </div>
-               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+               <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                <span class="sr-only">Previous</span>
                </a>
-               <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+               <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
                <span class="carousel-control-next-icon" aria-hidden="true"></span>
                <span class="sr-only">Next</span>
                </a>
             </div>
-         </div>
+          </div>
+        </div>
       </section>
     <section>
     <!-- formnnnnnnn    was here -->
 
-        <div class="card col-3" style="padding: 0px; margin: 0px">
-          <div class="card-body" style="padding: 0px; margin: 0px">
-            Map
-          </div>
-        </div>
-      </div>
     </section>
 
     <script>
@@ -259,7 +249,6 @@
       element.classList.toggle("loved");
     }
     </script>
-
     <!-- Optional JavaScript -->
     <script>
       $('.carousel-inner').find('.comments-section:first').addClass('active');
@@ -276,6 +265,7 @@
                  'salonId': salonId,
                }
              });
+           });
          // adding and removing items from cart
          $("tr").on("click", function(e){
            $("input[type='checkbox']", this).each( function() {
@@ -310,144 +300,4 @@
       </script>
     </body>
 
-          <div style="margin-bottom: 20px;" align=right class="social col-11"><i class="fab fa-facebook"></i> <i class="fab fa-youtube"></i> <i class="fab fa-instagram"></i>  <i class="fab fa-twitter"></i></div>
-
-      </div>
-    </div>
-  </div>
-
-  </section>
-
-  <section class="Services" style="padding: 0px 15px 0px 15px">
-    <div class="row">
-    <div class="card col-9 all-Services" style="border: none">
-      <h3 style="font-family: 'Ubuntu', sans-serif; margin: 10px 0px 0px 10px;   color: #000; margin-bottom: 0px; font-weight: bold; font-size: 1.5em">Our Services and Products</h3>
-      <div class="card-body">
-        <div class="row">
-        <table class="table table-borderless table-sm col-8">
-          <thead style="background-color: #55C9AF; color: #fff; font-weight: bold;">
-            <tr>
-              <th scope="col"></th>
-              <th scope="col">Service</th>
-              <th scope="col">Cost</th>
-              <th scope="col">Duration</th>
-              <th scope="col">Availabilty</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border: none">
-              {% for each in services %}
-              <td scope="row"><input type="checkbox" id="exampleCheck1"></td>
-              <td>{{ each.serviceName }}</td>
-              <td>{{ each.serviceCost }}</td>
-              <td>{{ each.serviceDuration }}</td>
-              <td>{{ each.svailability }}</td>
-            </tr>
-            {% endfor %}
-
-        </tbody>
-      </table>
-
-      <table class="table table-borderless table-sm col-4">
-        <thead style="background-color: whitesmoke; color: #55C9AF; font-weight: bold;">
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">Product</th>
-            <th scope="col">Price</th>
-            <th scope="col">Product Brand</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border: none">
-            {% for each in products %}
-            <td scope="row"><input type="checkbox" id="exampleCheck1"></td>
-            <td>{{ each.product }}</td>
-            <td>{{ each.price }}</td>
-            <td>{{ each.product_brand }}</td>
-          </tr>
-          {% endfor %}
-
-      </tbody>
-    </table>
-
-    </div>
-
-      </div>
-    </div>
-
-    <div class="card col-3 selected-Services" style="margin: 0px 0px 0px -20px; padding: 0px 0px 0px 0px ">
-      <div class="card-header" style="color: #55C9AF; font-weight: bold">
-      Services selected
-    </div>
-      <div class="card-body">
-
-        // comment <br>
-        Services to appear here on selecting them at Our Services section
-
-          <div align=center style="position: absolute; right: 10px; bottom: 10px"><button data-toggle="modal" data-target="#exampleModal" align=right class="btn btn-success">Book an Appointment</button></div>
-      </div>
-    </div>
-  </div>
-  </section>
-
-  <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-    <section>
-      <div class="card" align=center style="background-color: #CCEFE7; margin: 30px 0px 20px 0px">
-        <div class="card-body">
-          <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
-             <ol class="carousel-indicators">
-                <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselIndicators" data-slide-to="2"></li>
-             </ol>
-             <div class="carousel-inner" style="padding: 50px 0px 50px 0px ">
-                <div class="carousel-item active">
-                   <p>Best salon ever</p>
-                </div>
-                <div class="carousel-item">
-                   <p>Good prices</p>
-                </div>
-                <div class="carousel-item">
-                   <p>Quality Services</p>
-                </div>
-             </div>
-             <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
-             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-             <span class="sr-only">Previous</span>
-             </a>
-             <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
-             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-             <span class="sr-only">Next</span>
-             </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-  </body>
 </html>

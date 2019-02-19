@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from Hairways.models import Salons, Services, Owner, Products
+from Hairways.models import Salons, Services, Owner, Products, Comments
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -30,41 +30,8 @@ def home(request):
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
 
-
     # print("Holly shit %s" % salons.getItems) to be revisted
     return render(request, 'index.html', {"salons": salons })
-
-def locations(request):
-    print("I was activated")
-    # filtered_salons = Salons.objects.all().order_by('shares')
-    if request.method == 'GET' and request.is_ajax():
-        # For getting Salons within a selected location
-        selected_location = request.GET.get('location', False)
-        if selected_location == "All Locations":
-            filtered_salons = Salons.objects.all().order_by('shares')
-            print("selected_location is %s" % selected_location)
-        else:
-            filtered_salons = Salons.objects.filter(
-                location=selected_location).order_by('shares')
-            print("selected_location is again %s" % selected_location)
-    # for pagination
-    page = request.GET.get('page', 1)
-    paginator = Paginator(filtered_salons, 10)
-    try:
-        salons = paginator.page(page)
-    except PageNotAnInteger:
-        salons = paginator.page(1)
-    except EmptyPage:
-        salons = paginator.page(paginator.num_pages)
-    # some wired error happens if use json.dumps() directly.
-    JsonInfoData = serializers.serialize("json", salons)
-
-    # tmp = collections.OrderedDict()
-
-    # change the str format to json format.
-    # tmp['salons'] = json.loads(JsonInfoData)
-    return HttpResponse(json.dumps(json.loads(JsonInfoData)))
-
 
 def faqs(request):
     return render(request, "faqs.html")
@@ -117,15 +84,11 @@ def upgrade(request):
     return render(request, "dashboard/upgrade.php")
 
 
-def pricing(request):
-    return render(request, "pricing.html")
-
 def moreinfo(request, id):
     salon = Salons.objects.get(id=id) # moving to Salons model, and getting salonNameand then filtering it
     services = Services.objects.filter(salons__salonName=salon.salonName)
     products = Products.objects.filter(salons__salonName=salon.salonName)
     reviews = Comments.objects.filter(salon__id=id)
-
    # Comments form
     if request.method == "POST":
         form = CommentForm(request.POST)

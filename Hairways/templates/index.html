@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-<!-- {% block location %}<script src="{% static 'js/filter_salons.js' %}"></script>{% endblock %} -->
 <!-- RANKING SALONS IN SLIDER -->
 <section class="salon-rank">
    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -66,24 +65,26 @@
    <!--Advertisements -->
    <div class="w3-content w3-container " style="max-width:400px">
       <div class="mySlides w3-container w3-red">
-        <h1><b>Hurry!!!</b></h1>
-        <h1><i>Get your salon Known</i></h1>
+         <h1><b>Hurry!!!</b></h1>
+         <h1><i>Get your salon Known</i></h1>
       </div>
-      <div class="mySlides w3-container  w3-white">
-        <p><span class="w3-tag w3-yellow">New!</span><p> Get one month free on hairways </p></p>
+      <div class="mySlides w3-container w3-white">
+         <div><span class="w3-tag w3-yellow">New!</span><p> Get one month free on hairways </p></div>
       </div>
-    </div>
-  </div>
-  <!--The right container containing to cards -->
-  <div class="w3-container w3-rest  ">
-    <!--search by salon names-->
-    <div align="right">
-      <input class="search-input" placeholder="Search salon..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;">
-      <!-- <i align="left" class="fas fa-search" style="margin-left: 0px"></i> -->
-    </div>
-    <div class="salon_wrapper">
-    {% for each_salon in salons %}
-    <div class="w3-col s6 w3-mobile" style="padding-left:10px">
+   </div>
+</div>
+<!--The right container containing to cards -->
+<div class="w3-container w3-rest  ">
+<!--search by salon names-->
+<div align="right">
+   <input class="search-input form-control" placeholder="Search salon..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;">
+   <!-- <i align="left" class="fas fa-search" style="margin-left: 0px"></i> -->
+</div>
+<div class="salon_wrapper">
+  {{ salons.count }}
+   {% if salons.count != 0 %}
+   {% for each_salon in salons %}
+   <div class="w3-col s6 w3-mobile" style="padding-left:10px">
       <div class="blog-card" style="height:250px">
          <div class="meta">
             <div class="photo" style="background-image: url({% static 'css/images/cover1.jpg' %})"></div>
@@ -159,32 +160,33 @@
        $('nav ul').toggleClass('showing');
      });
 
-        $(window).on('scroll', function() {
-          if($(window).scrollTop()) {
-            $('nav').addClass('black');
-          }
-          else {
-            $('nav').removeClass('black');
-          }
-        });
-      });
-    </script>
-    <!-- <script>
-    var slideIndex = 0;
-    carousel();
+     $(window).on('scroll', function() {
+       if($(window).scrollTop()) {
+         $('nav').addClass('black');
+       }
+       else {
+         $('nav').removeClass('black');
+       }
+     });
+   });
+</script>
+<script>
+   var slideIndex = 0;
+   carousel();
 
-    function carousel() {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  slideIndex++;
-  if (slideIndex > x.length) {slideIndex = 1}
-  x[slideIndex-1].style.display = "block";
-  setTimeout(carousel, 2000);
-}
-</script> -->
+   function carousel() {
+   var i;
+   var x = document.getElementsByClassName("mySlides");
+   for (i = 0; i < x.length; i++) {
+   x[i].style.display = "none";
+   }
+   slideIndex++;
+   if (slideIndex > x.length) {slideIndex = 1}
+   x[slideIndex-1].style.display = "block";
+   setTimeout(carousel, 2000);
+   }
+   </script>
+<!-- // Getting filtered salons according to locations -->
 <script type="text/javascript">
   // removing duplicate entries on drop down
   temporary = {};

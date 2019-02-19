@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
-
 from Hairways.models import Client, User, Comments
 
 class ClientSignUpForm(UserCreationForm):
@@ -36,6 +35,7 @@ class OwnerSignUpForm(UserCreationForm):
             user.save()
         return user
 
+      
 class CommentForm(forms.ModelForm):
 
     class Meta:

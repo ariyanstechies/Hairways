@@ -15,7 +15,7 @@ from django.views.generic import TemplateView
 
 from django.views.generic import CreateView
 
-from ..forms import CommentForm
+from ..forms import CommentForm, addEmployeeForm
 
 def home(request):
     # To be revisited
@@ -49,8 +49,17 @@ def about(request):
 # protecting views you can't just access dashboard without logging
 @method_decorator([login_required, owner_required], name='dispatch')
 def dashboard(request):
-    owner = Salons.objects.all()
-    return render(request, "dashboard/dashboard.html", {'owner': owner})
+    me = Salons.objects.all()
+    if request.method == "POST":
+        form = addSalonForm(request.POST)
+        if form.is_valid():
+            salonadd = form.save(commit=False)
+            salonadd.save()
+            return redirect('dashboard')
+    else:
+        form = addSalonForm()
+
+    return render(request, "dashboard/dashboard.html", {'me': me, 'form': form})
 
 
 @login_required  # protecting views
@@ -66,7 +75,17 @@ def productsServices(request):
 
 @login_required
 def staffClients(request):
-    return render(request, "dashboard/staffClients.php")
+    if request.method == "POST":
+        form = addEmployeeForm(request.POST)
+        if form.is_valid():
+            salonadd = form.save(commit=False)
+            salonadd.save()
+            return redirect('dashboard')
+    else:
+        form = addEmployeeForm()
+
+    return render(request, "dashboard/staffClients.php", {'form': form})
+
 
 
 @login_required

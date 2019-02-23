@@ -65,6 +65,16 @@ class Appointments(models.Model):
     date_time = models.DateTimeField()
     totalCost = models.IntegerField()
 
+class Staff(models.Model):
+    firstname = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100)
+    date_started = models.DateTimeField()
+    salary = models.IntegerField()
+    favservice = models.CharField(max_length=100, null=True, blank=True)
+    favclient = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.firstname
 
 class Products(models.Model):
     product_name = models.CharField(max_length=100)

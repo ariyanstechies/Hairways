@@ -61,7 +61,7 @@ class Appointments(models.Model):
     client= models.ForeignKey(User, on_delete=models.CASCADE, default=1,related_name='my_appointments')
     services = models.ManyToManyField(Services)
     salons = models.ForeignKey(Salons, on_delete=models.CASCADE, default=1, related_name='appointments')
-    AppointmentsStatus = models.BooleanField()
+    AppointmentsStatus = models.BooleanField(default=False)
     date_time = models.DateTimeField()
     totalCost = models.IntegerField()
 
@@ -75,19 +75,8 @@ class Products(models.Model):
     def __str__(self):
         return self.product_name
 
-
-
-
-# class Pictures(models.Model):
-#     salonId = models.ForeignKey(Salons, on_delete=models.CASCADE)
-#     image = models.ImageField(upload_to='image/', blank=True, null=True)
-#
-#     def __str__(self):
-#         return self.salonId
-#
-#     def delete(self, *args, **kwargs):
-#         self.image.delete()
-#         super().delete(*args, **kwargs)
+class Likes(models.Model):
+    salon = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name="salon_likes")
 
 
 class Comments(models.Model):

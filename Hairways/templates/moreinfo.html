@@ -79,7 +79,7 @@
       <div class="card-body" style="color: whitesmoke;">
         <div class="row">
           <h3 style="font-family: 'Ubuntu', sans-serif; color: whitesmoke; margin-bottom: 0px; font-weight: bold; font-size: 1.5em">{{ salon.salonName }}</h3>
-          <i align=right class="far fa-heart col-11" id="likebutton" data-catid="{{ salon.salonName }}"></i> <i class="fas fa-ellipsis-h"></i>
+          <i align=right class="far fa-heart col-11 likebutton" id="love-icon" style="cursor: pointer;" data-catid="{{ salon.id }}"></i> <i class="fas fa-ellipsis-h"></i>
         </div>
         <i>{{ salon.description }}</i><br>
       </div>
@@ -248,20 +248,20 @@ $('.carousel-inner').find('.comments-section:first').addClass('active');
 <script>
 // Handling Likes
 $(".likebutton").on('click', function () {
-      var catid;
-      catid = $(this).attr("data-catid");
-      $.ajax({
-        type: 'GET',
-        url: '{% url "likepost" %}',
-        data: {
-            "post_id": catid
-        },
-        success(data){
-          $('#like' + catid).remove();
-          $('#message').text(data);
-        }
-      })
-    });
+  var catid;
+  catid = $(this).attr("data-catid");
+  $.ajax({
+  type: 'GET',
+  url: '{% url "likesalon" %}',
+  data: {
+    "salon_id": catid,
+  },
+  success(data){
+    $('#like' + catid).remove();
+    alert(data);
+  }
+});
+});
 // Handling number of views
 $(window).on('load', function(){
   var parent = $(this).parent();

@@ -45,6 +45,10 @@ class Salons(models.Model):
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
 
+class Likes(models.Model):
+    salon = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name="salon_likes")
+    def __str__(self):
+        return self.salon.salonName
 
 class Services(models.Model):
     salons = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name='services')
@@ -74,9 +78,6 @@ class Products(models.Model):
 
     def __str__(self):
         return self.product_name
-
-class Likes(models.Model):
-    salon = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name="salon_likes")
 
 
 class Comments(models.Model):

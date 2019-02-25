@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from Hairways.models import Salons, Services, Owner, Products, Comments
+from Hairways.models import Salons, Services, Owner, Products, Comments, Client, Staff
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -15,7 +15,7 @@ from django.views.generic import TemplateView
 
 from django.views.generic import CreateView
 
-from ..forms import CommentForm, addEmployeeForm
+from ..forms import CommentForm, addEmployeeForm, addClientForm
 
 def home(request):
     # To be revisited
@@ -75,17 +75,28 @@ def productsServices(request):
 
 @login_required
 def staffClients(request):
+    client = Client.objects.all()
+    staff = Staff.objects.all()
+
     if request.method == "POST":
         form = addEmployeeForm(request.POST)
         if form.is_valid():
             salonadd = form.save(commit=False)
             salonadd.save()
+            return redirect('staffClients')
+    else:
+        formstaff = addEmployeeForm()
+
+    if request.method == "POST":
+        form = addClientForm(request.POST)
+        if form.is_valid():
+            salonadd = form.save(commit=False)
+            salonadd.save()
             return redirect('dashboard')
     else:
-        form = addEmployeeForm()
+        formclient = addClientForm()
 
-    return render(request, "dashboard/staffClients.php", {'form': form})
-
+    return render(request, "dashboard/staffClients.php", {'formstaff': formstaff, 'formclient' : formclient, 'client' : client, 'staff' : staff})
 
 
 @login_required
@@ -171,7 +182,6 @@ class AppointmentListView(generic.ListView):
     model = Salons
     context_object_name = 'my_salon'
     template_name = 'dashboard/dashboard.html'
-
 
 
 # def decider(request):

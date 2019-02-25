@@ -10,11 +10,6 @@ class User(AbstractUser):
     nickname= models.CharField(max_length=30,null=True,blank=True)
 
 
-class Client(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    nickname=models.CharField(max_length=30)
-    email= models.CharField(max_length=30, default='myemail@gmail.com')
-
 
 class Owner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -57,6 +52,33 @@ class Services(models.Model):
     def __str__(self):
         return self.serviceName
 
+
+class Staff(models.Model):
+    firstname = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100)
+    date_started = models.DateTimeField(default=timezone.now)
+    salary = models.IntegerField()
+    phone = models.IntegerField()
+    email = models.CharField(max_length=100)
+    favservice = models.CharField(max_length=100, null=True, blank=True)
+    favclient = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.firstname
+
+
+class Client(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    nickname=models.CharField(max_length=30)
+    email= models.CharField(max_length=30, default='myemail@gmail.com')
+    phone = models.IntegerField(null=True, blank=True)
+    favservice = models.ForeignKey(Services, null=True, blank=True, on_delete=models.SET_NULL, related_name='my_service')
+    favstaff = models.ForeignKey(Staff, null=True, blank=True, on_delete=models.SET_NULL, related_name='my_staff')
+
+    def __str__(self):
+        return self.nickname
+
+
 class Appointments(models.Model):
     client= models.ForeignKey(User, on_delete=models.CASCADE, default=1,related_name='my_appointments')
     services = models.ManyToManyField(Services)
@@ -65,16 +87,6 @@ class Appointments(models.Model):
     date_time = models.DateTimeField()
     totalCost = models.IntegerField()
 
-class Staff(models.Model):
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
-    date_started = models.DateTimeField()
-    salary = models.IntegerField()
-    favservice = models.CharField(max_length=100, null=True, blank=True)
-    favclient = models.CharField(max_length=100, null=True, blank=True)
-
-    def __str__(self):
-        return self.firstname
 
 class Products(models.Model):
     product_name = models.CharField(max_length=100)

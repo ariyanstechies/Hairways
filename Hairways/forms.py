@@ -44,4 +44,10 @@ class addEmployeeForm(forms.ModelForm):
 
     class Meta:
         model = Staff
-        fields = ('firstname', 'lastname', 'salary', 'date_started', 'favclient', 'favservice')
+        fields = ('firstname', 'lastname', 'phone', 'email', 'salary', 'date_started', 'favclient', 'favservice')
+
+class addClientForm(forms.ModelForm):
+
+    class Meta:
+        model = Staff
+        fields = ('firstname', 'lastname', 'phone', 'favclient', 'favservice')

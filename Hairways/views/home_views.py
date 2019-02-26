@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from Hairways.models import Salons, Services, Owner, Products, Comments
+from Hairways.models import Salons, Likes, Services, Owner, Products, Comments
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -114,6 +114,18 @@ def update_views(request):
         update_view.views +=1
         update_view.save()
     return HttpResponse("Salon With ID %s Views Was Updated successfully" % update_view.views)
+
+
+def likedSalon(request):
+    if request.method == 'GET':
+        salon_id = request.GET['salon_id']
+        likedSalon = Salons.objects.get(pk=salon_id) # Getting the liked post
+        m = Likes(salon=likedSalon) # Creating Like Object
+        m.save() #saving it to store in database
+        return HttpResponse("Success!") # Sending an success response
+    else:
+        return HttpResponse("request method is not GET")
+
 
 def upload(request):
     context = {}

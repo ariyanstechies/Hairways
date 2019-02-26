@@ -24,7 +24,7 @@ urlpatterns = [
     path('faqs/', home_views.faqs, name='faqs'),
     # path('accounts/', include('django.contrib.auth.urls')),
     path('update_views/', home_views.update_views, name="update_views"),
-    # path('signup/', views.signup, name="signup"),
+    path('likesalon/', home_views.likedSalon, name="likesalon"),
     path('blog/', home_views.blog, name="blog"),
     path('appointment/add/', clients.AppointmentCreateView.as_view(), name='appointment_add'),
     path('client/dashboard', clients.AppointmentListView.as_view(), name='client_dashboard'),

@@ -72,8 +72,6 @@ class Client(models.Model):
     nickname=models.CharField(max_length=30)
     email= models.CharField(max_length=30, default='myemail@gmail.com')
     phone = models.IntegerField(null=True, blank=True)
-    favservice = models.ForeignKey(Services, null=True, blank=True, on_delete=models.SET_NULL, related_name='my_service')
-    favstaff = models.ForeignKey(Staff, null=True, blank=True, on_delete=models.SET_NULL, related_name='my_staff')
 
     def __str__(self):
         return self.nickname

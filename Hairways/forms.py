@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
-from Hairways.models import Client, User, Comments, Salons, Staff
+from Hairways.models import *
 
 class ClientSignUpForm(UserCreationForm):
     # interests = forms.ModelMultipleChoiceField(
@@ -44,10 +44,22 @@ class addEmployeeForm(forms.ModelForm):
 
     class Meta:
         model = Staff
-        fields = ('firstname', 'lastname', 'phone', 'email', 'salary', 'date_started', 'favclient', 'favservice')
+        fields = ('firstname', 'lastname', 'phone', 'email', 'salary', 'date_started',)
 
 class addClientForm(forms.ModelForm):
 
     class Meta:
-        model = Staff
-        fields = ('firstname', 'lastname', 'phone', 'favclient', 'favservice')
+        model = Client
+        fields = ('user', 'nickname', 'email', 'phone')
+
+class addServiceForm(forms.ModelForm):
+
+    class Meta:
+        model = Services
+        fields = ('serviceName', 'serviceCost', 'serviceDuration', 'serviceBookings', 'availability', 'salons')
+
+class addProductForm(forms.ModelForm):
+
+    class Meta:
+        model = Products
+        fields = ('product_name', 'price', 'product_brand', 'salons')

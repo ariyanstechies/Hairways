@@ -225,6 +225,17 @@ table.table .avatar {
 .modal form label {
   font-weight: normal;
 }
+/*
+#id_firstname {
+  border: none;
+  background-color: red;
+} */
+
+form span input{
+  border: none;
+  border-bottom: 1px solid #4caf50;
+  margin-left: 5px;
+}
 </style>
 
 </head>
@@ -294,7 +305,7 @@ table.table .avatar {
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">Staffs and Clients</a>
+            <a class="navbar-brand" href="javascript:void(0)">Product & Services</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>
@@ -338,7 +349,7 @@ table.table .avatar {
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12">     <!--   // START OF SERVICES SECTION -->
+            <div class="col-md-12">     <!--   // START OF Services SECTION -->
               <div class="card">
                 <div class="card-header card-header-primary">
                   <div class="table-title">
@@ -347,8 +358,8 @@ table.table .avatar {
                 						<h2>Manage <b>Services</b></h2>
                 					</div>
                 					<div class="col-sm-5">
-                						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Service</span></a>
-                						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+                						<a href="#addClientModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Services</span></a>
+                						<a href="#deleteClientModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
                 					</div>
                       </div>
                   </div>
@@ -366,94 +377,35 @@ table.table .avatar {
                   								<label for="selectAll"></label>
                   							</span>
                   						</th>
-                              <th>Name</th>
-                              <th>Email</th>
-            						      <th>Address</th>
-                              <th>Phone</th>
-                              <th>Actions</th>
+                              <th>Service</th>
+                              <th>Cost</th>
+                              <th>Duration</th>
+                              <th>Bookings</th>
+                              <th>availability</th>
                             </tr>
                             </thead>
-                            <tbody>
-                              <tr>
-            						        <td>
-                    							<span class="custom-checkbox">
-                    								<input type="checkbox" id="checkbox1" name="options[]" value="1">
-                    								<label for="checkbox1"></label>
-                    							</span>
-            						        </td>
-                                <td>Thomas Hardy</td>
-                                <td>thomashardy@mail.com</td>
-            						        <td>89 Chiaroscuro Rd, Portland, USA</td>
-                                <td>(171) 555-2222</td>
-                                <td>
-                                  <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                              </tr>
-                              <tr>
-            						        <td>
-                    							<span class="custom-checkbox">
-                    								<input type="checkbox" id="checkbox2" name="options[]" value="1">
-                    								<label for="checkbox2"></label>
-                    							</span>
-                    						</td>
-                                  <td>Dominique Perrier</td>
-                                  <td>dominiqueperrier@mail.com</td>
-            						          <td>Obere Str. 57, Berlin, Germany</td>
-                                  <td>(313) 555-5735</td>
-                                  <td>
-                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                  </td>
-                              </tr>
-                    					<tr>
-                    						<td>
-                    							<span class="custom-checkbox">
-                    								<input type="checkbox" id="checkbox3" name="options[]" value="1">
-                    								<label for="checkbox3"></label>
-                    							</span>
-                    						</td>
-                                <td>Maria Anders</td>
-                                <td>mariaanders@mail.com</td>
-            						        <td>25, rue Lauriston, Paris, France</td>
-                                <td>(503) 555-9931</td>
-                                <td>
-                                  <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                              </tr>
-                              <tr>
-            						        <td>
-            							        <span class="custom-checkbox">
-            								        <input type="checkbox" id="checkbox4" name="options[]" value="1">
-            								        <label for="checkbox4"></label>
-                    							</span>
-                    						</td>
-                                <td>Fran Wilson</td>
-                                <td>franwilson@mail.com</td>
-            						        <td>C/ Araquil, 67, Madrid, Spain</td>
-                                <td>(204) 619-5731</td>
-                                <td>
-                                  <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                              </tr>
-                    					<tr>
-                    						<td>
-                    							<span class="custom-checkbox">
-                    								<input type="checkbox" id="checkbox5" name="options[]" value="1">
-                    								<label for="checkbox5"></label>
-                    							</span>
-                    						</td>
-                                  <td>Martin Blank</td>
-                                  <td>martinblank@mail.com</td>
-            						          <td>Via Monte Bianco 34, Turin, Italy</td>
-                                  <td>(480) 631-2097</td>
-                                  <td>
-                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                  </td>
-                                </tr>
+                            <tbody class="all_services">
+                                 {% if service.count != 0 %}
+                                  {% for each in service %}
+                                  <tr style="border: none">
+                                    <td>
+                                      <span class="custom-checkbox">
+                                        <input type="checkbox" id="checkbox2" name="options[]" value="1">
+                                        <label for="checkbox2"></label>
+                                      </span>
+                                    </td>
+                                    <td>{{ each.serviceName }}</td>
+                                    <td>{{ each.serviceCost }}</td>
+                                    <td>{{ each.serviceDuration }}</td>
+                                    <td>{{ each.serviceBookings }}</td>
+                                    <td>{{ each.availability }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                  {% else %} <!-- spanning across the five columns-->
+                                  <tr style="border: none">
+                                  <td colspan="5" align="center">Sorry No Services For Now:)</td>
+                                 </tr>
+                                  {% endif%}
                             </tbody>
                         </table>
 
@@ -473,37 +425,23 @@ table.table .avatar {
                 </div>
 
   <!-- Edit Modal HTML -->
-              	<div id="addEmployeeModal" class="modal fade">
+              	<div id="addClientModal" class="modal fade">
               		<div class="modal-dialog">
               			<div class="modal-content">
-              				<form>
-              					<div class="modal-header">
-              						<h4 class="modal-title">Add Service</h4>
-              						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              					</div>
-              					<div class="modal-body">
-              						<div class="form-group">
-              							<label>Name</label>
-              							<input type="text" class="form-control" required>
-              						</div>
-              						<div class="form-group">
-              							<label>Email</label>
-              							<input type="email" class="form-control" required>
-              						</div>
-              						<div class="form-group">
-              							<label>Address</label>
-              							<textarea class="form-control" required></textarea>
-              						</div>
-              						<div class="form-group">
-              							<label>Phone</label>
-              							<input type="text" class="form-control" required>
-              						</div>
-              					</div>
-              					<div class="modal-footer">
-              						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-              						<input type="submit" class="btn btn-success" value="Add">
-              					</div>
-              				</form>
+                      <div class="modal-header">
+                        <h4 class="modal-title">Add Service</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="" method="POST">
+                          {% csrf_token %}
+                          {{ formservice }}
+                      </div>
+                      <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-success" value="Add">
+                      </div>
+                    </form>
               			</div>
               		</div>
               	</div>
@@ -512,28 +450,14 @@ table.table .avatar {
               	<div id="editEmployeeModal" class="modal fade">
               		<div class="modal-dialog">
               			<div class="modal-content">
-              				<form>
               					<div class="modal-header">
-              						<h4 class="modal-title">Edit Service</h4>
+              						<h4 class="modal-title">Edit Client</h4>
               						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               					</div>
               					<div class="modal-body">
-              						<div class="form-group">
-              							<label>Name</label>
-              							<input type="text" class="form-control" required>
-              						</div>
-              						<div class="form-group">
-              							<label>Email</label>
-              							<input type="email" class="form-control" required>
-              						</div>
-              						<div class="form-group">
-              							<label>Address</label>
-              							<textarea class="form-control" required></textarea>
-              						</div>
-              						<div class="form-group">
-              							<label>Phone</label>
-              							<input type="text" class="form-control" required>
-              						</div>
+                          <form action="" method="POST">
+                          {% csrf_token %}
+                          {{ formservice }}
               					</div>
               					<div class="modal-footer">
               						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -544,35 +468,33 @@ table.table .avatar {
               		</div>
               	</div>
 
-              	<!-- Delete Modal HTML -->
-              	<div id="deleteEmployeeModal" class="modal fade">
-              		<div class="modal-dialog">
-              			<div class="modal-content">
-              				<form>
-              					<div class="modal-header">
-              						<h4 class="modal-title">Delete Service</h4>
-              						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              					</div>
-              					<div class="modal-body">
-              						<p>Are you sure you want to delete these Records?</p>
-              						<p class="text-warning"><small>This action cannot be undone.</small></p>
-              					</div>
-              					<div class="modal-footer">
-              						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-              						<input type="submit" class="btn btn-danger" value="Delete">
-              					</div>
-              				</form>
-              			</div>
-              		</div>
-              	</div>
+                <!-- Delete Modal HTML -->
+                <div id="deleteClientModal" class="modal fade">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Delete Product</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Are you sure you want to delete these Records?</p>
+                          <p class="text-warning"><small>This action cannot be undone.</small></p>
+                        </div>
+                        <div class="modal-footer">
+                          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                          <input type="submit" class="btn btn-danger" value="Delete">
+                        </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- END OF SERVICES SECTION -->
+          <!-- END OF Services SECTION -->
 
 
-          <!-- START OF PRODUCT SECTION -->
+          <!-- START OF Product SECTION -->
           <div class="col-md-12">
             <div class="card">
               <div class="card-header card-header-primary">
@@ -601,94 +523,31 @@ table.table .avatar {
                                 <label for="selectAll"></label>
                               </span>
                             </th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Actions</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Product Brand</th>
                           </tr>
                           </thead>
-                          <tbody>
-                            <tr>
-                              <td>
-                                <span class="custom-checkbox">
-                                  <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                  <label for="checkbox1"></label>
-                                </span>
-                              </td>
-                              <td>Thomas Hardy</td>
-                              <td>thomashardy@mail.com</td>
-                              <td>89 Chiaroscuro Rd, Portland, USA</td>
-                              <td>(171) 555-2222</td>
-                              <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <span class="custom-checkbox">
-                                  <input type="checkbox" id="checkbox2" name="options[]" value="1">
-                                  <label for="checkbox2"></label>
-                                </span>
-                              </td>
-                                <td>Dominique Perrier</td>
-                                <td>dominiqueperrier@mail.com</td>
-                                <td>Obere Str. 57, Berlin, Germany</td>
-                                <td>(313) 555-5735</td>
-                                <td>
-                                  <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <span class="custom-checkbox">
-                                  <input type="checkbox" id="checkbox3" name="options[]" value="1">
-                                  <label for="checkbox3"></label>
-                                </span>
-                              </td>
-                              <td>Maria Anders</td>
-                              <td>mariaanders@mail.com</td>
-                              <td>25, rue Lauriston, Paris, France</td>
-                              <td>(503) 555-9931</td>
-                              <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <span class="custom-checkbox">
-                                  <input type="checkbox" id="checkbox4" name="options[]" value="1">
-                                  <label for="checkbox4"></label>
-                                </span>
-                              </td>
-                              <td>Fran Wilson</td>
-                              <td>franwilson@mail.com</td>
-                              <td>C/ Araquil, 67, Madrid, Spain</td>
-                              <td>(204) 619-5731</td>
-                              <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <span class="custom-checkbox">
-                                  <input type="checkbox" id="checkbox5" name="options[]" value="1">
-                                  <label for="checkbox5"></label>
-                                </span>
-                              </td>
-                                <td>Martin Blank</td>
-                                <td>martinblank@mail.com</td>
-                                <td>Via Monte Bianco 34, Turin, Italy</td>
-                                <td>(480) 631-2097</td>
-                                <td>
-                                  <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                              </tr>
+                          <tbody class="all_services">
+                               {% if product.count != 0 %}
+                                {% for each in product %}
+                                <tr style="border: none">
+                                  <td>
+                                    <span class="custom-checkbox">
+                                      <input type="checkbox" id="checkbox2" name="options[]" value="1">
+                                      <label for="checkbox2"></label>
+                                    </span>
+                                  </td>
+                                  <td>{{ each.product_name }}</td>
+                                  <td>{{ each.price }}</td>
+                                  <td>{{ each.product_brand }}</td>
+                                  </tr>
+                                  {% endfor %}
+                                {% else %} <!-- spanning across the five columns-->
+                                <tr style="border: none">
+                                <td colspan="5" align="center">Sorry No Services For Now:)</td>
+                               </tr>
+                                {% endif%}
                           </tbody>
                       </table>
 
@@ -711,28 +570,14 @@ table.table .avatar {
               <div id="addEmployeeModal" class="modal fade">
                 <div class="modal-dialog">
                   <div class="modal-content">
-                    <form>
                       <div class="modal-header">
                         <h4 class="modal-title">Add Product</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                       </div>
                       <div class="modal-body">
-                        <div class="form-group">
-                          <label>Name</label>
-                          <input type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                          <label>Email</label>
-                          <input type="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                          <label>Address</label>
-                          <textarea class="form-control" required></textarea>
-                        </div>
-                        <div class="form-group">
-                          <label>Phone</label>
-                          <input type="text" class="form-control" required>
-                        </div>
+                        <form action="" method="POST">
+                          {% csrf_token %}
+                          {{ formproduct }}
                       </div>
                       <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -804,7 +649,7 @@ table.table .avatar {
           </div>
         </div>
 
-        <!-- END OF PRODUCT SECTION -->
+        <!-- END OF Product SECTION -->
 
           </div>
         </div>
@@ -835,6 +680,7 @@ table.table .avatar {
           <div class="copyright float-right" id="date">
         </div>
       </footer>
+
 
       <!-- SCRIPT FOR NEW TABLE -->
 

@@ -15,7 +15,7 @@ from django.views.generic import TemplateView
 
 from django.views.generic import CreateView
 
-from ..forms import CommentForm, addEmployeeForm, addClientForm
+from ..forms import *
 
 def home(request):
     # To be revisited
@@ -69,8 +69,32 @@ def user(request, id):
     return render(request, "dashboard/user.html", {'user_details': user_details, 'salon_details' : salon_details})
 
 
+@login_required
 def productsServices(request):
-    return render(request, "dashboard/productsServices.php")
+    service = Services.objects.all()
+    product = Products.objects.all()
+
+    print(service, product)
+
+    if request.method == "POST":
+        form = addServiceForm(request.POST)
+        if form.is_valid():
+            salonadd = form.save(commit=False)
+            salonadd.save()
+            return redirect('productsServices')
+    else:
+        formservice = addServiceForm()
+
+    if request.method == "POST":
+        form = addProductForm(request.POST)
+        if form.is_valid():
+            salonadd = form.save(commit=False)
+            salonadd.save()
+            return redirect('productsServices')
+    else:
+        formproduct = addProductForm()
+
+    return render(request, "dashboard/productsServices.php", {'formservice': formservice, 'formproduct' : formproduct, 'service' : service, 'product' : product})
 
 
 @login_required

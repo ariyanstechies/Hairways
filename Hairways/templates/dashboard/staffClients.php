@@ -225,6 +225,17 @@ table.table .avatar {
 .modal form label {
   font-weight: normal;
 }
+/*
+#id_firstname {
+  border: none;
+  background-color: red;
+} */
+
+form span input{
+  border: none;
+  border-bottom: 1px solid #4caf50;
+  margin-left: 5px;
+}
 </style>
 
 </head>
@@ -414,7 +425,7 @@ table.table .avatar {
               		<div class="modal-dialog">
               			<div class="modal-content">
                       <div class="modal-header">
-                        <h4 class="modal-title">Add Employee</h4>
+                        <h4 class="modal-title">Add Client</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                       </div>
                       <div class="modal-body">
@@ -671,6 +682,7 @@ table.table .avatar {
           <div class="copyright float-right" id="date">
         </div>
       </footer>
+
 
       <!-- SCRIPT FOR NEW TABLE -->
 

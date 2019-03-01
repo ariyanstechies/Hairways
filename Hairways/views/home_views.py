@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
+from Hairways.models import Salons, Services, Owner, Products, Comments, Client, Staff
 from Hairways.models import Salons, Likes, Services, Owner, Products, Comments
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -15,7 +16,7 @@ from django.views.generic import TemplateView
 
 from django.views.generic import CreateView
 
-from ..forms import CommentForm
+from ..forms import *
 
 def home(request):
     # To be revisited
@@ -49,8 +50,17 @@ def about(request):
 # protecting views you can't just access dashboard without logging
 @method_decorator([login_required, owner_required], name='dispatch')
 def dashboard(request):
-    owner = Salons.objects.all()
-    return render(request, "dashboard/dashboard.html", {'owner': owner})
+    me = Salons.objects.all()
+    if request.method == "POST":
+        form = addSalonForm(request.POST)
+        if form.is_valid():
+            salonadd = form.save(commit=False)
+            salonadd.save()
+            return redirect('dashboard')
+    else:
+        form = addSalonForm()
+
+    return render(request, "dashboard/dashboard.html", {'me': me, 'form': form})
 
 
 @login_required  # protecting views
@@ -60,13 +70,58 @@ def user(request, id):
     return render(request, "dashboard/user.html", {'user_details': user_details, 'salon_details' : salon_details})
 
 
+@login_required
 def productsServices(request):
-    return render(request, "dashboard/productsServices.php")
+    service = Services.objects.all()
+    product = Products.objects.all()
+
+    print(service, product)
+
+    if request.method == "POST":
+        form = addServiceForm(request.POST)
+        if form.is_valid():
+            salonadd = form.save(commit=False)
+            salonadd.save()
+            return redirect('productsServices')
+    else:
+        formservice = addServiceForm()
+
+    if request.method == "POST":
+        form = addProductForm(request.POST)
+        if form.is_valid():
+            salonadd = form.save(commit=False)
+            salonadd.save()
+            return redirect('productsServices')
+    else:
+        formproduct = addProductForm()
+
+    return render(request, "dashboard/productsServices.php", {'formservice': formservice, 'formproduct' : formproduct, 'service' : service, 'product' : product})
 
 
 @login_required
 def staffClients(request):
-    return render(request, "dashboard/staffClients.php")
+    client = Client.objects.all()
+    staff = Staff.objects.all()
+
+    if request.method == "POST":
+        form = addEmployeeForm(request.POST)
+        if form.is_valid():
+            salonadd = form.save(commit=False)
+            salonadd.save()
+            return redirect('staffClients')
+    else:
+        formstaff = addEmployeeForm()
+
+    if request.method == "POST":
+        form = addClientForm(request.POST)
+        if form.is_valid():
+            salonadd = form.save(commit=False)
+            salonadd.save()
+            return redirect('dashboard')
+    else:
+        formclient = addClientForm()
+
+    return render(request, "dashboard/staffClients.php", {'formstaff': formstaff, 'formclient' : formclient, 'client' : client, 'staff' : staff})
 
 
 @login_required
@@ -164,7 +219,6 @@ class AppointmentListView(generic.ListView):
     model = Salons
     context_object_name = 'my_salon'
     template_name = 'dashboard/dashboard.html'
-
 
 
 # def decider(request):

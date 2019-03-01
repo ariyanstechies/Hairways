@@ -10,11 +10,6 @@ class User(AbstractUser):
     nickname= models.CharField(max_length=30,null=True,blank=True)
 
 
-class Client(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    nickname=models.CharField(max_length=30)
-    email= models.CharField(max_length=30, default='myemail@gmail.com')
-
 
 class Owner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -66,6 +61,38 @@ class Appointments(models.Model):
     services = models.ManyToManyField(Services)
     salons = models.ForeignKey(Salons, on_delete=models.CASCADE, default=1, related_name='appointments')
     AppointmentsStatus = models.BooleanField(default=False)
+    date_time = models.DateTimeField()
+    totalCost = models.IntegerField()
+
+class Staff(models.Model):
+    firstname = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100)
+    date_started = models.DateTimeField(default=timezone.now)
+    salary = models.IntegerField()
+    phone = models.IntegerField()
+    email = models.CharField(max_length=100)
+    favservice = models.CharField(max_length=100, null=True, blank=True)
+    favclient = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.firstname
+
+
+class Client(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    nickname=models.CharField(max_length=30)
+    email= models.CharField(max_length=30, default='myemail@gmail.com')
+    phone = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.nickname
+
+
+class Appointments(models.Model):
+    client= models.ForeignKey(User, on_delete=models.CASCADE, default=1,related_name='my_appointments')
+    services = models.ManyToManyField(Services)
+    salons = models.ForeignKey(Salons, on_delete=models.CASCADE, default=1, related_name='appointments')
+    AppointmentsStatus = models.BooleanField()
     date_time = models.DateTimeField()
     totalCost = models.IntegerField()
 

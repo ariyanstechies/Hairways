@@ -42,9 +42,12 @@
         <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="{% url 'faqs' %}">Faqs</a></li>
         {% if user.is_authenticated %}
+          {% if user.is_client %}
         <li><a href="{% url 'client_dashboard' %}" >{{request.user.username}}</a></li>
-
-        <li><a href="{% url 'dashboard'  %}" >Dashboard</a></li>
+          {% else %}
+        <li><a href="{% url 'owner_update' %}" >{{request.user.username}}</a></li>
+          {% endif %}
+          <li><a href="{% url 'dashboard'  %}" >Dashboard</a></li>
         <li><a href="{% url 'logout' %}" >Logout</a></li>
         {% else %}
         <li><a class="active" href="{% url 'login' %}">Login</a></li>

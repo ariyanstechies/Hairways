@@ -43,9 +43,9 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="#" >
+            <a class="nav-link" href="{% url 'owner_update' %}" >
               <i class="material-icons">person</i>
-              <p>{{ request.user.username}}</p>
+              <p>{{ request.user.username}} (Edit your Profile)</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -95,7 +95,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">You are logged in as <b>{{ request.user.username}}</b></a>
+            <a class="navbar-brand" href="{% url 'owner_update' %}">You are logged in as <b>{{ request.user.username }}</b>( <i>You can Edit profile here</i>)</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>

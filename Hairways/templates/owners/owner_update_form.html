@@ -1,0 +1,51 @@
+
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> details Update</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <style style="text/style">
+    /* Removing asterick from labels */
+      .asteriskField {
+        display: none;
+      }
+      /* formatting alert message */
+      form .alert ul li {
+        list-style: none;
+      }
+      form .alert ul {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <p>Your Name: <b> {{ request.user.owner.ownerName}}</b></p>
+              <p>Your Username:<b> {{ request.user.username}}</b></p>
+              <p>Phone No:<b> {{ request.user.owner.phone}}</b></p>
+              <p>Email Address: <b>{{ request.user.owner.email}}</b></p>
+              <p>Gender:<b> {{ request.user.owner.gender}}</b></p>
+              <p>Location:<b> {{ request.user.owner.location}}</b></p>
+              <h1 class="mt-2"><b>{{request.user.owner.ownerName }} </b>You can update your personal data here</h1>
+              <hr class="mt-0 mb-4">
+              <form action="" method="post">{% csrf_token %}
+                  {{ form.as_p }}
+                  <input type="submit" value="Update" />
+              </form>
+            <!-- GOOGLE AUTHENTICATION -->
+            <br>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

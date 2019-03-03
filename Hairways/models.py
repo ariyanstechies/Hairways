@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class User(AbstractUser):
@@ -14,12 +16,22 @@ class User(AbstractUser):
 class Owner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     ownerName = models.CharField(max_length=30)
-    email = models.TextField(max_length=150)
-    phone = models.PositiveIntegerField()
-    password = models.CharField(max_length=25)
+    email = models.CharField(max_length=150)
+    phone = models.PositiveIntegerField(default='0792799958')
+    location = models.CharField(max_length=25, default='Kisumu')
+    gender = models.CharField(max_length=150, default= 'Female')
 
     def __str__(self):
         return self.ownerName
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Owner.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.owner.save()
 
 
 class Salons(models.Model):
@@ -56,13 +68,6 @@ class Services(models.Model):
     def __str__(self):
         return self.serviceName
 
-class Appointments(models.Model):
-    client= models.ForeignKey(User, on_delete=models.CASCADE, default=1,related_name='my_appointments')
-    services = models.ManyToManyField(Services)
-    salons = models.ForeignKey(Salons, on_delete=models.CASCADE, default=1, related_name='appointments')
-    AppointmentsStatus = models.BooleanField(default=False)
-    date_time = models.DateTimeField()
-    totalCost = models.IntegerField()
 
 class Staff(models.Model):
     firstname = models.CharField(max_length=100)

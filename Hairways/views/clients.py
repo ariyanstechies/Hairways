@@ -59,7 +59,7 @@ class AppointmentCreateView(CreateView):
         appointment = form.save(commit=False)
         appointment.client = self.request.user
         appointment.save()
-        messages.success(self.request, 'The quiz was created with success! Go ahead and add some questions now.')
+        messages.success(self.request, 'The appointment was created succesfully.')
         return redirect('client_dashboard')
 
 

@@ -1,8 +1,9 @@
 from django.contrib.auth import login
 from django.shortcuts import redirect
+from django.contrib import messages
 from django.views.generic import CreateView
 from ..forms import OwnerSignUpForm
-from ..models import User, Owner, Appointments, Comments
+from ..models import User, Owner, Appointments, Salons
 from ..decorators import owner_required
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -36,3 +37,30 @@ class OwnerUpdate(UpdateView):
 
         return get_object_or_404(Owner, pk=self.request.user.id)
         # TODO: add redirect url or succes_url
+
+@method_decorator([login_required, owner_required], name='dispatch')
+class SalonCreateView(CreateView):
+    model = Salons
+    fields = ('salonName','description','paybill','location')
+    template_name = 'owners/salon_add_form.html'
+
+    def form_valid(self, form):
+        salon = form.save(commit=False)
+        salon.Owner = self.request.user.owner
+        salon.save()
+        messages.success(self.request, 'The Salon was created succesfully.')
+        return redirect('dashboard')
+
+        # special appointment adds
+@method_decorator([login_required, owner_required], name='dispatch')
+class Appointment2CreateView(CreateView):
+    model = Appointments
+    fields = ('services','salons','AppointmentsStatus','date_time','totalCost' )
+    template_name = 'clients/order_add_form.html'
+
+    def form_valid(self, form):
+        appointment = form.save(commit=False)
+        appointment.Owner = self.request.user.owner
+        appointment.save()
+        messages.success(self.request, 'The appointment was created succesfully.')
+        return redirect('dashboard')

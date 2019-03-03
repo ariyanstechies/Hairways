@@ -97,6 +97,16 @@
           <div class="navbar-wrapper">
             <a class="navbar-brand" href="{% url 'owner_update' %}">You are logged in as <b>{{ request.user.username }}</b>( <i>You can Edit profile here</i>)</a>
           </div>
+
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="{% url 'salon_add' %}">Add a new Salon</a>
+          </div>
+
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="{% url 'appointment2_add' %}">Create Appointment</a>
+          </div>
+
+
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>

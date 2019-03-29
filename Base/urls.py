@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import include, path
-from django.urls import include, path
 from Hairways.views import owners, clients, home_views
 
 urlpatterns = [

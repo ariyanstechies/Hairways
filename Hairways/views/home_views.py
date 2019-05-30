@@ -174,10 +174,10 @@ def update_views(request):
 def likedSalon(request):
     if request.method == 'GET':
         salon_id = request.GET['salon_id']
-        likedSalon = Salons.objects.get(pk=salon_id) # Getting the liked post
-        m = Likes(salon=likedSalon) # Creating Like Object
-        m.save() #saving it to store in database
-        return HttpResponse("Success!") # Sending an success response
+        # likedSalon = Salons.objects.get(pk=salon_id) # Getting the liked post
+        # m = Salons(salon=likedSalon) # Creating Like Object
+        # m.save() #saving it to store in database
+        # return HttpResponse("Success!") # Sending an success response
     else:
         return HttpResponse("request method is not GET")
 

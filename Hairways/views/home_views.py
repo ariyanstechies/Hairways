@@ -11,6 +11,7 @@ from ..decorators import client_required
 from ..decorators import owner_required
 from django.http import HttpResponse
 import json
+from django.shortcuts import render, get_object_or_404
 from django.core import serializers
 from django.views.generic import TemplateView
 
@@ -220,11 +221,33 @@ class AppointmentListView(generic.ListView):
     context_object_name = 'my_salon'
     template_name = 'dashboard/dashboard.html'
 
+    def get_queryset(self):
+        data = Salons.objects.get(Owner = self.request.user.owner)
+        queryset = data.appointments.all()
+        return queryset
 
-# def decider(request):
-#     if request.user.is_authenticated:
-#         if request.user.is_teacher:
-#             return redirect('home_views:dashboard')
-#         else:
-#             return redirect('index.html')
-#     return render(request, 'index.html')
+
+def appointment_detail(request, pk):
+    appointment = get_object_or_404(Appointments, pk=pk)
+    return render(request, 'dashboard/appointment_detail.html', {'appointment': appointment})
+
+
+def appointment_accept(request, pk ,):
+    appointment = get_object_or_404(Appointments, pk=pk)
+    appointment.is_pending = False
+    appointment.is_rejected = False
+    appointment.is_complete = False
+    appointment.is_accepted = True
+    appointment.save()
+    # ticket.mark_closed(closer)
+    return redirect('appointment_detail', pk=pk)
+
+def appointment_reject(request, pk ,):
+    appointment = get_object_or_404(Appointments, pk=pk)
+    appointment.is_pending = False
+    appointment.is_rejected = True
+    appointment.is_complete = False
+    appointment.is_accepted = False
+    appointment.save()
+    # ticket.mark_closed(closer)
+    return redirect('appointment_detail', pk=pk)

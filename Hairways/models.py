@@ -46,6 +46,7 @@ class Salons(models.Model):
     paybill = models.TextField(null=True, blank=True, max_length=12)
     location = models.CharField(max_length=30)
 
+
     def __str__(self):
         return self.salonName
 
@@ -99,8 +100,12 @@ class Appointments(models.Model):
     salons = models.ForeignKey(Salons, on_delete=models.CASCADE, default=1, related_name='appointments')
     AppointmentsStatus = models.BooleanField()
     date_time = models.DateTimeField()
+    created_date = models.DateTimeField(default=timezone.now)
     totalCost = models.IntegerField()
-
+    is_accepted = models.BooleanField(default=False)
+    is_rejected = models.BooleanField(default = False)
+    is_pending = models.BooleanField(default=True)
+    is_complete = models.BooleanField(default=False)
 
 class Products(models.Model):
     product_name = models.CharField(max_length=100)

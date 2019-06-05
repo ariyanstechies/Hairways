@@ -23,7 +23,6 @@ urlpatterns = [
     path('upgrade/', home_views.upgrade, name='upgrade'),
     path('upload/', home_views.upload, name='upload'),
     path('faqs/', home_views.faqs, name='faqs'),
-    # path('accounts/', include('django.contrib.auth.urls')),
     path('update_views/', home_views.update_views, name="update_views"),
     path('likesalon/', home_views.likedSalon, name="likesalon"),
     path('blog/', home_views.blog, name="blog"),
@@ -33,6 +32,12 @@ urlpatterns = [
     path('client/dashboard', clients.AppointmentListView.as_view(), name='client_dashboard'),
     path('dashboard/', home_views.AppointmentListView.as_view(), name='dashboard'),
     path('client/dashboard2', clients.CommentsListView.as_view(), name='client_dashboard2'),
+    path('appointment/<int:pk>/', home_views.appointment_detail, name='appointment_detail'),
+    path('appointment/<pk>/accept/', home_views.appointment_accept, name='appointment_accept'),
+    path('appointment/<pk>/reject/', home_views.appointment_reject, name='appointment_reject'),
+
+
+
     # url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
     # path('auth/', include('social_django.urls', namespace='social')),      # GOOGLE & FACEBOOK OAUTH
 

@@ -406,88 +406,148 @@
         </div>
       </div>
 
-<footer class="footer">
-<div class="footer-container-top container bottom_border">
-<div class="row">
-<div class=" col-sm-4 col-md col-sm-4  col-12 col">
-<h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
-<!--headin5_amrc-->
-<p class="mb10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-<p><i class="fa fa-location-arrow"></i> 9878/25 sec 9 rohini 35 </p>
-<p><i class="fa fa-phone"></i>  +91-9999878398  </p>
-<p><i class="fa fa fa-envelope"></i> info@example.com  </p>
 
 
+
+{% for appointment in my_salon %}
+<h1>{{appointment.id}}</h1>
+{% endfor%}
+
+<div class="container">
+
+  <br>
+  <!-- Nav pills -->
+  <ul class="nav nav-pills" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="pill" href="#home">Pending</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill" href="#menu1">In Progress</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill" href="#menu2">Complete</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Appointment No:</th>
+              <th>Client</th>
+              <th>Status</th>
+              <th>Appointment Date</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for appointment in my_salon %}
+            <tr data-href='{% url 'appointment_detail' pk=appointment.pk %}'>
+              <td>APN-{{appointment.id}}</td>
+              <td>{{appointment.client.username}}</td>
+              <td>{% if appointment.is_accepted%} In progress{% endif %} </td>
+              <td>{{appointment.date_time}}</td>
+              <td>Ksh.{{appointment.totalCost}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td>APN-002</td>
+              <td>Peter</td>
+              <td>Pending</td>
+              <td>2019-06-10 11:00</td>
+              <td>Ksh.5000 </td>
+            </tr>
+            <tr>
+              <td>APN-003</td>
+              <td>Moraa</td>
+              <td>Pending</td>
+              <td>2019-06-10 11:60</td>
+              <td>Ksh.5000 </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <div id="menu1" class="container tab-pane fade"><br>
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Appointment No:</th>
+              <th>Client</th>
+              <th>Status</th>
+              <th>Appointment Date</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>APN-001</td>
+              <td>Grace </td>
+              <td>Pending</td>
+              <td>2019-06-10 11:00</td>
+              <td>Ksh.5000 </td>
+            </tr>
+            <tr>
+              <td>APN-002</td>
+              <td>Peter</td>
+              <td>Pending</td>
+              <td>2019-06-10 11:00</td>
+              <td>Ksh.5000 </td>
+            </tr>
+            <tr>
+              <td>APN-003</td>
+              <td>Moraa</td>
+              <td>Pending</td>
+              <td>2019-06-10 11:60</td>
+              <td>Ksh.5000 </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <div id="menu2" class="container tab-pane fade"><br>
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Appointment No:</th>
+              <th>Client</th>
+              <th>Status</th>
+              <th>Appointment Date</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>APN-001</td>
+              <td>Grace </td>
+              <td>Pending</td>
+              <td>2019-06-10 11:00</td>
+              <td>Ksh.5000 </td>
+            </tr>
+            <tr>
+              <td>APN-002</td>
+              <td>Peter</td>
+              <td>Pending</td>
+              <td>2019-06-10 11:00</td>
+              <td>Ksh.5000 </td>
+            </tr>
+            <tr>
+              <td>APN-003</td>
+              <td>Moraa</td>
+              <td>Pending</td>
+              <td>2019-06-10 11:60</td>
+              <td>Ksh.5000 </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
 </div>
 
 
-<div class="col-sm-4 col-md  col-6 col">
-<h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
-<!--headin5_amrc-->
-<ul class="footer_ul_amrc">
-<li><a class="resize" href="http://kalarikendramdelhi.com">Image Rectoucing</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Clipping Path</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Hollow Man Montage</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Ebay & Amazon</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Hair Masking/Clipping</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Image Cropping</a></li>
-</ul>
-<!--footer_ul_amrc ends here-->
-</div>
 
 
-<div class="col-sm-4 col-md  col-6 col">
-<h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
-<!--headin5_amrc-->
-<ul class="footer_ul_amrc">
-<li><a class="resize" href="http://kalarikendramdelhi.com">Remove Background</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Shadows & Mirror Reflection</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Logo Design</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Vectorization</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Hair Masking/Clipping</a></li><br>
-<li><a class="resize" href="http://kalarikendramdelhi.com">Image Cropping</a></li>
-</ul>
-<!--footer_ul_amrc ends here-->
-</div>
-
-
-<div class="col-sm-4 col-md  col-12 col">
-<h5 class="headin5_amrc col_white_amrc pt2">Follow us</h5>
-<!--headin5_amrc ends here-->
-
-<ul class="footer_ul2_amrc">
-<li><a class="resize" href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...</p></li>
-<li><a class="resize" href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...</p></li>
-<li><a class="resize" href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...</p></li>
-</ul>
-<!--footer_ul2_amrc ends here-->
-</div>
-</div>
-</div>
-
-
-<div class="footer-container-bottom container">
-<ul class="foote_bottom_ul_amrc">
-<li><a href="http://kalarikendramdelhi.com">Home</a></li>
-<li><a href="http://kalarikendramdelhi.com">About</a></li>
-<li><a href="http://kalarikendramdelhi.com">Services</a></li>
-<li><a href="http://kalarikendramdelhi.com">Pricing</a></li>
-<li><a href="http://kalarikendramdelhi.com">Blog</a></li>
-<li><a href="http://kalarikendramdelhi.com">Contact</a></li>
-</ul>
-<!--foote_bottom_ul_amrc ends here-->
-<p class="text-center">Copyright @2017 | Powered by <a style="color: #5E28AB" href="#"><b>Ariyans Techies</b></a></p>
-
-<ul class="social_footer_ul">
-<li><a href="http://kalarikendramdelhi.com"><i class="fab fa-facebook-f"></i></a></li>
-<li><a href="http://kalarikendramdelhi.com"><i class="fab fa-twitter"></i></a></li>
-<li><a href="http://kalarikendramdelhi.com"><i class="fab fa-linkedin"></i></a></li>
-<li><a href="http://kalarikendramdelhi.com"><i class="fab fa-instagram"></i></a></li>
-</ul>
-<!--social_footer_ul ends here-->
-</div>
-
-</footer>
+<br><br>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -591,6 +651,17 @@
       </ul>
     </div>
   </div>
+
+  <!-- to make tr clicaeble -->
+  <script>
+    jQuery(document).ready(function ($) {
+        $('[data-href]').click(function () {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
+
+
   <!--   Core JS Files   -->
   <script src="{% static 'css/assets/js/core/jquery.min.js' %}"></script>
   <script src="{% static 'css/assets/js/core/popper.min.js' %}"></script>

@@ -64,3 +64,10 @@ class Appointment2CreateView(CreateView):
         appointment.save()
         messages.success(self.request, 'The appointment was created succesfully.')
         return redirect('dashboard')
+#
+# def AcceptAppointMent (request, pk):
+#     appointment = get_object_or_404(Apointments, pk=pk)
+#     appointment.is_accepted = True
+#     appointment.is_rejected = False
+#     appointment.save()
+#     return redirect('appointment_detail', pk=pk)

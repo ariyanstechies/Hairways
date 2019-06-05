@@ -34,8 +34,7 @@ class ClientUpdate(UpdateView):
     template_name =  'clients/client_update_form.html'
 
     def get_object(self):
-
-        return get_object_or_404(User, pk=self.request.user.id)
+        return get_object_or_404(Ticket, pk=self.pk)
         # TODO: add redirect url or succes_url
 
 @method_decorator([login_required, client_required], name='dispatch')

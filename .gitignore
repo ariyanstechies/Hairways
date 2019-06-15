@@ -1,7 +1,7 @@
 *.pyc
 __pycache__
-hairenv
-myvenv
+hairenv/
+myvenv/
 db.sqlite3
 /static
 .DS_Store

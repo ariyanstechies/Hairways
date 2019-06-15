@@ -24,7 +24,7 @@ class OwnerSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('home')
+        return redirect('salon_add')
 
 
 @method_decorator([login_required, owner_required], name='dispatch')

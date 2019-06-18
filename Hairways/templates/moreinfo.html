@@ -204,24 +204,17 @@
           </table>
           <div id="total" style="float: right; margin-right: 50px; font-weight: bold"></div>
           <div style="margin: 40px 15px 15px 15px">
-            <form style="padding-top: 70px">
-              <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control"  placeholder="Jane">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Phone number</label>
-                <input type="number" class="form-control" placeholder="071234567">
-                <small class="form-text text-muted">Enter your number to get notifications on your appointment.</small>
-              </div>
+			  <form method="POST" action="">
+				  {% csrf_token %}
+				  {{ clientAppointment }}
 
-            </form>
           </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Reserve an appointment</button>
-        <button type="button" class="btn btn-primary">Procede to book an appointment</button>
+        <input type="submit" class="btn btn-secondary" value="Reserve an appointment">
+      </form>
+        <button class="btn btn-primary"><a href="{% url 'clientPayment' %}">Proceed to book an appointment</a></button>
       </div>
     </div>
   </div>

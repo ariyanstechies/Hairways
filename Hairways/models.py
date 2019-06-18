@@ -96,9 +96,9 @@ class Client(models.Model):
 
 class Appointments(models.Model):
     client= models.ForeignKey(User, on_delete=models.CASCADE, default=1,related_name='my_appointments')
+    clientphoneNo= models.IntegerField()
     services = models.ManyToManyField(Services)
     salons = models.ForeignKey(Salons, on_delete=models.CASCADE, default=1, related_name='appointments')
-    AppointmentsStatus = models.BooleanField()
     date_time = models.DateTimeField()
     created_date = models.DateTimeField(default=timezone.now)
     totalCost = models.IntegerField()
@@ -106,6 +106,7 @@ class Appointments(models.Model):
     is_rejected = models.BooleanField(default = False)
     is_pending = models.BooleanField(default=True)
     is_complete = models.BooleanField(default=False)
+
 
 class Products(models.Model):
     product_name = models.CharField(max_length=100)

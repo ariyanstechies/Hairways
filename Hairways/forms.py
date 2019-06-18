@@ -63,3 +63,9 @@ class addProductForm(forms.ModelForm):
     class Meta:
         model = Products
         fields = ('product_name', 'price', 'product_brand', 'salons')
+
+class clientAppointment(forms.ModelForm):
+
+    class Meta:
+        model = Appointments
+        fields = ('client', 'clientphoneNo', 'salons', 'totalCost', 'date_time')

@@ -55,7 +55,7 @@ class SalonCreateView(CreateView):
 @method_decorator([login_required, owner_required], name='dispatch')
 class Appointment2CreateView(CreateView):
     model = Appointments
-    fields = ('services','salons','AppointmentsStatus','date_time','totalCost' )
+    fields = ('services','salons','date_time','totalCost' )
     template_name = 'clients/order_add_form.html'
 
     def form_valid(self, form):

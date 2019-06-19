@@ -96,7 +96,7 @@ class Client(models.Model):
 
 class Appointments(models.Model):
     client= models.ForeignKey(User, on_delete=models.CASCADE, default=1,related_name='my_appointments')
-    clientphoneNo= models.IntegerField()
+    clientphoneNo= models.IntegerField(default='2345966')
     services = models.ManyToManyField(Services)
     salons = models.ForeignKey(Salons, on_delete=models.CASCADE, default=1, related_name='appointments')
     date_time = models.DateTimeField()

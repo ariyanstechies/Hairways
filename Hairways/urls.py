@@ -36,6 +36,7 @@ urlpatterns = [
     path('appointment/<int:pk>/', home_views.appointment_detail, name='appointment_detail'),
     path('appointment/<pk>/accept/', home_views.appointment_accept, name='appointment_accept'),
     path('appointment/<pk>/reject/', home_views.appointment_reject, name='appointment_reject'),
+    path('update/<int:pk>/', owners.AppointmentUpdate.as_view(), name= 'a_update'),
 
 
 

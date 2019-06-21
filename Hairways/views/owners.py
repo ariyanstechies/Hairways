@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.views.generic import CreateView
-from ..forms import OwnerSignUpForm
+from ..forms import OwnerSignUpForm , AppointmentUpdateForm
 from ..models import User, Owner, Appointments, Salons
 from ..decorators import owner_required
 from django.contrib.auth.decorators import login_required
@@ -55,19 +55,20 @@ class SalonCreateView(CreateView):
 @method_decorator([login_required, owner_required], name='dispatch')
 class Appointment2CreateView(CreateView):
     model = Appointments
-    fields = ('services','salons','date_time','totalCost' )
+    fields = ('salons','date_time','totalCost' )
     template_name = 'clients/order_add_form.html'
 
     def form_valid(self, form):
-        appointment = form.save(commit=False)
-        appointment.Owner = self.request.user.owner
-        appointment.save()
+        self.appointment = form.save(commit=False)
+        self.appointment.Owner = self.request.user.owner
+        self.appointment.save()
         messages.success(self.request, 'The appointment was created succesfully.')
-        return redirect('dashboard')
-#
-# def AcceptAppointMent (request, pk):
-#     appointment = get_object_or_404(Apointments, pk=pk)
-#     appointment.is_accepted = True
-#     appointment.is_rejected = False
-#     appointment.save()
-#     return redirect('appointment_detail', pk=pk)
+        return redirect('a_update', pk=self.appointment.pk)
+
+@method_decorator([login_required, owner_required], name='dispatch')
+class AppointmentUpdate(UpdateView):
+    model = Appointments
+    form_class = AppointmentUpdateForm
+    template_name = 'appointments_update_form.html'
+
+    

@@ -69,3 +69,11 @@ class clientAppointment(forms.ModelForm):
     class Meta:
         model = Appointments
         fields = ('client', 'clientphoneNo', 'salons', 'totalCost', 'date_time')
+
+class AppointmentUpdateForm(forms.ModelForm):
+    class Meta :
+        model = Appointments
+        fields = ['services']
+        widgets = {
+            'services': forms.CheckboxSelectMultiple,
+        }

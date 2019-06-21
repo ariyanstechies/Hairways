@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 
 
 class User(AbstractUser):
@@ -97,7 +98,7 @@ class Client(models.Model):
 class Appointments(models.Model):
     client= models.ForeignKey(User, on_delete=models.CASCADE, default=1,related_name='my_appointments')
     clientphoneNo= models.IntegerField(default='2345966')
-    services = models.ManyToManyField(Services)
+    services = models.ManyToManyField(Services,related_name = 'services')
     salons = models.ForeignKey(Salons, on_delete=models.CASCADE, default=1, related_name='appointments')
     date_time = models.DateTimeField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -107,6 +108,11 @@ class Appointments(models.Model):
     is_pending = models.BooleanField(default=True)
     is_complete = models.BooleanField(default=False)
 
+    def __str__(self):
+        return  str(self.clientphoneNo)
+
+    def get_absolute_url(self):
+        return reverse('appointment_detail', kwargs={'pk': self.pk})
 
 class Products(models.Model):
     product_name = models.CharField(max_length=100)

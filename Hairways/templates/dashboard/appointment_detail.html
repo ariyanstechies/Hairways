@@ -62,9 +62,17 @@
 
                     <!-- Services booked -->
 
-                    <div><strong>Services Booked:</strong> </div>
-                    <div>1.Hair Cut</div>
-                    <div>2.Manicure</div>
+                    <div><strong>Services Booked:</strong>
+                      <ol>
+                             {% for service in appointment.services.all %}
+                             <li>
+                                 <div class="text-info"><strong>
+                                         <h5>{{ service }}</h5>
+                                     </strong></div>
+                             </li>
+                             {% endfor %}
+                         </ol>
+                    </div>
 <br>
                     <h5 class="mb-3">Branch Booked:<span class="text-info"> Kisumu CBD</span> </h5>
                 </div>

@@ -2,7 +2,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>For the best salons in town</title>
@@ -220,36 +219,34 @@
   </div>
 </div>
 <section>
-  <div class="card" align=center style="background-color: #CCEFE7; margin: 30px 0px 20px 0px">
-    <div class="card-body">
-      <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselIndicators" data-slide-to="0"></li>
-          <li data-target="#carouselIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" style="padding: 50px 0px 50px 0px">
-          {% for each in reviews %}
-          <div class="comments-section carousel-item">
-            <p>{{ each.reply }}</p>
-          </div>
-          {% endfor %}
-        </div>
-        <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
+<div>
+  <h4>Average Rating</h4>
+  <div>Chart here</div>
+</div>
+<div>
+  <p>Have you used this product before?</p>
+  <button>Write a Review</button>
   </div>
-</section>
-<section>
-  <!-- formnnnnnnn    was here -->
-
+  <div class="reviews-list">
+  <h1>All Reviews</h1> 
+  <select>
+    <option>Sort By</option>
+    <option>latest</option>
+    <option>Best Rating</option>
+    <option>Worst Rating</option>
+  </select>
+  {% if reviews %}
+  {% for review in reviews %}
+  <div>
+    <span> {{ review.author }}</span>
+    <span> {{ review.created_date }}</span>
+    <span> {{ review.reply }}</span>
+  </div>
+  {% endfor %}
+  {% else %}
+  <p>No Reviews yet</p>
+  {% endif%}
+  </div>
 </section>
 
 <script>

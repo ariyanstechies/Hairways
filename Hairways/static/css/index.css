@@ -1,117 +1,26 @@
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  width: 100%;
-  height: 70px;
-  padding: 10px 100px;
-  box-sizing: border-box;
-  transition: 0.3s;
+.navbar{
+	top: 0px;
+	overflow: hidden;
+	position: fixed;
+	z-index: 9;
+	width: 100%;
+}
 
+.navbar a{
+	color: whitesmoke;
 }
-nav.black {
-  background: rgba(0, 0, 0, 0.8);
-}
-nav .brand{
-  margin: 16px 36px;
-  position: fixed;
-  float: left;
-  color: #fff;
-  font-weight: bold;
-  font-size: 24px;
-}
-nav.black ul{
-  background: rgba(0, 0, 0, 0);
-}
-/* styling unordered list */
-nav ul{
-  list-style: none;
-  float: right;
-  color: #fff;
-  transition: 0.3s;
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  text-align: center;
-  background: rgba(0, 0, 0, 0);
-}
-nav ul li{
-  display: inline-block;
-  padding: 20px;
-}
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  text-transform: uppercase;
 
+.navbar-transparent{
+	opacity: .7;
+	font-weight: bold;
+	transition: 0.5s ease-in;
 }
-.menu-icon {
-  width: 100%;
-  text-align: right;
-  box-sizing: border-box;
-  padding: 15px 24px;
-  cursor: pointer;
-  background: #000;
-  display: none;
 
+.navbar-color{
+	background-color:black;
+	transition: 0.5s ease-in;
 }
-nav.black ul li a{
-  color: #fff;
-}
-nav ul li a:focus {
-  outline: none;
-}
-nav ul li a:active {
-  background: #E2472F;
-  color: #fff;
-  border-radius: 6px;
-}
-@media (max-width: 580px) {
-  .brand {
-  position: fixed;
-  top: 0;
-  margin-top: 16px;
-  }
-  nav ul {
-    max-height: 0px;
-    float:none;
-    overflow: auto;
-    background: #000;
 
-  }
-  .salon-rank {
-    margin: 4em auto;
-  }
-  nav.black ul {
-    background: #000;
-
-  }
-  .showing {
-  max-height: 20em;
-  }
-  nav ul li {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 24px 0;
-    text-align: center;
-
-  }
-  .menu-icon {
-    display: block;
-  }
-
-}
-/* end of navbar styling  */
-/* stars color  */
-span.fa.fa-star.checked {
-  color: darkred;
-}
-/* end of stars color  */
-/* Styling error not found salon */
-.not_found{
-background: url(./images/not_found.png);
-}
 .search-input{
 	margin: 10px 0px 10px 0px;
 	width: 250px;
@@ -126,6 +35,44 @@ background: url(./images/not_found.png);
 	transition: 0.25s ease-out;
 }
 
-.fakeimage{
-	cursor: pointer;
+.each-salon {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;	
+	opacity: .7;
+	border-radius: 50px;
+}
+
+.salon-name {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.salon-location {
+	font-size: 20px;
+	padding-left: 10px; 
+}
+
+.salon-description {
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
+	padding-left: 10px;
+}
+
+.salon-slogan{
+	font-size: 15px;
+	padding-left: 10px;
+}
+
+.icons > li {
+	display: inline-block;
+	margin-right: 5px; 
+	*display:inline; /*fix for IE 7 */
+	padding-left: 10px;
+}
+
+.read-more {
+	padding-left: 10px;
+	color: crimson
+}
+
+.icons {
+	color: rgb(0, 209, 176);
 }

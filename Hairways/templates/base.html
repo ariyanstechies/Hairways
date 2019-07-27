@@ -1,87 +1,69 @@
 {% load staticfiles %}
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head>
-<title>{% block title %} For the best Salons, Barber shop in town {% endblock %}</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap-grid.css' %}">
-  <!--font families  -->
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-  <!--custom css to override bootstrap -->
-  <link rel="stylesheet" href="{% static 'css/fixed_menu.css' %}">
-  <link href="{% static 'css/index.css' %}" rel="stylesheet"/>
-  {% block faqs %} {% endblock %}
-    <!-- custom js -->
-  <script src="{% static 'js/jquery.js' %}"></script>
-  <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
-  <script src="{% static 'js/javascript.js' %}"></script>
-  {% block location %} {% endblock %}
-
-</head>
-<body id="body" style="background-color: whitesmoke">
-  <!--nav bar -->
-  <!-- Repplace  w3 navbar with bootstrap navbar -->
-
-  <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" href="{% url 'home' %}">Hairways</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <head>
+    <title>{% block title %} For the best Salons, Barber shop in town {% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap-grid.css' %}">
+    <!--font families  -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet"/>
+    {% block location %} {% endblock %}
+  </head>
+  <body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light text-uppercase">
+      <a class="navbar-brand" href="{% url 'home' %}">Hairways</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
-        <a class="nav-item nav-link" href="{% url 'faqs' %}">Faqs</a>
-        {% if user.is_authenticated %}
-          {% if user.is_client %}
-            <a class="nav-item nav-link" href="{% url 'client_dashboard' %}" >{{request.user.username}}</a>
-                {% else %}
-                    <a class="nav-item nav-link" href="{% url 'owner_update' %}" >{{request.user.username}}</a>
-                {% endif %}
-                    <a class="nav-item nav-link" href="{% url 'dashboard' %}" >Dashboard</a>
-                    <a class="nav-item nav-link" href="{% url 'logout' %}" >Logout</a>
-                {% else %}
-                    <a class="nav-item nav-link" href="{% url 'login' %}" >Log In</a>
-                    <a class="nav-item nav-link" href="{% url 'signup' %}" >Sign Up</a>
-                {% endif %}
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  href="{% url 'about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  href="{% url 'faqs' %}">Faqs</a>
+          </li>
+          {% if user.is_authenticated %}
+            {% if user.is_client %}
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="{% url 'client_dashboard' %}" >{{request.user.username}}</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="{% url 'owner_update' %}" >{{request.user.username}}</a>
+              </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-item nav-link" href="{% url 'dashboard' %}" >Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-item nav-link" href="{% url 'logout' %}" >Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-item nav-link" href="{% url 'login' %}" >Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-item nav-link" href="{% url 'signup' %}" >Sign Up</a>
+            </li>
+          {% endif %}
+        </ul>
       </div>
-    </div>
-  </nav>
-
-  <!--end of navbar  -->
-  
-  <main>
+    </nav>
+    
     {% block content %}
-
     {% endblock %}
-  </main>
-
-
-  <footer>
-    <p>Footer under development</p>
-  </footer>
- 
-  <script>
-    $(window).scroll(function () { 
-      // console.log($(window).scrollTop())
-    if ($(window).scrollTop() > 45) {
-      $('nav').addClass('navbar-color');
-    }
-    if ($(window).scrollTop() < 45) {
-      $('nav').removeClass('navbar-color');
-    }
-    if ($(window).scrollTop() > 350){
-      $('nav').addClass('navbar-transparent')
-    }
-    if ($(window).scrollTop() < 350) {
-      $('nav').removeClass('navbar-transparent')
-    }
-  });
-  </script>
-
-</body>
-
+    <footer>
+      <p class="text-center">Footer under development</p>
+    </footer>    
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
+  </body>
 </html>

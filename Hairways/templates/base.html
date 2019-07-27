@@ -18,7 +18,6 @@
   <script src="{% static 'js/jquery.js' %}"></script>
   <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
   <script src="{% static 'js/javascript.js' %}"></script>
-  <!-- <script src="{% static 'js/scroll-horizontal.js' %}"></script> -->
   {% block location %} {% endblock %}
 
 </head>
@@ -52,35 +51,8 @@
     </div>
   </nav>
 
-
-
-
-  <!-- <nav>
-    <div class="brand">HAIRWAY</div>
-    <div class="menu-icon">
-      <i class="fa fa-bars fa-2x"></i>
-    </div>
-    <div class="menu">
-      <ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'faqs' %}">Faqs</a></li>
-        {% if user.is_authenticated %}
-          {% if user.is_client %}
-        <li><a href="{% url 'client_dashboard' %}" >{{request.user.username}}</a></li>
-          {% else %}
-        <li><a href="{% url 'owner_update' %}" >{{request.user.username}}</a></li>
-          {% endif %}
-          <li><a href="{% url 'dashboard'  %}" >Dashboard</a></li>
-        <li><a href="{% url 'logout' %}" >Logout</a></li>
-        {% else %}
-        <li><a class="active" href="{% url 'login' %}">Login</a></li>
-        <li><a href="{% url 'signup' %}">Sign Up</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </nav> -->
   <!--end of navbar  -->
+  
   <main>
     {% block content %}
 

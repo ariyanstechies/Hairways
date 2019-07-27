@@ -76,3 +76,15 @@
 .icons {
 	color: rgb(0, 209, 176);
 }
+
+@media (min-width: 320px) and (max-width: 480px) {
+	.salon-rank .carousel{
+		height: 250px;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+	.salon-rank .carousel{
+		height: 250px;
+	}
+}

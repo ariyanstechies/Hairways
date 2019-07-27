@@ -44,10 +44,10 @@
 </section>
 <!-- Getting a splited screen for left and right-->
 <!--<the outer container containing both left and right -->
-<div class=" w3-row w3-border ">
+<div class="row" style="margin:10px 15px 10px 10px">
 
-  <div class="w3-container w3-quarter " style="padding-top:5px">
-    <div class="w3-container" style="line-height: 30px; font-family: 'Kanit', sans-serif;">
+  <div class="col-lg-3" style="padding-top:5px">
+    <div class="container" style="line-height: 30px; background-color: whitesmoke; font-family: 'Kanit', sans-serif;">
       <h4 style="margin-bottom: 20px;">Filter Salons</h4>
       <div class="fakeimg"><i class="fa fa-fire" style="color: #11AEF1"></i> Popular</div>
       <div class="fakeimg"><i class="fa fa-map-marker" style="color: #11AEF1"></i> Near me</div>
@@ -63,130 +63,89 @@
       </div>
     </div>
     <hr>
-    <!--Advertisements -->
-    <!-- <div class="w3-content w3-container " style="max-width:400px">
-    <div class="mySlides w3-container w3-red">
-    <h1><b>Hurry!!!</b></h1>
-    <h1><i>Get your salon Known</i></h1>
-  </div>
-  <div class="mySlides w3-container w3-white">
-  <div><span class="w3-tag w3-yellow">New!</span><p> Get one month free on hairways </p></div>
 </div>
-</div> -->
-</div>
-<!--The right container containing to cards -->
-<div class="w3-container w3-rest  ">
-  <!--search by salon names-->
-  <div align="right">
-    <input class="search-input form-control" placeholder="Search salon..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;">
-    <!-- <i align="left" class="fa fa-search" style="margin-left: 0px"></i> -->
-  </div>
-  <div class="salon_wrapper">
-    {{ salons.count }}
-    {% if salons.count != 0 %}
-    {% for each_salon in salons %}
-    <div class="w3-col s6 w3-mobile" style="padding-left:10px">
-      <div class="blog-card" style="height:250px">
-        <div class="meta">
-          <div class="photo" style="background-image: url({% static 'css/images/cover1.jpg' %})"></div>
-          <ul class="details">
-            <li class="author"><a href="#"></a></li>
-            <li class="date">Rank: {{ each_salon.likes }}/10</li>
-            <li class="tags">
-              <ul>
-                <li><a href="#" class="salon_location">{{ each_salon.location }}</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <div class="description">
-          <h1> {{ each_salon.salonName }} </h1>
-          <h2>{{ each_salon.location }}</h2>
-          <p class="salon_descri"> {{each_salon.description}}</p>
-          <p class="read-more">
-            {% block comment %} Star Rating {% endblock %}
-            <span style="padding-right:32px">
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-            </span>
-            <a href="{% url 'moreinfo' id=each_salon.id %}" class="top-menu">Find More</a>
-          </p>
-          <hr>
-          <ul class="icons">
-            <li><i class="fa fa-eye fa-2x">{{ each_salon.views }}</i></li>
-            <li><i class="fa fa-heart-o fa-2x">{{ each_salon.likes }}</i></li>
-            <li><i class="fa fa-envelope-o fa-2x">{{ each_salon.approved_comments.count }}</i></li>
-            <li><i class="fa fa-share-alt fa-2x">{{ each_salon.shares }}</i></li>
-          </ul>
-        </div>
-      </div>
+
+
+<!-- NEW CARDS -->
+<div class="col-lg-9">
+    <!-- SEARCH BOX -->
+    <div align="right">
+      <input class="search-input form-control" placeholder="Search salon..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;">
+      <!-- <i align="left" class="fa fa-search" style="margin-left: 0px"></i> -->
     </div>
-    {% endfor %}
-    <br>
-    {% if salons.has_other_pages %}
-    <div class="w3-center" >
-      <div class="w3-bar w3-xlarge w3-border w3-round">
-        {% if salons.has_previous %}
-        <a href="?page={{ salons.previous_page_number }}" class="w3-button">&laquo;</a>
-        {% else %}
-        <a href="#" class="w3-button w3-disabled">&laquo;</a>
-        {% endif %}
-        {% for i in salons.paginator.page_range %}
-        {% if salons.number == i %}
-        <a  class="w3-button w3-pale-green">{{ i }} </a>
-        {% else %}
-        <a href="?page={{ i }}" class="w3-button">{{ i }}</a>
-        {% endif %}
+
+    <!-- SALONS CONTAINER -->
+    <div class="row allsalons">
+        {{ salons.count }}
+        {% if salons.count != 0 %}
+        {% for each_salon in salons %}
+        <div class="col-sm-6">
+            <div class="card" style="background-image: url({% static 'css/images/cover1.jpg' %}); margin-bottom: 20px; border-radius: 10px; border: none;">
+              <a href="{% url 'moreinfo' id=each_salon.id %}"><span style="position:absolute; width:100%; height:100%; top:0; left: 0;"></span></a>
+              <div class="each-salon card-body" style="padding: 0px; ">
+                  <div class="salon-description" style="background-color: whitesmoke; width: 70%; float: right; padding: 10px;">
+                    <h1 class="salon-name"> {{ each_salon.salonName }} </h1>
+                    <h2 class="salon-location">{{ each_salon.location }}</h2>
+                    <p class="salon-slogan"> <i>{{each_salon.description}}</i></p>
+                    <p class="read-more">
+                      {% block comment %} Star Rating {% endblock %}
+                      <span style="padding-right:32px">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                      </span>
+                    </p>
+                    <hr>
+                    <ul class="icons ">
+                      <li><i class="fa fa-eye fa-lg">&nbsp{{ each_salon.views }}</i></li>
+                      <li><i class="fa fa-heart-o fa-lg">&nbsp{{ each_salon.likes }}</i></li>
+                      <li><i class="fa fa-envelope-o fa-lg">&nbsp{{ each_salon.approved_comments.count }}</i></li>
+                      <li><i class="fa fa-share-alt fa-lg">&nbsp{{ each_salon.shares }}</i></li>
+                    </ul>
+                  </div>
+              </div>
+            </div>
+
+        </div>
         {% endfor %}
-        {% if salons.has_next %}
-        <a href="?page={{ salons.next_page_number }}" class="w3-button">&raquo;</a>
+   
+	</div>
+
+	{% if salons.has_other_pages %}
+        <div class="page" style="padding-bottom: 20px; margin: 0 auto">
+        <div aria-label="...">
+          <ul class="pagination">
+            {% if salons.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ salons.previous_page_number }}">Previous</a></li>
+			      {% else %}
+            <li class="page-item disabled"><a class="page-link" href="3" tabindex="-1">Previous</a></li>
+            {% endif %}
+            {% for i in salons.paginator.page_range %}
+            {% if salons.number == i %}
+            <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}<span class="sr-only">(current)</span></a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if salons.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ salons.next_page_number }}">Next</a></li>
+            {% else %}
+            <li class="page-item disabled"><a class="page-link" href="?page={{ i }}" tabindex="+1">Next</a></li>
+			{% endif %}
+			
+          </ul>
+        </div>
+	  </div>
+	  	{% endif %}
         {% else %}
-        <a href="" class="w3-button w3-disabled">&raquo;</a>
-        {% endif %}
-      </div>
-    </div>
-    {% endif %}
-    {% else %}
-    <p> No Salons To Display :(</p>
-    {% endif %}
-  </div>
-  <!-- : end of left -->
-  <!-- Adding black theme on navbar on scroll -->
-  <script>
-    $(document).ready(function() {
-      $('.menu-icon').bind('click', 'onload', function() {
-        $('nav ul').toggleClass('showing');
-      });
+        <p> No Salons To Display :(</p>
+		{% endif %}
 
-      $(window).on('scroll', function() {
-        if($(window).scrollTop()) {
-          $('nav').addClass('black');
-        }
-        else {
-          $('nav').removeClass('black');
-        }
-      });
-    });
-  </script>
-  <script>
-    var slideIndex = 0;
-    carousel();
+</div>
 
-    function carousel() {
-      var i;
-      var x = document.getElementsByClassName("mySlides");
-      for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-      }
-      slideIndex++;
-      if (slideIndex > x.length) {slideIndex = 1}
-      x[slideIndex-1].style.display = "block";
-      setTimeout(carousel, 2000);
-    }
-  </script>
+
   <!-- // Getting filtered salons according to locations -->
   <script type="text/javascript">
     // removing duplicate entries on drop down
@@ -202,20 +161,23 @@
     // Getting selected option from drpdown
     $('#location').on('change',function() {
       var location = $(this).val();
+      console.log(location)
+      // console.log($('.salon-location').text());
       if (location == "All Locations") {
-        $(".w3-col, .s6, .w3-mobile").show();
+        console.log("All was selected")
+        $(".col-sm-6").show();
       }else{
-        var match_location = $(".salon_location");
+        var match_location = $(".salon-location");
         for (var i=0; i<match_location.length; i++){
           if (location != $(match_location[i]).html()) {
-            $(".w3-col, .s6, .w3-mobile").eq(i).hide();
+            $(".col-sm-6").eq(i).hide();
           }else {
-            $(".w3-col, .s6, .w3-mobile").eq(i).show();
+            $(".col-sm-6").eq(i).show();
           }
         }
       }
     });
-    var salonNames = $(".description h1");
+    var salonNames = $(".salon-name");
     $(".search-input").on("keyup", function() {
       var query = $(this).val();
       checkSalon(query); // call filter method
@@ -228,15 +190,15 @@
           compare_salon = $(salonNames[y]).html().toLowerCase().trim();
           // comparing user input and all salon names
           if(compare_salon.startsWith(starts_with.toLowerCase())){
-            $(".w3-col, .s6, .w3-mobile").eq(y).show();
+            $(".col-sm-6").eq(y).show();
             salon_list.push(compare_salon);
           }
           else { // if didn't much hide that salon card
-          $(".w3-col, .s6, .w3-mobile").eq(y).hide();
+          $(".col-sm-6").eq(y).hide();
         }
       }
       else { // if input is empty show everything
-        $(".w3-col, .s6, .w3-mobile").eq(y).show();
+        $(".col-sm-6").eq(y).show();
       }
     }
   }

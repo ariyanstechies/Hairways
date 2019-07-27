@@ -81,7 +81,7 @@
         {% for each_salon in salons %}
         <div class="col-sm-6">
             <div class="card" style="background-image: url({% static 'css/images/cover1.jpg' %}); margin-bottom: 20px; border-radius: 10px; border: none;">
-              <a href="{% url 'moreinfo' id=each_salon.id %}"><span style="position:absolute; width:100%; height:100%; top:0; left: 0;"></span></a>
+              <a href="{% url 'moreinfo' id=each_salon.id %}"><span style="position:absolute; width:100%; height:100%; top:0; left: 0; z-index: 10;"></span></a>
               <div class="each-salon card-body" style="padding: 0px; ">
                   <div class="salon-description" style="background-color: whitesmoke; width: 70%; float: right; padding: 10px;">
                     <h1 class="salon-name"> {{ each_salon.salonName }} </h1>

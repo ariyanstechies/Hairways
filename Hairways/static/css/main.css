@@ -1,26 +1,16 @@
-.navbar{
-	top: 0px;
-	overflow: hidden;
-	position: fixed;
-	z-index: 9;
-	width: 100%;
+body {
+ font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
-
-.navbar a{
-	color: whitesmoke;
+.navbar-brand {
+	font-weight: bold;	
+    padding: 0 12px;
 }
-
-.navbar-transparent{
-	opacity: .7;
-	font-weight: bold;
-	transition: 0.5s ease-in;
+.navbar-nav .nav-item .nav-link.active {
+  color: #2F2F2F;
 }
-
-.navbar-color{
-	background-color:black;
-	transition: 0.5s ease-in;
+.navbar-nav .nav-item .nav-link:hover {
+  color: #2F2F2F;
 }
-
 .search-input{
 	margin: 10px 0px 10px 0px;
 	width: 250px;
@@ -75,4 +65,12 @@
 
 .icons {
 	color: rgb(0, 209, 176);
+}
+.home {
+	width: 100%;
+}
+.filters {
+	line-height: 1.8;
+	font-size: 16px;
+	cursor: pointer;
 }

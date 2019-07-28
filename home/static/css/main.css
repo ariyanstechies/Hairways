@@ -1,0 +1,87 @@
+body {
+ font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+.navbar-brand {
+	font-weight: bold;	
+    padding: 0 12px;
+}
+.navbar-nav .nav-item .nav-link.active {
+  color: #2F2F2F;
+}
+.navbar-nav .nav-item .nav-link:hover {
+  color: #2F2F2F;
+}
+.search-input{
+	margin: 10px 0px 10px 0px;
+	width: 250px;
+	color: #fff;
+	border: 2px solid #80BDFF;
+	color: #000;
+	font-weight: bold;
+}
+
+.search-input:focus{
+	width: 300px;
+	transition: 0.25s ease-out;
+}
+
+.each-salon {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;	
+	opacity: .7;
+	border-radius: 50px;
+}
+
+.salon-name {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.salon-location {
+	font-size: 20px;
+	padding-left: 10px; 
+}
+
+.salon-description {
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
+	padding-left: 10px;
+}
+
+.salon-slogan{
+	font-size: 15px;
+	padding-left: 10px;
+}
+
+.icons > li {
+	display: inline-block;
+	margin-right: 5px; 
+	*display:inline; /*fix for IE 7 */
+	padding-left: 10px;
+}
+
+.read-more {
+	padding-left: 10px;
+	color: crimson
+}
+
+.icons {
+	color: rgb(0, 209, 176);
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+	.salon-rank .carousel{
+		height: 250px;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+	.salon-rank .carousel{
+		height: 250px;
+	}
+.home {
+	width: 100%;
+}
+.filters {
+	line-height: 1.8;
+	font-size: 16px;
+	cursor: pointer;
+}

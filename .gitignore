@@ -128,3 +128,4 @@ media/
 *.pid
 # django migrations
 migrations/
+.vscode/

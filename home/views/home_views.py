@@ -33,14 +33,14 @@ def home(request):
 		salons = paginator.page(paginator.num_pages)
 
 	# print("Holly shit %s" % salons.getItems) to be revisted
-	return render(request, 'index.html', {"salons": salons })
+	return render(request, 'home/index.html', {"salons": salons })
 
 def faqs(request):
-	return render(request, "faqs.html")
+	return render(request, "faqs/faqs.html")
 
 
 def blog(request):
-	return render(request, "blog.html")
+	return render(request, "blog/blog.html")
 
 
 def about(request):
@@ -170,7 +170,7 @@ def moreinfo(request, id):
 		else:
 			form = clientAppointment()
 
-	return render(request, "moreinfo.html", {'salon': salon, 'services' : services, 'products' : products, 'reviews' : reviews, 'counter': 0, 'form': form, 'clientAppointment' : clientAppointment})
+	return render(request, "home/show.html", {'salon': salon, 'services' : services, 'products' : products, 'reviews' : reviews, 'counter': 0, 'form': form, 'clientAppointment' : clientAppointment})
 
 def clientPayment(request):
 	return render(request, "payment.html")
@@ -222,7 +222,7 @@ class SignUpView(TemplateView):
 #             return redirect('moreinfo')
 #
 #     form = CommentForm()
-#     return render(request, 'moreinfo.html', {'form': form})
+#     return render(request, 'home/show.html', {'form': form})
 
 
 

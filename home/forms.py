@@ -3,16 +3,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from home.models import *
 
-class ClientSignUpForm(UserCreationForm):
-    # interests = forms.ModelMultipleChoiceField(
-    #     queryset=Subject.objects.all(),
-    #     widget=forms.CheckboxSelectMultiple,
-    #     required=True
-    #)
 
+class ClientSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-
 
     @transaction.atomic
     def save(self):
@@ -21,7 +15,6 @@ class ClientSignUpForm(UserCreationForm):
         user.save()
         client = Client.objects.create(user=user)
         return user
-
 
 
 class OwnerSignUpForm(UserCreationForm):
@@ -34,17 +27,22 @@ class OwnerSignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
 class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comments
         fields = ('salon', 'reply')
 
+
 class addEmployeeForm(forms.ModelForm):
 
     class Meta:
         model = Staff
-        fields = ('firstname', 'lastname', 'phone', 'email', 'salary', 'date_started',)
+        fields = ('firstname', 'lastname', 'phone',
+                  'email', 'salary', 'date_started',)
+
 
 class addClientForm(forms.ModelForm):
 
@@ -52,11 +50,14 @@ class addClientForm(forms.ModelForm):
         model = Client
         fields = ('user', 'nickname', 'email', 'phone')
 
+
 class addServiceForm(forms.ModelForm):
 
     class Meta:
         model = Services
-        fields = ('serviceName', 'serviceCost', 'serviceDuration', 'serviceBookings', 'availability', 'salons')
+        fields = ('serviceName', 'serviceCost', 'serviceDuration',
+                  'serviceBookings', 'availability', 'salons')
+
 
 class addProductForm(forms.ModelForm):
 
@@ -64,14 +65,17 @@ class addProductForm(forms.ModelForm):
         model = Products
         fields = ('product_name', 'price', 'product_brand', 'salons')
 
+
 class clientAppointment(forms.ModelForm):
 
     class Meta:
         model = Appointments
-        fields = ('client', 'clientphoneNo', 'salons', 'totalCost', 'date_time')
+        fields = ('client', 'clientphoneNo',
+                  'salons', 'totalCost', 'date_time')
+
 
 class AppointmentUpdateForm(forms.ModelForm):
-    class Meta :
+    class Meta:
         model = Appointments
         fields = ['services']
         widgets = {

@@ -10,25 +10,27 @@ from django.urls import reverse
 class User(AbstractUser):
     is_client = models.BooleanField(default=False)
     is_owner = models.BooleanField(default=False)
-    nickname= models.CharField(max_length=30,null=True,blank=True)
-
+    nickname = models.CharField(max_length=30, null=True, blank=True)
 
 
 class Owner(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True)
     ownerName = models.CharField(max_length=30)
     email = models.CharField(max_length=150)
-    phone = models.PositiveIntegerField(default='0792799958')
+    phone = models.PositiveIntegerField(default='07000000')
     location = models.CharField(max_length=25, default='Kisumu')
-    gender = models.CharField(max_length=150, default= 'Female')
+    gender = models.CharField(max_length=150, default='Female')
 
     def __str__(self):
         return self.ownerName
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Owner.objects.create(user=instance)
+
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
@@ -39,7 +41,8 @@ class Salons(models.Model):
     salonName = models.CharField(max_length=20)
     description = models.TextField(max_length=50)
     created_date = models.DateTimeField(default=timezone.now)
-    Owner = models.ForeignKey(Owner, on_delete=models.CASCADE, related_name='my_salons')
+    Owner = models.ForeignKey(
+        Owner, on_delete=models.CASCADE, related_name='my_salons')
     likes = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     status = models.BooleanField(default=0)
@@ -47,20 +50,24 @@ class Salons(models.Model):
     paybill = models.TextField(null=True, blank=True, max_length=12)
     location = models.CharField(max_length=30)
 
-
     def __str__(self):
         return self.salonName
 
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
 
+
 class Likes(models.Model):
-    salon = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name="salon_likes")
+    salon = models.ForeignKey(
+        Salons, on_delete=models.CASCADE, related_name="salon_likes")
+
     def __str__(self):
         return self.salon.salonName
 
+
 class Services(models.Model):
-    salons = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name='services')
+    salons = models.ForeignKey(
+        Salons, on_delete=models.CASCADE, related_name='services')
     serviceName = models.CharField(max_length=100)
     serviceCost = models.CharField(max_length=50)
     serviceDuration = models.CharField(max_length=20)
@@ -86,9 +93,10 @@ class Staff(models.Model):
 
 
 class Client(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    nickname=models.CharField(max_length=30)
-    email= models.CharField(max_length=30, default='myemail@gmail.com')
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True)
+    nickname = models.CharField(max_length=30)
+    email = models.CharField(max_length=30, default='myemail@gmail.com')
     phone = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
@@ -96,37 +104,43 @@ class Client(models.Model):
 
 
 class Appointments(models.Model):
-    client= models.ForeignKey(User, on_delete=models.CASCADE, default=1,related_name='my_appointments')
-    clientphoneNo= models.IntegerField(default='2345966')
-    services = models.ManyToManyField(Services,related_name = 'services')
-    salons = models.ForeignKey(Salons, on_delete=models.CASCADE, default=1, related_name='appointments')
+    client = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='my_appointments')
+    clientphoneNo = models.IntegerField(default='2345966')
+    services = models.ManyToManyField(Services, related_name='services')
+    salons = models.ForeignKey(
+        Salons, on_delete=models.CASCADE, related_name='appointments')
     date_time = models.DateTimeField()
     created_date = models.DateTimeField(default=timezone.now)
     totalCost = models.IntegerField()
     is_accepted = models.BooleanField(default=False)
-    is_rejected = models.BooleanField(default = False)
+    is_rejected = models.BooleanField(default=False)
     is_pending = models.BooleanField(default=True)
     is_complete = models.BooleanField(default=False)
 
     def __str__(self):
-        return  str(self.clientphoneNo)
+        return str(self.clientphoneNo)
 
     def get_absolute_url(self):
         return reverse('appointment_detail', kwargs={'pk': self.pk})
+
 
 class Products(models.Model):
     product_name = models.CharField(max_length=100)
     price = models.IntegerField()
     product_brand = models.CharField(max_length=100)
-    salons = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name='products')
+    salons = models.ForeignKey(
+        Salons, on_delete=models.CASCADE, related_name='products')
 
     def __str__(self):
         return self.product_name
 
 
 class Comments(models.Model):
-    salon = models.ForeignKey(Salons, on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_comments')
+    salon = models.ForeignKey(
+        Salons, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='my_comments')
     reply = models.TextField(max_length=250)
     created_date = models.DateTimeField(
         default=timezone.now
@@ -136,6 +150,7 @@ class Comments(models.Model):
     def __str__(self):
         return self.reply
     # to be revisited
+
     def approve(self):
         self.approved_comment = True
         self.save()

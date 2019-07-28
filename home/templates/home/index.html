@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-  <!-- RANKING SALONS IN SLIDER -->
   <div class="container-fluid">
     <div class="row">
       <section class="home">
@@ -44,14 +43,11 @@
           </a>
         </div>
       </section>
-      <!-- Getting a splited screen for left and right-->
-      <!--<the outer container containing both left and right -->
     </div>
     <div class="row">
-      <div class="col-lg-3" style="padding-top:5px">
+      <div class="col-lg-3">
         <div class="container" style="font-family: 'Kanit', sans-serif;">
-          <h4>Filter Salons</h4>
-          <hr>
+          <h4>Filter Salons <hr></h4>
           <div class="filters"><i class="fa fa-fire"></i> Popular <hr></div>
           <div class="filters"><i class="fa fa-map-marker"></i> Near me <hr></div>
           <div class="filters"><i class="fa fa-thumbs-up"></i> Recommended <hr></div>
@@ -72,7 +68,6 @@
         <!-- SEARCH BOX -->
         <div align="right">
           <input class="search-input form-control" placeholder="Search salon..." style="border: 2px solid #80BDFF; color: #000; font-weight: bold;">
-          <!-- <i align="left" class="fa fa-search" style="margin-left: 0px"></i> -->
         </div>
         <!-- SALONS CONTAINER -->
         <div class="row allsalons">
@@ -108,12 +103,11 @@
                   </div>
                 </div>
               </div>
-            {% endfor %}
-            
+            {% endfor %}            
           </div>
           {% if salons.has_other_pages %}
-            <div class="page" style="padding-bottom: 20px; margin: 0 auto">
-              <div aria-label="...">
+            <div class="page">
+              <div>
                 <ul class="pagination">
                   {% if salons.has_previous %}
                     <li class="page-item"><a class="page-link" href="?page={{ salons.previous_page_number }}">Previous</a></li>
@@ -143,61 +137,4 @@
       </div>
     </div>
   </div>
-  <!-- // Getting filtered salons according to locations -->
-  <script type="text/javascript">
-  // removing duplicate entries on drop down
-  temporary = {};
-  jQuery('.custom-select').children().each(function() {
-  var txt = jQuery(this).attr('value');
-  if (temporary[txt]) {
-  jQuery(this).remove();
-  } else {
-  temporary[txt] = true;
-  }
-  });
-  // Getting selected option from drpdown
-  $('#location').on('change',function() {
-  var location = $(this).val();
-  console.log(location)
-  // console.log($('.salon-location').text());
-  if (location == "All Locations") {
-  console.log("All was selected")
-  $(".col-sm-6").show();
-  }else{
-  var match_location = $(".salon-location");
-  for (var i=0; i<match_location.length; i++){
-  if (location != $(match_location[i]).html()) {
-  $(".col-sm-6").eq(i).hide();
-  }else {
-  $(".col-sm-6").eq(i).show();
-  }
-  }
-  }
-  });
-  var salonNames = $(".salon-name");
-  $(".search-input").on("keyup", function() {
-  var query = $(this).val();
-  checkSalon(query); // call filter method
-  });
-  function checkSalon(starts_with) {
-  salon_list = []
-  // Iterating through each salon
-  for (var y=0; y<salonNames.length; y++){
-  if ($.trim(starts_with).length != 0){ //if there is sth in the input start filtering
-  compare_salon = $(salonNames[y]).html().toLowerCase().trim();
-  // comparing user input and all salon names
-  if(compare_salon.startsWith(starts_with.toLowerCase())){
-  $(".col-sm-6").eq(y).show();
-  salon_list.push(compare_salon);
-  }
-  else { // if didn't much hide that salon card
-  $(".col-sm-6").eq(y).hide();
-  }
-  }
-  else { // if input is empty show everything
-  $(".col-sm-6").eq(y).show();
-  }
-  }
-  }
-  </script>
 {% endblock %}

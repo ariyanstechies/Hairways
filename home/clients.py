@@ -13,6 +13,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 from django.views.generic.edit import UpdateView
 from django.shortcuts import get_list_or_404, get_object_or_404
 
+
 class ClientSignUpView(CreateView):
     model = User
     form_class = ClientSignUpForm
@@ -27,15 +28,17 @@ class ClientSignUpView(CreateView):
         login(self.request, user)
         return redirect('home')
 
+
 @method_decorator([login_required, client_required], name='dispatch')
 class ClientUpdate(UpdateView):
     model = Client
-    fields = ['nickname','email']
-    template_name =  'clients/client_update_form.html'
+    fields = ['nickname', 'email']
+    template_name = 'clients/client_update_form.html'
 
     def get_object(self):
         return get_object_or_404(Ticket, pk=self.pk)
         # TODO: add redirect url or succes_url
+
 
 @method_decorator([login_required, client_required], name='dispatch')
 class AppointmentListView(ListView):
@@ -48,17 +51,20 @@ class AppointmentListView(ListView):
             .select_related('client')
         return queryset
 
+
 @method_decorator([login_required, client_required], name='dispatch')
 class AppointmentCreateView(CreateView):
     model = Appointments
-    fields = ('services','salons','AppointmentsStatus','date_time','totalCost' )
+    fields = ('services', 'salons', 'AppointmentsStatus',
+              'date_time', 'totalCost')
     template_name = 'clients/order_add_form.html'
 
     def form_valid(self, form):
         appointment = form.save(commit=False)
         appointment.client = self.request.user
         appointment.save()
-        messages.success(self.request, 'The appointment was created succesfully.')
+        messages.success(
+            self.request, 'The appointment was created succesfully.')
         return redirect('client_dashboard')
 
 

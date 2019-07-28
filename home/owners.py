@@ -2,9 +2,9 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.views.generic import CreateView
-from ..forms import OwnerSignUpForm , AppointmentUpdateForm
-from ..models import User, Owner, Appointments, Salons
-from ..decorators import owner_required
+from home.forms import OwnerSignUpForm , AppointmentUpdateForm
+from home.models import User, Owner, Appointments, Salons
+from home.decorators import owner_required
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import get_list_or_404, get_object_or_404

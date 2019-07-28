@@ -1,23 +1,19 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from home.models import Salons, Services, Owner, Products, Comments, Client, Staff
-from home.models import Salons, Likes, Services, Owner, Products, Comments
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from ..decorators import client_required
-from ..decorators import owner_required
+from home.decorators import client_required, owner_required
 from django.http import HttpResponse
 import json
 from django.shortcuts import render, get_object_or_404
 from django.core import serializers
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
 
-from django.views.generic import CreateView
-
-from ..forms import *
+from home.forms import ClientSignUpForm
+from home.models import Salons, Services, Owner, Products, Comments, Client, Staff, Likes
 
 def home(request):
 	# To be revisited

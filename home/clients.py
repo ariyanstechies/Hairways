@@ -4,9 +4,9 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from ..decorators import client_required
-from ..forms import ClientSignUpForm
-from ..models import User, Client, Appointments, Comments
+from home.decorators import client_required
+from home.forms import ClientSignUpForm
+from home.models import User, Client, Appointments, Comments
 from django.views import generic
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)

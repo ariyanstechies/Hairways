@@ -63,14 +63,78 @@ body {
 	color: crimson
 }
 
+.read-more span {
+	padding-right:32px;
+}
+
 .icons {
 	color: rgb(0, 209, 176);
 }
+
 .home {
 	width: 100%;
 }
+
 .filters {
 	line-height: 1.8;
 	font-size: 16px;
 	cursor: pointer;
+}
+
+.col-lg-9 .search-input {
+	border: 2px solid #80BDFF; 
+	color: #000; 
+	font-weight: bold;
+}
+
+.custom-select {
+	font-weight: bold;
+}
+
+.allsalons .col-sm-6 .card {
+	background-image: url({% static 'css/images/cover1.jpg' %}); 
+	margin-bottom: 20px; 
+	border-radius: 10px; 
+	border: none;
+}
+
+.each-salon {
+	padding: 0px;
+}
+
+.salon-description {
+	background-color: whitesmoke; 
+	width: 70%; 
+	float: right; 
+	padding: 10px;
+}
+
+.card-link {
+	position:absolute; 
+	width:100%; 
+	height:100%; 
+	top:0; 
+	left: 0; 
+	z-index: 10;
+}
+
+.carousel-caption h5 {
+	color: #11AFF2; 
+	font-weight: bold;
+}
+
+.carousel-caption p {
+	color: #000;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+	.home .carousel{
+		height: 250px;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+	.home .carousel{
+		height: 250px;
+	}
 }

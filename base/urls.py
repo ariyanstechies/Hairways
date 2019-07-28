@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.urls import include, path
-from Hairways.views import owners, clients, home_views
+from home.views import owners, clients, home_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("Hairways.urls")),
+    path('', include("home.urls")),
 
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', home_views.SignUpView.as_view(), name='signup'),

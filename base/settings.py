@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Hairways',
+    'home',
     'crispy_forms',
     #'social_django',
 ]
@@ -59,12 +59,12 @@ MIDDLEWARE = [
 # SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='937755655618-iff20mdr7vkk0mp73s8gbpegrvlu9hnv.apps.googleusercontent.com'  # client Id
 # SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'N2yMghmefwhS1lrny32qAqcN' # client secret
 
-ROOT_URLCONF = 'Base.urls'
+ROOT_URLCONF = 'base.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'Hairways/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'home/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Base.wsgi.application'
+WSGI_APPLICATION = 'base.wsgi.application'
 
 
 # Database
@@ -128,7 +128,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-AUTH_USER_MODEL = 'Hairways.User'
+AUTH_USER_MODEL = 'home.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
@@ -143,7 +143,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'Hairways/static')
+    os.path.join(BASE_DIR, 'home/static')
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

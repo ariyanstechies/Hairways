@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from Hairways.models import Salons, Services, Owner, Products, Comments, Client, Staff
-from Hairways.models import Salons, Likes, Services, Owner, Products, Comments
+from home.models import Salons, Services, Owner, Products, Comments, Client, Staff
+from home.models import Salons, Likes, Services, Owner, Products, Comments
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt

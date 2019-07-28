@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
-from Hairways.models import *
+from home.models import *
 
 class ClientSignUpForm(UserCreationForm):
     # interests = forms.ModelMultipleChoiceField(

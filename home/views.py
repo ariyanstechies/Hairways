@@ -12,9 +12,9 @@ import json
 from django.shortcuts import render, get_object_or_404
 from django.core import serializers
 from django.views.generic import TemplateView, CreateView
-
-from home.forms import ClientSignUpForm
-from home.models import Salons, Services, Owner, Products, Comments, Client, Staff, Likes
+from home.forms import *
+from home.models import Salons, Services, Owner, Products, Comments
+from home.models import Client, Staff, Likes
 
 
 def home(request):

@@ -3,67 +3,12 @@
 <html>
   <head>
     <title>{% block title %} For the best Salons, Barber shop in town {% endblock %}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap-grid.css' %}">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href="{% static 'css/main.css' %}" rel="stylesheet"/>
+    {% include "shared/header.html" %}
   </head>
   <body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light text-uppercase">
-      <a class="navbar-brand" href="{% url 'home' %}">Hairways</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"  href="{% url 'about' %}">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"  href="{% url 'faqs' %}">Faqs</a>
-          </li>
-          {% if user.is_authenticated %}
-            {% if user.is_client %}
-              <li class="nav-item">
-                <a class="nav-item nav-link" href="{% url 'client_dashboard' %}" >{{request.user.username}}</a>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                <a class="nav-item nav-link" href="{% url 'owner_update' %}" >{{request.user.username}}</a>
-              </li>
-            {% endif %}
-            <li class="nav-item">
-              <a class="nav-item nav-link" href="{% url 'dashboard' %}" >Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item nav-link" href="{% url 'logout' %}" >Logout</a>
-            </li>
-          {% else %}
-            <li class="nav-item">
-              <a class="nav-item nav-link" href="{% url 'login' %}" >Log In</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item nav-link" href="{% url 'signup' %}" >Sign Up</a>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
-    </nav>
+    {% include "shared/navbar.html" %}
     {% block content %}
     {% endblock %}
-    <footer class="footer mt-auto py-3 bg-light">
-      <div class="container">
-        <div class="text-center">
-          <span class="copyright">Copyright &copy; Hairways Limited. <script>document.write(new Date().getFullYear());</script>, Kisumu.</span>          
-        </div>
-      </footer>
-      <script src="{% static 'js/jquery.js' %}"></script>
-      <script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
-    </body>
-  </html>
+    {% include "shared/footer.html" %}
+  </body>
+</html>

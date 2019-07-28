@@ -2,16 +2,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>For the best salons in town</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-    <!-- GOogle fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <!-- custom css -->
-    <link rel="stylesheet" href="{% static 'css/moreinfostyle.css' %}">
+    {% include "shared/header.html" %}
   </head>
   <body>
     <section class="salon-header" style="padding: 0px 15px 0px 15px;">
@@ -119,7 +111,7 @@
                     {% endfor %}
                     {% else %} <!-- spanning across the five columns-->
                     <tr style="border: none">
-                      <td colspan="5" align="center">Sorry No Services For Now:)</td>
+                      <td colspan="5" class="text-center text-muted">Sorry No Services For Now:)</td>
                     </tr>
                   {% endif%}
                 </tbody>
@@ -146,7 +138,7 @@
                     {% endfor %}
                     {% else %} <!-- spanning across the 4 columns-->
                     <tr style="border: none">
-                      <td colspan="4" align="center">No Products Found! :)</td>
+                      <td colspan="4" class="text-center text-muted">No Products Found! :)</td>
                     </tr>
                   {% endif%}
                 </tbody>
@@ -226,24 +218,35 @@
             </div>
           </div>
         </div>
-        {% if reviews %}
-          <hr>
-          {% for review in reviews %}
-            <div class="card-text">
+        <div class="card-text">
+          {% if reviews %}
+            <hr>
+            {% for review in reviews %}
               <p> {{ review.reply }}</p>
               <small> {{ review.author }}</small>
               <small> {{ review.created_date }}</small>
+              <hr>
+            {% endfor %}
+          {% else %}
+            <p class="text-center text-muted">No Reviews yet!</p>
+          {% endif%}
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="card-body">
+        <h3 class="card-title">Add Your Review</h3>
+        <div class="card-text">
+          <form>
+            <div class="form-group">
+              <textarea class="form-control" id="comment" rows="3"></textarea>
             </div>
-            <hr>
-          {% endfor %}
-        {% else %}
-          <p>No Reviews yet</p>
-        {% endif%}
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
       </div>
     </section>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  {% include "shared/footer.html" %}
 </body>
 </html>

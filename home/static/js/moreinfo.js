@@ -28,29 +28,8 @@ $(document).ready(function(){
     language: 'en'
   });
 
-function love() {
-  var element = document.getElementById("love-icon");
-  element.classList.toggle("loved");
-}
-
-
 $('.carousel-inner').find('.comments-section:first').addClass('active');
 
-// Handling Likes
-$(".likebutton").on('click', function () {
-  var catid;
-  catid = $(this).attr("data-catid");
-  $.ajax({
-  type: 'GET',
-  url: '{% url "likesalon" %}',
-  data: {
-    "salon_id": catid,
-  },
-  success(data){
-    $('#like' + catid).remove();
-    alert(data);
-  }});
-});
 // Handling number of views
 $(window).on('load', function(){
   var parent = $(this).parent();
@@ -144,7 +123,6 @@ var secondDivContent = document.getElementById('total');
 secondDivContent.innerHTML = "Total: "+firstDivContent.innerHTML;
 }
 
-});
 $(document).ready(function(){
     $('#booked').click(function() {
       $date = $("#datetimepicker").find("input").val();

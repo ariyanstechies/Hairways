@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.views.generic import CreateView
 from home.forms import OwnerSignUpForm, AppointmentUpdateForm
-from home.models import User, Owner, Appointments, Salons
+from home.models import User, Owner, Appointments, Salon
 from home.decorators import owner_required
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -41,7 +41,7 @@ class OwnerUpdate(UpdateView):
 
 @method_decorator([login_required, owner_required], name='dispatch')
 class SalonCreateView(CreateView):
-    model = Salons
+    model = Salon
     fields = ('name', 'description', 'paybill', 'location')
     template_name = 'owners/salon_add_form.html'
 

@@ -72,8 +72,8 @@
                                         {% for comment in my_comments %}
                                         <tr>
                                             <td>#{{comment.id}}</td>
-                                            <td>{{comment.date_time}}</td>
-                                            <td>{{comment.salons.saloonName}}</td>
+                                            <td>{{comment.created_date}}</td>
+                                            <td>{{comment.salon}}</td>
 
                                             <td>{% if comment.approved_comment%} Approved
 
@@ -102,8 +102,8 @@
                                         {% for comment in my_comments %}
                                         <tr>
                                             <td>#{{comment.id}}</td>
-                                            <td>{{comment.date_time}}</td>
-                                            <td>{{comment.salons.saloonName}}</td>
+                                            <td>{{comment.created_date}}</td>
+                                            <td>{{comment.salon}}</td>
 
                                             <td>{% if comment.approved_comment%} Approved
 

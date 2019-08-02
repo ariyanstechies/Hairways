@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <title>My Profile</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+
+                <img src="https://scontent.fnbo5-1.fna.fbcdn.net/v/t1.0-9/66400928_2328511317410206_9187459238312542208_n.jpg?_nc_cat=102&_nc_oc=AQlupFRQ3RLG5cDVoBqhzG2grd46cIIkGyiqklR5um1Xqp9tJHVSiJ8EgmS1j0IvVDo&_nc_ht=scontent.fnbo5-1.fna&oh=457f21536d734b678af1c716e2181862&oe=5DA246BA"
+                    class="rounded" alt="Cinque Terre" width="40" height="36">
+                <strong>{{request.user.username}}</strong>
+                <span class="float-right"> <strong>Logout</strong>
+
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-sm-3">
+                        <!-- left side battons -->
+                        <div class="btn-group-vertical">
+                            <a type="button" class="btn btn-primary disabled" href="#">View Profile</a>
+                            <a type="button" class="btn btn-primary" href="{% url 'client_update'%}">Edit Profile</a>
+                            <a type="button" class="btn btn-primary" href="{% url 'my_appointments'%}">My
+                                Appointments</a>
+                            <a type="button" class="btn btn-primary" href="{% url 'my_comments'%}">My Reviews</a>
+                            <a type="button" class="btn btn-primary" href="#">My Favourites</a>
+                            <a type="button" class="btn btn-primary" href="#">Logout</a>
+                        </div>
+                        <!-- /left side battons -->
+                    </div>
+                    <!-- Data area -->
+                    <div class="col-sm-9">
+                        <p>Full Name: {% if request.user.client.Full_Name %} {{request.user.client.Full_Name}}
+                            {%else%} <a href="{% url 'client_update'%}">Update Your Profile </a>{%endif%}
+                        </p>
+                        <p>Phone Number: {% if request.user.client.phone %} {{request.user.client.phone}}
+                            {%else%} <a href="{% url 'client_update'%}">Update Your Profile </a>{%endif%}</p>
+                        <p>Email Adress: {% if request.user.client.email %} {{request.user.client.email}}
+                            {%else%} <a href="{% url 'client_update'%}">Update Your Profile </a>{%endif%}</p>
+                        <p>Username: {{request.user.username}}</p>
+                        <p>Profile Picture: </p>
+                        <img src="https://scontent.fnbo5-1.fna.fbcdn.net/v/t1.0-9/66400928_2328511317410206_9187459238312542208_n.jpg?_nc_cat=102&_nc_oc=AQlupFRQ3RLG5cDVoBqhzG2grd46cIIkGyiqklR5um1Xqp9tJHVSiJ8EgmS1j0IvVDo&_nc_ht=scontent.fnbo5-1.fna&oh=457f21536d734b678af1c716e2181862&oe=5DA246BA"
+                            class="rounded" alt="Cinque Terre" width="404" height="336">
+
+                    </div>
+                    <!-- /data area -->
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    {% include "shared/footer.html" %}
+</body>
+
+</html>

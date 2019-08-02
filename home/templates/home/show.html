@@ -285,12 +285,7 @@
 });
 // Handling number of views
 $(window).on('load', function () {
-  var parent = $(this).parent();
-  var salonId = {
-    {
-      salon.id
-    }
-  };
+  var salonId = {{ salon.id }};
   $.ajax({
     url: '{% url "visits" %}',
     type: 'POST',

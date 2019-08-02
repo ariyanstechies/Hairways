@@ -225,3 +225,4 @@ def appointment_reject(request, pk,):
     appointment.is_accepted = False
     appointment.save()
     return redirect('appointment_detail', pk=pk)
+

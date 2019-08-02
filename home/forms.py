@@ -48,7 +48,7 @@ class addClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        fields = ('user', 'nickname', 'email', 'phone')
+        fields = ('user', 'Full_Name', 'email', 'phone')
 
 
 class addServiceForm(forms.ModelForm):

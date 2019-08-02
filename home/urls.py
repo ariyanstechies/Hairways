@@ -4,7 +4,7 @@ from django.urls import path, include
 from home import views, owners
 from home.owners import AppointmentUpdate, Appointment2CreateView
 from home.clients import ClientUpdate, AppointmentCreateView
-from home.clients import AppointmentListView, CommentsListView
+from home.clients import AppointmentListView, MiniDashboard,CommentsListView, MyAppointments, MyComments
 
 
 urlpatterns = [
@@ -41,6 +41,12 @@ urlpatterns = [
     path('appointment/<pk>/reject/',
          views.appointment_reject, name='appointment_reject'),
     path('update/<int:pk>/', AppointmentUpdate.as_view(), name='a_update'),
+
+#     client dashboard A.K.A Mini dashboard
+    path('user/profile/', MiniDashboard.as_view(), name = 'mini_dashboard'),
+    path('my/appointments',MyAppointments.as_view(), name = 'my_appointments'),
+    path('my/comments',MyComments.as_view(), name = 'my_comments')
+#     end of client dashboard
 ]
 
 if settings.DEBUG:

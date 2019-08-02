@@ -32,11 +32,11 @@ class ClientSignUpView(CreateView):
 @method_decorator([login_required, client_required], name='dispatch')
 class ClientUpdate(UpdateView):
     model = Client
-    fields = ['nickname', 'email']
+    fields = ['Full_Name', 'phone', 'email']
     template_name = 'clients/client_update_form.html'
 
     def get_object(self):
-        return get_object_or_404(Ticket, pk=self.pk)
+        return get_object_or_404(Client, pk=self.request.user.id)
         # TODO: add redirect url or succes_url
 
 
@@ -55,7 +55,7 @@ class AppointmentListView(ListView):
 @method_decorator([login_required, client_required], name='dispatch')
 class AppointmentCreateView(CreateView):
     model = Appointments
-    fields = ('services', 'salons', 'AppointmentsStatus',
+    fields = ('services', 'salons',
               'date_time', 'totalCost')
     template_name = 'clients/order_add_form.html'
 
@@ -73,6 +73,36 @@ class CommentsListView(ListView):
     model = Comments
     context_object_name = 'my_comments'
     template_name = 'clients/dashboard2.html'
+
+    def get_queryset(self):
+        queryset = self.request.user.my_comments \
+            .select_related('author')
+        return queryset
+
+
+@method_decorator([login_required, client_required], name='dispatch')
+class MiniDashboard(ListView):
+    model = Appointments
+    context_object_name = 'my_appointments'
+    template_name = 'clients/mini_dashboard.html'
+
+@method_decorator([login_required, client_required], name='dispatch')
+class MyAppointments(ListView):
+    model = Appointments
+    context_object_name = 'my_appointments'
+    template_name = 'clients/client_appointment.html'
+
+    def get_queryset(self):
+        queryset = self.request.user.my_appointments \
+            .select_related('client')
+        return queryset
+
+
+@method_decorator([login_required, client_required], name='dispatch')
+class MyComments(ListView):
+    model = Comments
+    context_object_name = 'my_comments'
+    template_name = 'clients/client_comments.html'
 
     def get_queryset(self):
         queryset = self.request.user.my_comments \

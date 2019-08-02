@@ -263,11 +263,7 @@
     type: "POST",
     url: "{% url 'preference' %}",
     data: {
-      'salon_id': {
-        {
-          salon.id
-        }
-      },
+      'salon_id': {{ salon.id }},
       'csrfmiddlewaretoken': '{{ csrf_token }}'
     },
     dataType: "json",
@@ -289,9 +285,7 @@ $(window).on('load', function () {
   $.ajax({
     url: '{% url "visits" %}',
     type: 'POST',
-    data: {
-      'salonId': salonId,
-    }
+    data: { 'salonId': salonId, }
   });
 });
 //  Share button

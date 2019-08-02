@@ -1,3 +1,7 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
 body {
  font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
@@ -39,11 +43,6 @@ body {
 .salon-location {
 	font-size: 20px;
 	padding-left: 10px; 
-}
-
-.salon-description {
-	clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
-	padding-left: 10px;
 }
 
 .salon-slogan{
@@ -90,25 +89,34 @@ body {
 .custom-select {
 	font-weight: bold;
 }
-
-.allsalons .col-sm-6 .card {
-	background-image: url({% static 'css/images/cover1.jpg' %}); 
-	margin-bottom: 20px; 
+/* GENERAL OPIONATED STYLING */
+section {
+	padding: 10px;
+}
+/* ==========================Moreinfo=====================================*/
+.salon-description {
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
+	background: transparent;
+}
+.salon-description .card{
+	/*background-image: url(images/cover1.jpg); */
+	background: rgba(0,0,0,0.7);
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 10px;
+	color: #fff;
 	border-radius: 10px; 
 	border: none;
 }
-
-.each-salon {
-	padding: 0px;
+/* Social Icons */
+.social {
+	cursor: pointer;
+	padding: 5px;
 }
-
-.salon-description {
-	background-color: whitesmoke; 
-	width: 70%; 
-	float: right; 
-	padding: 10px;
+.social:hover {
+	color: #222;
+	transition: 0.3s ease-out;
 }
-
 .card-link {
 	position:absolute; 
 	width:100%; 

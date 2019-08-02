@@ -99,13 +99,23 @@ class Staff(models.Model):
 
 class Client(models.Model):
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True)
-    nickname = models.CharField(max_length=30)
+        User, on_delete=models.CASCADE, primary_key=True , related_name = 'client')
+    Full_Name = models.CharField(max_length=30)
     email = models.CharField(max_length=30, default='myemail@gmail.com')
     phone = models.IntegerField(null=True, blank=True)
-
+    
     def __str__(self):
         return self.nickname
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Client.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.client.save()
 
 
 class Appointments(models.Model):

@@ -42,7 +42,7 @@ class OwnerUpdate(UpdateView):
 @method_decorator([login_required, owner_required], name='dispatch')
 class SalonCreateView(CreateView):
     model = Salons
-    fields = ('salonName', 'description', 'paybill', 'location')
+    fields = ('name', 'description', 'paybill', 'location')
     template_name = 'owners/salon_add_form.html'
 
     def form_valid(self, form):

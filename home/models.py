@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
+from django.template.defaultfilters import slugify
 
 
 class User(AbstractUser):
@@ -38,31 +39,35 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Salons(models.Model):
-    salonName = models.CharField(max_length=20)
+    name = models.CharField(max_length=20)
     description = models.TextField(max_length=50)
     created_date = models.DateTimeField(default=timezone.now)
     Owner = models.ForeignKey(
         Owner, on_delete=models.CASCADE, related_name='my_salons')
-    likes = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     status = models.BooleanField(default=0)
     shares = models.IntegerField(default=0)
     paybill = models.TextField(null=True, blank=True, max_length=12)
     location = models.CharField(max_length=30)
+    likes = models.ManyToManyField(User, related_name='likes')
 
     def __str__(self):
-        return self.salonName
+        return self.name
 
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
 
+    @property
+    def total_likes(self):
+        """
+        Likes for the salon
+        :return: Integer: Likes for the salon
+        """
+        return self.likes.count()
 
-class Likes(models.Model):
-    salon = models.ForeignKey(
-        Salons, on_delete=models.CASCADE, related_name="salon_likes")
-
-    def __str__(self):
-        return self.salon.salonName
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Salons, self).save(*args, **kwargs)
 
 
 class Services(models.Model):

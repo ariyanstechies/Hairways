@@ -14,7 +14,7 @@ from django.core import serializers
 from django.views.generic import TemplateView, CreateView
 from home.forms import *
 from home.models import Salons, Services, Owner, Products, Comments
-from home.models import Client, Staff, Likes
+from home.models import Client, Staff
 
 
 def home(request):
@@ -58,7 +58,8 @@ def dashboard(request):
 def user(request, id):
     user_details = Owner.objects.get(ownerId=id)
     salon_details = Salons.objects.get(ownerId=id)
-    return render(request, "dashboard/user.html", {'user_details': user_details, 'salon_details': salon_details})
+    context = {'user_details': user_details, 'salon_details': salon_details}
+    return render(request, "dashboard/user.html", context)
 
 
 @login_required
@@ -132,8 +133,8 @@ def upgrade(request):
 
 def moreinfo(request, id):
     salon = Salons.objects.get(id=id)
-    services = Services.objects.filter(salons__salonName=salon.salonName)
-    products = Products.objects.filter(salons__salonName=salon.salonName)
+    services = Services.objects.filter(salons__name=salon.name)
+    products = Products.objects.filter(salons__name=salon.name)
     reviews = Comments.objects.filter(salon__id=id)
 
     if request.method == "POST":
@@ -159,7 +160,28 @@ def moreinfo(request, id):
         else:
             form = clientAppointment()
 
-    return render(request, "home/show.html", {'salon': salon, 'services': services, 'products': products, 'reviews': reviews, 'counter': 0, 'form': form, 'clientAppointment': clientAppointment})
+    return render(request, "home/show.html", {'salon': salon, 'services': services, 'products': products,
+                                              'reviews': reviews, 'counter': 0, 'form': form, 'clientAppointment': clientAppointment})
+
+
+@login_required
+def preference(request):
+    if request.method == "POST":
+        salon_id = request.POST.get('salon_id', None)
+        salon = get_object_or_404(Salons, id=salon_id)
+        user = request.user
+
+        if salon.likes.filter(id=user.id):
+            # User has already liked this salon
+            # remove this user like
+            salon.likes.remove(user)
+            message = "dislike"
+        else:
+            # user likes salon
+            salon.likes.add(user)
+            message = "like"
+        context = {"likes_count": salon.total_likes, "message": message}
+    return HttpResponse(json.dumps(context), content_type='application/json')
 
 
 def clientPayment(request):
@@ -167,13 +189,14 @@ def clientPayment(request):
 
 
 @csrf_exempt
-def update_views(request):
+def visits(request):
     if request.method == 'POST' and request.is_ajax():
         get_view = request.POST.get('salonId', False)
         update_view = Salons.objects.get(id=get_view)
         update_view.views += 1
         update_view.save()
-    return HttpResponse("Salon With ID %s Views Was Updated successfully" % update_view.views)
+        message = "Salon With ID %s Views Was Updated successfully" % update_view.views
+    return HttpResponse(message)
 
 
 def upload(request):

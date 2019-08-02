@@ -127,5 +127,4 @@ media/
 *.db
 *.pid
 # django migrations
-migrations/
 .vscode/

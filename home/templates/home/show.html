@@ -275,15 +275,13 @@
     $(".likes_count").text(response.likes_count+ " ");
     }
     },
-    error: function (rs,err) {
-    }
-    });
-    });
-    // Handling number of views
-    $(window).on('load', function(){
-    var parent = $(this).parent();
-    var salonId= {{salon.id}};
-    $.ajax({
+    error: function (rs, err) {}
+  });
+});
+// Handling number of views
+$(window).on('load', function () {
+  var salonId = {{ salon.id }};
+  $.ajax({
     url: '{% url "visits" %}',
     type: 'POST',
     data: {

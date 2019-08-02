@@ -94,11 +94,11 @@ section {
 	padding: 10px;
 }
 /* ==========================Moreinfo=====================================*/
-.salon-description {
+.salon-details {
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
 	background: transparent;
 }
-.salon-description .card{
+.salon-details .card{
 	/*background-image: url(images/cover1.jpg); */
 	background: rgba(0,0,0,0.7);
 	background-repeat: no-repeat;

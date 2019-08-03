@@ -225,7 +225,7 @@
               {% if reviews %}
                 <hr>
                 {% for review in reviews %}
-                  <p> {{ review.reply }}</p>
+                  <p> {{ review.comment }}</p>
                   <small> {{ review.author }}</small>
                   <small> {{ review.created_date }}</small>
                   <hr>
@@ -242,14 +242,12 @@
       <div class="row">
         <div class="card col-sm-12">
           <div class="card-body">
-            <h3 class="card-title">Add Your Review</h3>
+            <h3 class="card-title">Add Your Review Below.</h3>
             <div class="card-text">
-              <form>
-                <div class="form-group">
-                  <textarea class="form-control" id="comment" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+            <form method="POST" class="post-form">{% csrf_token %}
+              {{ comment_form.as_p }}
+              <button type="submit" class="save btn btn-success">Save</button>
+            </form>
             </div>
           </div>
         </div>

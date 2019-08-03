@@ -143,18 +143,18 @@ def moreinfo(request, name):
     comments = Comments.objects.filter(salon__id=salon.id)
 
     if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            print('valid')
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
 
-            comment = form.save()
-            comment.author = request.user.username
+            comment = comment_form.save(commit=False)
+            comment.salon = salon
+            comment.author = request.user
 
             comment.save()
 
-            return redirect('moreinfo', id=salon.id)
+            return redirect('moreinfo', name=name)
 
-    form = CommentForm()
+    comment_form = CommentForm()
 
     if request.method == "POST":
         form = clientAppointment(request.POST)
@@ -162,10 +162,9 @@ def moreinfo(request, name):
             clientAppointmentAdd = form.save(commit=False)
             clientAppointmentAdd.save()
             return redirect('moreinfo', id=salon.id)
-        else:
-            form = clientAppointment()
+    form = clientAppointment()
     context = {'salon': salon, 'services': services, 'products': products,
-               'reviews': comments, 'counter': 0,
+               'reviews': comments, 'counter': 0, "comment_form": comment_form,
                'form': form, 'clientAppointment': clientAppointment}
     return render(request, "home/show.html", context)
 

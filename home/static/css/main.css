@@ -117,6 +117,9 @@ section {
 	border-radius: 10px; 
 	border: none;
 }
+.asteriskField {
+    display: none;
+}
 /* Social Icons */
 .social {
 	cursor: pointer;

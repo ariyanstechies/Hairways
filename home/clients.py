@@ -41,7 +41,6 @@ class ClientUpdate(UpdateView):
         return get_object_or_404(Client, pk=self.request.user.id)
         messages.success(
             self.request, 'The appointment was created succesfully.')
-   
 
 
 @method_decorator([login_required, client_required], name='dispatch')
@@ -89,6 +88,7 @@ class MiniDashboard(ListView):
     model = Appointments
     context_object_name = 'my_appointments'
     template_name = 'clients/mini_dashboard.html'
+
 
 @method_decorator([login_required, client_required], name='dispatch')
 class MyAppointments(ListView):

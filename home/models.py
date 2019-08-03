@@ -115,6 +115,7 @@ class Client(models.Model):
     def __str__(self):
         return self.nickname
 
+
 class Appointments(models.Model):
     client = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='my_appointments')
@@ -153,14 +154,14 @@ class Comments(models.Model):
         Salon, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='my_comments')
-    reply = models.TextField(max_length=250)
+    comment = models.TextField()
     created_date = models.DateTimeField(
         default=timezone.now
     )
     approved_comment = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.reply
+        return self.comment
     # to be revisited
 
     def approve(self):

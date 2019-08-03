@@ -4,7 +4,8 @@ from django.urls import path, include
 from home import views, owners
 from home.owners import AppointmentUpdate, Appointment2CreateView
 from home.clients import ClientUpdate, AppointmentCreateView
-from home.clients import AppointmentListView, MiniDashboard,CommentsListView, MyAppointments, MyComments
+from home.clients import AppointmentListView, MiniDashboard
+from home.clients import CommentsListView, MyAppointments, MyComments
 
 
 urlpatterns = [
@@ -14,7 +15,7 @@ urlpatterns = [
     path('client/update/', ClientUpdate.as_view(), name='client_update'),
     path('owner/update/', owners.OwnerUpdate.as_view(), name='owner_update'),
     path('dashboard/<int:id>/', views.dashboard, name='dashboard'),
-    path('Salon/<int:id>/', views.moreinfo, name='moreinfo'),
+    path('salon/<slug:name>/', views.moreinfo, name='moreinfo'),
     path('preference/', views.preference, name='preference'),
     path('visits/', views.visits, name="visits"),
     path('Salon/payment/', views.clientPayment, name='clientPayment'),
@@ -43,11 +44,11 @@ urlpatterns = [
          views.appointment_reject, name='appointment_reject'),
     path('update/<int:pk>/', AppointmentUpdate.as_view(), name='a_update'),
 
-#     client dashboard A.K.A Mini dashboard
-    path('user/profile/', MiniDashboard.as_view(), name = 'mini_dashboard'),
-    path('my/appointments',MyAppointments.as_view(), name = 'my_appointments'),
-    path('my/comments',MyComments.as_view(), name = 'my_comments')
-#     end of client dashboard
+    #     client dashboard A.K.A Mini dashboard
+    path('user/profile/', MiniDashboard.as_view(), name='mini_dashboard'),
+    path('my/appointments', MyAppointments.as_view(), name='my_appointments'),
+    path('my/comments', MyComments.as_view(), name='my_comments')
+    #     end of client dashboard
 ]
 
 if settings.DEBUG:

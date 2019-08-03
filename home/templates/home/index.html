@@ -76,7 +76,7 @@
             {% for each_salon in salons %}
               <div class="col-sm-6">
                 <div class="card">
-                  <a class="card-link" href="{% url 'moreinfo' id=each_salon.id %}"></a>
+                  <a class="card-link" href="{% url 'moreinfo' name=each_salon.url %}"></a>
                   <div class="each-salon card-body">
                     <div class="salon-description">
                       <h1 class="salon-name"> {{ each_salon.salonName }} </h1>

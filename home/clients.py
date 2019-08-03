@@ -12,6 +12,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 from django.views.generic.edit import UpdateView
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.urls import reverse_lazy
 
 
 class ClientSignUpView(CreateView):
@@ -34,10 +35,12 @@ class ClientUpdate(UpdateView):
     model = Client
     fields = ['Full_Name', 'phone', 'email']
     template_name = 'clients/client_update_form.html'
+    success_url = reverse_lazy('mini_dashboard')
 
     def get_object(self):
         return get_object_or_404(Client, pk=self.request.user.id)
-        # TODO: add redirect url or succes_url
+        messages.success(
+            self.request, 'The appointment was created succesfully.')
 
 
 @method_decorator([login_required, client_required], name='dispatch')
@@ -85,6 +88,7 @@ class MiniDashboard(ListView):
     model = Appointments
     context_object_name = 'my_appointments'
     template_name = 'clients/mini_dashboard.html'
+
 
 @method_decorator([login_required, client_required], name='dispatch')
 class MyAppointments(ListView):

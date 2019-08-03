@@ -115,18 +115,6 @@ class Client(models.Model):
     def __str__(self):
         return self.nickname
 
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Client.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.client.save()
-
-
 class Appointments(models.Model):
     client = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='my_appointments')

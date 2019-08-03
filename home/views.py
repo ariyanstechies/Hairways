@@ -16,6 +16,10 @@ from home.forms import *
 from home.models import Salon, Services, Owner, Products, Comments
 from home.models import Client, Staff
 
+import os
+from dotenv import load_dotenv
+load_dotenv(verbose=True)
+
 
 def home(request):
     filtered_salons = Salon.objects.all().order_by('likes')
@@ -141,6 +145,7 @@ def moreinfo(request, name):
     services = Services.objects.filter(salons__name=salon.name)
     products = Products.objects.filter(salons__name=salon.name)
     comments = Comments.objects.filter(salon__id=salon.id)
+    MAPS_API_KEY = os.getenv("MAPS_API_KEY")
 
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -166,7 +171,8 @@ def moreinfo(request, name):
             form = clientAppointment()
     context = {'salon': salon, 'services': services, 'products': products,
                'reviews': comments, 'counter': 0,
-               'form': form, 'clientAppointment': clientAppointment}
+               'form': form, 'clientAppointment': clientAppointment, 'MAPS_API_KEY' : MAPS_API_KEY}
+
     return render(request, "home/show.html", context)
 
 

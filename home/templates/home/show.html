@@ -52,16 +52,16 @@
           </div>
         </div>
       </section>
-      <section class="salon-description">
+      <section class="salon-details">
         <div class="row">
           <div class="card col-sm-12">
             <div class="card-body" style="color: whitesmoke;">
               <h3 class="card-title">{{ salon.name }}</h3>
               <div class="float-right d-inline">
                 <i class="social fa fa-heart" id="like"></i>
-                <i class="social fa fa-share share" data-href="{{ request.build_absolute_uri }}"></i>
+                <i class="social fa fa-share share-button" onclick="share_salon_page()" data-href="{{ request.build_absolute_uri }}"></i>
               </div>
-              <p>{{ salon.description }}</p>
+              <p class="salon-description">{{ salon.description }}</p>
             </div>
             <div class="row">
               <div class="col-6">
@@ -206,74 +206,75 @@
     </section>
     <section>
       <div class="row">
-      <div class="card col-sm-12">
-        <div class="card-body">
-          <h3 class="card-title d-inline">All Reviews</h3>
-          <div class="float-right d-inline">
-            <div class="dropdown dropleft">
-              <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Sort By
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">latest</a>
-                <a class="dropdown-item" href="#">Best Rating</a>
-                <a class="dropdown-item" href="#">Worst Rating</a>
+        <div class="card col-sm-12">
+          <div class="card-body">
+            <h3 class="card-title d-inline">All Reviews</h3>
+            <div class="float-right d-inline">
+              <div class="dropdown dropleft">
+                <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort By
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">latest</a>
+                  <a class="dropdown-item" href="#">Best Rating</a>
+                  <a class="dropdown-item" href="#">Worst Rating</a>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card-text">
-            {% if reviews %}
-              <hr>
-              {% for review in reviews %}
-                <p> {{ review.reply }}</p>
-                <small> {{ review.author }}</small>
-                <small> {{ review.created_date }}</small>
+            <div class="card-text">
+              {% if reviews %}
                 <hr>
-              {% endfor %}
-            {% else %}
-              <p class="text-center text-muted">No Reviews yet!</p>
-            {% endif%}
+                {% for review in reviews %}
+                  <p> {{ review.reply }}</p>
+                  <small> {{ review.author }}</small>
+                  <small> {{ review.created_date }}</small>
+                  <hr>
+                {% endfor %}
+              {% else %}
+                <p class="text-center text-muted">No Reviews yet!</p>
+              {% endif%}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-      </section>
-      <section>
-        <div class="row">
-          <div class="card col-sm-12">
-        <div class="card-body">
-          <h3 class="card-title">Add Your Review</h3>
-          <div class="card-text">
-            <form>
-              <div class="form-group">
-                <textarea class="form-control" id="comment" rows="3"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+    </section>
+    <section>
+      <div class="row">
+        <div class="card col-sm-12">
+          <div class="card-body">
+            <h3 class="card-title">Add Your Review</h3>
+            <div class="card-text">
+              <form>
+                <div class="form-group">
+                  <textarea class="form-control" id="comment" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
           </div>
         </div>
-        </div>
-        </div>
-      </section>
-      {% include "shared/footer.html" %}
-    </div>
-    <script>
-    $('#like').click(function () {
-    $.ajax({
+      </div>
+    </section>
+    {% include "shared/footer.html" %}
+  </div>
+  <script>
+ $('#like').click(function () {
+  $.ajax({
     type: "POST",
     url: "{% url 'preference' %}",
     data: {
-    'salon_id': {{salon.id}},
-    'csrfmiddlewaretoken': '{{ csrf_token }}'},
+      'salon_id': {{ salon.id }},
+      'csrfmiddlewaretoken': '{{ csrf_token }}'
+    },
     dataType: "json",
     success: function (response) {
-    if (response.message == "like") {
-    $("#like").css('color', '#FF0033');
-    $(".likes_count").text(response.likes_count+ " ");
-    } else {
-    $("#like").css('color', '');
-    $(".likes_count").text(response.likes_count+ " ");
-    }
+      if (response.message == "like") {
+        $("#like").css('color', '#FF0033');
+        $(".likes_count").text(response.likes_count + " ");
+      } else {
+        $("#like").css('color', '');
+        $(".likes_count").text(response.likes_count + " ");
+      }
     },
     error: function (rs, err) {}
   });
@@ -284,11 +285,40 @@ $(window).on('load', function () {
   $.ajax({
     url: '{% url "visits" %}',
     type: 'POST',
-    data: {
-    'salonId': salonId,
-    }});
+    data: { 'salonId': salonId, }
+  });
+});
+//  Share button
+async function share_salon_page() {
+  const title = document.title;
+  const url = $(".share-button").attr("data-href");
+  const description = $(".salon-description").text();
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: title,
+        text: description,
+        url: url,
+      });
+      return !0
+    } catch (err) {
+      console.error('There was an error trying to share this content');
+      return !1
+    }
+  } else if (window.Windows) {
+    const DataTransferManager = window.Windows.ApplicationModel.DataTransfer.DataTransferManager;
+    const dataTransferManager = DataTransferManager.getForCurrentView();
+    dataTransferManager.addEventListener("datarequested", (ev) => {
+      const data = ev.request.data;
+      data.properties.title = title;
+      data.properties.url = url;
+      data.setText(description)
     });
-    </script>
-    <script src="{% static "js/moreinfo.js" %}"></script>
-  </body>
+    DataTransferManager.showShareUI();
+    return !0
+  }
+};
+  </script>
+  <script src="{% static "js/moreinfo.js" %}"></script>
+</body>
 </html>

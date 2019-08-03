@@ -13,12 +13,12 @@ from django.shortcuts import render, get_object_or_404
 from django.core import serializers
 from django.views.generic import TemplateView, CreateView
 from home.forms import *
-from home.models import Salons, Services, Owner, Products, Comments
+from home.models import Salon, Services, Owner, Products, Comments
 from home.models import Client, Staff
 
 
 def home(request):
-    filtered_salons = Salons.objects.all().order_by('likes')
+    filtered_salons = Salon.objects.all().order_by('likes')
     page = request.GET.get('page', 1)
     paginator = Paginator(filtered_salons, 10)
     try:
@@ -41,7 +41,7 @@ def about(request):
 
 @method_decorator([login_required, owner_required], name='dispatch')
 def dashboard(request):
-    me = Salons.objects.all()
+    me = Salon.objects.all()
     if request.method == "POST":
         form = addSalonForm(request.POST)
         if form.is_valid():
@@ -51,13 +51,14 @@ def dashboard(request):
     else:
         form = addSalonForm()
 
-    return render(request, "dashboard/dashboard.html", {'me': me, 'form': form})
+    context = {'me': me, 'form': form}
+    return render(request, "dashboard/dashboard.html", context)
 
 
 @login_required
 def user(request, id):
     user_details = Owner.objects.get(ownerId=id)
-    salon_details = Salons.objects.get(ownerId=id)
+    salon_details = Salon.objects.get(ownerId=id)
     context = {'user_details': user_details, 'salon_details': salon_details}
     return render(request, "dashboard/user.html", context)
 
@@ -87,7 +88,9 @@ def productsServices(request):
     else:
         formproduct = addProductForm()
 
-    return render(request, "dashboard/productsServices.php", {'formservice': formservice, 'formproduct': formproduct, 'service': service, 'product': product})
+    context = {'formservice': formservice, 'formproduct': formproduct,
+               'service': service, 'product': product}
+    return render(request, "dashboard/productsServices.php", context)
 
 
 @login_required
@@ -113,7 +116,9 @@ def staffClients(request):
     else:
         formclient = addClientForm()
 
-    return render(request, "dashboard/staffClients.php", {'formstaff': formstaff, 'formclient': formclient, 'client': client, 'staff': staff})
+    context = {'formstaff': formstaff, 'formclient': formclient,
+               'client': client, 'staff': staff}
+    return render(request, "dashboard/staffClients.php", context)
 
 
 @login_required
@@ -131,11 +136,11 @@ def upgrade(request):
     return render(request, "dashboard/upgrade.php")
 
 
-def moreinfo(request, id):
-    salon = Salons.objects.get(id=id)
+def moreinfo(request, name):
+    salon = get_object_or_404(Salon, url=name)
     services = Services.objects.filter(salons__name=salon.name)
     products = Products.objects.filter(salons__name=salon.name)
-    reviews = Comments.objects.filter(salon__id=id)
+    comments = Comments.objects.filter(salon__id=salon.id)
 
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -159,16 +164,17 @@ def moreinfo(request, id):
             return redirect('moreinfo', id=salon.id)
         else:
             form = clientAppointment()
-
-    return render(request, "home/show.html", {'salon': salon, 'services': services, 'products': products,
-                                              'reviews': reviews, 'counter': 0, 'form': form, 'clientAppointment': clientAppointment})
+    context = {'salon': salon, 'services': services, 'products': products,
+               'reviews': comments, 'counter': 0,
+               'form': form, 'clientAppointment': clientAppointment}
+    return render(request, "home/show.html", context)
 
 
 @login_required
 def preference(request):
     if request.method == "POST":
         salon_id = request.POST.get('salon_id', None)
-        salon = get_object_or_404(Salons, id=salon_id)
+        salon = get_object_or_404(Salon, id=salon_id)
         user = request.user
 
         if salon.likes.filter(id=user.id):
@@ -192,10 +198,11 @@ def clientPayment(request):
 def visits(request):
     if request.method == 'POST' and request.is_ajax():
         get_view = request.POST.get('salonId', False)
-        update_view = Salons.objects.get(id=get_view)
+        update_view = Salon.objects.get(id=get_view)
         update_view.views += 1
         update_view.save()
-        message = "Salon With ID %s Views Was Updated successfully" % update_view.views
+        message = "Salon With ID %s Views Was \
+                Updated successfully" % update_view.views
     return HttpResponse(message)
 
 
@@ -215,19 +222,20 @@ class SignUpView(TemplateView):
 
 @method_decorator([login_required, owner_required], name='dispatch')
 class AppointmentListView(generic.ListView):
-    model = Salons
+    model = Salon
     context_object_name = 'my_salon'
     template_name = 'dashboard/dashboard.html'
 
     def get_queryset(self):
-        data = Salons.objects.get(Owner=self.request.user.owner)
+        data = Salon.objects.get(Owner=self.request.user.owner)
         queryset = data.appointments.all()
         return queryset
 
 
 def appointment_detail(request, pk):
     appointment = get_object_or_404(Appointments, pk=pk)
-    return render(request, 'dashboard/appointment_detail.html', {'appointment': appointment})
+    context = {'appointment': appointment}
+    return render(request, 'dashboard/appointment_detail.html', context)
 
 
 def appointment_accept(request, pk,):
@@ -248,4 +256,3 @@ def appointment_reject(request, pk,):
     appointment.is_accepted = False
     appointment.save()
     return redirect('appointment_detail', pk=pk)
-

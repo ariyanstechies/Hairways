@@ -38,8 +38,9 @@ def save_user_profile(sender, instance, **kwargs):
     instance.owner.save()
 
 
-class Salons(models.Model):
+class Salon(models.Model):
     name = models.CharField(max_length=20)
+    url = models.SlugField()
     description = models.TextField(max_length=50)
     created_date = models.DateTimeField(default=timezone.now)
     Owner = models.ForeignKey(
@@ -54,6 +55,12 @@ class Salons(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.url = slugify(self.name)
+
+        super(Salon, self).save(*args, **kwargs)
+
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
 
@@ -67,12 +74,12 @@ class Salons(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        super(Salons, self).save(*args, **kwargs)
+        super(Salon, self).save(*args, **kwargs)
 
 
 class Services(models.Model):
     salons = models.ForeignKey(
-        Salons, on_delete=models.CASCADE, related_name='services')
+        Salon, on_delete=models.CASCADE, related_name='services')
     serviceName = models.CharField(max_length=100)
     serviceCost = models.CharField(max_length=50)
     serviceDuration = models.CharField(max_length=20)
@@ -99,15 +106,14 @@ class Staff(models.Model):
 
 class Client(models.Model):
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True , related_name = 'client')
+        User, on_delete=models.CASCADE, primary_key=True,
+        related_name='client')
     Full_Name = models.CharField(max_length=30)
     email = models.CharField(max_length=30, default='myemail@gmail.com')
     phone = models.IntegerField(null=True, blank=True)
-    
+
     def __str__(self):
         return self.nickname
-
-
 
 class Appointments(models.Model):
     client = models.ForeignKey(
@@ -115,7 +121,7 @@ class Appointments(models.Model):
     clientphoneNo = models.IntegerField(default='2345966')
     services = models.ManyToManyField(Services, related_name='services')
     salons = models.ForeignKey(
-        Salons, on_delete=models.CASCADE, related_name='appointments')
+        Salon, on_delete=models.CASCADE, related_name='appointments')
     date_time = models.DateTimeField()
     created_date = models.DateTimeField(default=timezone.now)
     totalCost = models.IntegerField()
@@ -136,7 +142,7 @@ class Products(models.Model):
     price = models.IntegerField()
     product_brand = models.CharField(max_length=100)
     salons = models.ForeignKey(
-        Salons, on_delete=models.CASCADE, related_name='products')
+        Salon, on_delete=models.CASCADE, related_name='products')
 
     def __str__(self):
         return self.product_name
@@ -144,7 +150,7 @@ class Products(models.Model):
 
 class Comments(models.Model):
     salon = models.ForeignKey(
-        Salons, on_delete=models.CASCADE, related_name='comments')
+        Salon, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='my_comments')
     reply = models.TextField(max_length=250)

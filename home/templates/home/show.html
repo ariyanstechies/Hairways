@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -208,19 +209,7 @@
       <div class="row">
         <div class="card col-sm-12">
           <div class="card-body">
-            <h3 class="card-title d-inline">All Reviews</h3>
-            <div class="float-right d-inline">
-              <div class="dropdown dropleft">
-                <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sort By
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">latest</a>
-                  <a class="dropdown-item" href="#">Best Rating</a>
-                  <a class="dropdown-item" href="#">Worst Rating</a>
-                </div>
-              </div>
-            </div>
+            <h3 class="card-title">All Reviews</h3>
             <div class="card-text">
               {% if reviews %}
                 <hr>
@@ -244,8 +233,9 @@
           <div class="card-body">
             <h3 class="card-title">Add Your Review Below.</h3>
             <div class="card-text">
-            <form method="POST" class="post-form">{% csrf_token %}
-              {{ comment_form.as_p }}
+            <form method="POST" class="comment-form">
+              {% csrf_token %}
+              {{ comment_form | crispy }}
               <button type="submit" class="save btn btn-success">Save</button>
             </form>
             </div>

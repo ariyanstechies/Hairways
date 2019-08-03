@@ -140,7 +140,8 @@ def moreinfo(request, name):
     salon = get_object_or_404(Salon, url=name)
     services = Services.objects.filter(salons__name=salon.name)
     products = Products.objects.filter(salons__name=salon.name)
-    comments = Comments.objects.filter(salon__id=salon.id)
+    comments = Comments.objects.filter(
+        salon__id=salon.id).order_by("-created_date")
 
     if request.method == "POST":
         comment_form = CommentForm(request.POST)
@@ -161,12 +162,16 @@ def moreinfo(request, name):
         if form.is_valid():
             clientAppointmentAdd = form.save(commit=False)
             clientAppointmentAdd.save()
-            return redirect('moreinfo', id=salon.id)
+            return redirect('moreinfo', name=name)
     form = clientAppointment()
     context = {'salon': salon, 'services': services, 'products': products,
                'reviews': comments, 'counter': 0, "comment_form": comment_form,
                'form': form, 'clientAppointment': clientAppointment}
     return render(request, "home/show.html", context)
+
+
+def sort_comments():
+    pass
 
 
 @login_required

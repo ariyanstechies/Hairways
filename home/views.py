@@ -170,11 +170,6 @@ def moreinfo(request, name):
                'form': form, 'clientAppointment': clientAppointment, 'MAPS_API_KEY': MAPS_API_KEY}
     return render(request, "home/show.html", context)
 
-
-def sort_comments():
-    pass
-
-
 @login_required
 def preference(request):
     if request.method == "POST":

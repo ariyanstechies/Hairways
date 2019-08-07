@@ -142,6 +142,7 @@ def moreinfo(request, name):
     products = Products.objects.filter(salons__name=salon.name)
     comments = Comments.objects.filter(
         salon__id=salon.id).order_by("-created_date")
+    MAPS_API_KEY = settings.MAPS_API_KEY
 
     if request.method == "POST":
         comment_form = CommentForm(request.POST)
@@ -165,14 +166,10 @@ def moreinfo(request, name):
             return redirect('moreinfo', name=name)
     form = clientAppointment()
     context = {'salon': salon, 'services': services, 'products': products,
-               'reviews': comments, 'counter': 0, "comment_form": comment_form,
-               'form': form, 'clientAppointment': clientAppointment}
+               'reviews': comments, 'counter': 0,
+               'form': form, 'clientAppointment': clientAppointment,
+               'MAPS_API_KEY': MAPS_API_KEY}
     return render(request, "home/show.html", context)
-
-
-def sort_comments():
-    pass
-
 
 @login_required
 def preference(request):

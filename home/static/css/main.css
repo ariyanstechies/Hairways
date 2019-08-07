@@ -94,10 +94,19 @@ section {
 	padding: 10px;
 }
 /* ==========================Moreinfo=====================================*/
+
+.carousel-item img {
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+}
+
 .salon-details {
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
 	background: transparent;
 }
+
+
 .salon-details .card{
 	/*background-image: url(images/cover1.jpg); */
 	background: rgba(0,0,0,0.7);
@@ -142,10 +151,20 @@ section {
 	.home .carousel{
 		height: 250px;
 	}
+
+	#map {
+		height: 200px;
+		margin-top: 10px; 
+	}
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
 	.home .carousel{
 		height: 250px;
+	}
+
+	#map {
+		height: 200px;
+		margin-top: 10px;
 	}
 }

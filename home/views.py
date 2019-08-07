@@ -167,7 +167,7 @@ def moreinfo(request, name):
     form = clientAppointment()
     context = {'salon': salon, 'services': services, 'products': products,
                'reviews': comments, 'counter': 0,
-               'form': form, 'clientAppointment': clientAppointment, 
+               'form': form, 'clientAppointment': clientAppointment,
                'MAPS_API_KEY': MAPS_API_KEY}
     return render(request, "home/show.html", context)
 

@@ -145,31 +145,35 @@ def moreinfo(request, name):
     MAPS_API_KEY = settings.MAPS_API_KEY
 
     if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            print('valid')
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
 
-            comment = form.save()
-            comment.author = request.user.username
+            comment = comment_form.save(commit=False)
+            comment.salon = salon
+            comment.author = request.user
 
             comment.save()
 
-            return redirect('moreinfo', id=salon.id)
+            return redirect('moreinfo', name=name)
 
-    form = CommentForm()
+    comment_form = CommentForm()
 
     if request.method == "POST":
         form = clientAppointment(request.POST)
         if form.is_valid():
             clientAppointmentAdd = form.save(commit=False)
             clientAppointmentAdd.save()
-            return redirect('moreinfo', id=salon.id)
-        else:
-            form = clientAppointment()
+            return redirect('moreinfo', name=name)
+    form = clientAppointment()
     context = {'salon': salon, 'services': services, 'products': products,
                'reviews': comments, 'counter': 0,
                'form': form, 'clientAppointment': clientAppointment, 'MAPS_API_KEY': MAPS_API_KEY}
     return render(request, "home/show.html", context)
+
+
+def sort_comments():
+    pass
+
 
 @login_required
 def preference(request):

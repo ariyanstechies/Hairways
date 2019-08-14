@@ -10,6 +10,7 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
+from django.template.defaultfilters import slugify
 
 
 class OwnerSignUpView(CreateView):
@@ -48,6 +49,7 @@ class SalonCreateView(CreateView):
     def form_valid(self, form):
         salon = form.save(commit=False)
         salon.Owner = self.request.user.owner
+        salon.url = slugify(salon.name)
         salon.save()
         messages.success(self.request, 'The Salon was created succesfully.')
         return redirect('dashboard')

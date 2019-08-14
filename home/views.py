@@ -27,7 +27,6 @@ def home(request):
         salons = paginator.page(1)
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
-
     return render(request, 'home/index.html', {"salons": salons})
 
 

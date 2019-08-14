@@ -18,8 +18,8 @@
         <div class="card">
             <div class="card-header">
 
-                <img src="https://scontent.fnbo5-1.fna.fbcdn.net/v/t1.0-9/66400928_2328511317410206_9187459238312542208_n.jpg?_nc_cat=102&_nc_oc=AQlupFRQ3RLG5cDVoBqhzG2grd46cIIkGyiqklR5um1Xqp9tJHVSiJ8EgmS1j0IvVDo&_nc_ht=scontent.fnbo5-1.fna&oh=457f21536d734b678af1c716e2181862&oe=5DA246BA"
-                    class="rounded" alt="Cinque Terre" width="40" height="36">
+                <img src="{{request.user.image.url}}"
+                    class="rounded" alt="my Profile" width="40" height="36">
                 <strong>{{request.user.username}}</strong>
                 <span class="float-right"> <strong>Logout</strong>
 
@@ -50,7 +50,7 @@
                             {%else%} <a href="{% url 'client_update'%}">Update Your Profile </a>{%endif%}</p>
                         <p>Username: {{request.user.username}}</p>
                         <p>Profile Picture: </p>
-                        <img src="https://scontent.fnbo5-1.fna.fbcdn.net/v/t1.0-9/66400928_2328511317410206_9187459238312542208_n.jpg?_nc_cat=102&_nc_oc=AQlupFRQ3RLG5cDVoBqhzG2grd46cIIkGyiqklR5um1Xqp9tJHVSiJ8EgmS1j0IvVDo&_nc_ht=scontent.fnbo5-1.fna&oh=457f21536d734b678af1c716e2181862&oe=5DA246BA"
+                        <img src="{{request.user.image.url}}"
                             class="rounded" alt="Cinque Terre" width="404" height="336">
 
                     </div>

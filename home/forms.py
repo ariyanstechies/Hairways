@@ -7,7 +7,7 @@ from home.models import *
 class ClientSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-
+        fields = ('username', 'password1', 'password2','image', )
     @transaction.atomic
     def save(self):
         user = super().save(commit=False)

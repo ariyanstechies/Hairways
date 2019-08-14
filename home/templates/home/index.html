@@ -79,7 +79,7 @@
                   <a class="card-link" href="{% url 'moreinfo' name=each_salon.url %}"></a>
                   <div class="each-salon card-body">
                     <div class="salon-description">
-                      <h1 class="salon-name"> {{ each_salon.salonName }} </h1>
+                      <h1 class="salon-name"> {{ each_salon.name }} </h1>
                       <h2 class="salon-location">{{ each_salon.location }}</h2>
                       <p class="salon-slogan"> <i>{{each_salon.description}}</i></p>
                       <p class="read-more">
@@ -103,6 +103,7 @@
                   </div>
                 </div>
               </div>
+              
             {% endfor %}            
           </div>
           {% if salons.has_other_pages %}

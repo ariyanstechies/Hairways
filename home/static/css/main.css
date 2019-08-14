@@ -1,3 +1,4 @@
+c-
 *{
 	margin: 0px;
 	padding: 0px;
@@ -5,16 +6,21 @@
 body {
  font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
+/*==================  Navbar  ==================*/
+
+.bg-teal {
+	background-color: #007765;
+}
 .navbar-brand {
 	font-weight: bold;	
     padding: 0 12px;
 }
-.navbar-nav .nav-item .nav-link.active {
-  color: #2F2F2F;
+
+/*==================  Carousel   ==================*/
+.home {
+	width: 100%;
 }
-.navbar-nav .nav-item .nav-link:hover {
-  color: #2F2F2F;
-}
+
 .search-input{
 	margin: 10px 0px 10px 0px;
 	width: 250px;
@@ -70,10 +76,6 @@ body {
 	color: rgb(0, 209, 176);
 }
 
-.home {
-	width: 100%;
-}
-
 .filters {
 	line-height: 1.8;
 	font-size: 16px;
@@ -89,12 +91,8 @@ body {
 .custom-select {
 	font-weight: bold;
 }
-/* GENERAL OPIONATED STYLING */
-section {
-	padding: 10px;
-}
-/* ==========================Moreinfo=====================================*/
 
+/*==================  Moreinfo  ==================*/
 .carousel-item img {
 	background-size: cover;
 	width: 100%;
@@ -117,10 +115,13 @@ section {
 	border-radius: 10px; 
 	border: none;
 }
+
+/*==================  django forms  ==================*/
 .asteriskField {
     display: none;
 }
-/* Social Icons */
+
+/*==================  Social Icons  ==================*/
 .social {
 	cursor: pointer;
 	padding: 5px;
@@ -138,20 +139,7 @@ section {
 	z-index: 10;
 }
 
-.carousel-caption h5 {
-	color: #11AFF2; 
-	font-weight: bold;
-}
-
-.carousel-caption p {
-	color: #000;
-}
-
 @media (min-width: 320px) and (max-width: 480px) {
-	.home .carousel{
-		height: 250px;
-	}
-
 	#map {
 		height: 200px;
 		margin-top: 10px; 
@@ -159,10 +147,6 @@ section {
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
-	.home .carousel{
-		height: 250px;
-	}
-
 	#map {
 		height: 200px;
 		margin-top: 10px;

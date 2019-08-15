@@ -12,6 +12,7 @@ class User(AbstractUser):
     is_client = models.BooleanField(default=False)
     is_owner = models.BooleanField(default=False)
     nickname = models.CharField(max_length=30, null=True, blank=True)
+    image = models.ImageField(upload_to='images/')
 
 
 class Owner(models.Model):
@@ -39,9 +40,9 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Salon(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=100)
     url = models.SlugField()
-    description = models.TextField(max_length=50)
+    description = models.TextField(max_length=250)
     created_date = models.DateTimeField(default=timezone.now)
     Owner = models.ForeignKey(
         Owner, on_delete=models.CASCADE, related_name='my_salons')

@@ -7,7 +7,7 @@ from home.models import *
 class ClientSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-
+        fields = ('username', 'password1', 'password2', 'image', )
     @transaction.atomic
     def save(self):
         user = super().save(commit=False)
@@ -20,7 +20,7 @@ class ClientSignUpForm(UserCreationForm):
 class OwnerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-
+        fields = ('username', 'password1', 'password2', 'image', )
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_owner = True

@@ -21,13 +21,13 @@ body {
 	width: 100%;
 }
 
+/*==================  Search Input Field  ==================*/
+
+ 
 .search-input{
-	margin: 10px 0px 10px 0px;
+	margin: 10px 0 10px 0;
 	width: 250px;
-	color: #fff;
-	border: 2px solid #80BDFF;
-	color: #000;
-	font-weight: bold;
+	border: 1px solid #80BDFF;
 }
 
 .search-input:focus{
@@ -35,9 +35,19 @@ body {
 	transition: 0.25s ease-out;
 }
 
-.each-salon {
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;	
-	opacity: .7;
+/*==================  Salon Card  ==================*/
+
+.card-link {
+	position:absolute; 
+	width:100%; 
+	height:100%; 
+	top:0; 
+	left: 0; 
+	z-index: 10;
+}
+
+.card-body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	border-radius: 50px;
 }
 
@@ -56,6 +66,15 @@ body {
 	padding-left: 10px;
 }
 
+.card-text {
+	padding-left: 10px;
+	color: crimson
+}
+
+.icons {
+	color: rgb(0, 209, 176);
+}
+
 .icons > li {
 	display: inline-block;
 	margin-right: 5px; 
@@ -63,36 +82,18 @@ body {
 	padding-left: 10px;
 }
 
-.read-more {
-	padding-left: 10px;
-	color: crimson
-}
-
-.read-more span {
-	padding-right:32px;
-}
-
-.icons {
-	color: rgb(0, 209, 176);
-}
+/*==================  Sidebar navbar  ==================*/
 
 .filters {
 	line-height: 1.8;
 	font-size: 16px;
 	cursor: pointer;
 }
-
-.col-lg-9 .search-input {
-	border: 2px solid #80BDFF; 
-	color: #000; 
-	font-weight: bold;
-}
-
 .custom-select {
 	font-weight: bold;
 }
 
-/*==================  Moreinfo  ==================*/
+/*==================  Moreinfo/show page  ==================*/
 .carousel-item img {
 	background-size: cover;
 	width: 100%;
@@ -129,14 +130,6 @@ body {
 .social:hover {
 	color: #222;
 	transition: 0.3s ease-out;
-}
-.card-link {
-	position:absolute; 
-	width:100%; 
-	height:100%; 
-	top:0; 
-	left: 0; 
-	z-index: 10;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {

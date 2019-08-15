@@ -47,7 +47,7 @@
     <div class="row">
       <div class="col-lg-3">
         <br>
-          <h4>Filter Salons <hr></h4>
+          <h4 class="filter-header">Filter Salons <hr></h4>
           <div class="filters"><i class="fa fa-fire"></i> Popular <hr></div>
           <div class="filters"><i class="fa fa-map-marker"></i> Near me <hr></div>
           <div class="filters"><i class="fa fa-thumbs-up"></i> Recommended <hr></div>
@@ -66,7 +66,7 @@
       <div class="col-lg-9">
         <!-- SEARCH BOX -->
         <div align="right">
-          <input class="search-input form-control" placeholder="Search salon...">
+          <input class="search-input form-control" placeholder="search by name">
         </div>
         <!-- SALONS CONTAINER -->
         <div class="row allsalons">
@@ -76,12 +76,12 @@
               <div class="col-sm-6">
                 <div class="card">
                   <a class="card-link" href="{% url 'moreinfo' name=each_salon.url %}"></a>
-                  <div class="each-salon card-body">
+                  <div class="card-body">
                     <div class="salon-description">
-                      <h1 class="salon-name"> {{ each_salon.salonName }} </h1>
+                      <h1 class="salon-name"> {{ each_salon.name }} </h1>
                       <h2 class="salon-location">{{ each_salon.location }}</h2>
                       <p class="salon-slogan"> <i>{{each_salon.description}}</i></p>
-                      <p class="read-more">
+                      <p class="card-text">
                         {% block comment %} Star Rating {% endblock %}
                         <span>
                           <span class="fa fa-star checked"></span>
@@ -90,9 +90,9 @@
                           <span class="fa fa-star"></span>
                           <span class="fa fa-star"></span>
                         </span>
-                      </p>
                       <hr>
-                      <ul class="icons ">
+                      </p>
+                      <ul class="icons">
                         <li><i class="fa fa-eye fa-lg">&nbsp{{ each_salon.views }}</i></li>
                         <li><i class="fa fa-heart-o fa-lg">&nbsp{{ each_salon.total_likes }}</i></li>
                         <li><i class="fa fa-envelope-o fa-lg">&nbsp{{ each_salon.approved_comments.count }}</i></li>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from home.models import Owner, Comments, Services
-from home.models import Appointments, Salon, Products, Staff, Client
+from home.models import Appointments, Salon, Products, Staff, Client, User
 
 admin.site.register(Owner)
 admin.site.register(Comments)
@@ -10,3 +10,4 @@ admin.site.register(Salon)
 admin.site.register(Products)
 admin.site.register(Staff)
 admin.site.register(Client)
+admin.site.register(User)

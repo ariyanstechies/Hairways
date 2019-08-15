@@ -12,7 +12,7 @@ class User(AbstractUser):
     is_client = models.BooleanField(default=False)
     is_owner = models.BooleanField(default=False)
     nickname = models.CharField(max_length=30, null=True, blank=True)
-    image = models.ImageField(upload_to = 'images/')
+    image = models.ImageField(upload_to='images/')
 
 
 class Owner(models.Model):

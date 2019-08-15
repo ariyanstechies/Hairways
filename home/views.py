@@ -171,6 +171,7 @@ def moreinfo(request, name):
                'MAPS_API_KEY': MAPS_API_KEY}
     return render(request, "home/show.html", context)
 
+
 @login_required
 def preference(request):
     if request.method == "POST":

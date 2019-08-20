@@ -1,4 +1,3 @@
-c-
 *{
 	margin: 0px;
 	padding: 0px;
@@ -36,6 +35,18 @@ body {
 }
 
 /*==================  Salon Card  ==================*/
+.each_salon {
+	padding: 10px;
+}
+.allsalons .card {
+	background-image: url('../css/images/cover1.jpg'); 
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 250px;
+}
+.allsalons .card .card-link {
+	border-radius: 10px; 
+}
 
 .card-link {
 	position:absolute; 
@@ -49,6 +60,17 @@ body {
 .card-body {
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	border-radius: 50px;
+	opacity: .7;
+	padding: 0px;
+}
+
+.salon-description {
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
+	padding-left: 20px;
+	background-color: whitesmoke;
+	width: 70%;
+	height: 250px;
+	float: right;
 }
 
 .salon-name {
@@ -64,6 +86,8 @@ body {
 .salon-slogan{
 	font-size: 15px;
 	padding-left: 10px;
+	overflow: hidden;
+	height: 15%;
 }
 
 .card-text {
@@ -98,23 +122,6 @@ body {
 	background-size: cover;
 	width: 100%;
 	height: 100%;
-}
-
-.salon-details {
-	clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
-	background: transparent;
-}
-
-
-.salon-details .card{
-	/*background-image: url(images/cover1.jpg); */
-	background: rgba(0,0,0,0.7);
-	background-repeat: no-repeat;
-	background-size: cover;
-	padding: 10px;
-	color: #fff;
-	border-radius: 10px; 
-	border: none;
 }
 
 /*==================  django forms  ==================*/

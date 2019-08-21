@@ -5,23 +5,28 @@
 body {
  font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
+/*==================  Navbar  ==================*/
+
+.bg-teal {
+	background-color: #007765;
+}
 .navbar-brand {
 	font-weight: bold;	
     padding: 0 12px;
 }
-.navbar-nav .nav-item .nav-link.active {
-  color: #2F2F2F;
+
+/*==================  Carousel   ==================*/
+.home {
+	width: 100%;
 }
-.navbar-nav .nav-item .nav-link:hover {
-  color: #2F2F2F;
-}
+
+/*==================  Search Input Field  ==================*/
+
+ 
 .search-input{
-	margin: 10px 0px 10px 0px;
+	margin: 10px 0 10px 0;
 	width: 250px;
-	color: #fff;
-	border: 2px solid #80BDFF;
-	color: #000;
-	font-weight: bold;
+	border: 1px solid #80BDFF;
 }
 
 .search-input:focus{
@@ -29,10 +34,43 @@ body {
 	transition: 0.25s ease-out;
 }
 
-.each-salon {
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;	
-	opacity: .7;
+/*==================  Salon Card  ==================*/
+.each_salon {
+	padding: 10px;
+}
+.allsalons .card {
+	background-image: url('../css/images/cover1.jpg'); 
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 250px;
+}
+.allsalons .card .card-link {
+	border-radius: 10px; 
+}
+
+.card-link {
+	position:absolute; 
+	width:100%; 
+	height:100%; 
+	top:0; 
+	left: 0; 
+	z-index: 10;
+}
+
+.card-body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	border-radius: 50px;
+	opacity: .7;
+	padding: 0px;
+}
+
+.salon-description {
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
+	padding-left: 20px;
+	background-color: whitesmoke;
+	width: 70%;
+	height: 250px;
+	float: right;
 }
 
 .salon-name {
@@ -48,6 +86,17 @@ body {
 .salon-slogan{
 	font-size: 15px;
 	padding-left: 10px;
+	overflow: hidden;
+	height: 15%;
+}
+
+.card-text {
+	padding-left: 10px;
+	color: crimson
+}
+
+.icons {
+	color: rgb(0, 209, 176);
 }
 
 .icons > li {
@@ -57,70 +106,31 @@ body {
 	padding-left: 10px;
 }
 
-.read-more {
-	padding-left: 10px;
-	color: crimson
-}
-
-.read-more span {
-	padding-right:32px;
-}
-
-.icons {
-	color: rgb(0, 209, 176);
-}
-
-.home {
-	width: 100%;
-}
+/*==================  Sidebar navbar  ==================*/
 
 .filters {
 	line-height: 1.8;
 	font-size: 16px;
 	cursor: pointer;
 }
-
-.col-lg-9 .search-input {
-	border: 2px solid #80BDFF; 
-	color: #000; 
-	font-weight: bold;
-}
-
 .custom-select {
 	font-weight: bold;
 }
-/* GENERAL OPIONATED STYLING */
-section {
-	padding: 10px;
-}
-/* ==========================Moreinfo=====================================*/
 
+/*==================  Moreinfo/show page  ==================*/
 .carousel-item img {
 	background-size: cover;
 	width: 100%;
 	height: 100%;
+	min-height: max-content;
 }
 
-.salon-details {
-	clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
-	background: transparent;
-}
-
-
-.salon-details .card{
-	/*background-image: url(images/cover1.jpg); */
-	background: rgba(0,0,0,0.7);
-	background-repeat: no-repeat;
-	background-size: cover;
-	padding: 10px;
-	color: #fff;
-	border-radius: 10px; 
-	border: none;
-}
+/*==================  django forms  ==================*/
 .asteriskField {
     display: none;
 }
-/* Social Icons */
+
+/*==================  Social Icons  ==================*/
 .social {
 	cursor: pointer;
 	padding: 5px;
@@ -129,29 +139,8 @@ section {
 	color: #222;
 	transition: 0.3s ease-out;
 }
-.card-link {
-	position:absolute; 
-	width:100%; 
-	height:100%; 
-	top:0; 
-	left: 0; 
-	z-index: 10;
-}
-
-.carousel-caption h5 {
-	color: #11AFF2; 
-	font-weight: bold;
-}
-
-.carousel-caption p {
-	color: #000;
-}
 
 @media (min-width: 320px) and (max-width: 480px) {
-	.home .carousel{
-		height: 250px;
-	}
-
 	#map {
 		height: 200px;
 		margin-top: 10px; 
@@ -159,10 +148,6 @@ section {
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
-	.home .carousel{
-		height: 250px;
-	}
-
 	#map {
 		height: 200px;
 		margin-top: 10px;

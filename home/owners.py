@@ -65,7 +65,7 @@ class Appointment2CreateView(CreateView):
 
     def form_valid(self, form):
         self.appointment = form.save(commit=False)
-        self.appointment.Owner = self.request.user.owner
+        self.appointment.client = self.request.user
         self.appointment.save()
         messages.success(
             self.request, 'The appointment was created succesfully.')
@@ -76,4 +76,4 @@ class Appointment2CreateView(CreateView):
 class AppointmentUpdate(UpdateView):
     model = Appointments
     form_class = AppointmentUpdateForm
-    template_name = 'appointments_update_form.html'
+    template_name = 'appointments/appointments_update_form.html'

@@ -80,12 +80,13 @@ class Salon(models.Model):
 
 class Services(models.Model):
     salons = models.ForeignKey(
-        Salon, on_delete=models.CASCADE, related_name='services')
+        Salon, on_delete=models.CASCADE, related_name ='services')
+    
     serviceName = models.CharField(max_length=100)
     serviceCost = models.CharField(max_length=50)
     serviceDuration = models.CharField(max_length=20)
     serviceBookings = models.IntegerField()
-    availability = models.BooleanField(default=True)
+    availability = models.BooleanField(default=   True)
 
     def __str__(self):
         return self.serviceName

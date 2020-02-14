@@ -10,6 +10,7 @@ from home.clients import CommentsListView, MyAppointments, MyComments
 
 urlpatterns = [
     path('', views.comingsoon, name='comingsoon'),
+    path('current/registerd/salons',views.crs, name = 'crs'),
     path('home', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('faqs/', views.faqs, name='faqs'),

@@ -35,6 +35,12 @@ class CommentForm(forms.ModelForm):
         model = Comments
         fields = ('comment', )
 
+class TempUserForm(forms.ModelForm):
+
+    class Meta:
+        model = tempuser
+        fields = ('name','phone_no','email', )
+
 
 class addEmployeeForm(forms.ModelForm):
 

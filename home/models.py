@@ -6,13 +6,18 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.template.defaultfilters import slugify
+from phone_field import PhoneField
 
+class tempuser(models.Model):
+    name = models.CharField(max_length = 254, )
+    phone_no = PhoneField()
+    email =  models.EmailField(max_length = 254, blank = True, null = True)
 
 class User(AbstractUser):
     is_client = models.BooleanField(default=False)
     is_owner = models.BooleanField(default=False)
     nickname = models.CharField(max_length=30, null=True, blank=True)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', null = True, blank = True)
 
 
 class Owner(models.Model):

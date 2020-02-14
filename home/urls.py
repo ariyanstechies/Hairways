@@ -9,7 +9,8 @@ from home.clients import CommentsListView, MyAppointments, MyComments
 
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.comingsoon, name='comingsoon'),
+    path('home', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('faqs/', views.faqs, name='faqs'),
     path('client/update/', ClientUpdate.as_view(), name='client_update'),
@@ -49,6 +50,8 @@ urlpatterns = [
     path('my/appointments', MyAppointments.as_view(), name='my_appointments'),
     path('my/comments', MyComments.as_view(), name='my_comments')
     #     end of client dashboard
+
+
 ]
 
 if settings.DEBUG:

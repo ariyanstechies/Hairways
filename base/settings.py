@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'crispy_forms',
+    'phone_field',
     #'social_django',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

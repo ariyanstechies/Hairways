@@ -29,6 +29,20 @@ def home(request):
         salons = paginator.page(paginator.num_pages)
     return render(request, 'home/index.html', {"salons": salons})
 
+def comingsoon(request):
+
+    if request.method == "POST":
+        temuser_form = TempUserForm(request.POST)
+        if temuser_form.is_valid():
+
+            temuser = temuser_form.save(commit=False)
+
+            temuser.save()
+
+            return redirect('comingsoon')
+
+    temuser_form = TempUserForm()
+    return render(request, 'comingsoon/index.html',{'temuser_form':temuser_form})
 
 def faqs(request):
     return render(request, "faqs/index.html")
@@ -170,6 +184,9 @@ def moreinfo(request, name):
                'form': form, 'clientAppointment': clientAppointment,
                'MAPS_API_KEY': MAPS_API_KEY}
     return render(request, "home/show.html", context)
+
+
+
 
 
 @login_required

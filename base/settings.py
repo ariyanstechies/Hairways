@@ -20,7 +20,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', "localhost"]
+# ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', "localhost"]
+ALLOWED_HOSTS = '*'
 
 
 # Application definition
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'phone_field',
     #'social_django',
+    'bootstrap4',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [

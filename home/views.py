@@ -42,7 +42,7 @@ def comingsoon(request):
             return redirect('comingsoon')
 
     temuser_form = TempUserForm()
-    return render(request, 'comingsoon/index.html',{'temuserf_form':temuser_form})
+    return render(request, 'comingsoon/index-design-2.html',{'temuserf_form':temuser_form})
 
 def faqs(request):
     return render(request, "faqs/index.html")

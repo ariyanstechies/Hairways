@@ -9,6 +9,7 @@ from django.utils.decorators import method_decorator
 from home.decorators import client_required, owner_required
 from django.http import HttpResponse
 import json
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.core import serializers
 from django.views.generic import TemplateView, CreateView
@@ -29,6 +30,7 @@ def home(request):
         salons = paginator.page(paginator.num_pages)
     return render(request, 'home/index.html', {"salons": salons})
 
+
 def comingsoon(request):
 
     if request.method == "POST":
@@ -38,11 +40,16 @@ def comingsoon(request):
             temuser = temuser_form.save(commit=False)
 
             temuser.save()
-
+            messages.success(request, 'We successfully received your details!')
             return redirect('comingsoon')
 
     temuser_form = TempUserForm()
+    
     return render(request, 'comingsoon/index.html',{'temuser_form':temuser_form})
+
+def crs(request):
+    people = tempuser.objects.all()
+    return render(request, "comingsoon/check.html",{'people':people})
 
 def faqs(request):
     return render(request, "faqs/index.html")

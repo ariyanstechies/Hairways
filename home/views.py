@@ -44,8 +44,8 @@ def comingsoon(request):
             return redirect('comingsoon')
 
     temuser_form = TempUserForm()
-    
-    return render(request, 'comingsoon/index.html',{'temuser_form':temuser_form})
+    return render(request, 'comingsoon/index.html',{'temuserf_form':temuser_form})
+
 
 def crs(request):
     people = tempuser.objects.all()

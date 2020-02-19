@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 {%load static%}
+{% load bootstrap4 %}
 {% load crispy_forms_tags %}
 
 <head>
@@ -47,7 +48,7 @@
           <li>
             <a href="https://www.facebook.com/hairways.co.ke/">
               <i class="fa fa-facebook-square"></i>
-              Like Page
+              Like our Page
             </a>
           </li>
           <li>
@@ -77,7 +78,11 @@
 
     <div class="container">
       <h1 class="logo cursive">
-        Comming Soon!<br><small style="font-family: ubuntu;">For the <b class="text-info"> best</b> Salons in <b
+        Comming Soon!<br><small style="font-family: ubuntu;">
+          
+        <div class="powr-countdown-timer" id="cde05765_1581687329"></div>
+        <script src="https://www.powr.io/powr.js?platform=html"></script>
+          For the <b class="text-info"> best</b> Salons in <b
             class="text-info"> town
           </b></small>
       </h1>
@@ -85,11 +90,7 @@
 
       <div class="content">
         <h5 class="motto">Hairways Kenya is a platform that brings <span class="text-info"><b> Salons</b></span> and
-          their
-          <span class="text-info"><b> Clients</b></span> together. Users can find
-          best Salons near them
-          and book for services of these Salons weather the selected salon have a website or not. Hairways is also
-          providing management tools for Salon Owners
+          We will 
         </h5>
         <div class="subscribe">
           <h5 class="info-text">
@@ -101,7 +102,7 @@
 
               <form method="POST" class="form-inline">
                 {% csrf_token %}
-                {{ temuser_form | crispy }} <br><br>
+                {% bootstrap_form temuserf_form %} <br><br>
                 <button type="submit" class="save btn btn-fill mb-2 btn-info">Notify Me</button>
 
               </form>
@@ -120,6 +121,11 @@
     </div>
   </div>
 </body>
+
+<style>
+  mar
+</style>
+
 <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 

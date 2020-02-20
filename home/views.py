@@ -1,6 +1,7 @@
 from django.views import generic
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -39,7 +40,10 @@ def comingsoon(request):
 
             temuser.save()
 
+            messages.success(request, 'We have received your details')
+
             return redirect('comingsoon')
+            
 
     temuser_form = TempUserForm()
     return render(request, 'comingsoon/index-design-2.html',{'temuserf_form':temuser_form})

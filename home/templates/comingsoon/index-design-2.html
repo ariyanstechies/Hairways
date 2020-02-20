@@ -55,7 +55,19 @@
                     <h3>Be the first to get notified when we go live. Sign-up in this pre-launch season and get amazing discounts</h3>
                 </div>
 
-                <div class="card">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong class="text-success">Success!</strong> {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                
+
+                <div class="card form-card">
                     <div class="card-body">
                         <form method="POST" class="form-inline">
                             {% csrf_token %}
@@ -106,6 +118,14 @@
 </body>
 
     <style>
+        .alert{
+            position: absolute;
+            top: 100px;
+            float: right;
+        }
+        .form-card{
+            margin-top: 50px;
+        }
         .scroll-down{
             font-weight: bold;
             font-size: xx-large;
@@ -165,14 +185,14 @@
             font-weight: bold;
         }
         .form{
-            margin: 30px 0px 20px 0px;
+            margin: 20px 0px 20px 0px;
             opacity: .9;
         }
         .header{
             font-weight: bold;
         }
         .container{
-            margin: 50px 0px 50px 0px;
+            margin: 30px 0px 50px 0px;
             text-align: center;
         }
         .facebook{
@@ -200,6 +220,8 @@
     </style>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
@@ -209,6 +231,10 @@
         var copyright_year = new Date().getFullYear();
         var copyright = document.getElementById('copyright');
         document.getElementById('copyright').innerHTML = 'Copyright \251 '+ copyright_year +' All rights reserved | Hairways Kenya';
+
+        // Closing toast
+        $(".alert").alert();
+            window.setTimeout(function () { $(".alert").alert('close'); }, 5000);
     </script>
 
 </html>

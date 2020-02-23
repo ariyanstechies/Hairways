@@ -20,7 +20,7 @@ from home.models import Client, Staff
 def home(request):
     filtered_salons = Salon.objects.all().order_by('likes')
     page = request.GET.get('page', 1)
-    paginator = Paginator(filtered_salons, 10)
+    paginator = Paginator(filtered_salons, 4)
     try:
         salons = paginator.page(page)
     except PageNotAnInteger:

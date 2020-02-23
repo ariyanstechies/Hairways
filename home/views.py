@@ -30,6 +30,12 @@ def home(request):
         salons = paginator.page(paginator.num_pages)
     return render(request, 'home/index.html', {"salons": salons})
 
+def signup_steps(request):
+    context = {
+        
+    }
+    return render(request, 'sign-up-steps.html', context)
+
 def comingsoon(request):
 
     if request.method == "POST":

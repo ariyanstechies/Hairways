@@ -50,7 +50,7 @@ class TempUserForm(forms.ModelForm):
 class addSalonForm(forms.ModelForm):
     class Meta:
         model = Salon
-        fields = ('name', 'description', 'paybill', 'location')
+        fields = ('name', 'description', 'paybill', 'town', 'location_description')
 
 class SalonSubscriptionForm(forms.ModelForm):
     class Meta:

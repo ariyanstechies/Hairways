@@ -18,6 +18,47 @@ from home.forms import *
 from home.models import Salon, Services, Owner, Products, Comments
 from home.models import Client, Staff
 
+def finalshow(request,name):
+    salon = get_object_or_404(Salon, url=name)
+    services = Services.objects.filter(salons__name=salon.name)
+    products = Products.objects.filter(salons__name=salon.name)
+    comments = Comments.objects.filter(salon__id=salon.id).order_by("-created_date")
+    MAPS_API_KEY = settings.MAPS_API_KEY
+
+    if request.method == "POST":
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+
+            comment = comment_form.save(commit=False)
+            comment.salon = salon
+            comment.author = request.user
+
+            comment.save()
+            messages.success(request, 'Review Received Successfully! It will be posted soon. You can edit it on your Profile')
+            return redirect('finalshow', name=name)
+
+    comment_form = CommentForm()
+
+
+
+    if request.method == "POST":
+        form = clientAppointment(request.POST)
+        if form.is_valid():
+            clientAppointmentAdd = form.save(commit=False)
+            clientAppointmentAdd.client = request.user
+            clientAppointmentAdd.salons = salon
+            clientAppointmentAdd.totalCost = 900
+            clientAppointmentAdd.save()
+            messages.success(request, 'Appointment Successfuly booked')
+            return redirect('finalshow', name=name)
+    form = clientAppointment()
+
+    context = {'salon': salon, 'services': services, 'products': products,
+               'reviews': comments, 'counter': 0,
+               'comment_form': comment_form,
+               'form': form, 'clientAppointment': clientAppointment,
+               'MAPS_API_KEY': MAPS_API_KEY}   
+    return render(request, "home/finalshow.html",context)
 
 def home(request):
     filtered_salons = Salon.objects.all().order_by('likes')

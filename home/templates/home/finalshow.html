@@ -1,0 +1,366 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load bootstrap4 %} {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %} {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %} {# Embed Bootstrap JS+jQuery #}
+{{ form.media }} {# Adds date-picker required JS and CSS #}
+
+<div>
+    <div class="container">
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong class="text-success"></strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Image  -->
+    <div class="container card" style="background-image: url({% static 'css/images/salonss.jpg'%}); background-size: cover;  
+    background-position: center;  height: 500px; background-repeat: no-repeat;margin-top:10px">
+        <h3 class="text-center " style="background-color: rgba(242, 247, 247, 0.561);color:black;margin-bottom:0px;">
+            {{salon.name}}
+            </h4>
+            <div class="row" style="margin-top: 0px;">
+
+                <div class="col-sm-4 card" style="background-color: rgba(225, 250, 250, 0.644);">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs flex-column" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" data-toggle="tab" href="#home"><b>City:
+                                    {{salon.town}}</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-info" data-toggle="tab" href="#home"><b></b>
+                                <small style="color: black;">{{salon.location_description}}</small></b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " style="color: black;" data-toggle="tab" href="#menu1"><b></b>
+                                <i>{{salon.description}}</i></b></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-info" data-toggle="tab" href="#menu3"><b>Comments and
+                                    Reviews</b></a>
+                        </li>
+                    </ul>
+                    <h5 class="" style="color: rgb(6, 143, 111);"> Follow us: <i class="social fa fa-instagram"></i> |
+                        <i class="social fa fa-facebook"></i> |
+                        <i class="social fa fa-twitter"></i></h5>
+                </div>
+                <div class="col"></div>
+            </div>
+
+    </div>
+    <!-- end of Image -->
+    <div class="container"><i class="fa fa-envelope-o"
+            style="color: #00AF87; padding-right: 4px">&nbsp{{ salon.approved_comments.count }} Comments</i>|
+        <i style="color: #00AF87; padding-right: 4px" class="fa fa-thumbs-up">
+            {{ salon.total_likes }} Likes</i>| <i
+            style="color: #00AF87; padding-right: 4px">{{salon.appointments.count}} Bookings</i> | <i
+            style="color: #00AF87; padding-right: 4px" class="fa fa-eye"> {{ salon.views }} Views</i> |<i
+            class="fa fa-share-alt " style="color: #00AF87; padding-right: 4px">{{ each_salon.shares }}
+            {{salon.shares}} Shares</i>
+    </div>
+    <br>
+    <!-- body  -->
+    <div class="container">
+        <section>
+            <div class="row">
+                <div class="card col-sm-12">
+                    <div class="card-body">
+                        <h3 class="card-title">Our Services and Products</h3>
+                        <div class="card-body  ">
+                            <!--Forform for Services Offered  -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!-- Trial  -->
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6 mb-0">
+                                                {{ form.services|as_crispy_field }}
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <ul style="list-style: none;">
+                                                    <p>Amount</p>
+                                                    {% if services.count != 0 %}
+                                                    {% for each in services %}
+                                                    <li class="">Ksh. {{ each.serviceCost }}</li>
+                                                    {% endfor %}
+                                                    {% else %}
+                                                </ul>
+                                                <!-- spanning across the five columns-->
+                                                <tr style="border: none">
+                                                    <td colspan="5" class="text-center text-muted">Sorry No Services For
+                                                        Now:)
+                                                    </td>
+                                                </tr>
+                                                {% endif%}
+
+                                            </div>
+                                            <p>If you wish to buy our products include them bellow</p>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6 mb-0">
+                                                {{ form.products|as_crispy_field }}
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <ul style="list-style: none;">
+                                                    <p>Amount</p>
+                                                    {% if products.count != 0 %}
+                                                    {% for prod in products %}
+                                                    <li class="">Ksh. {{prod.price }}</li>
+                                                    {% endfor %}
+                                                    {% else %}
+                                                </ul>
+                                                <!-- spanning across the five columns-->
+                                                <tr style="border: none">
+                                                    <td colspan="5" class="text-center text-muted">Sorry No Services For
+                                                        Now:)
+                                                    </td>
+                                                </tr>
+                                                {% endif%}
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 mb-0">
+                                            {{ form.appointment_date|as_crispy_field }}
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Book Now</button>
+                                    </form>
+                                    <br>
+                                    <!-- End trial  -->
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><br>
+            <div class="row">
+
+                <!--For products  -->
+                <div class="card col-sm-12">
+                    <div class="card-body">
+                        <h3 class="card-title">Reviews and comments</h3>
+
+
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+                            rel="stylesheet"
+                            integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
+                            crossorigin="anonymous">
+
+                        <section>
+                            <div class="container">
+                                <div class="row ">
+                                    <div class="col-md-3 border text-center">
+                                        <div class="card-body">
+                                            <h1 class="text-danger">4.5</h1>
+                                            <div class="sub-row text-warning">
+                                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                    class="fa fa-star-half-o"></i>
+                                            </div>
+                                            <p>{{salon.comments.count}} Ratings</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 border">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <h6>5 Stars</h6>
+                                                </div>
+                                                <div class="col-md-7 pt-1">
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-success" style="width:20%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h6>(1)</h6>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <h6>4 Stars</h6>
+                                                </div>
+                                                <div class="col-md-7 pt-1">
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-success" style="width:20%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h6>(1)</h6>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <h6>3 Stars</h6>
+                                                </div>
+                                                <div class="col-md-7 pt-1">
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-warning" style="width:20%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h6>(1)</h6>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <h6>2 Stars</h6>
+                                                </div>
+                                                <div class="col-md-7 pt-1">
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-danger" style="width:20%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h6>(1)</h6>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <h6>1 Star</h6>
+                                                </div>
+                                                <div class="col-md-7 pt-1">
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-danger" style="width:20%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h6>(1)</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 border text-center">
+                                        <div class="card-body">
+                                            <i class="fa fa-pencil-square fa-3x text-success"></i>
+                                            <a href="#comments">
+                                                <h4>Write Your Views</h4>
+                                            </a>
+                                            <small>share your experience/views about this Salon</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+                        <br>
+
+                        <!-- comments  -->
+                        <section style="margin-top: 24px;">
+
+                            <!-- tryal phase -->
+                            <div class="row">
+                                {% if reviews %}
+
+                                {% for review in reviews %}
+                                <div class="col-md-2">
+                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                        class="img img-rounded img-fluid" />
+                                    <p class="text-secondary text-center">{{ review.created_date }}</p>
+                                </div>
+                                <div class="col-md-10">
+                                    <p>
+                                        <a class="float-left"
+                                            href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>{{ review.author }}
+                                                | </strong></a>
+
+                                        {% if review.stars == '3 Stars' %}
+                                        <span class="float-rigt"><i class="text-warning fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+                                        {% endif %}
+                                        {% if review.stars == '4 Stars' %}
+                                        <span class="float-rigt"><i class="text-success fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+                                        {% endif %}
+                                        {% if review.stars == '2 Stars' %}
+                                        <span class="float-rigt"><i class="text-danger fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-danger fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+                                        {% endif %}
+                                        {% if review.stars == '1 Star' %}
+                                        <span class="float-rigt"><i class="text-danger fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-dangr fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+                                        {% endif %}
+
+                                        {% if review.stars == '5 Stars' %}
+                                        <span class="float-rigt"><i class="text-success fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                                        {% endif %}
+
+
+                                    </p>
+                                    <div class="clearfix"></div>
+                                    <p>{{ review.comment }}</p>
+                                    <p>
+                                        <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i>
+                                            Reply</a>
+                                    </p>
+                                </div>
+
+                                <hr>
+                                {% endfor %}
+                                {% else %}
+                                <p class="text-center text-muted">No Reviews yet!</p>
+                                {% endif %}
+                            </div>
+
+                            <!-- end of trial phase  -->
+
+                        </section>
+                        <div id="comments">
+
+
+                            <!-- end comments -->
+                            <p>Share your experience/views about this Salon</p>
+                            <form method="POST" class="comment-form">
+                                {% csrf_token %}
+                                {{ comment_form | crispy }}
+                                {% if request.user.is_authenticated %}
+                                <button type="submit" class="save btn btn-success">Save</button>
+                                {% else %}
+                                <p>You must <a href="{% url 'login'%}" style="font-size: 34px;">Login</a> to submit a
+                                    review</p>
+                                {%endif%}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+        </section>
+
+    </div>
+    <!-- end of body  -->
+</div>
+{% endblock content %}

@@ -55,7 +55,8 @@ class Salon(models.Model):
     status = models.BooleanField(default=0)
     shares = models.IntegerField(default=0)
     paybill = models.TextField(null=True, blank=True, max_length=12)
-    location = models.CharField(max_length=30)
+    town = models.CharField(max_length=30)
+    location_description = models.CharField(max_length = 250, null= True, blank = True)
     likes = models.ManyToManyField(User, related_name='likes')
 
     def __str__(self):
@@ -121,15 +122,26 @@ class Client(models.Model):
     def __str__(self):
         return self.nickname
 
+class Products(models.Model):
+    product_name = models.CharField(max_length=100)
+    price = models.IntegerField()
+    product_brand = models.CharField(max_length=100)
+    salons = models.ForeignKey(
+        Salon, on_delete=models.CASCADE, related_name='products')
+
+    def __str__(self):
+        return self.product_name
+
 
 class Appointments(models.Model):
     client = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='my_appointments')
     clientphoneNo = models.IntegerField(default='2345966')
     services = models.ManyToManyField(Services, related_name='services')
+    products = models.ManyToManyField(Products, related_name='products')
     salons = models.ForeignKey(
         Salon, on_delete=models.CASCADE, related_name='appointments')
-    date_time = models.DateTimeField()
+    appointment_date = models.DateTimeField()
     created_date = models.DateTimeField(default=timezone.now)
     totalCost = models.IntegerField()
     is_accepted = models.BooleanField(default=False)
@@ -144,30 +156,30 @@ class Appointments(models.Model):
         return reverse('appointment_detail', kwargs={'pk': self.pk})
 
 
-class Products(models.Model):
-    product_name = models.CharField(max_length=100)
-    price = models.IntegerField()
-    product_brand = models.CharField(max_length=100)
-    salons = models.ForeignKey(
-        Salon, on_delete=models.CASCADE, related_name='products')
-
-    def __str__(self):
-        return self.product_name
 
 
 class Comments(models.Model):
+    STAR_CHOICES = (
+        ('1 Star', '1 star'),
+        ('2 Stars', '2 stars'),
+        ('3 Stars', '3 stars'),
+        ('4 Stars', '4 stars'),
+        ('5 Stars', '5 stars'),
+    )
     salon = models.ForeignKey(
         Salon, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='my_comments')
+    stars = models.CharField(max_length=10, choices=STAR_CHOICES, default='1 star')
     comment = models.TextField()
     created_date = models.DateTimeField(
         default=timezone.now
     )
+
     approved_comment = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.comment
+        return self.author
     # to be revisited
 
     def approve(self):

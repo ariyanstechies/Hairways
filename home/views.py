@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from home.decorators import client_required, owner_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import json
 from django.shortcuts import render, get_object_or_404
 from django.core import serializers
@@ -31,8 +31,111 @@ def home(request):
     return render(request, 'home/index.html', {"salons": salons})
 
 def signup_steps(request):
-    context = {
+    
+    if request.method == "POST":
+        logged_in_user = request.user
+        print(logged_in_user)
         
+        owner = Owner.objects.get(user__username=logged_in_user)
+        print(owner)
+
+        # Processing form data
+        if request.POST['input_data']:
+
+            input_data = json.loads(request.POST['input_data'])[0]
+            print(input_data)
+
+            # Update owner details
+            if 'owner_name' in input_data:
+                name = input_data['owner_name']
+                email = input_data['email']
+                phone = input_data['phone']
+                location = input_data['location']
+                gender = input_data['gender']
+
+
+                Owner.objects.filter(user=logged_in_user).update(ownerName=name, email=email, phone=phone, location=location, gender=gender)
+                
+                results = {
+                    'message_type': 'success',
+                    'results': 'Account details successfully updated'
+                }
+                return JsonResponse(results)
+
+            # Create new salon
+            elif 'salon_name' in input_data:
+                name = input_data['salon_name']
+                description = input_data['description']
+                paybill = input_data['paybill']
+                location = input_data['location']
+
+                
+                if Salon.objects.filter(name=name).count() > 0:
+                    results = {
+                        'message_type': 'error',
+                        'results': 'A salon with this name exists. Please choose another name'
+                    }
+                    print('results to show here')
+                    print(results)
+                    return JsonResponse(results)
+
+                else:                
+                    salon = Salon(name=name, description=description, owner=owner, paybill=paybill, location=location)
+                    salon.save()
+
+                    results = {
+                        'message_type': 'success',
+                        'results': 'Salon added successfully'
+                    }
+                    print('results to show here')
+                    print(results)
+                    return JsonResponse(results)
+                        
+
+            elif 'salon_name' in input_data:
+                package = input_data['package']
+                amount = input_data['amount']
+                payment_method = input_data['payment_method']
+
+                salon = Salon.objects.get(owner=owner)
+                subscription = SalonSubscription(salon=salon, package=package, amount=amount, payment_method=payment_method,
+                who_payed=owner)
+                subscription.save()
+
+                results = {
+                    'message_type': 'success',
+                    'results': 'Payment completed'
+                }
+                return JsonResponse(results)
+
+        # Forms
+        owner_details = OwnerAddInfoForm(request.POST)
+        if owner_details.is_valid():
+            salonadd = owner_details.save(commit=False)
+            salonadd.save()
+            return redirect('add_salon')
+
+        add_salon = addSalonForm(request.POST)
+        if add_salon.is_valid():
+            salonadd = add_salon.save(commit=False)
+            salonadd.save()
+            return redirect('add_salon')
+
+        salon_subsription = SalonSubscriptionForm(request.POST)
+        if salon_subsription.is_valid():
+            salonadd = salon_subsription.save(commit=False)
+            salonadd.save()
+            return redirect('add_salon')
+
+    else:
+        owner_details = OwnerAddInfoForm()
+        add_salon = addSalonForm
+        salon_subsription = SalonSubscriptionForm
+
+    context = {
+        'owner_details': owner_details,
+        'add_salon': add_salon,
+        'salon_subsription': salon_subsription
     }
     return render(request, 'sign-up-steps.html', context)
 
@@ -256,7 +359,7 @@ class AppointmentListView(generic.ListView):
     template_name = 'dashboard/dashboard.html'
 
     def get_queryset(self):
-        data = Salon.objects.get(Owner=self.request.user.owner)
+        data = Salon.objects.get(owner=self.request.user.owner)
         queryset = data.appointments.all()
         return queryset
 

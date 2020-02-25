@@ -1,16 +1,12 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Sign up process</title>
-  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet"><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
-<link rel="stylesheet" href="{% static 'css/sign-up-steps.css' %}">
-</head>
-<body>
+{% load bootstrap4 %}
+
+{% block content %}
 
 <!--PEN CONTENT     -->
 <div class="content">
+	<div id="results"></div>
   <!--content inner-->
   <div class="content__inner">
     
@@ -21,7 +17,7 @@
         <div class="row progess-bar">
           <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
             <div class="multisteps-form__progress">
-              <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">Create account</button>
+              <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">Update info</button>
               <button class="multisteps-form__progress-btn" type="button" title="Address">Add salon</button>
               <button class="multisteps-form__progress-btn" type="button" title="Order Info">Payment</button>
               <button class="multisteps-form__progress-btn" type="button" title="Comments">Comments</button>
@@ -31,55 +27,77 @@
         <!--form panels-->
         <div class="row">
           <div class="col-12 col-lg-8 m-auto">
-            <form class="multisteps-form__form">
+            <div class="multisteps-form__form">
               <!--single form panel-->
-              <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="slideHorz">
-                <h3 class="multisteps-form__title">Create an account</h3>
+              <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" id="1" data-animation="slideHorz">
+                <h3 class="multisteps-form__title">Update info</h3>
                 <div class="multisteps-form__content">
                   
-                  Sign up form
-                  <div class="button-row d-flex mt-4">
-                    <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                  <!-- Form to update owner details -->
+                  <div class="container">
+                    <form action="" class="ajax-form" id="owner-details-form" method="POST">
+                      {% bootstrap_form owner_details %}
+
+                      {% buttons %}
+                      <div class="button-row d-flex mt-4">
+                        <button class="btn btn-primary ml-auto js-btn-next" id="next_salon" type="submit" title="Next">Next</button>
+                      </div>
+                      {% endbuttons %}
+                    </form>
                   </div>
+                  
                 </div>
               </div>
               <!--single form panel-->
-              <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+              <div class="multisteps-form__panel shadow p-4 rounded bg-white" id="2" data-animation="slideHorz">
                 <h3 class="multisteps-form__title">Add a salon</h3>
                 <div class="multisteps-form__content">
                   
-                  Add salon form
-                  <div class="button-row d-flex mt-4">
-                    <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                    <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                  <!-- Form to add salon -->
+                  <div class="container">
+                    <form action="" class="ajax-form" id="add-salon-form" method="POST">
+                      {% bootstrap_form add_salon %}
+                  
+                      {% buttons %}
+                      <div class="button-row d-flex mt-4">
+                        <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                        <button class="btn btn-primary ml-auto js-btn-next" id="next_salon" type="submit" title="Next">Next</button>
+                      </div>
+                      {% endbuttons %}
+                    </form>
                   </div>
                 </div>
               </div>
               <!--single form panel-->
-              <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+              <div class="multisteps-form__panel shadow p-4 rounded bg-white" id="3" data-animation="slideHorz">
                 <h3 class="multisteps-form__title">Payment</h3>
                 <div class="multisteps-form__content">
               
-                  Payment form
-                  <div class="button-row d-flex mt-4">
-                    <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                    <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                  <!-- Payment form -->
+                  <div class="container">
+                    <form action="" class="ajax-form" id="salon_subscription-form" method="POST">
+                      {% bootstrap_form salon_subsription %}
+                  
+                      {% buttons %}
+                      <div class="button-row d-flex mt-4">
+                        <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                        <button class="btn btn-primary ml-auto js-btn-next" id="next_salon" type="submit" title="Send">Send</button>
+                      </div>
+                      {% endbuttons %}
+                    </form>
                   </div>
                 </div>
               </div>
               <!--single form panel-->
-              <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+              <div class="multisteps-form__panel shadow p-4 rounded bg-white" id="4" data-animation="slideHorz">
                 <h3 class="multisteps-form__title">Additional Comments</h3>
                 <div class="multisteps-form__content">
                   
-                  Finish up
-                  <div class="button-row d-flex mt-4">
-                    <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                    <button class="btn btn-success ml-auto" type="button" title="Send">Send</button>
-                  </div>
+                  <h2>Congratulation You have successfully created your account</h2>
+                  
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -88,17 +106,213 @@
 </div>
 <!-- partial -->
   <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'></script> -->
-<script src="{% static 'js/sign-up-steps.js' %}"></script>
+<script src="{% static 'js/add-salon.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>  
 
 </body>
 <style>
+  .hide{
+    visibility: hidden;
+  }
+	#results{
+		position: fixed;
+		right: 50px;
+		top: 50px;
+		z-index: 1;
+	}
   .content{
-    margin-top: 100px;
-    padding-top: 50px;
+    margin-top: 20px;
+    padding-top: 20px;
   }
   
   .progess-bar{
-    margin-bottom: 50px;
+    margin-bottom: 20px;
   }
 </style>
-</html>
+
+<script>
+  // Get active tab
+  function get_active_tab() {
+    var active_step_tab = $('.multisteps-form__panel.js-active').attr('id')
+    console.log(active_step_tab)
+  }
+  
+
+  // Set active tab to 0
+  var activePanelNum = 0
+
+  // After a successful post increase value by one to get to the next step tab
+  function next_step() {
+      activePanelNum++;
+      setActiveStep(activePanelNum);
+      setActivePanel(activePanelNum);
+  }
+  
+
+  $(function () {
+    
+
+	data_to_views = []
+
+	// Get values for add owner details
+	function getOwnerDetails() {
+		var owner_name = $('#id_ownerName').val()
+		var email = $('#id_email').val()
+		var phone = $('#id_phone').val()
+		var location = $('#id_location').val()
+		var gender = $('#id_gender').val()
+
+		data_to_views.push({
+			'owner_name': owner_name,
+			'email': email,
+			'phone': phone,
+			'location': location,
+			'gender': gender,
+		});
+
+		console.log(data_to_views)
+		AddOwnerDetails()
+	}
+
+  // Get values for salon details form
+  function getSalonDetails() {
+    var salon_name = $('#id_name').val()
+    var description = $('#id_description').val()
+    var paybill = $('#id_paybill').val()
+    var location = $('#id_location').val()
+
+    data_to_views.push({
+      'salon_name': salon_name,
+      'description': description,
+      'paybill': paybill,
+      'location': location,
+    });
+
+    console.log(data_to_views)
+    AddOwnerDetails()
+  }
+
+  // Get values for payment subscription
+  function getSalonSubscription() {
+      var package = $('#id_package').val()
+      var amount = $('#id_amount').val()
+      var payment_method = $('#id_payment_method').val()
+
+      data_to_views.push({
+        'package': package,
+        'amount': amount,
+        'payment_method': payment_method,
+      });
+
+    console.log(data_to_views)
+    AddOwnerDetails()
+    }
+
+	// Get the ajax form that was submitted
+	  function getAjaxForm() {
+		  $(".ajax-form").on('submit', function (event) {
+			  event.preventDefault();
+			  submitted_form = event.target.id;
+			  console.log(submitted_form);
+        data_to_views = []
+			  if (submitted_form == 'owner-details-form') {
+				  getOwnerDetails()
+			  }
+			  else if (submitted_form == 'add-salon-form') {
+				  getSalonDetails();
+			  }
+
+			  else if (submitted_form == 'salon_subscription-form') {
+				  getSalonSubscription();
+			  }
+		  });
+	  }
+
+	getAjaxForm()
+
+	function AddOwnerDetails() {
+	// console.log("filter record method is working!") // sanity check
+	  $.ajax({
+		  url: "add_salon", // the endpoint
+		  type: "POST", // http method
+		  data: { input_data: JSON.stringify(data_to_views) }, // data sent with the post request
+		  // handle a successful response
+		  success: function (json) {
+        response_type = json.results['']
+			  console.log(json.results)
+			  $('#results').html('<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Success!</strong> '+ json.results +' <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+        $('.alert').removeClass('hide')
+        setTimeout(function () {
+          $('.alert').addClass('hide')
+        }, 5000);
+        next_step()
+        console.log(activePanelNum)
+      },
+		  // handle a non-successful response
+		  error: function (xhr, errmsg, err) {
+			  $('#results').html('<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Error!</strong> Sorry we have encountered the following error: ' + errmsg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'); // add the error to the dom
+			  console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+		  setTimeout(function () {
+          $('.alert').addClass('hide')
+        }, 5000);
+        next_step()
+      }
+	  });
+	}
+
+    // This function gets cookie with a given name
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = jQuery.trim(cookies[i]);
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) == (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    /*
+    The functions below will create a header with csrftoken
+    */
+
+    function csrfSafeMethod(method) {
+      // these HTTP methods do not require CSRF protection
+      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    function sameOrigin(url) {
+      // test that a given url is a same-origin URL
+      // url could be relative or scheme relative or absolute
+      var host = document.location.host; // host + port
+      var protocol = document.location.protocol;
+      var sr_origin = '//' + host;
+      var origin = protocol + sr_origin;
+      // Allow absolute or scheme relative URLs to same origin
+      return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+        // or any other URL that isn't scheme relative or absolute i.e relative.
+        !(/^(\/\/|http:|https:).*/.test(url));
+    }
+
+    $.ajaxSetup({
+      beforeSend: function (xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+          // Send the token to same-origin, relative URLs only.
+          // Send the token only if the method warrants CSRF protection
+          // Using the CSRFToken value acquired earlier
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      }
+    });
+  });
+</script>
+
+{% endblock %}

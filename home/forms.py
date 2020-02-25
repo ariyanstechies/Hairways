@@ -28,6 +28,10 @@ class OwnerSignUpForm(UserCreationForm):
             user.save()
         return user
 
+class OwnerAddInfoForm(forms.ModelForm):
+    class Meta:
+        model = Owner
+        fields = ('ownerName','email','phone','location','gender')
 
 class CommentForm(forms.ModelForm):
 
@@ -41,6 +45,15 @@ class TempUserForm(forms.ModelForm):
         model = tempuser
         fields = ('name','phone_no','email', )
 
+class addSalonForm(forms.ModelForm):
+    class Meta:
+        model = Salon
+        fields = ('name', 'description', 'paybill', 'location')
+
+class SalonSubscriptionForm(forms.ModelForm):
+    class Meta:
+        model = SalonSubscription
+        fields = ('package', 'amount', 'payment_method')
 
 class addEmployeeForm(forms.ModelForm):
 

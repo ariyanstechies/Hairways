@@ -61,7 +61,7 @@ a:hover, a:focus {
 
 @media(max-width: 430px) {
 	.carousel-fullscreen .carousel-inner .carousel-item {
-		height: 40vh;
+		height: 45vh;
 	}
 }
 

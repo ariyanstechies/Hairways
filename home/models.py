@@ -49,12 +49,13 @@ class Salon(models.Model):
     url = models.SlugField()
     description = models.TextField(max_length=250)
     created_date = models.DateTimeField(default=timezone.now)
-    Owner = models.ForeignKey(
+    owner = models.OneToOneField(
         Owner, on_delete=models.CASCADE, related_name='my_salons')
     views = models.IntegerField(default=0)
     status = models.BooleanField(default=0)
     shares = models.IntegerField(default=0)
-    paybill = models.TextField(null=True, blank=True, max_length=12)
+    paybill = models.IntegerField(null=True, blank=True)
+    location = models.CharField(max_length=30)
     town = models.CharField(max_length=30)
     location_description = models.CharField(max_length = 250, null= True, blank = True)
     likes = models.ManyToManyField(User, related_name='likes')
@@ -83,6 +84,15 @@ class Salon(models.Model):
         self.slug = slugify(self.name)
         super(Salon, self).save(*args, **kwargs)
 
+class SalonSubscription(models.Model):
+    salon = models.OneToOneField(Salon, on_delete=models.CASCADE, related_name='salon_subscriptions_salon')
+    package = models.CharField(max_length=100)
+    amount = models.IntegerField()
+    payment_method = models.CharField(max_length=100, default='M-Pesa')
+    who_payed = models.ForeignKey(Owner, on_delete=models.CASCADE, related_name='salon_subscriptions_owner')
+
+    def __str__(self):
+        return f'{str(self.salon)} {self.amount}'
 
 class Services(models.Model):
     salons = models.ForeignKey(

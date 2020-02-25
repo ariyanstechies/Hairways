@@ -14,6 +14,7 @@ urlpatterns = [
     path('home', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('faqs/', views.faqs, name='faqs'),
+    path('add_salon', views.signup_steps, name='add_salon'),
     path('client/update/', ClientUpdate.as_view(), name='client_update'),
     path('owner/update/', owners.OwnerUpdate.as_view(), name='owner_update'),
     path('dashboard/<int:id>/', views.dashboard, name='dashboard'),
@@ -50,7 +51,7 @@ urlpatterns = [
     path('user/profile/', MiniDashboard.as_view(), name='mini_dashboard'),
     path('my/appointments', MyAppointments.as_view(), name='my_appointments'),
     path('my/comments', MyComments.as_view(), name='my_comments'),
-    path('moreinfo/<slug:name>/',views.finalshow, name = 'finalshow')
+    path('moreinfo/<slug:name>/',views.salon_details, name = 'salon_details')
     #     end of client dashboard
 
 

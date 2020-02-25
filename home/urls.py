@@ -49,7 +49,8 @@ urlpatterns = [
     #     client dashboard A.K.A Mini dashboard
     path('user/profile/', MiniDashboard.as_view(), name='mini_dashboard'),
     path('my/appointments', MyAppointments.as_view(), name='my_appointments'),
-    path('my/comments', MyComments.as_view(), name='my_comments')
+    path('my/comments', MyComments.as_view(), name='my_comments'),
+    path('moreinfo/<slug:name>/',views.finalshow, name = 'finalshow')
     #     end of client dashboard
 
 

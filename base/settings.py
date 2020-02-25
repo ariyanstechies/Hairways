@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'home',
     'crispy_forms',
     'phone_field',
-    #'social_django',
     'bootstrap4',
+    'bootstrap_datepicker_plus',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
@@ -154,3 +154,9 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}

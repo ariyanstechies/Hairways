@@ -76,17 +76,17 @@
                 <div class="salon-description">
                   <h2 class="card-title">
                     <a class="card-link"
-                      href="{% url 'moreinfo' name=salon.url %}">
+                      href="{% url 'salon_details' name=salon.url %}">
                       {{ salon.name | truncatewords:3 }} </a> </h2>
                   <h4 class="card-subtitle mb-2">
                     <a class="card-link"
-                      href="{% url 'moreinfo' name=salon.url %}">
+                      href="{% url 'salon_details' name=salon.url %}">
                       {{ salon.location | truncatewords:3 }} </a></h4>
 
                   <div class="card-body">
                     <p class="card-text">
                       <a class="card-link"
-                        href="{% url 'moreinfo' name=salon.url %}">
+                        href="{% url 'salon_details' name=salon.url %}">
                         {{ salon.description|truncatewords:30 }}
                       </a>
                     </p>
@@ -161,10 +161,6 @@
         </div>
         {% endif %}
       </div>
-      {% endif %}
-      {% else %}
-      <p class="text-center text-muted"> No Salons To Display :(</p>
-      {% endif %}
     </div>
   </div>
 </section>

@@ -1,6 +1,7 @@
 from django.views import generic
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -9,6 +10,7 @@ from django.utils.decorators import method_decorator
 from home.decorators import client_required, owner_required
 from django.http import HttpResponse
 import json
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.core import serializers
 from django.views.generic import TemplateView, CreateView
@@ -16,6 +18,47 @@ from home.forms import *
 from home.models import Salon, Services, Owner, Products, Comments
 from home.models import Client, Staff
 
+def finalshow(request,name):
+    salon = get_object_or_404(Salon, url=name)
+    services = Services.objects.filter(salons__name=salon.name)
+    products = Products.objects.filter(salons__name=salon.name)
+    comments = Comments.objects.filter(salon__id=salon.id).order_by("-created_date")
+    MAPS_API_KEY = settings.MAPS_API_KEY
+
+    if request.method == "POST":
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+
+            comment = comment_form.save(commit=False)
+            comment.salon = salon
+            comment.author = request.user
+
+            comment.save()
+            messages.success(request, 'Review Received Successfully! It will be posted soon. You can edit it on your Profile')
+            return redirect('finalshow', name=name)
+
+    comment_form = CommentForm()
+
+
+
+    if request.method == "POST":
+        form = clientAppointment(request.POST)
+        if form.is_valid():
+            clientAppointmentAdd = form.save(commit=False)
+            clientAppointmentAdd.client = request.user
+            clientAppointmentAdd.salons = salon
+            clientAppointmentAdd.totalCost = 900
+            clientAppointmentAdd.save()
+            messages.success(request, 'Appointment Successfuly booked')
+            return redirect('finalshow', name=name)
+    form = clientAppointment()
+
+    context = {'salon': salon, 'services': services, 'products': products,
+               'reviews': comments, 'counter': 0,
+               'comment_form': comment_form,
+               'form': form, 'clientAppointment': clientAppointment,
+               'MAPS_API_KEY': MAPS_API_KEY}   
+    return render(request, "home/finalshow.html",context)
 
 def home(request):
     filtered_salons = Salon.objects.all().order_by('likes')
@@ -29,6 +72,28 @@ def home(request):
         salons = paginator.page(paginator.num_pages)
     return render(request, 'home/index.html', {"salons": salons})
 
+
+def comingsoon(request):
+
+    if request.method == "POST":
+        temuser_form = TempUserForm(request.POST)
+        if temuser_form.is_valid():
+
+            temuser = temuser_form.save(commit=False)
+
+            temuser.save()
+            messages.success(request, 'We successfully received your details!')
+
+            return redirect('comingsoon')
+            
+
+    temuser_form = TempUserForm()
+    return render(request, 'comingsoon/index-design-2.html',{'temuserf_form':temuser_form})
+
+
+def crs(request):
+    people = tempuser.objects.all()
+    return render(request, "comingsoon/check.html",{'people':people})
 
 def faqs(request):
     return render(request, "faqs/index.html")
@@ -170,6 +235,9 @@ def moreinfo(request, name):
                'form': form, 'clientAppointment': clientAppointment,
                'MAPS_API_KEY': MAPS_API_KEY}
     return render(request, "home/show.html", context)
+
+
+
 
 
 @login_required

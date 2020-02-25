@@ -160,3 +160,97 @@ a:hover, a:focus {
 		margin-top: 10px;
 	}
 }
+
+/* New image b */
+        @import url('https://fonts.googleapis.com/css?family=Montserrat|Oswald');
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+        }
+
+        p {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .image-wrap {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .banner-content {
+            position: absolute;
+            z-index: 99999;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            text-align: let;
+            font-size: 1.5em;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .img-content img {
+      
+            display: block;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #99d19e1c;
+            /* opacity: .8; */
+            z-index: 999;
+            height: 100%;
+        }
+
+        .ban-btn {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+
+        .btn-red {
+            background-color: red;
+        }
+
+        .btn-green {
+            background-color: #4CAF50;
+		}
+		
+.blog .carousel-indicators {
+	left: 0;
+	top: auto;
+    bottom: -40px;
+
+}
+
+/* The colour of the indicators */
+.blog .carousel-indicators li {
+    background: #a3a3a3;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+}
+
+.blog .carousel-indicators .active {
+background: #707070;
+}
+
+.card-inner{
+    margin-left: 4rem;
+}

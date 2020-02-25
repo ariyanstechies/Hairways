@@ -129,7 +129,7 @@ media/
 # django migrations
 .vscode/
 migrations/
-/migrations
+migrations/.*
 
 # django migrations 
 **/migrations/**

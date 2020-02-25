@@ -1,66 +1,92 @@
-*{
+/* General Style */
+
+* {
 	margin: 0px;
 	padding: 0px;
 }
+
 body {
- font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+	font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+a {
+	color: #0d0f0f;
+}
+
+a:hover, a:focus {
+	color: #007765;
+	transition: 0.25s ease-out;
+}
+
 /*==================  Navbar  ==================*/
+
+.navbar {
+	padding: 0.85rem 1rem;
+}
 
 .bg-teal {
 	background-color: #007765;
 }
+
 .navbar-brand {
-	font-weight: bold;	
-    padding: 0 12px;
+	font-weight: bold;
+	padding: 0 12px;
 }
 
 /*==================  Carousel   ==================*/
-.home {
+
+.homepage {
 	width: 100%;
+	margin-bottom: 12px;
+}
+
+.carousel-fullscreen .carousel-inner .carousel-item {
+	height: 90vh;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+@media(max-width: 767px) {
+	.carousel-fullscreen .carousel-inner .carousel-item {
+		height: 60vh;
+	}
+}
+
+@media(max-width: 576px) {
+	.carousel-fullscreen .carousel-inner .carousel-item {
+		height: 50vh;
+	}
+}
+
+@media(max-width: 430px) {
+	.carousel-fullscreen .carousel-inner .carousel-item {
+		height: 45vh;
+	}
 }
 
 /*==================  Search Input Field  ==================*/
 
- 
-.search-input{
-	margin: 10px 0 10px 0;
-	width: 250px;
+.search-input {
 	border: 1px solid #80BDFF;
 }
 
-.search-input:focus{
-	width: 300px;
+.search-input:focus {
 	transition: 0.25s ease-out;
 }
 
-/*==================  Salon Card  ==================*/
-.each_salon {
-	padding: 10px;
-}
-.allsalons .card {
-	background-image: url('../css/images/cover1.jpg'); 
+/*==================  Salons Card Homepage ==================*/
+
+.salon_card {
+	background-image: url('../css/images/cover1.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 	height: 250px;
-}
-.allsalons .card .card-link {
-	border-radius: 10px; 
-}
-
-.card-link {
-	position:absolute; 
-	width:100%; 
-	height:100%; 
-	top:0; 
-	left: 0; 
-	z-index: 10;
 }
 
 .card-body {
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	border-radius: 50px;
-	opacity: .7;
 	padding: 0px;
 }
 
@@ -73,36 +99,15 @@ body {
 	float: right;
 }
 
-.salon-name {
-	font-size: 30px;
-	font-weight: bold;
-}
-
-.salon-location {
-	font-size: 20px;
-	padding-left: 10px; 
-}
-
-.salon-slogan{
-	font-size: 15px;
-	padding-left: 10px;
-	overflow: hidden;
-	height: 15%;
-}
-
-.card-text {
-	padding-left: 10px;
-	color: crimson
-}
-
 .icons {
 	color: rgb(0, 209, 176);
 }
 
-.icons > li {
+.icons>li {
 	display: inline-block;
-	margin-right: 5px; 
-	*display:inline; /*fix for IE 7 */
+	margin-right: 5px;
+	*display: inline;
+	/*fix for IE 7 */
 	padding-left: 10px;
 }
 
@@ -113,12 +118,10 @@ body {
 	font-size: 16px;
 	cursor: pointer;
 }
-.custom-select {
-	font-weight: bold;
-}
 
 /*==================  Moreinfo/show page  ==================*/
-.carousel-item img {
+
+.details_page .carousel-item img {
 	background-size: cover;
 	width: 100%;
 	height: 100%;
@@ -126,15 +129,18 @@ body {
 }
 
 /*==================  django forms  ==================*/
+
 .asteriskField {
-    display: none;
+	display: none;
 }
 
 /*==================  Social Icons  ==================*/
+
 .social {
 	cursor: pointer;
 	padding: 5px;
 }
+
 .social:hover {
 	color: #222;
 	transition: 0.3s ease-out;
@@ -143,7 +149,7 @@ body {
 @media (min-width: 320px) and (max-width: 480px) {
 	#map {
 		height: 200px;
-		margin-top: 10px; 
+		margin-top: 10px;
 	}
 }
 
@@ -152,4 +158,98 @@ body {
 		height: 200px;
 		margin-top: 10px;
 	}
+}
+
+/* New image b */
+        @import url('https://fonts.googleapis.com/css?family=Montserrat|Oswald');
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+        }
+
+        p {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .image-wrap {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .banner-content {
+            position: absolute;
+            z-index: 99999;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            text-align: let;
+            font-size: 1.5em;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .img-content img {
+      
+            display: block;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #99d19e1c;
+            /* opacity: .8; */
+            z-index: 999;
+            height: 100%;
+        }
+
+        .ban-btn {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+
+        .btn-red {
+            background-color: red;
+        }
+
+        .btn-green {
+            background-color: #4CAF50;
+		}
+		
+.blog .carousel-indicators {
+	left: 0;
+	top: auto;
+    bottom: -40px;
+
+}
+
+/* The colour of the indicators */
+.blog .carousel-indicators li {
+    background: #a3a3a3;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+}
+
+.blog .carousel-indicators .active {
+background: #707070;
+}
+
+.card-inner{
+    margin-left: 4rem;
 }

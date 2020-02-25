@@ -10,6 +10,7 @@ from home.clients import CommentsListView, MyAppointments, MyComments
 
 urlpatterns = [
     path('', views.comingsoon, name='comingsoon'),
+    path('current/registerd/salons',views.crs, name = 'crs'),
     path('home', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('faqs/', views.faqs, name='faqs'),
@@ -49,7 +50,8 @@ urlpatterns = [
     #     client dashboard A.K.A Mini dashboard
     path('user/profile/', MiniDashboard.as_view(), name='mini_dashboard'),
     path('my/appointments', MyAppointments.as_view(), name='my_appointments'),
-    path('my/comments', MyComments.as_view(), name='my_comments')
+    path('my/comments', MyComments.as_view(), name='my_comments'),
+    path('moreinfo/<slug:name>/',views.salon_details, name = 'salon_details')
     #     end of client dashboard
 
 

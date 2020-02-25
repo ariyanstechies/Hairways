@@ -2,7 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from home.models import *
-
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit, Row, Column
+from bootstrap_datepicker_plus import DatePickerInput
 
 class ClientSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -37,7 +39,7 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comments
-        fields = ('comment', )
+        fields = ('stars','comment')
 
 class TempUserForm(forms.ModelForm):
 
@@ -89,8 +91,13 @@ class clientAppointment(forms.ModelForm):
 
     class Meta:
         model = Appointments
-        fields = ('client', 'clientphoneNo',
-                  'salons', 'totalCost', 'date_time')
+        fields = ['services','appointment_date', 'products']
+        widgets = {
+            'services': forms.CheckboxSelectMultiple,
+            'appointment_date': DatePickerInput(),
+            'products': forms.CheckboxSelectMultiple,
+        }
+    
 
 
 class AppointmentUpdateForm(forms.ModelForm):

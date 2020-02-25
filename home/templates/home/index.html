@@ -51,8 +51,8 @@
             <select class="custom-select col-sm-6 mb-2">
               <option selected>All Locations</option>
               {% for salon in salons %}
-              <option value="{{ salon.location }}">{{ salon.location }}</option>
               {% endfor %}
+              <option value="{{ salon.location }}">{{ salon.location }}</option>
             </select>
             <input class="search-input form-control float-right col-sm-5 mb-2
               offset-sm-1"
@@ -69,17 +69,17 @@
                   <h2 class="card-title">
                     <a class="card-link"
                       href="{% url 'moreinfo' name=salon.url %}">
-                      {{ salon.name }} </a> </h2>
+                      {{ salon.name | truncatewords:3 }} </a> </h2>
                   <h4 class="card-subtitle mb-2">
                     <a class="card-link"
                       href="{% url 'moreinfo' name=salon.url %}">
-                      {{ salon.location }} </a></h4>
+                      {{ salon.location | truncatewords:3 }} </a></h4>
 
                   <div class="card-body">
                     <p class="card-text">
                       <a class="card-link"
                         href="{% url 'moreinfo' name=salon.url %}">
-                        {{ salon.description|truncatewords:50 }}
+                        {{ salon.description|truncatewords:30 }}
                       </a>
                     </p>
                     <span>

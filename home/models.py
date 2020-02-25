@@ -179,7 +179,7 @@ class Comments(models.Model):
     approved_comment = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.author
+        return str(self.author)
     # to be revisited
 
     def approve(self):

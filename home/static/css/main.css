@@ -128,15 +128,6 @@ a:hover, a:focus {
 	min-height: max-content;
 }
 
-/* Page Footer */
-
-.page-footer {
-	right: 0;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-}
-
 /*==================  django forms  ==================*/
 
 .asteriskField {
@@ -167,15 +158,6 @@ a:hover, a:focus {
 		height: 200px;
 		margin-top: 10px;
 	}
-}
-
-/* New image b */
-
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Oswald');
-body {
-	margin: 0;
-	padding: 0;
-	font-family: 'Montserrat', sans-serif;
 }
 
 h1 {

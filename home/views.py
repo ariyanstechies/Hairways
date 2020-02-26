@@ -15,7 +15,7 @@ from django.shortcuts import render, get_object_or_404
 from django.core import serializers
 from django.views.generic import TemplateView, CreateView
 from home.forms import *
-from home.models import Salon, Services, Owner, Products, Comments, SalonSubscription
+from home.models import Salon, Services, Owner, Products, Comments, SalonSubscription, Comments
 from home.models import Client, Staff
 
 def salon_details(request,name):
@@ -211,7 +211,8 @@ def about(request):
     return render(request, "about.html")
 
 
-@method_decorator([login_required, owner_required], name='dispatch')
+@login_required 
+@owner_required
 def dashboard(request):
     me = Salon.objects.all()
     if request.method == "POST":
@@ -228,46 +229,99 @@ def dashboard(request):
 
 
 @login_required
-def user(request, id):
+def profile(request, id):
     user_details = Owner.objects.get(ownerId=id)
     salon_details = Salon.objects.get(ownerId=id)
     context = {'user_details': user_details, 'salon_details': salon_details}
-    return render(request, "dashboard/user.html", context)
-
+    return render(request, "dashboard/profile.html", context)
 
 @login_required
-def productsServices(request):
-    service = Services.objects.all()
-    product = Products.objects.all()
+def reviews(request):
+    reviews = Comments.objects.all()
+    context = {
+        'reviews': reviews
+    }
+    return render(request, "dashboard/reviews.html", context)
 
-    print(service, product)
+@login_required
+def services(request):
+    service = Services.objects.all()
+
+    print(service)
 
     if request.method == "POST":
         form = addServiceForm(request.POST)
         if form.is_valid():
             salonadd = form.save(commit=False)
             salonadd.save()
-            return redirect('productsServices')
+            return redirect('services')
     else:
         formservice = addServiceForm()
+
+    context = {
+        'formservice': formservice, 'service': service 
+    }
+
+    return render(request, "dashboard/services.html", context)
+
+
+@login_required
+def services_add(request):
+    context = {
+
+    }
+    return render(request, "dashboard/services_add.html", context)
+
+@login_required
+def products(request):
+    product = Products.objects.all()
+
+    print(product)
+
 
     if request.method == "POST":
         form = addProductForm(request.POST)
         if form.is_valid():
             salonadd = form.save(commit=False)
             salonadd.save()
-            return redirect('productsServices')
+            return redirect('products')
     else:
         formproduct = addProductForm()
 
-    context = {'formservice': formservice, 'formproduct': formproduct,
-               'service': service, 'product': product}
-    return render(request, "dashboard/productsServices.php", context)
+    context = {'formproduct': formproduct,
+               'product': product}
 
+    return render(request, "dashboard/products.html", context)
 
 @login_required
-def staffClients(request):
-    client = Client.objects.all()
+def products_add(request):
+    context = {
+
+    }
+    return render(request, "dashboard/products_add.html", context)
+
+@login_required
+def customers(request):
+    customers = Client.objects.all()
+
+    if request.method == "POST":
+        form = addClientForm(request.POST)
+        if form.is_valid():
+            salonadd = form.save(commit=False)
+            salonadd.save()
+            return redirect('customers')
+    else:
+        formclient = addClientForm()
+
+    context = {
+        'client': customers, 'formclient': formclient,
+    }
+
+    return render(request, "dashboard/customers.html", context)
+
+@login_required
+def staffs(request):
+    
     staff = Staff.objects.all()
 
     if request.method == "POST":
@@ -275,38 +329,29 @@ def staffClients(request):
         if form.is_valid():
             salonadd = form.save(commit=False)
             salonadd.save()
-            return redirect('staffClients')
+            return redirect('staffs')
     else:
         formstaff = addEmployeeForm()
 
-    if request.method == "POST":
-        form = addClientForm(request.POST)
-        if form.is_valid():
-            salonadd = form.save(commit=False)
-            salonadd.save()
-            return redirect('dashboard')
-    else:
-        formclient = addClientForm()
 
-    context = {'formstaff': formstaff, 'formclient': formclient,
-               'client': client, 'staff': staff}
-    return render(request, "dashboard/staffClients.php", context)
+    context = {'formstaff': formstaff,
+               'staff': staff}
 
+    return render(request, "dashboard/staffs.html", context)
 
 @login_required
-def map(request):
-    return render(request, "dashboard/map.php")
+def staffs_add(request):
+    context = {
 
-
-@login_required
-def calendar(request):
-    return render(request, "dashboard/calendar.php")
-
+    }
+    return render(request, "dashboard/staffs_add.html", context)
 
 @login_required
-def upgrade(request):
-    return render(request, "dashboard/upgrade.php")
+def dashboard_appointments_add(request):
+    context = {
 
+    }
+    return render(request, "dashboard/appointments_add.html", context)
 
 def moreinfo(request, name):
     salon = get_object_or_404(Salon, url=name)
@@ -343,9 +388,6 @@ def moreinfo(request, name):
                'form': form, 'clientAppointment': clientAppointment,
                'MAPS_API_KEY': MAPS_API_KEY}
     return render(request, "home/show.html", context)
-
-
-
 
 
 @login_required
@@ -402,18 +444,12 @@ class SignUpView(TemplateView):
 class AppointmentListView(generic.ListView):
     model = Salon
     context_object_name = 'my_salon'
-    template_name = 'dashboard/dashboard.html'
+    template_name = 'dashboard/appointments.html'
 
     def get_queryset(self):
         data = Salon.objects.get(owner=self.request.user.owner)
         queryset = data.appointments.all()
         return queryset
-
-
-def appointment_detail(request, pk):
-    appointment = get_object_or_404(Appointments, pk=pk)
-    context = {'appointment': appointment}
-    return render(request, 'dashboard/appointment_detail.html', context)
 
 
 def appointment_accept(request, pk,):
@@ -423,7 +459,7 @@ def appointment_accept(request, pk,):
     appointment.is_complete = False
     appointment.is_accepted = True
     appointment.save()
-    return redirect('appointment_detail', pk=pk)
+    return redirect('appointments', pk=pk)
 
 
 def appointment_reject(request, pk,):
@@ -433,4 +469,4 @@ def appointment_reject(request, pk,):
     appointment.is_complete = False
     appointment.is_accepted = False
     appointment.save()
-    return redirect('appointment_detail', pk=pk)
+    return redirect('appointments', pk=pk)

@@ -18,9 +18,9 @@
           <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
             <div class="multisteps-form__progress">
               <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">Update info</button>
-              <button class="multisteps-form__progress-btn" type="button" title="Address">Add salon</button>
-              <button class="multisteps-form__progress-btn" type="button" title="Order Info">Payment</button>
-              <button class="multisteps-form__progress-btn" type="button" title="Comments">Comments</button>
+              <button class="multisteps-form__progress-btn" {% if request.user.OwnerName%}{%else%}disabled{%endif%} type="button" title="Address">Add salon</button>
+              <button class="multisteps-form__progress-btn" {% if request.user.my_salons%}{%else%}disabled{%endif%} type="button" title="Order Info">Payment</button>
+              <button class="multisteps-form__progress-btn" {% if request.user.my_salons.is_paid%}{%else%}disabled{%endif%} type="button" title="Comments">Comments</button>
             </div>
           </div>
         </div>
@@ -180,13 +180,13 @@
     var salon_name = $('#id_name').val()
     var description = $('#id_description').val()
     var paybill = $('#id_paybill').val()
-    var location = $('#id_location').val()
+    var town = $('#id_town').val()
 
     data_to_views.push({
       'salon_name': salon_name,
       'description': description,
       'paybill': paybill,
-      'location': location,
+      'town': town,
     });
 
     console.log(data_to_views)

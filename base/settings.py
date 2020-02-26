@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'phone_field',
     'bootstrap4',
     'bootstrap_datepicker_plus',
+    
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
@@ -143,7 +144,6 @@ STATIC_URL = '/static/'
 # user redirected to home after successfull login
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-# prints emails on the console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

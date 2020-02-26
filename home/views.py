@@ -25,6 +25,48 @@ def salon_details(request,name):
     comments = Comments.objects.filter(salon__id=salon.id).order_by("-created_date")
     MAPS_API_KEY = settings.MAPS_API_KEY
 
+    average_rating = 0    
+    stars_1 = 0
+    stars_2 = 0
+    stars_3 = 0
+    stars_4 = 0
+    stars_5 = 0
+
+    ps1 = 0
+    ps2 = 0
+    ps3 = 0
+    ps4 = 0
+    ps5 = 0
+
+    for comment in comments:
+        if comment.stars == '1 Star':
+            stars_1 +=1
+        
+        if comment.stars == '2 Stars':
+            stars_2 +=1
+
+        if comment.stars == '3 Stars':
+            stars_3 +=1
+
+        if comment.stars == '4 Stars':
+            stars_4 +=1
+
+        if comment.stars == '5 Stars':
+            stars_5 +=1
+
+    
+    total_stars = stars_1+stars_2+stars_3+stars_4+stars_5
+    if total_stars > 0:
+        ps1 = (stars_1/total_stars)*100
+        ps2 = (stars_2/total_stars)*100
+        ps3 = (stars_3/total_stars)*100
+        ps4 = (stars_4/total_stars)*100
+        ps5 = (stars_5/total_stars)*100
+    
+        average_rating = 0
+    
+        average_rating = round((stars_1+ (stars_2*2)+ (stars_3*3)+ (stars_4*4)+ (stars_5*5))/total_stars,1)
+
     if request.method == "POST":
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
@@ -39,8 +81,6 @@ def salon_details(request,name):
 
     comment_form = CommentForm()
 
-
-
     if request.method == "POST":
         form = clientAppointment(request.POST)
         if form.is_valid():
@@ -53,11 +93,11 @@ def salon_details(request,name):
             return redirect('salon_details', name=name)
     form = clientAppointment()
 
-    context = {'salon': salon, 'services': services, 'products': products,
+    context = {'salon': salon,'average_rating':average_rating, 'services': services, 'products': products,
                'reviews': comments, 'counter': 0,
-               'comment_form': comment_form,
-               'form': form, 'clientAppointment': clientAppointment,
-               'MAPS_API_KEY': MAPS_API_KEY}   
+               'comment_form': comment_form, 'total_stars': total_stars,
+               'form': form, 'clientAppointment': clientAppointment,'ps1':ps1,'ps2':ps2,'ps3':ps3,'ps4':ps4,'ps5':ps5,
+               'MAPS_API_KEY': MAPS_API_KEY, 'stars_1': stars_1, 'stars_2': stars_2, 'stars_3': stars_3, 'stars_4': stars_4, 'stars_5': stars_5}   
     return render(request, "home/salon_details.html",context)
 
 def home(request):
@@ -76,16 +116,13 @@ def signup_steps(request):
     
     if request.method == "POST":
         logged_in_user = request.user
-        print(logged_in_user)
         
         owner = Owner.objects.get(user__username=logged_in_user)
-        print(owner)
 
         # Processing form data
         if request.POST['input_data']:
 
             input_data = json.loads(request.POST['input_data'])[0]
-            print(input_data)
 
             # Update owner details
             if 'owner_name' in input_data:
@@ -109,7 +146,7 @@ def signup_steps(request):
                 name = input_data['salon_name']
                 description = input_data['description']
                 paybill = input_data['paybill']
-                location = input_data['location']
+                town = input_data['town']
 
                 
                 if Salon.objects.filter(name=name).count() > 0:
@@ -117,20 +154,16 @@ def signup_steps(request):
                         'message_type': 'error',
                         'results': 'A salon with this name exists. Please choose another name'
                     }
-                    print('results to show here')
-                    print(results)
                     return JsonResponse(results)
 
                 else:                
-                    salon = Salon(name=name, description=description, owner=owner, paybill=paybill, location=location)
+                    salon = Salon(name=name, description=description, owner=owner, paybill=paybill, town=town)
                     salon.save()
 
                     results = {
                         'message_type': 'success',
                         'results': 'Salon added successfully'
                     }
-                    print('results to show here')
-                    print(results)
                     return JsonResponse(results)
                         
 
@@ -247,8 +280,6 @@ def reviews(request):
 def services(request):
     service = Services.objects.all()
 
-    print(service)
-
     if request.method == "POST":
         form = addServiceForm(request.POST)
         if form.is_valid():
@@ -275,9 +306,6 @@ def services_add(request):
 @login_required
 def products(request):
     product = Products.objects.all()
-
-    print(product)
-
 
     if request.method == "POST":
         form = addProductForm(request.POST)
@@ -352,42 +380,6 @@ def dashboard_appointments_add(request):
 
     }
     return render(request, "dashboard/appointments_add.html", context)
-
-def moreinfo(request, name):
-    salon = get_object_or_404(Salon, url=name)
-    services = Services.objects.filter(salons__name=salon.name)
-    products = Products.objects.filter(salons__name=salon.name)
-    comments = Comments.objects.filter(
-        salon__id=salon.id).order_by("-created_date")
-    MAPS_API_KEY = settings.MAPS_API_KEY
-
-    if request.method == "POST":
-        comment_form = CommentForm(request.POST)
-        if comment_form.is_valid():
-
-            comment = comment_form.save(commit=False)
-            comment.salon = salon
-            comment.author = request.user
-
-            comment.save()
-
-            return redirect('moreinfo', name=name)
-
-    comment_form = CommentForm()
-
-    if request.method == "POST":
-        form = clientAppointment(request.POST)
-        if form.is_valid():
-            clientAppointmentAdd = form.save(commit=False)
-            clientAppointmentAdd.save()
-            return redirect('moreinfo', name=name)
-    form = clientAppointment()
-    context = {'salon': salon, 'services': services, 'products': products,
-               'reviews': comments, 'counter': 0,
-               'comment_form': comment_form,
-               'form': form, 'clientAppointment': clientAppointment,
-               'MAPS_API_KEY': MAPS_API_KEY}
-    return render(request, "home/show.html", context)
 
 
 @login_required

@@ -55,7 +55,7 @@ class Salon(models.Model):
     status = models.BooleanField(default=0)
     shares = models.IntegerField(default=0)
     paybill = models.IntegerField(null=True, blank=True)
-    location = models.CharField(max_length=30)
+    is_paid = models.BooleanField(default=False)
     town = models.CharField(max_length=30)
     location_description = models.CharField(max_length = 250, null= True, blank = True)
     likes = models.ManyToManyField(User, related_name='likes')
@@ -98,7 +98,7 @@ class Services(models.Model):
     salons = models.ForeignKey(
         Salon, on_delete=models.CASCADE, related_name='services')
     serviceName = models.CharField(max_length=100)
-    serviceCost = models.CharField(max_length=50)
+    serviceCost = models.ImageField(max_length=50)
     serviceDuration = models.CharField(max_length=20)
     serviceBookings = models.IntegerField()
     availability = models.BooleanField(default=True)
@@ -189,7 +189,7 @@ class Comments(models.Model):
     approved_comment = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.author
+        return str(self.author)
     # to be revisited
 
     def approve(self):

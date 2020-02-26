@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
 {% load bootstrap4 %} {# import bootstrap4/bootstrap3 #}
@@ -164,11 +164,11 @@
                             crossorigin="anonymous">
 
                         <section>
-                            <div class="container">
+                            <div class="container-fliud">
                                 <div class="row ">
-                                    <div class="col-md-3 border text-center">
+                                    <div class="col-md-3 border  text-center">
                                         <div class="card-body">
-                                            <h1 class="text-danger">4.5</h1>
+                                            <h1 class="text-danger">{{average_rating}}</h1>
                                             <div class="sub-row text-warning">
                                                 <i class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                     class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -183,66 +183,68 @@
                                                 <div class="col-md-3">
                                                     <h6>5 Stars</h6>
                                                 </div>
-                                                <div class="col-md-7 pt-1">
+                                                <div class="col-md-9 pt-1">
                                                     <div class="progress">
-                                                        <div class="progress-bar bg-success" style="width:20%"></div>
+                                                        <div style="width: {{ps5}}%;"
+                                                            class="progress-bar text-dark text-bold  bg-success">
+                                                            {{stars_5}}</div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
-                                                    <h6>(1)</h6>
-                                                </div>
+
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <h6>4 Stars</h6>
                                                 </div>
-                                                <div class="col-md-7 pt-1">
+                                                <div class="col-md-9 pt-1">
                                                     <div class="progress">
-                                                        <div class="progress-bar bg-success" style="width:20%"></div>
+                                                        <div style="width: {{ps4}}%;"
+                                                            class="progress-bar text-dark text-bold bg-success">
+                                                            {{stars_4}}</div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
-                                                    <h6>(1)</h6>
-                                                </div>
+
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <h6>3 Stars</h6>
                                                 </div>
-                                                <div class="col-md-7 pt-1">
+                                                <div class="col-md-9 pt-1">
                                                     <div class="progress">
-                                                        <div class="progress-bar bg-warning" style="width:20%"></div>
+                                                        <div style="width: {{ps3}}%;"
+                                                            class="progress-bar text-dark text-bold bg-warning">
+                                                            {{stars_3}}</div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
-                                                    <h6>(1)</h6>
-                                                </div>
+
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <h6>2 Stars</h6>
                                                 </div>
-                                                <div class="col-md-7 pt-1">
+                                                <div class="col-md-9 pt-1">
                                                     <div class="progress">
-                                                        <div class="progress-bar bg-danger" style="width:20%"></div>
+                                                        <div style="width: {{ps2}}%;"
+                                                            class="progress-bar text-dark text-bold bg-danger">
+                                                            {{stars_2}}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
-                                                    <h6>(1)</h6>
-                                                </div>
+
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <h6>1 Star</h6>
                                                 </div>
-                                                <div class="col-md-7 pt-1">
+                                                <div class="col-md-9 pt-1">
                                                     <div class="progress">
-                                                        <div class="progress-bar bg-danger" style="width:20%"></div>
+                                                        <div class="progress-bar  text-dark text-bold bg-danger"
+                                                            style="width: {{ps1}}%;">
+                                                            {{stars_1}}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
-                                                    <h6>(1)</h6>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -321,10 +323,7 @@
                                     </p>
                                     <div class="clearfix"></div>
                                     <p>{{ review.comment }}</p>
-                                    <p>
-                                        <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i>
-                                            Reply</a>
-                                    </p>
+
                                 </div>
 
                                 <hr>

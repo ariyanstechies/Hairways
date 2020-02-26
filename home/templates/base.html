@@ -1,14 +1,17 @@
-{% load staticfiles %}
+{% load static %}
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <title>{% block title %} For the best Salons, Barber shop in town {% endblock %}</title>
-    {% include "shared/header.html" %}
-  </head>
-  <body>
-    {% include "shared/navbar.html" %}
-    {% block content %}
-    {% endblock %}
-    {% include "shared/footer.html" %}
-  </body>
+
+<head>
+  <title>{% block title %} For the best Salons, Barber shop in town {% endblock %}</title>
+  {% include "shared/header.html" %}
+</head>
+
+<body>
+  {% include "shared/navbar.html" %}
+  {% block content %}
+  {% endblock %}
+  {% include "shared/footer.html" %}
+</body>
+
 </html>

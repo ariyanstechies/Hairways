@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'phone_field',
     'bootstrap4',
     'bootstrap_datepicker_plus',
+    
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [

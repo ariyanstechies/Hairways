@@ -48,7 +48,15 @@ def salon_details(request,name):
             stars_5 +=1
 
     total_stars = stars_1+stars_2+stars_3+stars_4+stars_5
-    average_rating = round((stars_1+ (stars_2*2)+ (stars_3*3)+ (stars_4*4)+ (stars_5*5))/total_stars,1)
+    ps1 = (stars_1/total_stars)*100
+    ps2 = (stars_2/total_stars)*100
+    ps3 = (stars_3/total_stars)*100
+    ps4 = (stars_4/total_stars)*100
+    ps5 = (stars_5/total_stars)*100
+   
+    average_rating = 0
+    if total_stars > 0:
+        average_rating = round((stars_1+ (stars_2*2)+ (stars_3*3)+ (stars_4*4)+ (stars_5*5))/total_stars,1)
 
     if request.method == "POST":
         comment_form = CommentForm(request.POST)
@@ -79,9 +87,9 @@ def salon_details(request,name):
     context = {'salon': salon,'average_rating':average_rating, 'services': services, 'products': products,
                'reviews': comments, 'counter': 0,
                'comment_form': comment_form, 'total_stars': total_stars,
-               'form': form, 'clientAppointment': clientAppointment,
+               'form': form, 'clientAppointment': clientAppointment,'ps1':ps1,'ps2':ps2,'ps3':ps3,'ps4':ps4,'ps5':ps5,
                'MAPS_API_KEY': MAPS_API_KEY, 'stars_1': stars_1, 'stars_2': stars_2, 'stars_3': stars_3, 'stars_4': stars_4, 'stars_5': stars_5}   
-    return render(request, "home/finalshow.html",context)
+    return render(request, "home/salon_details.html",context)
 
 def home(request):
     filtered_salons = Salon.objects.all().order_by('likes')

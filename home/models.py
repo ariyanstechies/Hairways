@@ -55,6 +55,7 @@ class Salon(models.Model):
     status = models.BooleanField(default=0)
     shares = models.IntegerField(default=0)
     paybill = models.IntegerField(null=True, blank=True)
+    is_paid = models.BooleanField(default=False)
     town = models.CharField(max_length=30)
     location_description = models.CharField(max_length = 250, null= True, blank = True)
     likes = models.ManyToManyField(User, related_name='likes')

@@ -52,7 +52,7 @@ class SalonCreateView(CreateView):
         salon.url = slugify(salon.name)
         salon.save()
         messages.success(self.request, 'The Salon was created succesfully.')
-        return redirect('dashboard')
+        return redirect('dashboard_appointments')
 
         # special appointment adds
 

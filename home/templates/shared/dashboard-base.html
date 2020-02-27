@@ -1,4 +1,5 @@
 {% load static %}
+
 <!doctype html>
 <html lang="en">
 
@@ -268,8 +269,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="{% url
-                        'dashboard_appointments_add'
+                      <a href="{% url 'dashboard_appointments_add'
                         %}">
                         <i class="metismenu-icon">
                         </i>Add Appointments
@@ -292,7 +292,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="{% url 'staffs_add' %}">
+                      <a href="{% url 'staffs_new' %}">
                         <i class="metismenu-icon">
                         </i>Add Staff
                       </a>
@@ -354,3 +354,6 @@
   </body>
 
 </html>
+
+{% block modal %}
+{% endblock %}

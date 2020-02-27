@@ -1,0 +1,468 @@
+{% extends 'shared/dashboard-base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="app-main__inner">
+  <div class="app-page-title">
+    <div class="page-title-wrapper">
+      <div class="page-title-heading">
+        <div class="page-title-icon">
+          <i class="pe-7s-car icon-gradient bg-mean-fruit">
+          </i>
+        </div>
+        <div>Analytics Dashboard
+          <div class="page-title-subheading">This is an example
+            dashboard created using build-in elements
+            and components.
+          </div>
+        </div>
+      </div>
+      <div class="page-title-actions">
+        <div class="d-inline-block dropdown">
+          <button type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"
+            class="btn-shadow dropdown-toggle btn btn-info">
+            <span class="btn-icon-wrapper pr-2 opacity-7">
+              <i class="fa fa-business-time fa-w-20"></i>
+            </span>
+            Buttons
+          </button>
+          <div tabindex="-1" role="menu" aria-hidden="true"
+            class="dropdown-menu dropdown-menu-right">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a href="javascript:void(0);"
+                  class="nav-link">
+                  <i class="nav-link-icon lnr-inbox"></i>
+                  <span>
+                    Inbox
+                  </span>
+                  <div class="ml-auto badge badge-pill
+                    badge-secondary">86</div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="javascript:void(0);"
+                  class="nav-link">
+                  <i class="nav-link-icon lnr-book"></i>
+                  <span>
+                    Book
+                  </span>
+                  <div class="ml-auto badge badge-pill
+                    badge-danger">5</div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="javascript:void(0);"
+                  class="nav-link">
+                  <i class="nav-link-icon lnr-picture"></i>
+                  <span>
+                    Picture
+                  </span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a disabled href="javascript:void(0);"
+                  class="nav-link disabled">
+                  <i class="nav-link-icon lnr-file-empty"></i>
+                  <span>
+                    File Disabled
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page content goes here -->
+
+  <!-- Messages -->
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    {% if message.tags %}
+    <div class="alert alert-{{ message.tags }}" role="alert">
+      {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">
+          <!-- Div for search and filter -->
+          <div class="form-row align-items-center" id="search_filter">
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend dropdown">
+                  <div class="input-group-text dropdown-toggle"
+                    id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">Sort by:
+                  </div>
+
+                  <div class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton">
+                    <form action="" class="ajax-form" method="POST"
+                      id="filter_form">
+                      <button type="submit" class="filter dropdown-item"
+                        id="alphabet">A - Z</button>
+                      <button type="submit" class="filter dropdown-item"
+                        id="date_started">Date started</button>
+                      <button type="submit" class="filter dropdown-item"
+                        id="salary">Salary</button>
+                    </form>
+                  </div>
+                </div>
+                <form action="">
+                  <input type="search" class="form-control"
+                    id="search-staffs" placeholder="Search Staffs">
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="btn-actions-pane-right">
+            <div role="group" class="btn-group-sm btn-group">
+              <button class="active btn btn-focus">Last Week</button>
+              <button class="btn btn-focus">All Month</button>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="align-middle mb-0 table table-borderless
+            table-striped table-hover">
+            <thead>
+              <tr>
+                <th class="text-center">#</th>
+                <th>Name</th>
+                <th class="text-center">Phone Number</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Date started</th>
+                <th class="text-center">Salary</th>
+                <th class="text-center">Edit</th>
+                <th class="text-center">Delete</th>
+              </tr>
+            </thead>
+            <tbody id="table-data">
+              {% if staffs %}
+              {% for staff in staffs %}
+              <tr>
+                <td class="text-center text-muted">#{{staff.id}}</td>
+                <td>
+                  <div class="widget-content p-0">
+                    <div class="widget-content-wrapper">
+                      <div class="widget-content-left
+                        mr-3">
+                        <div
+                          class="widget-content-left">
+                          <img width="40"
+                            class="rounded-circle"
+                            src="assets/images/avatars/4.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                      <div class="widget-content-left
+                        flex2">
+                        <div class="widget-heading">{{staff.firstname}}
+                          {{staff.lastname}}</div>
+                        <div class="widget-subheading
+                          opacity-7">{{staff.job_description}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">{{staff.phone}}</td>
+                <td class="text-center">{{staff.email}}</td>
+                <td class="text-center">{{staff.date_started|date:"d-m-y"}}</td>
+                <td class="text-center">{{staff.salary}}</td>
+                <td><a href="{% url 'staffs_edit' pk=staff.pk %}"><i class="fas
+                      fa-edit edit-row-data"></i></a></td>
+                <td><i data-toggle="modal" name="{{staff.firstname}}
+                    {{staff.lastname}} -
+                    {{staff.job_description}}" data-target="#delete-staff-modal"
+                    id="{{staff.id}}" class="fas fa-trash-alt delete-row-data"></i></td>
+              </tr>
+              {% endfor %}
+              {% else %}
+              <p>No clients yet</p>
+              {% endif %}
+            </tbody>
+          </table>
+          <div class="filter-error filter-error-hide">
+            <p>The filter did not yield results<p></p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <style>
+      .filter-error-hide{
+      display: none;
+    }
+
+    .filter-error{
+       text-align: center;
+        color: rgb(63, 25, 25);
+        font-weight: bold;
+        margin: 50px 0px 50px 0px; 
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+  <script>
+ 
+    // Display salon to delete
+    $('.delete-row-data').on('click', function () {
+        var staff_data = $(this).attr('name');
+        console.log(this.id)
+        $('#staff_to_delete_id').html(staff_data)
+        $('#staff_to_delete_id_input').val(this.id)
+    });
+  
+    $(function () {
+        // Initialising an empty global variable to hold the clicked_filter
+        var filter = '';
+        var keyword = '';
+
+        var staffs_before_search = $('#table-data').html();
+
+        // Search as you type
+        $("#search-staffs").keyup(function (event) {
+            var search = $(this).val();
+            console.log(search);
+            if (search.length < 1) {
+                $('#table-data').html(staffs_before_search);
+                console.log('empty')
+                $('.filter-error').addClass('filter-error-hide')
+            }
+            else {
+                keyword = search;
+                search_staffs();
+            }
+        });
+
+        // Get the ajax form that was submitted
+        function getAjaxForm() {
+            $(".ajax-form").on('submit', function (event) {
+                event.preventDefault();
+                submitted_form = event.target.id;
+                if (submitted_form == 'filter_form') {
+                    filter_records();
+                }
+                else if (submitted_form == 'delete-staff-form') {
+                    
+                }
+            });
+        }
+
+        // Function that gets the clicked function
+        function getFilter() {
+            $(".filter").click(function getfilter(event) {
+                clicked_filter = event.target.id;
+                console.log(clicked_filter)
+                filter = clicked_filter;
+            });
+        }
+
+        // Calling get filter to save the filter to variable "filter" which is later accessed by ajax
+        getFilter();
+
+        // Submit post on submit
+        getAjaxForm();
+
+        // Search staffs function
+        function search_staffs() {
+            $.ajax({
+                url: "", // the endpoint
+                type: "GET", // http method
+                data: { 'keyword': keyword }, // data sent with the post request
+                // handle a successful response
+                success: function (json) {
+                    console.log(json.data)
+                    console.log(json.data.fields)
+                    console.log(json.data_length)
+                    filtered_data = JSON.parse(json.data)
+                    console.log(filtered_data)
+                    console.log(typeof (filtered_data))
+                    $('#table-data').html('');
+                    $('.quantity-today').hide();
+                    if (json.data_length < 1) {
+                        $('.filter-error').removeClass('filter-error-hide');
+                    } else {
+                      $('.filter-error').addClass('filter-error-hide')
+                        for (var i = 0; i < filtered_data.length; i++) {
+                            fields = filtered_data[i]['fields']
+                            id = filtered_data[i]['pk']
+                            console.log(id)
+                            console.log(fields.firstname)
+                            $('#table-data').prepend('<tr><td class="text-center text-muted">#'+ id +
+                            '</td><td><div class="widget-content p-0"><div class="widget-content-wrapper"><div class="widget-content-left mr-3"><div class="widget-content-left"><img width="40" class="rounded-circle" src="assets/images/avatars/4.jpg" alt=""></div></div><div class="widget-content-left flex2"><div class="widget-heading">'+ fields.firstname +
+                            ' '+ fields.lastname +'</div><div class="widget-subheading opacity-7">'+ fields.job_description +
+                            '</div></div></div></div></td><td class="text-center">'+ fields.phone +
+                            '</td><td class="text-center">'+ fields.email +'</td><td class="text-center">'+ fields.date_started +
+                            '</td><td class="text-center">'+ fields.salary +'</td><td><i data-toggle="modal" data-target="#edit-staff-modal" id='+ fields.id +
+                            ' class="fas fa-edit edit-row-data"></i></td><td><i data-toggle="modal" data-target="#delete-staff-modal" id='+ fields.id +
+                            ' class="fas fa-trash-alt delete-row-data"></i></td></tr>');
+                        }
+                    }
+                },
+                // handle a non-successful response
+                error: function (xhr, errmsg, err) {
+                    $('#results').html('<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Error!</strong> Sorry we have encountered the following error: ' + errmsg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'); // add the error to the dom
+                    console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                }
+            });
+        }
+
+        // AJAX for posting
+        // Filter using filter
+        function filter_records() {
+            // console.log("filter record method is working!") // sanity check
+            $.ajax({
+                url: "", // the endpoint
+                type: "POST", // http method
+                data: { filter: filter }, // data sent with the post request
+                // handle a successful response
+                success: function (json) {
+                  console.log(json.data)
+                    filtered_data = JSON.parse(json.data)
+                    console.log(filtered_data)
+                    console.log(typeof (filtered_data))
+                    $('#table-data').html('');
+                    if (json.data_length < 1) {
+                        // If no staffs where found display error
+                        $('.filter-error').removeClass('filter-error-hide');
+                    } else {
+                        $('.filter-error').addClass('filter-error-hide')
+                        for (var i = 0; i < filtered_data.length; i++) {
+                            fields = filtered_data[i]['fields']
+                            id = filtered_data[i]['pk']
+                            console.log(fields.first)
+                            $('#table-data').prepend('<tr><td class="text-center text-muted">#'+ id +
+                            '</td><td><div class="widget-content p-0"><div class="widget-content-wrapper"><div class="widget-content-left mr-3"><div class="widget-content-left"><img width="40" class="rounded-circle" src="assets/images/avatars/4.jpg" alt=""></div></div><div class="widget-content-left flex2"><div class="widget-heading">'+ fields.firstname +
+                            ' '+ fields.lastname +'</div><div class="widget-subheading opacity-7">'+ fields.job_description +
+                            '</div></div></div></div></td><td class="text-center">'+ fields.phone +
+                            '</td><td class="text-center">'+ fields.email +'</td><td class="text-center">'+ fields.date_started +
+                            '</td><td class="text-center">'+ fields.salary +'</td><td><i data-toggle="modal" data-target="#edit-staff-modal" id='+ fields.id +
+                            ' class="fas fa-edit edit-row-data"></i></td><td><i data-toggle="modal" data-target="#delete-staff-modal" id='+ fields.id +
+                            ' class="fas fa-trash-alt delete-row-data"></i></td></tr>');
+                        }
+                    }
+                },
+                // handle a non-successful response
+                error: function (xhr, errmsg, err) {
+                    $('#results').html('<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Error!</strong> Sorry we have encountered the following error: ' + errmsg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'); // add the error to the dom
+                    console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                }
+            });
+
+            // Function to close dropdown
+            $('.dropdown').removeClass('show');
+            $('.dropdown-menu').removeClass('show');
+        }
+
+        // This function gets cookie with a given name
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+
+        /*
+        The functions below will create a header with csrftoken
+        */
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        function sameOrigin(url) {
+            // test that a given url is a same-origin URL
+            // url could be relative or scheme relative or absolute
+            var host = document.location.host; // host + port
+            var protocol = document.location.protocol;
+            var sr_origin = '//' + host;
+            var origin = protocol + sr_origin;
+            // Allow absolute or scheme relative URLs to same origin
+            return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+                (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+                // or any other URL that isn't scheme relative or absolute i.e relative.
+                !(/^(\/\/|http:|https:).*/.test(url));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                    // Send the token to same-origin, relative URLs only.
+                    // Send the token only if the method warrants CSRF protection
+                    // Using the CSRFToken value acquired earlier
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+    });
+
+</script>
+  {% endblock %}
+
+  {% block modal %}
+
+
+  <!-- Delete staff form -->
+  <form action="" method="POST" id="delete-staff-form">{% csrf_token %}</form>
+  <!-- Delete staff modal -->
+  <div class="modal fade" id="delete-staff-modal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Staff</h5>
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0">Are you sure you want to delete <strong
+              class="text-danger" id="staff_to_delete_id"></strong> ?</p>
+          <p class="mb-10"><small id="categoryHelp" class="form-text text-muted">This staff
+              and
+              its records will be completely deleted from The system</small></p>
+        </div>
+        <div class="modal-footer">
+          <input form="delete-staff-form" type="text" hidden
+            name="staff_to_delete_id" value="" id="staff_to_delete_id_input">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="submit" form="delete-staff-form" class="btn btn-danger">Confirm
+            Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% endblock %}

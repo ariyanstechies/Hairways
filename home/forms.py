@@ -57,12 +57,15 @@ class SalonSubscriptionForm(forms.ModelForm):
         model = SalonSubscription
         fields = ('package', 'amount', 'payment_method')
 
-class addEmployeeForm(forms.ModelForm):
+class StaffForm(forms.ModelForm):
 
     class Meta:
         model = Staff
-        fields = ('firstname', 'lastname', 'phone',
-                  'email', 'salary', 'date_started',)
+        fields = ('firstname', 'lastname', 'job_description', 'phone',
+                  'email', 'date_started', 'salary',)
+        widgets = {
+            'date_started': DatePickerInput(),
+        }
 
 
 class addClientForm(forms.ModelForm):

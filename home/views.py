@@ -12,7 +12,7 @@ from django.http import HttpResponse, JsonResponse
 import json
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
-from django.core import serializers
+from django.core.serializers import serialize
 from django.views.generic import TemplateView, CreateView
 from home.forms import *
 from home.models import Salon, Services, Owner, Products, Comments, SalonSubscription, Comments
@@ -25,7 +25,7 @@ def salon_details(request,name):
     comments = Comments.objects.filter(salon__id=salon.id).order_by("-created_date")
     MAPS_API_KEY = settings.MAPS_API_KEY
 
-    average_rating = 0    
+    average_rating = 0
     stars_1 = 0
     stars_2 = 0
     stars_3 = 0
@@ -41,7 +41,7 @@ def salon_details(request,name):
     for comment in comments:
         if comment.stars == '1 Star':
             stars_1 +=1
-        
+
         if comment.stars == '2 Stars':
             stars_2 +=1
 
@@ -54,7 +54,7 @@ def salon_details(request,name):
         if comment.stars == '5 Stars':
             stars_5 +=1
 
-    
+
     total_stars = stars_1+stars_2+stars_3+stars_4+stars_5
     if total_stars > 0:
         ps1 = (stars_1/total_stars)*100
@@ -62,9 +62,9 @@ def salon_details(request,name):
         ps3 = (stars_3/total_stars)*100
         ps4 = (stars_4/total_stars)*100
         ps5 = (stars_5/total_stars)*100
-    
+
         average_rating = 0
-    
+
         average_rating = round((stars_1+ (stars_2*2)+ (stars_3*3)+ (stars_4*4)+ (stars_5*5))/total_stars,1)
 
     if request.method == "POST":
@@ -97,7 +97,7 @@ def salon_details(request,name):
                'reviews': comments, 'counter': 0,
                'comment_form': comment_form, 'total_stars': total_stars,
                'form': form, 'clientAppointment': clientAppointment,'ps1':ps1,'ps2':ps2,'ps3':ps3,'ps4':ps4,'ps5':ps5,
-               'MAPS_API_KEY': MAPS_API_KEY, 'stars_1': stars_1, 'stars_2': stars_2, 'stars_3': stars_3, 'stars_4': stars_4, 'stars_5': stars_5}   
+               'MAPS_API_KEY': MAPS_API_KEY, 'stars_1': stars_1, 'stars_2': stars_2, 'stars_3': stars_3, 'stars_4': stars_4, 'stars_5': stars_5}
     return render(request, "home/salon_details.html",context)
 
 def home(request):
@@ -113,10 +113,10 @@ def home(request):
     return render(request, 'home/index.html', {"salons": salons})
 
 def signup_steps(request):
-    
+
     if request.method == "POST":
         logged_in_user = request.user
-        
+
         owner = Owner.objects.get(user__username=logged_in_user)
 
         # Processing form data
@@ -134,7 +134,7 @@ def signup_steps(request):
 
 
                 Owner.objects.filter(user=logged_in_user).update(ownerName=name, email=email, phone=phone, location=location, gender=gender)
-                
+
                 results = {
                     'message_type': 'success',
                     'results': 'Account details successfully updated'
@@ -148,7 +148,7 @@ def signup_steps(request):
                 paybill = input_data['paybill']
                 town = input_data['town']
 
-                
+
                 if Salon.objects.filter(name=name).count() > 0:
                     results = {
                         'message_type': 'error',
@@ -156,7 +156,7 @@ def signup_steps(request):
                     }
                     return JsonResponse(results)
 
-                else:                
+                else:
                     salon = Salon(name=name, description=description, owner=owner, paybill=paybill, town=town)
                     salon.save()
 
@@ -165,7 +165,7 @@ def signup_steps(request):
                         'results': 'Salon added successfully'
                     }
                     return JsonResponse(results)
-                        
+
 
             elif 'salon_name' in input_data:
                 package = input_data['package']
@@ -226,7 +226,7 @@ def comingsoon(request):
             messages.success(request, 'We successfully received your details!')
 
             return redirect('comingsoon')
-            
+
 
     temuser_form = TempUserForm()
     return render(request, 'comingsoon/index-design-2.html',{'temuserf_form':temuser_form})
@@ -244,7 +244,7 @@ def about(request):
     return render(request, "about.html")
 
 
-@login_required 
+@login_required
 @owner_required
 def dashboard(request):
     me = Salon.objects.all()
@@ -290,7 +290,7 @@ def services(request):
         formservice = addServiceForm()
 
     context = {
-        'formservice': formservice, 'service': service 
+        'formservice': formservice, 'service': service
     }
 
     return render(request, "dashboard/services.html", context)
@@ -349,30 +349,107 @@ def customers(request):
 
 @login_required
 def staffs(request):
-    
-    staff = Staff.objects.all()
+
+    # Searching for a staff
+    if request.GET.get('keyword'):
+        keyword = request.GET.get('keyword')
+        filtered_data_query = Staff.objects.filter(
+            firstname__icontains=keyword)
+        filtered_data = serialize('json', filtered_data_query)
+
+        filtered_data = {
+            'data': filtered_data,
+            'data_length': len(filtered_data_query)
+        }
+        return JsonResponse(filtered_data)
+
+    staffs = Staff.objects.all()
 
     if request.method == "POST":
-        form = addEmployeeForm(request.POST)
-        if form.is_valid():
-            salonadd = form.save(commit=False)
-            salonadd.save()
-            return redirect('staffs')
-    else:
-        formstaff = addEmployeeForm()
+        # Deleting a staff
+        if request.POST.get('staff_to_delete_id'):
+            staff_to_delete = request.POST.get('staff_to_delete_id')
+            if Staff.objects.filter(pk=staff_to_delete).count() > 0:
+                Staff.objects.get(pk=staff_to_delete).delete()
+                messages.info(request, 'User succefully deleted')
+                return redirect('staffs')
+            else:
+                messages.error(request, 'That user could not be found')
+                return redirect('staffs')
 
+        # Order staff alphabetically
+        elif request.POST.get('filter'):
+            filter = request.POST.get('filter')
+            if filter == 'alphabet':
+                filtered_data_query = Staff.objects.all().order_by('firstname')
+                filtered_data = serialize('json', filtered_data_query)
 
-    context = {'formstaff': formstaff,
-               'staff': staff}
+                filtered_data = {
+                    'data': filtered_data,
+                    'data_length': len(filtered_data_query)
+                }
 
-    return render(request, "dashboard/staffs.html", context)
+                return JsonResponse(filtered_data)
+
+            elif filter == 'date_started':
+                filtered_data_query = Staff.objects.all().order_by('date_started')
+                filtered_data = serialize('json', filtered_data_query)
+
+                filtered_data = {
+                    'data': filtered_data,
+                    'data_length': len(filtered_data_query)
+                }
+
+                return JsonResponse(filtered_data)
+
+            elif filter == 'salary':
+                filtered_data_query = Staff.objects.all().order_by('salary')
+                filtered_data = serialize('json', filtered_data_query)
+
+                filtered_data = {
+                    'data': filtered_data,
+                    'data_length': len(filtered_data_query)
+                }
+
+                return JsonResponse(filtered_data)
+
+    context = {'staffs': staffs}
+
+    return render(request, "dashboard/staff/staff.html", context)
 
 @login_required
-def staffs_add(request):
-    context = {
+@owner_required
+def staff_new(request):
+    context = {'staffs': staffs}
+    return render(request, "dashboard/staff/add.html", context)
 
-    }
-    return render(request, "dashboard/staffs_add.html", context)
+@login_required
+@owner_required
+def staffs_edit(request, pk):
+    # Updating staff details
+    staff = get_object_or_404(Staff, pk=pk)
+    form = StaffForm(request.POST, instance=staff)
+    if form.is_valid():
+        form.save()
+        return redirect('staffs')
+
+    formstaff = StaffForm()
+
+    context = {'formstaff': formstaff }
+    return render(request, "dashboard/staff/edit.html", context)
+
+@login_required
+@owner_required
+def staffs_add(request):
+    form = StaffForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('staffs')
+
+    formstaff = StaffForm()
+
+    context = {'formstaff': formstaff }
+    return render(request, "dashboard/staff/add.html", context)
 
 @login_required
 def dashboard_appointments_add(request):
@@ -414,7 +491,7 @@ def visits(request):
         update_view.views += 1
         update_view.save()
         message = "Salon With ID %s Views Was \
-                Updated successfully" % update_view.views
+                Updated successfully"                                                                                                                                                                                                                               % update_view.views
     return HttpResponse(message)
 
 

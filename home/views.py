@@ -191,7 +191,6 @@ def dashboard(request):
         form = addSalonForm()
 
     context = {'salon': salon, 'form': form}
-    print(salon.url)
     return render(request, "dashboard/dashboard.html", context)
 
 

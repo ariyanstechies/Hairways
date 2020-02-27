@@ -93,8 +93,8 @@
                                                 <ul style="list-style: none;">
                                                     <p>Amount</p>
                                                     {% if services.count != 0 %}
-                                                    {% for each in services %}
-                                                    <li class="">Ksh. {{ each.serviceCost }}</li>
+                                                    {% for service in services %}
+                                                    <li class="">Ksh. {{ service.cost }}</li>
                                                     {% endfor %}
                                                     {% else %}
                                                 </ul>
@@ -107,7 +107,7 @@
                                                 {% endif%}
 
                                             </div>
-                                            <p>If you wish to buy our products include them bellow</p>
+                                            <p>If you wish to buy our products include them below</p>
 
                                         </div>
                                         <div class="row">
@@ -362,4 +362,4 @@
     </div>
     <!-- end of body  -->
 </div>
-{% endblock content %}
+{% endblock %}

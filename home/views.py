@@ -108,7 +108,6 @@ def salon_details(request, name):
 def client_profile_for_salons(request, pk):
     client = get_object_or_404(Client, pk=pk)
     bookings = (Appointments.objects.filter(client=client.pk)).count()
-    print(bookings)
     return render(request, 'clients/about.html', {'client': client, 'bookings': bookings})
 
 
@@ -261,28 +260,17 @@ def about(request):
 @owner_required
 def dashboard(request):
 
-    my_salon = Appointments.objects.filter(salons__owner=request.user.owner)
-    salon = get_object_or_404(Salon, owner=request.user.owner.pk)
-    services = Services.objects.filter(salons__name=salon.name)
-    products = Products.objects.filter(salons__name=salon.name)
+    me = Salon.objects.all()
     if request.method == "POST":
-        form = clientAppointment(request.POST)
+        form = addSalonForm(request.POST)
         if form.is_valid():
-            clientAppointmentAdd = form.save(commit=False)
-            clientAppointmentAdd.client = request.user
-            clientAppointmentAdd.salons = salon
-            clientAppointmentAdd.totalCost = 900
-            clientAppointmentAdd.save()
-            form.save_m2m()
-            messages.success(request, 'Appointment Successfuly booked')
-            return redirect('dashboard_appointments')
-    form = clientAppointment()
-    context = {
-        'services': services,
-        'products': products,
-        'form': form,
-        'my_salon': my_salon,
-    }
+            salonadd = form.save(commit=False)
+            salonadd.save()
+            return redirect('dashboard')
+    else:
+        form = addSalonForm()
+
+    context = {'me': me, 'form': form}
     return render(request, "dashboard/dashboard.html", context)
 
 
@@ -503,7 +491,6 @@ def appointment_accept(request, pk,):
 
 def appointment_complete(request, pk,):
     appointment = get_object_or_404(Appointments, pk=pk)
-    print(appointment.status)
     appointment.status = 'Complete'
     appointment.save()
     return redirect('dashboard_appointments',)

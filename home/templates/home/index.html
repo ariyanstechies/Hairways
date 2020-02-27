@@ -79,15 +79,15 @@
               <div class="card-body">
                 <div class="salon-description">
                   <h2 class="card-title">
-                    <a class="card-link" href="{% url 'salon_details' name=salon.url %}">
+                    <a class="card-link" href="{% url 'salon_details' name=salon.slug %}">
                       {{ salon.name | truncatewords:3 }} </a> </h2>
                   <h4 class="card-subtitle mb-2">
-                    <a class="card-link" href="{% url 'salon_details' name=salon.url %}">
+                    <a class="card-link" href="{% url 'salon_details' name=salon.slug %}">
                       {{ salon.location | truncatewords:3 }} </a></h4>
 
                   <div class="card-body">
                     <p class="card-text">
-                      <a class="card-link" href="{% url 'salon_details' name=salon.url %}">
+                      <a class="card-link" href="{% url 'salon_details' name=salon.slug %}">
                         {{ salon.description|truncatewords:30 }}
                       </a>
                     </p>

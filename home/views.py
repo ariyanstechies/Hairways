@@ -15,17 +15,19 @@ from django.shortcuts import render, get_object_or_404
 from django.core import serializers
 from django.views.generic import TemplateView, CreateView
 from home.forms import *
-from home.models import Salon, Services, Owner, Products, Comments, SalonSubscription, Comments
+from home.models import Salon, Services, Owner, Appointments, Products, Comments, SalonSubscription, Comments
 from home.models import Client, Staff
 
-def salon_details(request,name):
-    salon = get_object_or_404(Salon, url=name)
+
+def salon_details(request, name):
+    salon = get_object_or_404(Salon, slug=name)
     services = Services.objects.filter(salons__name=salon.name)
     products = Products.objects.filter(salons__name=salon.name)
-    comments = Comments.objects.filter(salon__id=salon.id).order_by("-created_date")
+    comments = Comments.objects.filter(
+        salon__id=salon.id).order_by("-created_date")
     MAPS_API_KEY = settings.MAPS_API_KEY
 
-    average_rating = 0    
+    average_rating = 0
     stars_1 = 0
     stars_2 = 0
     stars_3 = 0
@@ -40,21 +42,20 @@ def salon_details(request,name):
 
     for comment in comments:
         if comment.stars == '1 Star':
-            stars_1 +=1
-        
+            stars_1 += 1
+
         if comment.stars == '2 Stars':
-            stars_2 +=1
+            stars_2 += 1
 
         if comment.stars == '3 Stars':
-            stars_3 +=1
+            stars_3 += 1
 
         if comment.stars == '4 Stars':
-            stars_4 +=1
+            stars_4 += 1
 
         if comment.stars == '5 Stars':
-            stars_5 +=1
+            stars_5 += 1
 
-    
     total_stars = stars_1+stars_2+stars_3+stars_4+stars_5
     if total_stars > 0:
         ps1 = (stars_1/total_stars)*100
@@ -62,10 +63,11 @@ def salon_details(request,name):
         ps3 = (stars_3/total_stars)*100
         ps4 = (stars_4/total_stars)*100
         ps5 = (stars_5/total_stars)*100
-    
+
         average_rating = 0
-    
-        average_rating = round((stars_1+ (stars_2*2)+ (stars_3*3)+ (stars_4*4)+ (stars_5*5))/total_stars,1)
+
+        average_rating = round(
+            (stars_1 + (stars_2*2) + (stars_3*3) + (stars_4*4) + (stars_5*5))/total_stars, 1)
 
     if request.method == "POST":
         comment_form = CommentForm(request.POST)
@@ -76,7 +78,8 @@ def salon_details(request,name):
             comment.author = request.user
 
             comment.save()
-            messages.success(request, 'Review Received Successfully! It will be posted soon. You can edit it on your Profile')
+            messages.success(
+                request, 'Review Received Successfully! It will be posted soon. You can edit it on your Profile')
             return redirect('salon_details', name=name)
 
     comment_form = CommentForm()
@@ -89,16 +92,25 @@ def salon_details(request,name):
             clientAppointmentAdd.salons = salon
             clientAppointmentAdd.totalCost = 900
             clientAppointmentAdd.save()
+            form.save_m2m()
             messages.success(request, 'Appointment Successfuly booked')
             return redirect('salon_details', name=name)
     form = clientAppointment()
 
-    context = {'salon': salon,'average_rating':average_rating, 'services': services, 'products': products,
+    context = {'salon': salon, 'average_rating': average_rating, 'services': services, 'products': products,
                'reviews': comments, 'counter': 0,
                'comment_form': comment_form, 'total_stars': total_stars,
-               'form': form, 'clientAppointment': clientAppointment,'ps1':ps1,'ps2':ps2,'ps3':ps3,'ps4':ps4,'ps5':ps5,
-               'MAPS_API_KEY': MAPS_API_KEY, 'stars_1': stars_1, 'stars_2': stars_2, 'stars_3': stars_3, 'stars_4': stars_4, 'stars_5': stars_5}   
-    return render(request, "home/salon_details.html",context)
+               'form': form, 'clientAppointment': clientAppointment, 'ps1': ps1, 'ps2': ps2, 'ps3': ps3, 'ps4': ps4, 'ps5': ps5,
+               'MAPS_API_KEY': MAPS_API_KEY, 'stars_1': stars_1, 'stars_2': stars_2, 'stars_3': stars_3, 'stars_4': stars_4, 'stars_5': stars_5}
+    return render(request, "home/salon_details.html", context)
+
+
+def client_profile_for_salons(request, pk):
+    client = get_object_or_404(Client, pk=pk)
+    bookings = (Appointments.objects.filter(client=client.pk)).count()
+    print(bookings)
+    return render(request, 'clients/about.html', {'client': client, 'bookings': bookings})
+
 
 def home(request):
     filtered_salons = Salon.objects.all().order_by('likes')
@@ -112,11 +124,12 @@ def home(request):
         salons = paginator.page(paginator.num_pages)
     return render(request, 'home/index.html', {"salons": salons})
 
+
 def signup_steps(request):
-    
+
     if request.method == "POST":
         logged_in_user = request.user
-        
+
         owner = Owner.objects.get(user__username=logged_in_user)
 
         # Processing form data
@@ -132,9 +145,9 @@ def signup_steps(request):
                 location = input_data['location']
                 gender = input_data['gender']
 
+                Owner.objects.filter(user=logged_in_user).update(
+                    ownerName=name, email=email, phone=phone, location=location, gender=gender)
 
-                Owner.objects.filter(user=logged_in_user).update(ownerName=name, email=email, phone=phone, location=location, gender=gender)
-                
                 results = {
                     'message_type': 'success',
                     'results': 'Account details successfully updated'
@@ -148,7 +161,6 @@ def signup_steps(request):
                 paybill = input_data['paybill']
                 town = input_data['town']
 
-                
                 if Salon.objects.filter(name=name).count() > 0:
                     results = {
                         'message_type': 'error',
@@ -156,8 +168,9 @@ def signup_steps(request):
                     }
                     return JsonResponse(results)
 
-                else:                
-                    salon = Salon(name=name, description=description, owner=owner, paybill=paybill, town=town)
+                else:
+                    salon = Salon(name=name, description=description,
+                                  owner=owner, paybill=paybill, town=town)
                     salon.save()
 
                     results = {
@@ -165,7 +178,6 @@ def signup_steps(request):
                         'results': 'Salon added successfully'
                     }
                     return JsonResponse(results)
-                        
 
             elif 'salon_name' in input_data:
                 package = input_data['package']
@@ -174,7 +186,7 @@ def signup_steps(request):
 
                 salon = Salon.objects.get(owner=owner)
                 subscription = SalonSubscription(salon=salon, package=package, amount=amount, payment_method=payment_method,
-                who_payed=owner)
+                                                 who_payed=owner)
                 subscription.save()
 
                 results = {
@@ -214,6 +226,7 @@ def signup_steps(request):
     }
     return render(request, 'sign-up-steps.html', context)
 
+
 def comingsoon(request):
 
     if request.method == "POST":
@@ -226,15 +239,15 @@ def comingsoon(request):
             messages.success(request, 'We successfully received your details!')
 
             return redirect('comingsoon')
-            
 
     temuser_form = TempUserForm()
-    return render(request, 'comingsoon/index-design-2.html',{'temuserf_form':temuser_form})
+    return render(request, 'comingsoon/index-design-2.html', {'temuserf_form': temuser_form})
 
 
 def crs(request):
     people = tempuser.objects.all()
-    return render(request, "comingsoon/check.html",{'people':people})
+    return render(request, "comingsoon/check.html", {'people': people})
+
 
 def faqs(request):
     return render(request, "faqs/index.html")
@@ -244,20 +257,32 @@ def about(request):
     return render(request, "about.html")
 
 
-@login_required 
+@login_required
 @owner_required
 def dashboard(request):
-    me = Salon.objects.all()
-    if request.method == "POST":
-        form = addSalonForm(request.POST)
-        if form.is_valid():
-            salonadd = form.save(commit=False)
-            salonadd.save()
-            return redirect('dashboard')
-    else:
-        form = addSalonForm()
 
-    context = {'me': me, 'form': form}
+    my_salon = Appointments.objects.filter(salons__owner=request.user.owner)
+    salon = get_object_or_404(Salon, owner=request.user.owner.pk)
+    services = Services.objects.filter(salons__name=salon.name)
+    products = Products.objects.filter(salons__name=salon.name)
+    if request.method == "POST":
+        form = clientAppointment(request.POST)
+        if form.is_valid():
+            clientAppointmentAdd = form.save(commit=False)
+            clientAppointmentAdd.client = request.user
+            clientAppointmentAdd.salons = salon
+            clientAppointmentAdd.totalCost = 900
+            clientAppointmentAdd.save()
+            form.save_m2m()
+            messages.success(request, 'Appointment Successfuly booked')
+            return redirect('dashboard_appointments')
+    form = clientAppointment()
+    context = {
+        'services': services,
+        'products': products,
+        'form': form,
+        'my_salon': my_salon,
+    }
     return render(request, "dashboard/dashboard.html", context)
 
 
@@ -268,6 +293,7 @@ def profile(request, id):
     context = {'user_details': user_details, 'salon_details': salon_details}
     return render(request, "dashboard/profile.html", context)
 
+
 @login_required
 def reviews(request):
     reviews = Comments.objects.all()
@@ -275,6 +301,7 @@ def reviews(request):
         'reviews': reviews
     }
     return render(request, "dashboard/reviews.html", context)
+
 
 @login_required
 def services(request):
@@ -290,7 +317,7 @@ def services(request):
         formservice = addServiceForm()
 
     context = {
-        'formservice': formservice, 'service': service 
+        'formservice': formservice, 'service': service
     }
 
     return render(request, "dashboard/services.html", context)
@@ -302,6 +329,7 @@ def services_add(request):
 
     }
     return render(request, "dashboard/services_add.html", context)
+
 
 @login_required
 def products(request):
@@ -321,12 +349,14 @@ def products(request):
 
     return render(request, "dashboard/products.html", context)
 
+
 @login_required
 def products_add(request):
     context = {
 
     }
     return render(request, "dashboard/products_add.html", context)
+
 
 @login_required
 def customers(request):
@@ -347,9 +377,10 @@ def customers(request):
 
     return render(request, "dashboard/customers.html", context)
 
+
 @login_required
 def staffs(request):
-    
+
     staff = Staff.objects.all()
 
     if request.method == "POST":
@@ -361,11 +392,11 @@ def staffs(request):
     else:
         formstaff = addEmployeeForm()
 
-
     context = {'formstaff': formstaff,
                'staff': staff}
 
     return render(request, "dashboard/staffs.html", context)
+
 
 @login_required
 def staffs_add(request):
@@ -373,6 +404,7 @@ def staffs_add(request):
 
     }
     return render(request, "dashboard/staffs_add.html", context)
+
 
 @login_required
 def dashboard_appointments_add(request):
@@ -432,16 +464,31 @@ class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
 
 
-@method_decorator([login_required, owner_required], name='dispatch')
-class AppointmentListView(generic.ListView):
-    model = Salon
-    context_object_name = 'my_salon'
-    template_name = 'dashboard/appointments.html'
+def appointment_list_view(request):
+    my_salon = Appointments.objects.filter(salons__owner=request.user.owner)
+    salon = get_object_or_404(Salon, owner=request.user.owner.pk)
+    services = Services.objects.filter(salons__name=salon.name)
+    products = Products.objects.filter(salons__name=salon.name)
+    if request.method == "POST":
+        form = clientAppointment(request.POST)
+        if form.is_valid():
+            clientAppointmentAdd = form.save(commit=False)
+            clientAppointmentAdd.client = request.user
+            clientAppointmentAdd.salons = salon
+            clientAppointmentAdd.totalCost = 900
+            clientAppointmentAdd.save()
+            form.save_m2m()
+            messages.success(request, 'Appointment Successfuly booked')
+            return redirect('dashboard_appointments')
+    form = clientAppointment()
+    context = {
+        'services': services,
+        'products': products,
+        'form': form,
+        'my_salon': my_salon,
+    }
 
-    def get_queryset(self):
-        data = Salon.objects.get(owner=self.request.user.owner)
-        queryset = data.appointments.all()
-        return queryset
+    return render(request, 'dashboard/appointments.html', context)
 
 
 def appointment_accept(request, pk,):
@@ -452,6 +499,14 @@ def appointment_accept(request, pk,):
     appointment.is_accepted = True
     appointment.save()
     return redirect('appointments', pk=pk)
+
+
+def appointment_complete(request, pk,):
+    appointment = get_object_or_404(Appointments, pk=pk)
+    print(appointment.status)
+    appointment.status = 'Complete'
+    appointment.save()
+    return redirect('dashboard_appointments',)
 
 
 def appointment_reject(request, pk,):

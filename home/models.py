@@ -8,16 +8,18 @@ from django.urls import reverse
 from django.template.defaultfilters import slugify
 from phone_field import PhoneField
 
+
 class tempuser(models.Model):
-    name = models.CharField(max_length = 254, )
+    name = models.CharField(max_length=254, )
     phone_no = PhoneField()
-    email =  models.EmailField(max_length = 254, blank = True, null = True)
+    email = models.EmailField(max_length=254, blank=True, null=True)
+
 
 class User(AbstractUser):
     is_client = models.BooleanField(default=False)
     is_owner = models.BooleanField(default=False)
     nickname = models.CharField(max_length=30, null=True, blank=True)
-    image = models.ImageField(upload_to='images/', null = True, blank = True)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
 
 class Owner(models.Model):
@@ -46,7 +48,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Salon(models.Model):
     name = models.CharField(max_length=100)
-    url = models.SlugField()
+    slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField(max_length=250)
     created_date = models.DateTimeField(default=timezone.now)
     owner = models.OneToOneField(
@@ -57,16 +59,12 @@ class Salon(models.Model):
     paybill = models.IntegerField(null=True, blank=True)
     is_paid = models.BooleanField(default=False)
     town = models.CharField(max_length=30)
-    location_description = models.CharField(max_length = 250, null= True, blank = True)
+    location_description = models.CharField(
+        max_length=250, null=True, blank=True)
     likes = models.ManyToManyField(User, related_name='likes')
 
-    def __str__(self):
-        return self.name
-
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.url = slugify(self.name)
-
+        self.slug = slugify(self.name)
         super(Salon, self).save(*args, **kwargs)
 
     def approved_comments(self):
@@ -84,15 +82,19 @@ class Salon(models.Model):
         self.slug = slugify(self.name)
         super(Salon, self).save(*args, **kwargs)
 
+
 class SalonSubscription(models.Model):
-    salon = models.OneToOneField(Salon, on_delete=models.CASCADE, related_name='salon_subscriptions_salon')
+    salon = models.OneToOneField(
+        Salon, on_delete=models.CASCADE, related_name='salon_subscriptions_salon')
     package = models.CharField(max_length=100)
     amount = models.IntegerField()
     payment_method = models.CharField(max_length=100, default='M-Pesa')
-    who_payed = models.ForeignKey(Owner, on_delete=models.CASCADE, related_name='salon_subscriptions_owner')
+    who_payed = models.ForeignKey(
+        Owner, on_delete=models.CASCADE, related_name='salon_subscriptions_owner')
 
     def __str__(self):
         return f'{str(self.salon)} {self.amount}'
+
 
 class Services(models.Model):
     salons = models.ForeignKey(
@@ -132,6 +134,7 @@ class Client(models.Model):
     def __str__(self):
         return self.nickname
 
+
 class Products(models.Model):
     product_name = models.CharField(max_length=100)
     price = models.IntegerField()
@@ -144,28 +147,31 @@ class Products(models.Model):
 
 
 class Appointments(models.Model):
+    STATUS_CHOICES = (
+        ('Accepted', 'Accepted'),
+        ('Rejected', 'Rejected'),
+        ('Pending', 'Pending'),
+        ('Complete', 'Complete'),
+
+    )
     client = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='my_appointments')
     clientphoneNo = models.IntegerField(default='2345966')
-    services = models.ManyToManyField(Services, related_name='services')
-    products = models.ManyToManyField(Products, related_name='products')
+    services = models.ManyToManyField(Services, related_name='servicess')
+    products = models.ManyToManyField(Products, related_name='productss')
     salons = models.ForeignKey(
         Salon, on_delete=models.CASCADE, related_name='appointments')
     appointment_date = models.DateTimeField()
     created_date = models.DateTimeField(default=timezone.now)
     totalCost = models.IntegerField()
-    is_accepted = models.BooleanField(default=False)
-    is_rejected = models.BooleanField(default=False)
-    is_pending = models.BooleanField(default=True)
-    is_complete = models.BooleanField(default=False)
+    status = models.CharField(
+        max_length=50, choices=STATUS_CHOICES, default='Pending')
 
     def __str__(self):
-        return str(self.clientphoneNo)
+        return str(self.id)
 
     def get_absolute_url(self):
         return reverse('appointment_detail', kwargs={'pk': self.pk})
-
-
 
 
 class Comments(models.Model):
@@ -180,7 +186,8 @@ class Comments(models.Model):
         Salon, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='my_comments')
-    stars = models.CharField(max_length=10, choices=STAR_CHOICES, default='1 star')
+    stars = models.CharField(
+        max_length=10, choices=STAR_CHOICES, default='1 star')
     comment = models.TextField()
     created_date = models.DateTimeField(
         default=timezone.now

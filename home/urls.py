@@ -40,10 +40,13 @@ urlpatterns = [
          Appointment2CreateView.as_view(), name='appointment2_add'),
     path('client/dashboard', AppointmentListView.as_view(),
          name='client_dashboard'),
-    path('dashboard/appointments', views.AppointmentListView.as_view(), name='dashboard_appointments'),
+    path('dashboard/appointments', views.appointment_list_view, name='dashboard_appointments'),
     path('client/dashboard2', CommentsListView.as_view(),
          name='client_dashboard2'),
     path('update/<int:pk>/', AppointmentUpdate.as_view(), name='a_update'),
+    path('about/client/<int:pk>/',views.client_profile_for_salons, name = 'client_profile_for_salons'),
+    path('app/complete/<int:pk>/',views.appointment_complete, name = 'appointment_complete'),
+
 
     #     client dashboard A.K.A Mini dashboard
     path('user/profile/', MiniDashboard.as_view(), name='mini_dashboard'),

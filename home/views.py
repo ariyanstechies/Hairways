@@ -209,6 +209,11 @@ def reviews(request):
     return render(request, "dashboard/reviews.html", context)
 
 
+"""
+ Services CRUD
+ """
+
+
 @login_required
 def services(request):
     salon = get_object_or_404(Salon, owner__ownerName=request.user.owner)
@@ -252,6 +257,56 @@ def service_delete(request, id):
     service = get_object_or_404(Services, pk=id)
     service.delete()
     return redirect('services')
+
+
+"""
+ Products CRUD
+"""
+
+
+@login_required
+def products(request):
+    salon = get_object_or_404(Salon, owner__ownerName=request.user.owner)
+    products = Products.objects.filter(salon=salon)
+
+    context = {'products': products, 'salon': salon}
+
+    return render(request, "dashboard/products/index.html", context)
+
+
+@login_required
+def product_new(request):
+    if request.method == "POST":
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('products')
+    else:
+        form = ProductForm()
+    context = {'form': form}
+
+    return render(request, "dashboard/products/new.html", context)
+
+
+@login_required
+def product_edit(request, id):
+    product = get_object_or_404(Products, pk=id)
+    if request.method == "POST":
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('products')
+    else:
+        form = ProductForm(instance=product)
+    context = {'product': product, 'form': form}
+    return render(request, "dashboard/products/edit.html", context)
+
+
+@login_required
+def product_delete(request, id):
+    product = get_object_or_404(Products, pk=id)
+    product.delete()
+    return redirect('products')
 
 
 def salon_details(request, name):
@@ -366,28 +421,27 @@ def services_add(request):
     return render(request, "dashboard/services_add.html", context)
 
 
-@login_required
-def products(request):
-    product = Products.objects.all()
+# @login_required
+# def products(request):
+#     product = Products.objects.all()
 
-    if request.method == "POST":
-        form = addProductForm(request.POST)
-        if form.is_valid():
-            salonadd = form.save(commit=False)
-            salonadd.save()
-            return redirect('products')
-    else:
-        formproduct = addProductForm()
+#     if request.method == "POST":
+#         form = addProductForm(request.POST)
+#         if form.is_valid():
+#             salonadd = form.save(commit=False)
+#             salonadd.save()
+#             return redirect('products')
+#     else:
+#         formproduct = addProductForm()
 
-    context = {'formproduct': formproduct, 'product': product}
+#     context = {'formproduct': formproduct, 'product': product}
 
-    return render(request, "dashboard/products.html", context)
+#     return render(request, "dashboard/products.html", context)
 
-
-@login_required
-def products_add(request):
-    context = {}
-    return render(request, "dashboard/products_add.html", context)
+# @login_required
+# def products_add(request):
+#     context = {}
+#     return render(request, "dashboard/products_add.html", context)
 
 
 @login_required

@@ -119,6 +119,18 @@ class Services(models.Model):
         return self.name
 
 
+class Products(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.IntegerField()
+    brand = models.CharField(max_length=100)
+    salon  = models.ForeignKey(Salon,
+                               on_delete=models.CASCADE,
+                               related_name='products')
+
+    def __str__(self):
+        return self.product_name
+
+
 class Staff(models.Model):
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
@@ -144,18 +156,6 @@ class Client(models.Model):
 
     def __str__(self):
         return self.nickname
-
-
-class Products(models.Model):
-    product_name = models.CharField(max_length=100)
-    price = models.IntegerField()
-    product_brand = models.CharField(max_length=100)
-    salons = models.ForeignKey(Salon,
-                               on_delete=models.CASCADE,
-                               related_name='products')
-
-    def __str__(self):
-        return self.product_name
 
 
 class Appointments(models.Model):

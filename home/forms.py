@@ -101,13 +101,13 @@ class addClientForm(forms.ModelForm):
 class ServiceForm(forms.ModelForm):
     class Meta:
         model = Services
-        fields = ('name', 'cost', 'duration', 'availability')
+        fields = ('name', 'cost', 'duration', 'availability', 'salon')
 
 
-class addProductForm(forms.ModelForm):
+class ProductForm(forms.ModelForm):
     class Meta:
         model = Products
-        fields = ('product_name', 'price', 'product_brand', 'salons')
+        fields = ('name', 'price', 'brand', 'salon')
 
 
 class clientAppointment(forms.ModelForm):

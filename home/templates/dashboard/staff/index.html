@@ -182,12 +182,8 @@
                 <td class="text-center">{{staff.email}}</td>
                 <td class="text-center">{{staff.date_started|date:"d-m-y"}}</td>
                 <td class="text-center">{{staff.salary}}</td>
-                <td><a href="{% url 'staffs_edit' pk=staff.pk %}"><i class="fas
-                      fa-edit edit-row-data"></i></a></td>
-                <td><i data-toggle="modal" name="{{staff.firstname}}
-                    {{staff.lastname}} -
-                    {{staff.job_description}}" data-target="#delete-staff-modal"
-                    id="{{staff.id}}" class="fas fa-trash-alt delete-row-data"></i></td>
+                <td><a href="{% url 'staff_edit' id=staff.pk %}"><i class="ti-pencil"></i></a></td>
+                <td><a href="{% url 'staff_delete' id=staff.pk %}"><i class="ti-trash"></i></a></td>
               </tr>
               {% endfor %}
               {% else %}
@@ -457,8 +453,8 @@
           <input form="delete-staff-form" type="text" hidden
             name="staff_to_delete_id" value="" id="staff_to_delete_id_input">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="submit" form="delete-staff-form" class="btn btn-danger">Confirm
-            Delete</button>
+          <a href=""><button type="button" class="btn btn-danger">Confirm
+            Delete</button></a>
         </div>
       </div>
     </div>

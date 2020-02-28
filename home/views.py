@@ -18,6 +18,7 @@ from home.forms import *
 from home.models import Salon, Services, Owner, Products, Comments, SalonSubscription, Comments
 from home.models import Client, Staff
 
+
 def home(request):
     filtered_salons = Salon.objects.all().order_by('likes')
     page = request.GET.get('page', 1)
@@ -360,12 +361,6 @@ def salon_details(request, name):
 
 
 @login_required
-def services_add(request):
-    context = {}
-    return render(request, "dashboard/services_add.html", context)
-
-
-@login_required
 def products(request):
     product = Products.objects.all()
 
@@ -454,7 +449,8 @@ def staffs(request):
                 return JsonResponse(filtered_data)
 
             elif filter == 'date_started':
-                filtered_data_query = Staff.objects.all().order_by('date_started')
+                filtered_data_query = Staff.objects.all().order_by(
+                    'date_started')
                 filtered_data = serialize('json', filtered_data_query)
 
                 filtered_data = {
@@ -475,31 +471,47 @@ def staffs(request):
 
                 return JsonResponse(filtered_data)
 
-    context = {'staffs': staffs }
+    context = {'staffs': staffs}
 
-    return render(request, "dashboard/staff/staff.html", context)
+    return render(request, "dashboard/staff/index.html", context)
+
 
 @login_required
 @owner_required
 def staff_new(request):
-    context = {'staffs': staffs}
-    return render(request, "dashboard/staff/add.html", context)
+    if request.method == "POST":
+        form = StaffForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('staffs')
+    else:
+        form = StaffForm()
+    context = {'form': form}
+    return render(request, "dashboard/staff/new.html", context)
 
 
 @login_required
-@owner_required
-def staffs_edit(request, pk):
-    # Updating staff details
-    staff = get_object_or_404(Staff, pk=pk)
-    form = StaffForm(request.POST, instance=staff)
-    if form.is_valid():
-        form.save()
-        return redirect('staffs')
+def staff_edit(request, id):
+    staff = get_object_or_404(Staff, pk=id)
 
-    formstaff = StaffForm()
+    if request.method == "POST":
+        form = StaffForm(request.POST, instance=staff)
+        if form.is_valid():
+            form.save()
+            return redirect('staffs')
+    else:
+        form = StaffForm(instance=staff)
+    context = {'staff': staff, 'form': form}
 
-    context = {'formstaff': formstaff }
     return render(request, "dashboard/staff/edit.html", context)
+
+
+@login_required
+def staff_delete(request, id):
+    staff = get_object_or_404(Staff, pk=id)
+    staff.delete()
+    return redirect('staffs')
+
 
 @login_required
 @owner_required
@@ -546,7 +558,7 @@ def visits(request):
         update_view.views += 1
         update_view.save()
         message = "Salon With ID %s Views Was \
-                Updated successfully"                                                                                                                                                                                                                               % update_view.views
+                Updated successfully"                                                                                                                                                     % update_view.views
     return HttpResponse(message)
 
 

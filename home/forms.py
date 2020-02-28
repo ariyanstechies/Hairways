@@ -121,6 +121,18 @@ class clientAppointment(forms.ModelForm):
         }
 
 
+class SalonAppointment(forms.ModelForm):
+
+    class Meta:
+        model = Appointments
+        fields = ['services', 'appointment_date', 'products', 'clientphoneNo']
+        widgets = {
+            'services': forms.CheckboxSelectMultiple,
+            'appointment_date': DatePickerInput(),
+            'products': forms.CheckboxSelectMultiple,
+        }
+
+
 class AppointmentUpdateForm(forms.ModelForm):
     class Meta:
         model = Appointments

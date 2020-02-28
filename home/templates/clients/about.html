@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+
+            <strong>{{client.user}}</strong>
+            <span class="float-right"> <strong><a href="{% url 'dashboard_appointments'%}">Go Back</a> </strong>
+
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-sm-3 border">
+                    <!-- left side battons -->
+
+                    {% if client.user.image %}
+                    <img src="{{client.user.image.url}}" class="rounded mt-2" alt="Cinque Terre" width="200">
+                    {%endif%}
+                    <!-- /left side battons -->
+                </div>
+                <!-- Data area -->
+                <div class="col-sm-9 mt-2">
+                    <p>Full Name: {% if client.user.Full_Name %} <strong class="text-info">
+                            {{client.user.Full_Name}}</strong>
+                        {%else%} <strong class="text-danger"> Not Updated </strong>{%endif%}
+                    </p>
+                    <p> Phone Number: {% if client.user.phone %} <strong class="text-info">
+                            {{client.user.phone}}</strong>
+                        {%else%} <strong class="text-danger"> Not Updated
+                        </strong>{%endif%}</p>
+
+                    <p>Email Adress: {% if client.user.email %} <strong
+                            class="text-infor">{{client.user.email}}</strong>
+                        {%else%} <strong class="text-danger"> Not Upadated </strong>{%endif%}</p>
+                    <p>No of Bookings : {{bookings}} on hairwayskenya</p>
+
+                </div>
+                <!-- /data area -->
+
+            </div>
+
+        </div>
+    </div>
+    <br>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,317 @@
+{% extends 'shared/dashboard-base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% load bootstrap4 %} {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %} {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %} {# Embed Bootstrap JS+jQuery #}
+{{ form.media }} {# Adds date-picker required JS and CSS #}
+
+<div class="container">
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong class="text-success"></strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div class="page-title-icon">
+                    <i class="ti-truck icon-gradient bg-mean-fruit">
+                    </i>
+                </div>
+                <div>
+                    Appointments Control
+                    <div class="page-title-subheading">
+                        View appointments you haven't worked on and those that are previously completed in your salon
+
+                    </div>
+                </div>
+            </div>
+            <div class="page-title-actions">
+                <button type="button" class="btn mr-2 mb-2 btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Basic Modal
+                </button>
+            </div>
+        </div>
+
+        <!-- Page content goes here -->
+        <hr>
+        <!-- appointments lists  -->
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                <div class="mb-3 card">
+                    <div class="card-header-tab card-header-tab-animation card-header">
+                        <div class="card-header-title">
+                            <i class="header-icon lnr-apartment icon-gradient bg-love-kiss">
+                            </i>
+                            Pending Visits
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="tabs-eg-77">
+                                <div class="scroll-area">
+                                    <div class="scrollbar-container ps ps--active-y">
+                                        <ul class="rm-list-borders rm-list-borders-scroll list-group list-group-flush">
+                                            {% for appointment in my_salon %}
+                                            {% if appointment.status == 'Pending'%}
+                                            <li class="list-group-item">
+                                                <div class="widget-content p-0">
+                                                    <!-- here  -->
+                                                    <div id="exampleAccordion{{appointment.id}}" data-children=".item">
+                                                        <div class="item">
+                                                            <button type="button" aria-expanded="false"
+                                                                aria-controls="exampleAccordion{{appointment.id}}"
+                                                                data-toggle="collapse"
+                                                                href="#collapseExample{{appointment.id}}"
+                                                                class="m-0 p-0 btn btn-lin collapsed">
+                                                                <div class="widget-content-wrapper">
+                                                                    <div class="widget-content-left mr-3">
+                                                                        <img width="48" class="rounded-circle"
+                                                                            src="{% static 'css/images/1.jpg' %}"
+                                                                            alt="gg" />
+                                                                    </div>
+                                                                    <div class="widget-content-left mr-3">
+                                                                        <div class="widget-heading">
+                                                                            {{appointment.client}}
+                                                                        </div>
+                                                                        <div class="widget-subheading">
+                                                                            {{appointment.clientphoneNo}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="widget-content-left mr-3">
+                                                                        <div class="widget-heading">
+                                                                            {{appointment.appointment_date}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="widget-content-left  mr-3">
+                                                                        <div class="widget-heading">Paid</div>
+                                                                    </div>
+                                                                    <div class="content-right">
+                                                                        <div class="font-size-xlg text-muted">
+                                                                            <small class="opacity-5 pr-1">Ksh.</small>
+                                                                            <span>{{appointment.totalCost}}</span>
+                                                                            <small class="text-danger pl-2">
+                                                                                View
+                                                                            </small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </button>
+                                                            <div data-parent="#exampleAccordion{{appointment.id}}"
+                                                                id="collapseExample{{appointment.id}}" class="collapse">
+
+                                                                <div class="row"
+                                                                    style="background-color: rgba(48, 99, 71, 0.274);">
+                                                                    <div class="col-md-12 col-lg-6">
+                                                                        <ul>
+                                                                            <h5>Services Booked</h5>
+                                                                            {% for service in appointment.services.all %}
+                                                                            <li>
+                                                                                <h6>{{service.name}}</h6>
+                                                                            </li>
+                                                                            {% endfor %}
+
+
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-md-12 col-lg-6">
+                                                                        <ul>
+                                                                            <h5>Products Booked</h5>
+                                                                            {% for prod in appointment.products.all %}
+                                                                            <li>
+                                                                                <h6>{{prod}}</h6>
+                                                                            </li>
+                                                                            {% endfor %}
+
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div>
+
+                                                                        <a class="ml-3 mb-2 mr-2 btn btn-primary  text-white"
+                                                                            href="{% url 'client_profile_for_salons' pk=appointment.client.id%}">Client
+                                                                            Profile</a>
+                                                                        <a class="ml-3 mb-2 mr-2 btn btn-primary  text-white"
+                                                                            href="{% url 'appointment_complete' pk=appointment.pk%}">Complete</a>
+
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <p class="mb-3">
+
+                                                                    <hr>
+
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            {%endif%}
+                                            {% endfor%}
+
+                                        </ul>
+                                        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                                            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                                        </div>
+                                        <div class="ps__rail-y" style="top: 0px; height: 200px; right: 0px;">
+                                            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 139px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                <div class="mb-3 card">
+                    <div class="card-header-tab card-header">
+                        <div class="card-header-title">
+                            <i class="header-icon lnr-rocket icon-gradient bg-tempting-azure">
+                            </i>
+                            Previous appointments
+                        </div>
+
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="tab-eg-55">
+
+                            <div class="pt-2 card-body">
+                                <div class="row">
+                                    <table class="mb-0 table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Client</th>
+                                                <th>Status</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for app in my_salon %}
+
+                                            {% if app.status == 'Complete' %}
+                                            <tr>
+                                                <th scope="row">APN-{{app.id}}</th>
+                                                <td>{{app.client}}</td>
+                                                <td>{{app.status}}</td>
+                                                <td>{{app.totalCost}}</td>
+                                            </tr>
+                                            {% endif %}
+
+                                            {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end appointment list-->
+    </div>
+
+    <!-- Page content goes here -->
+</div>
+{% endblock %}
+
+
+{% block modal %}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <!-- it tt  -->
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                            {{ form.services|as_crispy_field }}
+                        </div>
+
+                        <div class="col-sm-6">
+                            <ul style="list-style: none;">
+                                <p>Amount</p>
+                                {% if services.count != 0 %}
+                                {% for each in services %}
+                                <li class="">Ksh. {{ each.serviceCost }}</li>
+                                {% endfor %}
+                                {% else %}
+                            </ul>
+                            <!-- spanning across the five columns-->
+                            <tr style="border: none">
+                                <td colspan="5" class="text-center text-muted">Sorry No Services For
+                                    Now:)
+                                </td>
+                            </tr>
+                            {% endif%}
+
+                        </div>
+                        <p>If you wish to buy our products include them bellow</p>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 mb-0">
+                            {{ form.products|as_crispy_field }}
+                        </div>
+                        <div class="col-sm-6">
+                            <ul style="list-style: none;">
+                                <p>Amount</p>
+                                {% if products.count != 0 %}
+                                {% for prod in products %}
+                                <li class="">Ksh. {{prod.price }}</li>
+                                {% endfor %}
+                                {% else %}
+                            </ul>
+                            <!-- spanning across the five columns-->
+                            <tr style="border: none">
+                                <td colspan="5" class="text-center text-muted">Sorry No Services For
+                                    Now:)
+                                </td>
+                            </tr>
+                            {% endif%}
+
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.appointment_date|as_crispy_field }}
+                    </div>
+
+                    <!-- end it tt  -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="save btn btn-success">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock modal %}

@@ -1,5 +1,6 @@
 {% extends 'shared/dashboard-base.html' %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block content %}
 <div class="app-main__inner">
@@ -7,7 +8,7 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                    <i class="ti-truck icon-gradient bg-mean-fruit">
                     </i>
                 </div>
                 <div>Analytics Dashboard
@@ -73,8 +74,18 @@
             </div>
         </div>
     </div>
-
-    <!-- Page content goes here -->
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" class="post-form">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <div class="button-row d-flex mt-4">
+                    <button type="submit" class="save btn btn-success ml-auto
+                        text-uppercase">Add Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
 </div>
 {% endblock %}

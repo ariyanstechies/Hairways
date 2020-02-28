@@ -6,10 +6,17 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 from bootstrap_datepicker_plus import DatePickerInput
 
+
 class ClientSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'password1', 'password2', 'image', )
+        fields = (
+            'username',
+            'password1',
+            'password2',
+            'image',
+        )
+
     @transaction.atomic
     def save(self):
         user = super().save(commit=False)
@@ -22,7 +29,13 @@ class ClientSignUpForm(UserCreationForm):
 class OwnerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'password1', 'password2', 'image', )
+        fields = (
+            'username',
+            'password1',
+            'password2',
+            'image',
+        )
+
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_owner = True
@@ -30,79 +43,89 @@ class OwnerSignUpForm(UserCreationForm):
             user.save()
         return user
 
+
 class OwnerAddInfoForm(forms.ModelForm):
     class Meta:
         model = Owner
-        fields = ('ownerName','email','phone','location','gender')
+        fields = ('ownerName', 'email', 'phone', 'location', 'gender')
+
 
 class CommentForm(forms.ModelForm):
-
     class Meta:
         model = Comments
-        fields = ('stars','comment')
+        fields = ('stars', 'comment')
+
 
 class TempUserForm(forms.ModelForm):
-
     class Meta:
         model = tempuser
-        fields = ('name','phone_no','email', )
+        fields = (
+            'name',
+            'phone_no',
+            'email',
+        )
+
 
 class addSalonForm(forms.ModelForm):
     class Meta:
         model = Salon
-        fields = ('name', 'description', 'paybill', 'town', 'location_description')
+        fields = ('name', 'description', 'paybill', 'town',
+                  'location_description')
+
 
 class SalonSubscriptionForm(forms.ModelForm):
     class Meta:
         model = SalonSubscription
         fields = ('package', 'amount', 'payment_method')
 
-class addEmployeeForm(forms.ModelForm):
 
+class addEmployeeForm(forms.ModelForm):
     class Meta:
         model = Staff
-        fields = ('firstname', 'lastname', 'phone',
-                  'email', 'salary', 'date_started',)
+        fields = (
+            'firstname',
+            'lastname',
+            'phone',
+            'email',
+            'salary',
+            'date_started',
+        )
 
 
 class addClientForm(forms.ModelForm):
-
     class Meta:
         model = Client
         fields = ('user', 'Full_Name', 'email', 'phone')
 
 
-class addServiceForm(forms.ModelForm):
-
+class ServiceForm(forms.ModelForm):
     class Meta:
         model = Services
-        fields = ('serviceName', 'serviceCost', 'serviceDuration',
-                  'serviceBookings', 'availability', 'salons')
+        fields = ('name', 'cost', 'duration', 'availability', 'salon')
 
 
-class addProductForm(forms.ModelForm):
-
+class ProductForm(forms.ModelForm):
     class Meta:
         model = Products
-        fields = ('product_name', 'price', 'product_brand', 'salons')
+        fields = ('name', 'price', 'brand', 'salon')
 
 
 class clientAppointment(forms.ModelForm):
-
     class Meta:
         model = Appointments
-        fields = ['services','appointment_date', 'products']
+        fields = ['services', 'appointment_date', 'products']
         widgets = {
             'services': forms.CheckboxSelectMultiple,
             'appointment_date': DatePickerInput(),
             'products': forms.CheckboxSelectMultiple,
         }
-    
+
+
 class SalonAppointment(forms.ModelForm):
 
     class Meta:
         model = Appointments
-        fields = ['services','appointment_date', 'products','clientphoneNo']
+        fields = ['services', 'appointment_date', 'products', 'clientphoneNo']
         widgets = {
             'services': forms.CheckboxSelectMultiple,
             'appointment_date': DatePickerInput(),

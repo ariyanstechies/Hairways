@@ -28,7 +28,8 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <i class="pe-7s-car icon-gradient bg-mean-fruit"> </i>
+                    <i class="ti-truck icon-gradient bg-mean-fruit">
+                    </i>
                 </div>
                 <div>
                     Appointments Control
@@ -119,7 +120,7 @@
                                                                             <h5>Services Booked</h5>
                                                                             {% for service in appointment.services.all %}
                                                                             <li>
-                                                                                <h6>{{service.serviceName}}</h6>
+                                                                                <h6>{{service.name}}</h6>
                                                                             </li>
                                                                             {% endfor %}
 

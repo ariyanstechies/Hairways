@@ -127,14 +127,14 @@ class Products(models.Model):
 
 
 class Staff(models.Model):
+    salon = models.ForeignKey(Salon, on_delete=models.CASCADE, related_name='staffs')
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
-    date_started = models.DateTimeField(default=timezone.now)
+    date_started = models.DateField(default=timezone.now)
     salary = models.IntegerField()
+    job_description = models.CharField(max_length=100)
     phone = models.IntegerField()
     email = models.CharField(max_length=100)
-    favservice = models.CharField(max_length=100, null=True, blank=True)
-    favclient = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.firstname

@@ -79,17 +79,14 @@ class SalonSubscriptionForm(forms.ModelForm):
         fields = ('package', 'amount', 'payment_method')
 
 
-class addEmployeeForm(forms.ModelForm):
+class StaffForm(forms.ModelForm):
     class Meta:
         model = Staff
-        fields = (
-            'firstname',
-            'lastname',
-            'phone',
-            'email',
-            'salary',
-            'date_started',
-        )
+        fields = ('firstname', 'lastname', 'job_description', 'phone',
+                  'email', 'date_started', 'salary',)
+        widgets = {
+            'date_started': DatePickerInput(),
+        }
 
 
 class addClientForm(forms.ModelForm):
@@ -101,13 +98,13 @@ class addClientForm(forms.ModelForm):
 class ServiceForm(forms.ModelForm):
     class Meta:
         model = Services
-        fields = ('name', 'cost', 'duration', 'availability', 'salon')
+        fields = ('name', 'cost', 'duration', 'availability')
 
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Products
-        fields = ('name', 'price', 'brand', 'salon')
+        fields = ('name', 'price', 'brand')
 
 
 class clientAppointment(forms.ModelForm):

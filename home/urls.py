@@ -41,7 +41,7 @@ urlpatterns = [
          views.product_delete,
          name='product_delete'),
     path('dashboard/staffs-add/', views.staffs_add, name='staffs_add'),
-    path('dashboard/appointments-add/',
+    path('dashboard/appointments/new/',
          views.dashboard_appointments_add,
          name='dashboard_appointments_add'),
     path('dashboard/staffs/', views.staffs, name='staffs'),

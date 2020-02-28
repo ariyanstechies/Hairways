@@ -497,7 +497,7 @@ def staffs_add(request):
 
 
 @login_required
-def dashboard_appointments_add(request):
+def dashboard_appointments_new(request):
     context = {}
     return render(request, "dashboard/appointments/new.html", context)
 
@@ -552,7 +552,7 @@ class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
 
 
-def appointment_list_view(request):
+def appointments(request):
     my_salon = Appointments.objects.filter(salons__owner=request.user.owner)
     salon = get_object_or_404(Salon, owner=request.user.owner.pk)
     services = Services.objects.filter(salon__name=salon.name)

@@ -499,7 +499,7 @@ def staffs_add(request):
 @login_required
 def dashboard_appointments_add(request):
     context = {}
-    return render(request, "dashboard/appointments_add.html", context)
+    return render(request, "dashboard/appointments/new.html", context)
 
 
 @login_required
@@ -576,7 +576,7 @@ def appointment_list_view(request):
         'my_salon': my_salon,
     }
 
-    return render(request, 'dashboard/appointments.html', context)
+    return render(request, 'dashboard/appointments/index.html', context)
 
 
 def appointment_accept(

@@ -101,16 +101,28 @@ class ServiceForm(forms.ModelForm):
         fields = ('name', 'cost', 'duration', 'availability')
 
 
-class addProductForm(forms.ModelForm):
+class ProductForm(forms.ModelForm):
     class Meta:
         model = Products
-        fields = ('product_name', 'price', 'product_brand', 'salons')
+        fields = ('name', 'price', 'brand')
 
 
 class clientAppointment(forms.ModelForm):
     class Meta:
         model = Appointments
         fields = ['services', 'appointment_date', 'products']
+        widgets = {
+            'services': forms.CheckboxSelectMultiple,
+            'appointment_date': DatePickerInput(),
+            'products': forms.CheckboxSelectMultiple,
+        }
+
+
+class SalonAppointment(forms.ModelForm):
+
+    class Meta:
+        model = Appointments
+        fields = ['services', 'appointment_date', 'products', 'clientphoneNo']
         widgets = {
             'services': forms.CheckboxSelectMultiple,
             'appointment_date': DatePickerInput(),

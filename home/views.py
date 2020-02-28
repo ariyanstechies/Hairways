@@ -15,8 +15,14 @@ from django.shortcuts import render, get_object_or_404
 from django.core.serializers import serialize
 from django.views.generic import TemplateView, CreateView
 from home.forms import *
-from home.models import Salon, Services, Owner, Products, Comments, SalonSubscription, Comments
+from home.models import Salon, Services, Owner, Appointments, Products, Comments, SalonSubscription, Comments
 from home.models import Client, Staff
+
+
+def client_profile_for_salons(request, pk):
+    client = get_object_or_404(Client, pk=pk)
+    bookings = (Appointments.objects.filter(client=client.pk)).count()
+    return render(request, 'clients/about.html', {'client': client, 'bookings': bookings})
 
 
 def home(request):
@@ -209,6 +215,11 @@ def reviews(request):
     return render(request, "dashboard/reviews.html", context)
 
 
+"""
+ Services CRUD
+ """
+
+
 @login_required
 def services(request):
     salon = get_object_or_404(Salon, owner__ownerName=request.user.owner)
@@ -222,8 +233,11 @@ def services(request):
 @login_required
 def service_new(request):
     if request.method == "POST":
+        salon = get_object_or_404(Salon, owner=request.user.owner.pk)
         form = ServiceForm(request.POST)
         if form.is_valid():
+            form = form.save(commit=False)
+            form.salon = salon
             form.save()
             return redirect('services')
     else:
@@ -252,6 +266,59 @@ def service_delete(request, id):
     service = get_object_or_404(Services, pk=id)
     service.delete()
     return redirect('services')
+
+
+"""
+ Products CRUD
+"""
+
+
+@login_required
+def products(request):
+    salon = get_object_or_404(Salon, owner__ownerName=request.user.owner)
+    products = Products.objects.filter(salon=salon)
+
+    context = {'products': products, 'salon': salon}
+
+    return render(request, "dashboard/products/index.html", context)
+
+
+@login_required
+def product_new(request):
+    if request.method == "POST":
+        salon = get_object_or_404(Salon, owner=request.user.owner.pk)
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.salon = salon
+            form.save()
+            return redirect('products')
+    else:
+        form = ProductForm()
+    context = {'form': form}
+
+    return render(request, "dashboard/products/new.html", context)
+
+
+@login_required
+def product_edit(request, id):
+    product = get_object_or_404(Products, pk=id)
+    if request.method == "POST":
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('products')
+    else:
+        form = ProductForm(instance=product)
+    context = {'product': product, 'form': form}
+    return render(request, "dashboard/products/edit.html", context)
+
+
+@login_required
+def product_delete(request, id):
+    product = get_object_or_404(Products, pk=id)
+    product.delete()
+    return redirect('products')
 
 
 def salon_details(request, name):
@@ -361,30 +428,6 @@ def salon_details(request, name):
 
 
 @login_required
-def products(request):
-    product = Products.objects.all()
-
-    if request.method == "POST":
-        form = addProductForm(request.POST)
-        if form.is_valid():
-            salonadd = form.save(commit=False)
-            salonadd.save()
-            return redirect('products')
-    else:
-        formproduct = addProductForm()
-
-    context = {'formproduct': formproduct, 'product': product}
-
-    return render(request, "dashboard/products.html", context)
-
-
-@login_required
-def products_add(request):
-    context = {}
-    return render(request, "dashboard/products_add.html", context)
-
-
-@login_required
 def customers(request):
     customers = Client.objects.all()
 
@@ -480,8 +523,11 @@ def staffs(request):
 @owner_required
 def staff_new(request):
     if request.method == "POST":
+        salon = get_object_or_404(Salon, owner=request.user.owner.pk)
         form = StaffForm(request.POST)
         if form.is_valid():
+            form = form.save(commit=False)
+            form.salon = salon
             form.save()
             return redirect('staffs')
     else:
@@ -521,9 +567,9 @@ def staffs_add(request):
 
 
 @login_required
-def dashboard_appointments_add(request):
+def dashboard_appointments_new(request):
     context = {}
-    return render(request, "dashboard/appointments_add.html", context)
+    return render(request, "dashboard/appointments/new.html", context)
 
 
 @login_required
@@ -558,7 +604,7 @@ def visits(request):
         update_view.views += 1
         update_view.save()
         message = "Salon With ID %s Views Was \
-                Updated successfully"                                                                                                                                                     % update_view.views
+                Updated successfully"                                                                                                                                                                                                                                                                                                                                                                                                                        % update_view.views
     return HttpResponse(message)
 
 
@@ -576,16 +622,31 @@ class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
 
 
-@method_decorator([login_required, owner_required], name='dispatch')
-class AppointmentListView(generic.ListView):
-    model = Salon
-    context_object_name = 'my_salon'
-    template_name = 'dashboard/appointments.html'
+def appointments(request):
+    my_salon = Appointments.objects.filter(salons__owner=request.user.owner)
+    salon = get_object_or_404(Salon, owner=request.user.owner.pk)
+    services = Services.objects.filter(salon__name=salon.name)
+    products = Products.objects.filter(salon__name=salon.name)
+    if request.method == "POST":
+        form = clientAppointment(request.POST)
+        if form.is_valid():
+            clientAppointmentAdd = form.save(commit=False)
+            clientAppointmentAdd.client = request.user
+            clientAppointmentAdd.salons = salon
+            clientAppointmentAdd.totalCost = 900
+            clientAppointmentAdd.save()
+            form.save_m2m()
+            messages.success(request, 'Appointment Successfuly booked')
+            return redirect('dashboard_appointments')
+    form = clientAppointment()
+    context = {
+        'services': services,
+        'products': products,
+        'form': form,
+        'my_salon': my_salon,
+    }
 
-    def get_queryset(self):
-        data = Salon.objects.get(owner=self.request.user.owner)
-        queryset = data.appointments.all()
-        return queryset
+    return render(request, 'dashboard/appointments/index.html', context)
 
 
 def appointment_accept(
@@ -601,10 +662,14 @@ def appointment_accept(
     return redirect('appointments', pk=pk)
 
 
-def appointment_reject(
-    request,
-    pk,
-):
+def appointment_complete(request, pk,):
+    appointment = get_object_or_404(Appointments, pk=pk)
+    appointment.status = 'Complete'
+    appointment.save()
+    return redirect('dashboard_appointments',)
+
+
+def appointment_reject(request, pk,):
     appointment = get_object_or_404(Appointments, pk=pk)
     appointment.is_pending = False
     appointment.is_rejected = True

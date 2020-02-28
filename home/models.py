@@ -49,7 +49,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Salon(models.Model):
     name = models.CharField(max_length=100)
-    url = models.SlugField()
+    slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField(max_length=250)
     created_date = models.DateTimeField(default=timezone.now)
     owner = models.OneToOneField(Owner,
@@ -66,13 +66,8 @@ class Salon(models.Model):
                                             blank=True)
     likes = models.ManyToManyField(User, related_name='likes')
 
-    def __str__(self):
-        return self.name
-
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.url = slugify(self.name)
-
+        self.slug = slugify(self.name)
         super(Salon, self).save(*args, **kwargs)
 
     def approved_comments(self):
@@ -119,6 +114,18 @@ class Services(models.Model):
         return self.name
 
 
+class Products(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.IntegerField()
+    brand = models.CharField(max_length=100)
+    salon = models.ForeignKey(Salon,
+                              on_delete=models.CASCADE,
+                              related_name='products')
+
+    def __str__(self):
+        return self.name
+
+
 class Staff(models.Model):
     salon = models.ForeignKey(Salon, on_delete=models.CASCADE, related_name='staffs')
     firstname = models.CharField(max_length=100)
@@ -146,38 +153,30 @@ class Client(models.Model):
         return self.nickname
 
 
-class Products(models.Model):
-    product_name = models.CharField(max_length=100)
-    price = models.IntegerField()
-    product_brand = models.CharField(max_length=100)
-    salons = models.ForeignKey(Salon,
-                               on_delete=models.CASCADE,
-                               related_name='products')
-
-    def __str__(self):
-        return self.product_name
-
-
 class Appointments(models.Model):
-    client = models.ForeignKey(User,
-                               on_delete=models.CASCADE,
-                               related_name='my_appointments')
+    STATUS_CHOICES = (
+        ('Accepted', 'Accepted'),
+        ('Rejected', 'Rejected'),
+        ('Pending', 'Pending'),
+        ('Complete', 'Complete'),
+
+    )
+    client = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='my_appointments')
     clientphoneNo = models.IntegerField(default='2345966')
-    services = models.ManyToManyField(Services, related_name='services')
-    products = models.ManyToManyField(Products, related_name='products')
-    salons = models.ForeignKey(Salon,
-                               on_delete=models.CASCADE,
-                               related_name='appointments')
+    services = models.ManyToManyField(Services, related_name='servicess')
+    products = models.ManyToManyField(Products, related_name='productss')
+    salons = models.ForeignKey(
+        Salon, on_delete=models.CASCADE, related_name='appointments')
+
     appointment_date = models.DateTimeField()
     created_date = models.DateTimeField(default=timezone.now)
     totalCost = models.IntegerField()
-    is_accepted = models.BooleanField(default=False)
-    is_rejected = models.BooleanField(default=False)
-    is_pending = models.BooleanField(default=True)
-    is_complete = models.BooleanField(default=False)
+    status = models.CharField(
+        max_length=50, choices=STATUS_CHOICES, default='Pending')
 
     def __str__(self):
-        return str(self.clientphoneNo)
+        return str(self.id)
 
     def get_absolute_url(self):
         return reverse('appointment_detail', kwargs={'pk': self.pk})

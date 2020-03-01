@@ -10,16 +10,15 @@ from django.utils.decorators import method_decorator
 from home.decorators import client_required, owner_required
 from django.http import HttpResponse, JsonResponse
 import json
-from datetime import date
-from dateutil.relativedelta import relativedelta
 from datetime import datetime, timedelta
-from django.contrib import messages
+from dateutil.relativedelta import relativedelta
 from django.shortcuts import render, get_object_or_404
 from django.core.serializers import serialize
 from django.views.generic import TemplateView, CreateView
 from home.forms import *
 from home.models import Salon, Services, Owner, Appointments, Products, Comments, SalonSubscription, Comments
 from home.models import Client, Staff
+from visits.models import Visit
 
 
 def client_profile_for_salons(request, pk):
@@ -32,9 +31,9 @@ def client_profile_for_salons(request, pk):
 
 
 def home(request):
-    filtered_salons = Salon.objects.all().order_by('likes')
+    salons = Salon.objects.all()
     page = request.GET.get('page', 1)
-    paginator = Paginator(filtered_salons, 4)
+    paginator = Paginator(salons, 4)
     try:
         salons = paginator.page(page)
     except PageNotAnInteger:
@@ -226,16 +225,17 @@ monthly_chart_datas = []
 @owner_required
 def dashboard(request):
     salon = get_object_or_404(Salon, owner__ownerName=request.user.owner)
+    visits = Visit.objects.get_uri_visits_for(request, uri=salon.slug)
     end_date = datetime.date(datetime.now())
     start_date = end_date - timedelta(days=7)
     end_month = datetime.date(datetime.now())
     start_month = end_month - relativedelta(months=12)
     weekly_appointments = Appointments.objects.filter(
-        salons=salon,
+        salon=salon,
         created_date__range=(start_date,
                              end_date)).order_by('created_date').all()
     monthly_appointments = Appointments.objects.filter(
-        salons=salon,
+        salon=salon,
         created_date__range=(start_month,
                              end_month)).order_by('created_date').all()
 
@@ -281,25 +281,14 @@ def dashboard(request):
         for month in months_of_year():
             monthly_appointments_data.append(monthly_chart_data[month.lower()])
 
-    salon_views_count = salon.views
-    if request.method == "POST":
-        form = addSalonForm(request.POST)
-        if form.is_valid():
-            salonadd = form.save(commit=False)
-            salonadd.save()
-            return redirect('dashboard')
-    else:
-        form = addSalonForm()
-
     appointments = Appointments.objects.filter(
-        salons__owner=request.user.owner)
+        salon__owner=request.user.owner)
     context = {
         'salon': salon,
         'months_of_year': months_of_year(),
         'weekly_chart_data': weekly_chart_data,
         'monthly_appointments_data': monthly_appointments_data,
-        'salon_views_count': salon_views_count,
-        'form': form,'appointments': appointments
+        'appointments': appointments
     }
     return render(request, "dashboard/dashboard.html", context)
 
@@ -426,6 +415,8 @@ def product_delete(request, id):
 
 
 def salon_details(request, name):
+    # Page we are listening for unique urls visits
+    Visit.objects.add_uri_visit(request, request.META["PATH_INFO"], 'home')
     salon = get_object_or_404(Salon, slug=name)
     services = Services.objects.filter(salon__name=salon.name)
     products = Products.objects.filter(salon__name=salon.name)
@@ -433,18 +424,9 @@ def salon_details(request, name):
         salon__id=salon.id).order_by("-created_date")
     MAPS_API_KEY = settings.MAPS_API_KEY
 
-    average_rating = 0
-    stars_1 = 0
-    stars_2 = 0
-    stars_3 = 0
-    stars_4 = 0
-    stars_5 = 0
-
-    ps1 = 0
-    ps2 = 0
-    ps3 = 0
-    ps4 = 0
-    ps5 = 0
+    average_rating = 0.0
+    stars_1 = stars_2 = stars_3 = stars_4 = stars_5 = 0
+    ps1 = ps2 = ps3 = ps4 = ps5 = 0
 
     for comment in comments:
         if comment.stars == '1 Star':
@@ -469,13 +451,11 @@ def salon_details(request, name):
         ps3 = (stars_3 / total_stars) * 100
         ps4 = (stars_4 / total_stars) * 100
         ps5 = (stars_5 / total_stars) * 100
-
-        average_rating = 0
-
         average_rating = round((stars_1 + (stars_2 * 2) + (stars_3 * 3) +
                                 (stars_4 * 4) + (stars_5 * 5)) / total_stars,
                                1)
-
+        salon.rating = average_rating
+        salon.save()
     if request.method == "POST":
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
@@ -490,7 +470,6 @@ def salon_details(request, name):
                 'Review Received Successfully! It will be posted soon. You can edit it on your Profile'
             )
             return redirect('salon_details', name=name)
-
     comment_form = CommentForm()
 
     if request.method == "POST":
@@ -498,7 +477,7 @@ def salon_details(request, name):
         if form.is_valid():
             clientAppointmentAdd = form.save(commit=False)
             clientAppointmentAdd.client = request.user
-            clientAppointmentAdd.salons = salon
+            clientAppointmentAdd.salon = salon
             clientAppointmentAdd.totalCost = 900
             clientAppointmentAdd.save()
             messages.success(request, 'Appointment Successfuly booked')
@@ -699,23 +678,6 @@ def preference(request):
 def clientPayment(request):
     return render(request, "payment.html")
 
-
-@csrf_exempt
-def visits(request):
-    if request.method == 'POST' and request.is_ajax():
-        get_view = request.POST.get('salonId', False)
-        update_view = Salon.objects.get(id=get_view)
-        update_view.views += 1
-        update_view.save()
-        message = "Salon With ID %s Views Was \
-<<<<<<< HEAD
-                Updated successfully"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     % update_view.views
-=======
-                Updated successfully" % update_view.views
->>>>>>> 6077810ab3db670dcb86ec53be9fe82504f410ab
-    return HttpResponse(message)
-
-
 def upload(request):
     context = {}
     if request.method == 'POST':
@@ -731,7 +693,7 @@ class SignUpView(TemplateView):
 
 
 def appointments(request):
-    my_salon = Appointments.objects.filter(salons__owner=request.user.owner)
+    my_salon = Appointments.objects.filter(salon__owner=request.user.owner)
     salon = get_object_or_404(Salon, owner=request.user.owner.pk)
     services = Services.objects.filter(salon__name=salon.name)
     products = Products.objects.filter(salon__name=salon.name)
@@ -740,7 +702,7 @@ def appointments(request):
         if form.is_valid():
             clientAppointmentAdd = form.save(commit=False)
             clientAppointmentAdd.client = request.user
-            clientAppointmentAdd.salons = salon
+            clientAppointmentAdd.salon = salon
             clientAppointmentAdd.totalCost = 900
             clientAppointmentAdd.save()
             form.save_m2m()
@@ -757,10 +719,7 @@ def appointments(request):
     return render(request, 'dashboard/appointments/index.html', context)
 
 
-def appointment_accept(
-    request,
-    pk,
-):
+def appointment_accept(request, pk):
     appointment = get_object_or_404(Appointments, pk=pk)
     appointment.is_pending = False
     appointment.is_rejected = False
@@ -770,20 +729,14 @@ def appointment_accept(
     return redirect('appointments', pk=pk)
 
 
-def appointment_complete(
-    request,
-    pk,
-):
+def appointment_complete(request, pk):
     appointment = get_object_or_404(Appointments, pk=pk)
-    appointment.status = 'Complete'
+    appointment.status = 'Completed'
     appointment.save()
     return redirect('dashboard_appointments', )
 
 
-def appointment_reject(
-    request,
-    pk,
-):
+def appointment_reject(request, pk):
     appointment = get_object_or_404(Appointments, pk=pk)
     appointment.is_pending = False
     appointment.is_rejected = True

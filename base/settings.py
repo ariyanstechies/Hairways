@@ -3,10 +3,8 @@ import dj_database_url
 from dotenv import load_dotenv
 load_dotenv(verbose=True)
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -23,9 +21,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', "localhost"]
 # ALLOWED_HOSTS = '*'
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,7 +34,7 @@ INSTALLED_APPS = [
     'phone_field',
     'bootstrap4',
     'bootstrap_datepicker_plus',
-    
+    'visits',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
@@ -51,20 +47,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-# #   GOOGLE FACEBOOK OAUTH
-# AUTHENTICATION_BACKENDS = (
-#  'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
-#  'social_core.backends.google.GoogleOpenId',  # for Google authentication
-#  'social_core.backends.google.GoogleOAuth2',  # for Google authentication
-#  'social_core.backends.github.GithubOAuth2',  # for Github authentication
-#  'social_core.backends.facebook.FacebookOAuth2',  # for Facebook authentication
-#
-#  'django.contrib.auth.backends.ModelBackend',
-# )
-
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='937755655618-iff20mdr7vkk0mp73s8gbpegrvlu9hnv.apps.googleusercontent.com'  # client Id
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'N2yMghmefwhS1lrny32qAqcN' # client secret
 
 ROOT_URLCONF = 'base.urls'
 
@@ -79,14 +61,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #cial_django.context_processors.login_redirect',
+                'visits.context_processors.request_meta',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'base.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -108,19 +89,22 @@ DATABASES['default'].update(db_from_env)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -148,9 +132,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'home/static')
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'home/static')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -160,3 +142,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 BOOTSTRAP4 = {
     'include_jquery': True,
 }
+# Django Visits Hit Count
+MIN_TIME_BETWEEN_VISITS = 1

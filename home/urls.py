@@ -20,7 +20,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('salon/add/', owners.SalonCreateView.as_view(), name='salon_add'),
     path('preference/', views.preference, name='preference'),
-    path('visits/', views.visits, name="visits"),
     path('Salon/payment/', views.clientPayment, name='clientPayment'),
     # profile starts here
     path('dashboard/profile/', views.profile, name='profile'),

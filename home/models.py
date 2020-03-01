@@ -55,7 +55,7 @@ class Salon(models.Model):
     owner = models.OneToOneField(Owner,
                                  on_delete=models.CASCADE,
                                  related_name='my_salons')
-    views = models.IntegerField(default=0)
+    rating = models.FloatField(default=0.0)
     status = models.BooleanField(default=0)
     shares = models.IntegerField(default=0)
     paybill = models.IntegerField(null=True, blank=True)
@@ -64,22 +64,22 @@ class Salon(models.Model):
     location_description = models.CharField(max_length=250,
                                             null=True,
                                             blank=True)
-    likes = models.ManyToManyField(User, related_name='likes')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Salon, self).save(*args, **kwargs)
 
+    def pending_appointments(self):
+        return self.appointments.filter(status="Pending")
+
+    def completed_appointments(self):
+        return self.appointments.filter(status="Completed")
+
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
 
-    @property
-    def total_likes(self):
-        """
-        Likes for the salon
-        :return: Integer: Likes for the salon
-        """
-        return self.likes.count()
+    def pending_comments(self):
+        return self.comments.filter(approved_comment=False)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -127,8 +127,9 @@ class Products(models.Model):
 
 
 class Staff(models.Model):
-    salon = models.ForeignKey(
-        Salon, on_delete=models.CASCADE, related_name='staffs')
+    salon = models.ForeignKey(Salon,
+                              on_delete=models.CASCADE,
+                              related_name='staffs')
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
     date_started = models.DateField(default=timezone.now)
@@ -155,26 +156,24 @@ class Client(models.Model):
 
 
 class Appointments(models.Model):
-    STATUS_CHOICES = (
-        ('Accepted', 'Accepted'),
-        ('Rejected', 'Rejected'),
-        ('Pending', 'Pending'),
-        ('Complete', 'Complete'),
-
-    )
-    client = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='my_appointments')
+    STATUS_CHOICES = (('Accepted', 'Accepted'), ('Rejected', 'Rejected'),
+                      ('Pending', 'Pending'), ('Completed', 'Completed'))
+    client = models.ForeignKey(User,
+                               on_delete=models.CASCADE,
+                               related_name='my_appointments')
     clientphoneNo = models.IntegerField(default='2345966')
     services = models.ManyToManyField(Services, related_name='servicess')
     products = models.ManyToManyField(Products, related_name='productss')
-    salons = models.ForeignKey(
-        Salon, on_delete=models.CASCADE, related_name='appointments')
+    salon = models.ForeignKey(Salon,
+                              on_delete=models.CASCADE,
+                              related_name='appointments')
 
     appointment_date = models.DateTimeField()
     created_date = models.DateTimeField(default=timezone.now)
     totalCost = models.IntegerField()
-    status = models.CharField(
-        max_length=50, choices=STATUS_CHOICES, default='Pending')
+    status = models.CharField(max_length=50,
+                              choices=STATUS_CHOICES,
+                              default='Pending')
 
     def __str__(self):
         return f'{str(self.id)} {str(self.created_date)}'
@@ -199,17 +198,15 @@ class Comments(models.Model):
                                related_name='my_comments')
     stars = models.CharField(max_length=10,
                              choices=STAR_CHOICES,
-                             default='1 star')
+                             default='1 Star')
     comment = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
 
     approved_comment = models.BooleanField(default=False)
 
-    def __str__(self):
-        return str(self.author)
-
-    # to be revisited
-
     def approve(self):
         self.approved_comment = True
         self.save()
+
+    def __str__(self):
+        return str(self.author)

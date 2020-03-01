@@ -20,17 +20,7 @@ from home.models import Salon, Services, Owner, Appointments, Products, Comments
 from home.models import Client, Staff
 from visits.models import Visit
 
-
-def client_profile_for_salons(request, pk):
-    client = get_object_or_404(Client, pk=pk)
-    bookings = (Appointments.objects.filter(client=client.pk)).count()
-    return render(request, 'clients/about.html', {
-        'client': client,
-        'bookings': bookings
-    })
-
-
-def home(request):
+def index(request):
     salons = Salon.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(salons, 4)
@@ -175,6 +165,15 @@ def comingsoon(request):
                   {'temuserf_form': temuser_form})
 
 
+def client_profile_for_salons(request, pk):
+    client = get_object_or_404(Client, pk=pk)
+    bookings = (Appointments.objects.filter(client=client.pk)).count()
+    return render(request, 'clients/about.html', {
+        'client': client,
+        'bookings': bookings
+    })
+
+
 def crs(request):
     people = tempuser.objects.all()
     return render(request, "comingsoon/check.html", {'people': people})
@@ -272,12 +271,12 @@ def dashboard(request):
         weekly_chart_data['fri'], weekly_chart_data['sat'],
         weekly_chart_data['sun']
     ]
+    monthly_appointments_data = []
     for appointment in monthly_appointments:
         monthly_chart_data[month_of_year(
             appointment.created_date)] = monthly_appointments.filter(
                 created_date=appointment.created_date).count()
 
-        monthly_appointments_data = []
         for month in months_of_year():
             monthly_appointments_data.append(monthly_chart_data[month.lower()])
 

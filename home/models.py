@@ -176,7 +176,7 @@ class Appointments(models.Model):
                               default='Pending')
 
     def __str__(self):
-        return str(self.id)
+        return f'{str(self.id)} {str(self.created_date)}'
 
     def get_absolute_url(self):
         return reverse('appointment_detail', kwargs={'pk': self.pk})

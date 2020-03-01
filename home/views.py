@@ -10,6 +10,9 @@ from django.utils.decorators import method_decorator
 from home.decorators import client_required, owner_required
 from django.http import HttpResponse, JsonResponse
 import json
+from datetime import date
+from dateutil.relativedelta import relativedelta
+from datetime import datetime, timedelta
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.core.serializers import serialize
@@ -22,7 +25,10 @@ from home.models import Client, Staff
 def client_profile_for_salons(request, pk):
     client = get_object_or_404(Client, pk=pk)
     bookings = (Appointments.objects.filter(client=client.pk)).count()
-    return render(request, 'clients/about.html', {'client': client, 'bookings': bookings})
+    return render(request, 'clients/about.html', {
+        'client': client,
+        'bookings': bookings
+    })
 
 
 def home(request):
@@ -183,15 +189,118 @@ def about(request):
     return render(request, "about.html")
 
 
+"""
+Takes date and returns a string of the day of the week
+"""
+
+
+def day_of_week(date):
+    return date.strftime('%A')[:3].lower()
+
+
+"""
+Takes date and returns a string of the month of the year
+"""
+
+
+def month_of_year(date):
+    return date.strftime('%B')[:3].lower()
+
+""" Returns string of all previous 12 month names"""
+
+def months_of_year():
+    count = 0
+    months = []
+    while count < 12:
+        date = datetime.now() - relativedelta(months=count)
+        month = date.strftime('%B')[:3]
+        count += 1
+
+        months.append(month)
+
+    return months[::-1]
+
+monthly_chart_datas = []
+
 @login_required
 @owner_required
 def dashboard(request):
-    # Symons work
+    salon = get_object_or_404(Salon, owner__ownerName=request.user.owner)
+    end_date = datetime.date(datetime.now())
+    start_date = end_date - timedelta(days=7)
+    end_month = datetime.date(datetime.now())
+    start_month = end_month - relativedelta(months=12)
+    weekly_appointments = Appointments.objects.filter(
+        salons=salon,
+        created_date__range=(start_date,
+                             end_date)).order_by('created_date').all()
+    monthly_appointments = Appointments.objects.filter(
+        salons=salon,
+        created_date__range=(start_month,
+                             end_month)).order_by('created_date').all()
+
+    weekly_chart_data = {
+        'mon': 0,
+        'tue': 0,
+        'wed': 0,
+        'thu': 0,
+        'fri': 0,
+        'sat': 0,
+        'sun': 0
+    }
+    monthly_chart_data = {
+        'jan': 0,
+        'feb': 0,
+        'mar': 0,
+        'apr': 0,
+        'may': 0,
+        'jun': 0,
+        'jul': 0,
+        'aug': 0,
+        'sep': 0,
+        'oct': 0,
+        'nov': 0,
+        'dec': 0,
+    }
+    for appointment in weekly_appointments:
+        weekly_chart_data[day_of_week(
+            appointment.created_date)] = weekly_appointments.filter(
+                created_date=appointment.created_date).count()
+    weekly_chart_data = [
+        weekly_chart_data['mon'], weekly_chart_data['tue'],
+        weekly_chart_data['wed'], weekly_chart_data['thu'],
+        weekly_chart_data['fri'], weekly_chart_data['sat'],
+        weekly_chart_data['sun']
+    ]
+    for appointment in monthly_appointments:
+        monthly_chart_data[month_of_year(
+            appointment.created_date)] = monthly_appointments.filter(
+                created_date=appointment.created_date).count()
+
+        monthly_appointments_data = []
+        for month in months_of_year():
+            monthly_appointments_data.append(monthly_chart_data[month.lower()])
+
+    salon_views_count = salon.views
+    if request.method == "POST":
+        form = addSalonForm(request.POST)
+        if form.is_valid():
+            salonadd = form.save(commit=False)
+            salonadd.save()
+            return redirect('dashboard')
+    else:
+        form = addSalonForm()
+
     appointments = Appointments.objects.filter(
         salons__owner=request.user.owner)
-
-    # symons work
-    context = {'appointments': appointments, }
+    context = {
+        'salon': salon,
+        'months_of_year': months_of_year(),
+        'weekly_chart_data': weekly_chart_data,
+        'monthly_appointments_data': monthly_appointments_data,
+        'salon_views_count': salon_views_count,
+        'form': form,'appointments': appointments
+    }
     return render(request, "dashboard/dashboard.html", context)
 
 
@@ -599,7 +708,11 @@ def visits(request):
         update_view.views += 1
         update_view.save()
         message = "Salon With ID %s Views Was \
+<<<<<<< HEAD
+                Updated successfully"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     % update_view.views
+=======
                 Updated successfully" % update_view.views
+>>>>>>> 6077810ab3db670dcb86ec53be9fe82504f410ab
     return HttpResponse(message)
 
 
@@ -657,14 +770,20 @@ def appointment_accept(
     return redirect('appointments', pk=pk)
 
 
-def appointment_complete(request, pk,):
+def appointment_complete(
+    request,
+    pk,
+):
     appointment = get_object_or_404(Appointments, pk=pk)
     appointment.status = 'Complete'
     appointment.save()
-    return redirect('dashboard_appointments',)
+    return redirect('dashboard_appointments', )
 
 
-def appointment_reject(request, pk,):
+def appointment_reject(
+    request,
+    pk,
+):
     appointment = get_object_or_404(Appointments, pk=pk)
     appointment.is_pending = False
     appointment.is_rejected = True

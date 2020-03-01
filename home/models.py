@@ -177,7 +177,7 @@ class Appointments(models.Model):
         max_length=50, choices=STATUS_CHOICES, default='Pending')
 
     def __str__(self):
-        return str(self.id)
+        return f'{str(self.id)} {str(self.created_date)}'
 
     def get_absolute_url(self):
         return reverse('appointment_detail', kwargs={'pk': self.pk})

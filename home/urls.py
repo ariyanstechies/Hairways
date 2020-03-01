@@ -8,9 +8,9 @@ from home.clients import AppointmentListView, MiniDashboard
 from home.clients import CommentsListView, MyAppointments, MyComments
 
 urlpatterns = [
+    path('home', views.index, name='home'),
     path('', views.comingsoon, name='comingsoon'),
     path('current/registerd/salons', views.crs, name='crs'),
-    path('home', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('faqs/', views.faqs, name='faqs'),
     path('salon/<slug:name>/', views.salon_details, name='salon_details'),

@@ -186,17 +186,12 @@ def about(request):
 @login_required
 @owner_required
 def dashboard(request):
-    salon = get_object_or_404(Salon, owner__ownerName=request.user.owner)
-    if request.method == "POST":
-        form = addSalonForm(request.POST)
-        if form.is_valid():
-            salonadd = form.save(commit=False)
-            salonadd.save()
-            return redirect('dashboard')
-    else:
-        form = addSalonForm()
+    # Symons work
+    appointments = Appointments.objects.filter(
+        salons__owner=request.user.owner)
 
-    context = {'salon': salon, 'form': form}
+    # symons work
+    context = {'appointments': appointments, }
     return render(request, "dashboard/dashboard.html", context)
 
 
@@ -322,9 +317,9 @@ def product_delete(request, id):
 
 
 def salon_details(request, name):
-    salon = get_object_or_404(Salon, url=name)
+    salon = get_object_or_404(Salon, slug=name)
     services = Services.objects.filter(salon__name=salon.name)
-    products = Products.objects.filter(salons__name=salon.name)
+    products = Products.objects.filter(salon__name=salon.name)
     comments = Comments.objects.filter(
         salon__id=salon.id).order_by("-created_date")
     MAPS_API_KEY = settings.MAPS_API_KEY
@@ -604,7 +599,7 @@ def visits(request):
         update_view.views += 1
         update_view.save()
         message = "Salon With ID %s Views Was \
-                Updated successfully"                                                                                                                                                                                                                                                                                                                                                                                                                        % update_view.views
+                Updated successfully" % update_view.views
     return HttpResponse(message)
 
 

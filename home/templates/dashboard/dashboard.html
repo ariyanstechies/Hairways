@@ -506,6 +506,95 @@
             </div>
             <div class="widget-content-left fsize-1">
               <div class="text-muted opacity-6">Income Target</div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-header">Open Appointments
+                    <div class="btn-actions-pane-right">
+                        <div role="group" class="btn-group-sm btn-group">
+                            <button class="active btn btn-focus">Last Week</button>
+                            <button class="btn btn-focus">All Month</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-3">
+                    <div class="row">
+                        <h5 class="card-title text-center col-md-2">
+                            #
+                        </h5>
+                        <h5 class="card-title text-center col-md-4">
+                            Client
+                        </h5>
+                        <h5 class="card-title text-center col-md-4">
+                            Date
+                        </h5>
+                    </div>
+                </div>
+                {% for appointment in appointments %}
+                {% if appointment.status == 'Pending'%}
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <div class="row">
+                            <h5 class="card-title text-center col-md-2 text-muted">
+                                APN-{{appointment.id}}
+                            </h5>
+                            <h5 class="card-title text-center col-md-4 text-muted">
+                                {{appointment.client}}
+                            </h5>
+                            <h5 class="card-title text-center col-md-4 text-muted">
+                                {{appointment.appointment_date|date:'d/m/y' }}
+                                <span class="badge badge-focus"> {{appointment.appointment_date|date:'h:m'}}</span>
+                            </h5>
+                            <button type="button" data-toggle="collapse" href="#collapseExample{{appointment.id}}"
+                                class="btn btn-primary col-md-2" aria-expanded="true">Details</button>
+                        </div>
+                        <div class="collapse " id="collapseExample{{appointment.id}}" style="">
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <ul>
+                                        <h5>Services Booked</h5>
+                                        {% for service in appointment.services.all %}
+                                        <li>
+                                            <h6>{{service.name}}</h6>
+                                        </li>
+                                        {% endfor %}
+
+
+                                    </ul>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <ul>
+                                        <h5>Products Booked</h5>
+                                        {% for prod in appointment.products.all %}
+                                        <li>
+                                            <h6>{{prod}}</h6>
+                                        </li>
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
+                                <div>
+
+                                    <a class="ml-3 mb-2 mr-2 btn btn-primary  text-white"
+                                        href="{% url 'client_profile_for_salons' pk=appointment.client.id%}">Client
+                                        Profile</a>
+                                    <a class="ml-3 mb-2 mr-2 btn btn-primary  text-white"
+                                        href="{% url 'dashboard' %}">Complete</a>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                {%endif%}
+                {% endfor%}
+                <!-- end of symons work -->
+
             </div>
           </div>
         </div>
@@ -591,7 +680,9 @@
     </div>
   </div>
 </div>
-
+</div>
+</div>
+</div>
 {% block script %}
 <!-- ChartJs CDN js-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>

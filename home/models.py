@@ -127,7 +127,8 @@ class Products(models.Model):
 
 
 class Staff(models.Model):
-    salon = models.ForeignKey(Salon, on_delete=models.CASCADE, related_name='staffs')
+    salon = models.ForeignKey(
+        Salon, on_delete=models.CASCADE, related_name='staffs')
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
     date_started = models.DateField(default=timezone.now)

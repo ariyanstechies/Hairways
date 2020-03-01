@@ -291,14 +291,15 @@ def dashboard(request):
     else:
         form = addSalonForm()
 
+    appointments = Appointments.objects.filter(
+        salons__owner=request.user.owner)
     context = {
         'salon': salon,
         'months_of_year': months_of_year(),
         'weekly_chart_data': weekly_chart_data,
         'monthly_appointments_data': monthly_appointments_data,
-        'appointments_count': appointments,
         'salon_views_count': salon_views_count,
-        'form': form
+        'form': form,'appointments': appointments
     }
     return render(request, "dashboard/dashboard.html", context)
 
@@ -707,7 +708,11 @@ def visits(request):
         update_view.views += 1
         update_view.save()
         message = "Salon With ID %s Views Was \
+<<<<<<< HEAD
                 Updated successfully"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     % update_view.views
+=======
+                Updated successfully" % update_view.views
+>>>>>>> 6077810ab3db670dcb86ec53be9fe82504f410ab
     return HttpResponse(message)
 
 

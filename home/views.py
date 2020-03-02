@@ -20,10 +20,11 @@ from home.models import Salon, Services, Owner, Appointments, Products, Comments
 from home.models import Client, Staff
 from visits.models import Visit
 
+
 def index(request):
     salons = Salon.objects.order_by('-rating').all()
     page = request.GET.get('page', 1)
-    paginator = Paginator(salons, 3)
+    paginator = Paginator(salons, 4)
     try:
         salons = paginator.page(page)
     except PageNotAnInteger:
@@ -184,7 +185,7 @@ def faqs(request):
 
 
 def about(request):
-    return render(request, "about.html")
+    return render(request, "about/index.html")
 
 
 """
@@ -204,7 +205,9 @@ Takes date and returns a string of the month of the year
 def month_of_year(date):
     return date.strftime('%B')[:3].lower()
 
+
 """ Returns string of all previous 12 month names"""
+
 
 def months_of_year():
     count = 0
@@ -218,7 +221,9 @@ def months_of_year():
 
     return months[::-1]
 
+
 monthly_chart_datas = []
+
 
 @login_required
 @owner_required
@@ -280,8 +285,7 @@ def dashboard(request):
         for month in months_of_year():
             monthly_appointments_data.append(monthly_chart_data[month.lower()])
 
-    appointments = Appointments.objects.filter(
-        salon__owner=request.user.owner)
+    appointments = Appointments.objects.filter(salon__owner=request.user.owner)
     context = {
         'salon': salon,
         'months_of_year': months_of_year(),
@@ -676,6 +680,7 @@ def preference(request):
 
 def clientPayment(request):
     return render(request, "payment.html")
+
 
 def upload(request):
     context = {}

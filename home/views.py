@@ -22,7 +22,7 @@ from visits.models import Visit
 
 
 def index(request):
-    salons = Salon.objects.all()
+    salons = Salon.objects.order_by('-rating').all()
     page = request.GET.get('page', 1)
     paginator = Paginator(salons, 16)
     try:
@@ -185,7 +185,7 @@ def faqs(request):
 
 
 def about(request):
-    return render(request, "about.html")
+    return render(request, "about/index.html")
 
 
 """
@@ -285,8 +285,7 @@ def dashboard(request):
         for month in months_of_year():
             monthly_appointments_data.append(monthly_chart_data[month.lower()])
 
-    appointments = Appointments.objects.filter(
-        salon__owner=request.user.owner)
+    appointments = Appointments.objects.filter(salon__owner=request.user.owner)
     context = {
         'salon': salon,
         'months_of_year': months_of_year(),

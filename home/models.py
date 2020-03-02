@@ -210,3 +210,10 @@ class Comments(models.Model):
 
     def __str__(self):
         return str(self.author)
+
+
+class Gallery(models.Model):
+    salon = models.ForeignKey(Salon,
+                              on_delete=models.CASCADE,
+                              related_name='gallery')
+    cover_image = models.ImageField(upload_to='images/', null=True, blank=True)

@@ -21,9 +21,9 @@ from home.models import Client, Staff
 from visits.models import Visit
 
 def index(request):
-    salons = Salon.objects.all()
+    salons = Salon.objects.order_by('-rating').all()
     page = request.GET.get('page', 1)
-    paginator = Paginator(salons, 4)
+    paginator = Paginator(salons, 3)
     try:
         salons = paginator.page(page)
     except PageNotAnInteger:

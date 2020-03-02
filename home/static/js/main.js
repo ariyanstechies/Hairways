@@ -1,3 +1,89 @@
+$(document).ready(function ($) {
+
+  "use strict";
+
+  $(window).stellar({
+    responsive: false,
+    parallaxBackgrounds: true,
+    parallaxElements: true,
+    horizontalScrolling: false,
+    hideDistantElements: false,
+    scrollProperty: 'scroll'
+  });
+
+
+  // loader
+  var loader = function () {
+    setTimeout(function () {
+      if ($('#main-loader').length > 0) {
+        $('#main-loader').removeClass('show');
+      }
+    }, 1);
+  };
+  loader();
+
+  var carousel = function () {
+    $('.carousel').owlCarousel({
+      loop: true,
+      margin: 10,
+      nav: true,
+      stagePadding: 5,
+      nav: false,
+      navText: ['<span class="icon-chevron-left">', '<span class="icon-chevron-right">'],
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 2
+        },
+        1000: {
+          items: 3
+        }
+      }
+    });
+
+    $('.loop-block-31').owlCarousel({
+      loop: true,
+      margin: 0,
+      nav: true,
+      items: 1,
+      autoplay: true,
+      stagePadding: 0,
+      nav: true,
+      navText: ['<span class="ti-arrow-left">', '<span class="ti-arrow-right">'],
+      animateOut: 'fadeOut',
+      animateIn: 'fadeIn',
+    });
+
+  };
+  carousel();
+  
+  // navigation
+  var OnePageNav = function () {
+    $(".smoothscroll[href^='#'], #main-nav ul li a[href^='#']").on('click', function (e) {
+      e.preventDefault();
+
+      var hash = this.hash,
+        navToggler = $('.navbar-toggler');
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 700, 'easeInOutExpo', function () {
+        window.location.hash = hash;
+      });
+
+
+      if (navToggler.is(':visible')) {
+        navToggler.click();
+      }
+    });
+    $('body').on('activate.bs.scrollspy', function () {
+      console.log('nice');
+    })
+  };
+  OnePageNav();
+
+});
 temporary = {};
 jQuery('.custom-select').children().each(function () {
   var txt = jQuery(this).attr('value');

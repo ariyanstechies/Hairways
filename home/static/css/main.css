@@ -318,14 +318,6 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 
 /*==================  Salons Card Homepage ==================*/
 
-.img-fluid {
-	min-height: 200px;
-}
-
-.card-min-height {
-	min-height: 300px;
-}
-
 .salon_card {
 	background-image: url('../css/images/cover1.jpg');
 	background-size: cover;
@@ -333,8 +325,10 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	height: 250px;
 }
 
-.btn-rounded {
-	border-radius: 18px;
+.card-body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	border-radius: 50px;
+	padding: 0px;
 }
 
 .salon-description {
@@ -360,21 +354,11 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 
 /*==================  Sidebar navbar  ==================*/
 
-/*==================  Text Selctinn  ==================*/
-
-::selection {
-	background: teal;
-	color: white;
-	/* WebKit/Blink Browsers */
+.filters {
+	line-height: 1.8;
+	font-size: 16px;
+	cursor: pointer;
 }
-
-::-moz-selection {
-	background: teal;
-	color: white;
-	/* Gecko Browsers */
-}
-
-/*==================  Paginator  ==================*/
 
 /*==================  Moreinfo/show page  ==================*/
 

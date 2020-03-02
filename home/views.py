@@ -22,7 +22,7 @@ from visits.models import Visit
 
 
 def index(request):
-    salons = Salon.objects.order_by('-rating').all()
+    salons = Salon.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(salons, 4)
     try:

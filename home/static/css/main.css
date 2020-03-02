@@ -108,11 +108,11 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 
 .main-navbar-light .navbar-nav>.nav-item.cta>a {
 	padding-left: 0;
-	color: rgb(235, 223, 171);
+	color: rgb(1, 136, 136);
 }
 
 .main-navbar-light .navbar-nav>.nav-item.cta>a span {
-	border: 2px solid rgb(235, 223, 171);
+	border: 2px solid rgb(1, 136, 136);
 	display: inline-block;
 	padding: 10px 20px;
 	border-radius: 4px;
@@ -130,7 +130,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 .main-navbar-light .navbar-nav>.nav-item.active>a:before {
 	content: "";
 	height: 2px;
-	background: rgb(235, 223, 171);
+	background: rgb(1, 136, 136);
 	left: 20px;
 	right: 20px;
 	position: absolute;
@@ -150,9 +150,11 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	font-size: 24px;
 	letter-spacing: .1em;
 }
+
 .main-navbar-light .navbar-toggler .ti-menu {
 	font-size: 28px;
 }
+
 .navbar-brand {
 	text-transform: uppercase;
 	letter-spacing: .1em;
@@ -277,7 +279,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	background: rgb(246, 246, 244);
 	border-radius: 7px;
 	font-weight: bold;
-	border: 2px solid rgb(235, 223, 171);
+	border: 2px solid rgb(1, 136, 136);
 	font-size: 14px;
 	letter-spacing: .2em;
 	text-transform: uppercase;
@@ -287,7 +289,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 
 .block-30 .btn:hover {
-	border-color: rgb(235, 223, 171);
+	border-color: rgb(1, 136, 136);
 	color: #fff;
 	background: transparent;
 }
@@ -316,7 +318,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	transition: 0.25s ease-out;
 }
 
-.text-teal{
+.text-teal {
 	color: teal;
 }
 
@@ -508,6 +510,7 @@ p {
 }
 
 /* coved */
+
 .headshot {
 	flex-shrink: 0;
 	margin: 5px;
@@ -521,8 +524,6 @@ p {
 	box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
 }
 
-
 .headshot-3 {
 	border-radius: 30% 10%;
-
 }

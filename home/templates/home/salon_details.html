@@ -25,71 +25,117 @@
     <!-- Image  -->
     <div class="container card" style="background-image: url({% static 'css/images/salonss.jpg'%}); background-size: cover;  
     background-position: center;  height: 500px; background-repeat: no-repeat;margin-top:10px">
-        <h3 class="text-center " style="background-color: rgba(242, 247, 247, 0.561);color:black;margin-bottom:0px;">
-            {{salon.name}}
-            </h4>
-            <div class="row" style="margin-top: 0px;">
 
-                <div class="col-sm-4 card" style="background-color: rgba(225, 250, 250, 0.644);">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs flex-column" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: black;" data-toggle="tab" href="#home"><b>City:
-                                    {{salon.town}}</b></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-info" data-toggle="tab" href="#home"><b></b>
-                                <small style="color: black;">{{salon.location_description}}</small></b></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " style="color: black;" data-toggle="tab" href="#menu1"><b></b>
-                                <i>{{salon.description}}</i></b></a>
-                        </li>
+        <div class="row" style="margin-top: 0px;">
 
-                        <li class="nav-item">
-                            <a class="nav-link text-info" data-toggle="tab" href="#menu3"><b>Comments and
-                                    Reviews</b></a>
-                        </li>
-                    </ul>
-                    <h5 class="" style="color: rgb(6, 143, 111);"> Follow us: <i class="social fa fa-instagram"></i> |
-                        <i class="social fa fa-facebook"></i> |
-                        <i class="social fa fa-twitter"></i></h5>
+            <div class="col-sm-4 card" style="background-color: rgba(125, 173, 173, 0.644);">
+
+                <div class="headshot headshot-3">
+                    <h3 class="text-center " style="color:black;margin-bottom:0px;">
+                        {{salon.name}} <br><small>
+                            <span class="float-rigt"><i class="text-warning fa fa-star"></i></span>
+                            <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
+                            <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
+                            <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+                            <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+                        </small>
+                    </h3>
+                    <b>City:
+                        {{salon.town}}</b>
                 </div>
-                <div class="col"></div>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs flex-column" role="tablist">
+
+                    <li class="nav-item">
+                        <a class="nav-link text-info" data-toggle="tab" href="#home"><b></b>
+                            <small style="color: black;">{{salon.location_description}}</small></b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " style="color: black;" data-toggle="tab" href="#menu1"><b></b>
+                            <i>{{salon.description}}</i></b></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-info" data-toggle="tab" href="#menu3"><b>Comments and
+                                Reviews</b></a>
+                    </li>
+                </ul>
+                <h4 class="" style="color: rgb(2, 6, 29);"> Follow us: <i class="social fa fa-instagram"></i>
+                    |
+                    <i class="social fa fa-facebook"></i> |
+                    <i class="social fa fa-twitter"></i></h4>
             </div>
+            <div class="col"></div>
+        </div>
 
     </div>
+
+
     <!-- end of Image -->
-    <div class="container"><i class="fa fa-envelope-o"
-            style="color: #00AF87; padding-right: 4px">&nbsp{{ salon.approved_comments.count }} Comments</i>|
-        <i style="color: #00AF87; padding-right: 4px" class="fa fa-thumbs-up">
-            {{ salon.total_likes }} Likes</i>| <i
-            style="color: #00AF87; padding-right: 4px">{{salon.appointments.count}} Bookings</i> | <i
-            style="color: #00AF87; padding-right: 4px" class="fa fa-eye"> {{ salon.views }} Views</i> |<i
-            class="fa fa-share-alt " style="color: #00AF87; padding-right: 4px">{{ each_salon.shares }}
-            {{salon.shares}} Shares</i>
-    </div>
-    <br>
-    <!-- body  -->
     <div class="container">
+
+    </div>
+
+    <!-- body  -->
+    <div class="container" style="background-image: url({% static 'css/images/isolated.svg'%});">
         <section>
+
             <div class="row">
-                <div class="card col-sm-12">
+                <div class="card col-sm-12 text-white"
+                    style="background-color: rgba(12, 146, 84, 0.438);;font-style:bold">
+                    <!-- test  -->
+                    <div class="container-fluid card mb-3" style="background-color: rgba(12, 146, 84, 0.212);">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-3 col-sm-3 pt-1">
+                                <div class="filters">
+                                    <h4>60 <i class="fa fa-envelope-o"></i><span class="d-none d-sm-inline">
+                                            Comments</span>
+                                    </h4>
+
+                                </div>
+                            </div>
+                            <div class="col-3 col-sm-2 pt-1">
+                                <div class="filters">
+                                    <h4>45 <i class="fa fa-eye"></i><span class="d-none d-sm-inline"> Views</span>
+                                    </h4>
+
+                                </div>
+                            </div>
+                            <div class="col-3 col-sm-2 pt-1">
+                                <div class="filters">
+                                    <h4>{{ salon.total_likes }}<i class="fa fa-thumbs-up"></i><span
+                                            class="d-none d-sm-inline">
+                                            Bookings</span></h4>
+                                    </h4>
+
+                                </div>
+                            </div>
+                            <div class="col-3 col-sm-2 pt-1">
+                                <div class="filters">
+                                    <h4> <i class="fa fa-share-alt "></i> <span class="d-none d-sm-inline">Share</span>
+                                    </h4>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- test  -->
                     <div class="card-body">
                         <h3 class="card-title">Our Services and Products</h3>
-                        <div class="card-body  ">
+                        <div class="card-ody  ">
                             <!--Forform for Services Offered  -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <!-- Trial  -->
                                     <form method="post">
                                         {% csrf_token %}
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6 mb-0">
+                                        <div class="form-row" style="margin: 0px;">
+                                            <div class="form-group col-6 mb-0">
                                                 {{ form.services|as_crispy_field }}
                                             </div>
 
-                                            <div class="col-sm-6">
+                                            <div class="col-6" style="margin: 0px;">
                                                 <ul style="list-style: none;">
                                                     <p>Amount</p>
                                                     {% if services.count != 0 %}
@@ -111,10 +157,10 @@
 
                                         </div>
                                         <div class="row">
-                                            <div class="form-group col-md-6 mb-0">
+                                            <div class="form-group col-6">
                                                 {{ form.products|as_crispy_field }}
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-6 " style="margin:0px">
                                                 <ul style="list-style: none;">
                                                     <p>Amount</p>
                                                     {% if products.count != 0 %}
@@ -149,11 +195,11 @@
                         </div>
                     </div>
                 </div>
-            </div><br>
+            </div>
             <div class="row">
 
                 <!--For products  -->
-                <div class="card col-sm-12">
+                <div class="card col-sm-12" style="background-color: rgba(12, 146, 84, 0.438);">
                     <div class="card-body">
                         <h3 class="card-title">Reviews and comments</h3>
 
@@ -271,12 +317,12 @@
                                 {% if reviews %}
 
                                 {% for review in reviews %}
-                                <div class="col-md-2">
-                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                <div class="col-6">
+                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" width="90"
                                         class="img img-rounded img-fluid" />
-                                    <p class="text-secondary text-center">{{ review.created_date }}</p>
+
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-6">
                                     <p>
                                         <a class="float-left"
                                             href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>{{ review.author }}
@@ -324,6 +370,9 @@
                                     <div class="clearfix"></div>
                                     <p>{{ review.comment }}</p>
 
+                                    <small>
+                                        <p class="text-info ">{{ review.created_date }}</p>
+                                    </small>
                                 </div>
 
                                 <hr>
@@ -340,7 +389,7 @@
 
 
                             <!-- end comments -->
-                            <p>Share your experience/views about this Salon</p>
+                            <h5>Share your experience/views about this Salon</h5>
                             <form method="POST" class="comment-form">
                                 {% csrf_token %}
                                 {{ comment_form | crispy }}
@@ -356,7 +405,6 @@
                 </div>
 
             </div>
-            <br>
         </section>
 
     </div>

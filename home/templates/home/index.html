@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load visits_tags %}
 {% block content %}
 <section class="block-31" style="position: relative;">
   <div class="owl-carousel loop-block-31">
@@ -25,25 +26,8 @@
 </section>
 
 <section>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3 d-none d-md-block">
-        <h4 class="mb-2">Filter Salons
-          <hr>
-        </h4>
-        <div class="filters"><i class="fa fa-fire"></i> Popular
-          <hr>
-        </div>
-        <div class="filters"><i class="fa fa-map-marker"></i> Near me
-          <hr>
-        </div>
-        <div class="filters"><i class="fa fa-thumbs-up"></i> Recommended
-          <hr>
-        </div>
-        <div class="filters"><i class="fa fa-gift"></i> Offers</div>
-      </div>
+  <div class="container">
       <!-- NEW CARDS -->
-      <div class="col-md-9">
         <!-- SEARCH BOX -->
         <div class="row">
           <div class="dashboard col-sm-12 mb-2">
@@ -57,62 +41,61 @@
               offset-sm-1" placeholder="search by name">
           </div>
         </div>
-        <!-- SALONS CONTAINER -->
-        <div class="row">
-          {% for salon in salons %}
-          <div class="col-sm-6">
-            <div class="salon_card card mb-3">
-              <div class="card-body">
-                <div class="salon-description">
-                  <h2 class="card-title">
-                    <a class="card-link" href="{% url 'salon_details'
-                      name=salon.slug %}">
-                      {{ salon.name | truncatewords:3 }} </a> </h2>
-                  <h4 class="card-subtitle mb-2">
-                    <a class="card-link" href="{% url 'salon_details'
-                      name=salon.slug %}">
-                      {{ salon.location | truncatewords:3 }} </a></h4>
 
-                  <div class="card-body">
-                    <p class="card-text">
-                      <a class="card-link" href="{% url 'salon_details'
-                        name=salon.slug %}">
-                        {{ salon.description|truncatewords:30 }}
-                      </a>
-                    </p>
-                    <span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                    </span>
-                    <hr>
-                  </div>
-                  <ul class="card_footer icons">
-                    <li><i class="fa fa-eye fa-lg">&nbsp{{ salon.views }}</i></li>
-                    <li>
-                      <i class="fa fa-heart-o fa-lg">
-                        &nbsp{{ salon.total_likes }}</i>
-                    </li>
-                    <li>
-                      <i class="fa fa-envelope-o fa-lg">
-                        &nbsp{{ salon.approved_comments.count }}
-                      </i>
-                    </li>
-                    <li>
-                      <i class="fa fa-share-alt fa-lg">
-                        &nbsp{{ salon.shares }}
-                      </i>
-                    </li>
-                  </ul>
-                </div>
+
+        
+        <!-- SALONS CONTAINER -->
+        <div class="container">
+          <div class="card-deck">
+          {% for salon in salons %}
+          {% get_visits salon.slug as visits %}
+          <div class="col-sm-12 col-md-6 col-lg-4 card-min-height">
+          <div class="card salon-card mb-4 m-0">
+            <img class="card-img-top img-fluid" src="{% static 'css/images/salon.jpg' %}" alt="Card image cap">
+            <div class="card-body card-min-height">
+              <h4 class="card-title">
+                {{ salon.name | truncatewords:3 }}
+              </h4>
+              <ul class="list-unstyled list-inline rating mb-0">
+                {% for star in '12345' %}
+                {% if forloop.counter <= salon.rating %}
+                <li class="list-inline-item mr-0"><i class="metismenu-icon ti-star text-warning"></i></li>
+                {% else %}
+                <li class="list-inline-item mr-0"><i class="metismenu-icon ti-star text-danger"></i></li>
+                {% endif %}
+                {% endfor %}
+                <li class="list-inline-item">
+                  <p class="text-muted mb-2">
+                    {{ salon.rating }} 
+                    ({{ salon.approved_comments.count }})
+                  </p>
+                </li>
+              </ul>
+              <div class="mb-3">
+                <li data-toggle="tooltip" data-placement="top" title="Likes" class="list-inline-item mr-0"><i class="metismenu-icon ti-thumb-up text-success"></i>
+                  {{ salon.rating }}
+                </li>
+                <li data-toggle="tooltip" data-placement="top" title="Views" class="list-inline-item mr-0"><i class="metismenu-icon ml-2 ti-eye text-success"></i>
+                  {% if visits %}{{ visits }}{% else %}0{% endif %}
+                </li>
+                <li data-toggle="tooltip" data-placement="top" title="{{salon.town}}" class="list-inline-item mr-0"><i class="metismenu-icon ml-2 ti-location-pin text-success"></i>
+                  {{ salon.town | truncatewords:2 }}
+                </li>
               </div>
+              <p data-toggle="tooltip" data-placement="top" title="{{salon.description}}" 
+              class="card-text">
+                {{ salon.description|truncatewords:10 }}
+              </p>
+              <p class="card-text text-center"><small class="text-muted"><a type="button" 
+                href="{% url 'salon_details' name=salon.slug %}" 
+                class="btn w-75 btn-outline-success btn-rounded text-center">Visit Salon</a></small></p>
             </div>
+          </div>
           </div>
           {% empty %}
           <p class="text-center">Salons will appear here</p>
           {% endfor %}
+          </div>
         </div>
         {% if salons.has_other_pages %}
         <div class="row">
@@ -133,8 +116,8 @@
                   }}">{{ i }}<span
                     class="sr-only">(current)</span></a></li>
               {% else %}
-              <li class="page-item"><a class="page-link" href="?page={{ i }}">{{
-                  i }}</a></li>
+              <li class="page-item"><a class="page-link" href="?page={{ i }}">
+                {{i}}</a></li>
               {% endif %}
               {% endfor %}
               {% if salons.has_next %}
@@ -142,8 +125,7 @@
                   salons.next_page_number }}">Next
                   <i class="fa fa-arrow-right"></i></a></li>
               {% else %}
-              <li class="page-item disabled"><a class="page-link" href="?page={{
-                  i }}" tabindex="+1">Next
+              <li class="page-item disabled"><a class="page-link" href="?page={[i}}" tabindex="+1">Next
                   <i class="fa fa-arrow-right"></i></a></li>
               {% endif %}
 
@@ -152,7 +134,5 @@
         </div>
         {% endif %}
       </div>
-    </div>
-  </div>
 </section>
 {% endblock %}

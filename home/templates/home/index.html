@@ -38,41 +38,55 @@
     </a>
   </div>
 </section>
+<section class="sticky-top">
+  <!-- test  -->
+  <div class="container-fluid card mb-3" style="background-color:white">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-3 col-sm-2 pt-1">
+        <div class="filters">
+          <h4><i class="fa fa-fire"></i><span class="d-none d-sm-inline"> Popular</span>
+          </h4>
+
+        </div>
+      </div>
+      <div class="col-3 col-sm-2 pt-1">
+        <div class="filters">
+          <h4><i class="fa fa-map-marker"></i><span class="d-none d-sm-inline"> Near me</span>
+          </h4>
+
+        </div>
+      </div>
+      <div class="col-3 col-sm-2 pt-1">
+        <div class="filters">
+          <h4><i class="fa fa-thumbs-up"></i><span class="d-none d-sm-inline"> Recommended</span></h4>
+          </h4>
+
+        </div>
+      </div>
+      <div class="col-3 col-sm-2 pt-1">
+        <div class="filters">
+          <h4> <i class="fa fa-gift"></i> <span class="d-none d-sm-inline">Offers</span>
+          </h4>
+        </div>
+      </div>
+      <div class="col-12 col-sm-3 pt-1">
+        <input class="search-input form-control float-right col-sm-12 mb-2" placeholder="search by name">
+      </div>
+    </div>
+  </div>
+  <!-- test  -->
+
+</section>
 <section>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3 d-none d-md-block">
-        <h4 class="mb-2">Filter Salons
-          <hr>
-        </h4>
-        <div class="filters"><i class="fa fa-fire"></i> Popular
-          <hr>
-        </div>
-        <div class="filters"><i class="fa fa-map-marker"></i> Near me
-          <hr>
-        </div>
-        <div class="filters"><i class="fa fa-thumbs-up"></i> Recommended
-          <hr>
-        </div>
-        <div class="filters"><i class="fa fa-gift"></i> Offers</div>
-      </div>
+
       <!-- NEW CARDS -->
-      <div class="col-md-9">
+      <div class="col-md-12">
         <!-- SEARCH BOX -->
-        <div class="row">
-          <div class="dashboard col-sm-12 mb-2">
-            <select class="custom-select col-sm-6 mb-2">
-              <option selected>All Locations</option>
-              {% for salon in salons %}
-              {% endfor %}
-              <option value="{{ salon.location }}">{{ salon.location }}</option>
-            </select>
-            <input class="search-input form-control float-right col-sm-5 mb-2
-              offset-sm-1" placeholder="search by name">
-          </div>
-        </div>
+
         <!-- SALONS CONTAINER -->
-        <div class="row">
+        <div class="row" id="myDIV">
           {% for salon in salons %}
           <div class="col-sm-6">
             <div class="salon_card card mb-3">
@@ -160,4 +174,5 @@
     </div>
   </div>
 </section>
+
 {% endblock %}

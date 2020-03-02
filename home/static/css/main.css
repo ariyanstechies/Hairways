@@ -244,3 +244,23 @@ p {
 .card-inner {
 	margin-left: 4rem;
 }
+
+/* coved */
+.headshot {
+	flex-shrink: 0;
+	margin: 5px;
+	height: calc(90px + 6vw);
+	width: calc(250px + 6vw);
+	border: calc(8px + 0.2vw) solid transparent;
+	background-origin: border-box;
+	background-clip: content-box, border-box;
+	background-size: cover;
+	box-sizing: border-box;
+	box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+.headshot-3 {
+	border-radius: 30% 10%;
+
+}

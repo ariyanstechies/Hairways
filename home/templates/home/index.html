@@ -28,29 +28,29 @@
     <div class="row align-items-center pt-3 justify-content-center">
       <div class="col-3 col-sm-2">
         <div class="filters">
-          <h4><i class="ti-bolt"></i><span class="d-none d-sm-inline"> Popular</span>
-          </h4>
+          <h5><i class="ti-bolt"></i><span class="d-none d-sm-inline"> Popular</span>
+          </h5>
 
         </div>
       </div>
       <div class="col-3 col-sm-2">
         <div class="filters">
-          <h4><i class="ti-location-pin"></i><span class="d-none d-sm-inline"> Near me</span>
-          </h4>
+          <h5><i class="ti-location-pin"></i><span class="d-none d-sm-inline"> Near me</span>
+          </h5>
 
         </div>
       </div>
       <div class="col-3 col-sm-2">
         <div class="filters">
-          <h4><i class="ti-thumb-up"></i><span class="d-none d-sm-inline"> Recommended</span></h4>
-          </h4>
+          <h5><i class="ti-thumb-up"></i><span class="d-none d-sm-inline"> Recommended</span></h4>
+          </h5>
 
         </div>
       </div>
       <div class="col-3 col-sm-2">
         <div class="filters">
-          <h4> <i class="ti-gift"></i> <span class="d-none d-sm-inline">Offers</span>
-          </h4>
+          <h5> <i class="ti-gift"></i> <span class="d-none d-sm-inline">Offers</span>
+          </h5>
         </div>
       </div>
       <div class="col-12 col-sm-3">
@@ -127,10 +127,10 @@
           {% if salons.has_previous %}
           <li class="page-item"><a class="page-link" href="?page={{
                   salons.previous_page_number }}">
-              <i class="fa fa-arrow-left"></i> Previous</a></li>
+              <i class="ti-arrow-left"></i> Previous</a></li>
           {% else %}
           <li class="page-item disabled"><a class="page-link" href="3" tabindex="-1">
-              <i class="fa fa-arrow-left"></i> Previous</a></li>
+              <i class="ti-arrow-left"></i> Previous</a></li>
           {% endif %}
           {% for i in salons.paginator.page_range %}
           {% if salons.number == i %}
@@ -144,10 +144,10 @@
           {% if salons.has_next %}
           <li class="page-item"><a class="page-link" href="?page={{
                   salons.next_page_number }}">Next
-              <i class="fa fa-arrow-right"></i></a></li>
+              <i class="ti-arrow-right"></i></a></li>
           {% else %}
           <li class="page-item disabled"><a class="page-link" href="?page={[i}}" tabindex="+1">Next
-              <i class="fa fa-arrow-right"></i></a></li>
+              <i class="ti-arrow-right"></i></a></li>
           {% endif %}
 
         </ul>

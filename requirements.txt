@@ -8,6 +8,7 @@ Django==3.0.3
 django-bootstrap-datepicker-plus==3.0.5
 django-bootstrap4==1.1.1
 django-crispy-forms==1.9.0
+django-extensions==2.2.6
 django-phone-field==1.8.0
 docopt==0.6.2
 gunicorn==20.0.4
@@ -17,8 +18,10 @@ packaging==20.1
 Pillow==7.0.0
 pip-upgrader==1.4.15
 psycopg2-binary==2.8.4
+pygraphviz==1.5
 PyJWT==1.7.1
 pyparsing==2.4.6
+python-dateutil==2.8.1
 python-dotenv==0.12.0
 python3-openid==3.1.0
 pytz==2019.3
@@ -32,3 +35,4 @@ sqlparse==0.3.1
 terminaltables==3.1.0
 urllib3==1.25.8
 whitenoise==5.0.1
+yapf==0.29.0

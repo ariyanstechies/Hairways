@@ -8,21 +8,24 @@ from django.urls import reverse
 from django.template.defaultfilters import slugify
 from phone_field import PhoneField
 
+
 class tempuser(models.Model):
-    name = models.CharField(max_length = 254, )
+    name = models.CharField(max_length=254, )
     phone_no = PhoneField()
-    email =  models.EmailField(max_length = 254, blank = True, null = True)
+    email = models.EmailField(max_length=254, blank=True, null=True)
+
 
 class User(AbstractUser):
     is_client = models.BooleanField(default=False)
     is_owner = models.BooleanField(default=False)
     nickname = models.CharField(max_length=30, null=True, blank=True)
-    image = models.ImageField(upload_to='images/', null = True, blank = True)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
 
 class Owner(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User,
+                                on_delete=models.CASCADE,
+                                primary_key=True)
     ownerName = models.CharField(max_length=30)
     email = models.CharField(max_length=150)
     phone = models.PositiveIntegerField(default='07000000')
@@ -46,85 +49,104 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Salon(models.Model):
     name = models.CharField(max_length=100)
-    url = models.SlugField()
+    slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField(max_length=250)
     created_date = models.DateTimeField(default=timezone.now)
-    owner = models.OneToOneField(
-        Owner, on_delete=models.CASCADE, related_name='my_salons')
-    views = models.IntegerField(default=0)
+    owner = models.OneToOneField(Owner,
+                                 on_delete=models.CASCADE,
+                                 related_name='my_salons')
+    rating = models.FloatField(default=0.0)
     status = models.BooleanField(default=0)
     shares = models.IntegerField(default=0)
     paybill = models.IntegerField(null=True, blank=True)
     is_paid = models.BooleanField(default=False)
     town = models.CharField(max_length=30)
-    location_description = models.CharField(max_length = 250, null= True, blank = True)
-    likes = models.ManyToManyField(User, related_name='likes')
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.url = slugify(self.name)
-
-        super(Salon, self).save(*args, **kwargs)
-
-    def approved_comments(self):
-        return self.comments.filter(approved_comment=True)
-
-    @property
-    def total_likes(self):
-        """
-        Likes for the salon
-        :return: Integer: Likes for the salon
-        """
-        return self.likes.count()
+    location_description = models.CharField(max_length=250,
+                                            null=True,
+                                            blank=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Salon, self).save(*args, **kwargs)
 
+    def pending_appointments(self):
+        return self.appointments.filter(status="Pending")
+
+    def completed_appointments(self):
+        return self.appointments.filter(status="Completed")
+
+    def approved_comments(self):
+        return self.comments.filter(approved_comment=True)
+
+    def pending_comments(self):
+        return self.comments.filter(approved_comment=False)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Salon, self).save(*args, **kwargs)
+
+
 class SalonSubscription(models.Model):
-    salon = models.OneToOneField(Salon, on_delete=models.CASCADE, related_name='salon_subscriptions_salon')
+    salon = models.OneToOneField(Salon,
+                                 on_delete=models.CASCADE,
+                                 related_name='salon_subscriptions_salon')
     package = models.CharField(max_length=100)
     amount = models.IntegerField()
     payment_method = models.CharField(max_length=100, default='M-Pesa')
-    who_payed = models.ForeignKey(Owner, on_delete=models.CASCADE, related_name='salon_subscriptions_owner')
+    who_payed = models.ForeignKey(Owner,
+                                  on_delete=models.CASCADE,
+                                  related_name='salon_subscriptions_owner')
 
     def __str__(self):
         return f'{str(self.salon)} {self.amount}'
 
+
 class Services(models.Model):
-    salons = models.ForeignKey(
-        Salon, on_delete=models.CASCADE, related_name='services')
-    serviceName = models.CharField(max_length=100)
-    serviceCost = models.ImageField(max_length=50)
-    serviceDuration = models.CharField(max_length=20)
-    serviceBookings = models.IntegerField()
+    salon = models.ForeignKey(Salon,
+                              on_delete=models.CASCADE,
+                              related_name='services')
+    name = models.CharField(max_length=100)
+    cost = models.IntegerField()
+    duration = models.IntegerField()
     availability = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.serviceName
+        return self.name
+
+
+class Products(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.IntegerField()
+    brand = models.CharField(max_length=100)
+    salon = models.ForeignKey(Salon,
+                              on_delete=models.CASCADE,
+                              related_name='products')
+
+    def __str__(self):
+        return self.name
 
 
 class Staff(models.Model):
+    salon = models.ForeignKey(Salon,
+                              on_delete=models.CASCADE,
+                              related_name='staffs')
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
-    date_started = models.DateTimeField(default=timezone.now)
+    date_started = models.DateField(default=timezone.now)
     salary = models.IntegerField()
+    job_description = models.CharField(max_length=100)
     phone = models.IntegerField()
     email = models.CharField(max_length=100)
-    favservice = models.CharField(max_length=100, null=True, blank=True)
-    favclient = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.firstname
 
 
 class Client(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True,
-        related_name='client')
+    user = models.OneToOneField(User,
+                                on_delete=models.CASCADE,
+                                primary_key=True,
+                                related_name='client')
     Full_Name = models.CharField(max_length=30)
     email = models.CharField(max_length=30, default='myemail@gmail.com')
     phone = models.IntegerField(null=True, blank=True)
@@ -132,40 +154,32 @@ class Client(models.Model):
     def __str__(self):
         return self.nickname
 
-class Products(models.Model):
-    product_name = models.CharField(max_length=100)
-    price = models.IntegerField()
-    product_brand = models.CharField(max_length=100)
-    salons = models.ForeignKey(
-        Salon, on_delete=models.CASCADE, related_name='products')
-
-    def __str__(self):
-        return self.product_name
-
 
 class Appointments(models.Model):
-    client = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='my_appointments')
+    STATUS_CHOICES = (('Accepted', 'Accepted'), ('Rejected', 'Rejected'),
+                      ('Pending', 'Pending'), ('Completed', 'Completed'))
+    client = models.ForeignKey(User,
+                               on_delete=models.CASCADE,
+                               related_name='my_appointments')
     clientphoneNo = models.IntegerField(default='2345966')
-    services = models.ManyToManyField(Services, related_name='services')
-    products = models.ManyToManyField(Products, related_name='products')
-    salons = models.ForeignKey(
-        Salon, on_delete=models.CASCADE, related_name='appointments')
+    services = models.ManyToManyField(Services, related_name='servicess')
+    products = models.ManyToManyField(Products, related_name='productss')
+    salon = models.ForeignKey(Salon,
+                              on_delete=models.CASCADE,
+                              related_name='appointments')
+
     appointment_date = models.DateTimeField()
     created_date = models.DateTimeField(default=timezone.now)
     totalCost = models.IntegerField()
-    is_accepted = models.BooleanField(default=False)
-    is_rejected = models.BooleanField(default=False)
-    is_pending = models.BooleanField(default=True)
-    is_complete = models.BooleanField(default=False)
+    status = models.CharField(max_length=50,
+                              choices=STATUS_CHOICES,
+                              default='Pending')
 
     def __str__(self):
-        return str(self.clientphoneNo)
+        return f'{str(self.id)} {str(self.created_date)}'
 
     def get_absolute_url(self):
         return reverse('appointment_detail', kwargs={'pk': self.pk})
-
-
 
 
 class Comments(models.Model):
@@ -176,22 +190,30 @@ class Comments(models.Model):
         ('4 Stars', '4 stars'),
         ('5 Stars', '5 stars'),
     )
-    salon = models.ForeignKey(
-        Salon, on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='my_comments')
-    stars = models.CharField(max_length=10, choices=STAR_CHOICES, default='1 star')
+    salon = models.ForeignKey(Salon,
+                              on_delete=models.CASCADE,
+                              related_name='comments')
+    author = models.ForeignKey(User,
+                               on_delete=models.CASCADE,
+                               related_name='my_comments')
+    stars = models.CharField(max_length=10,
+                             choices=STAR_CHOICES,
+                             default='1 Star')
     comment = models.TextField()
-    created_date = models.DateTimeField(
-        default=timezone.now
-    )
+    created_date = models.DateTimeField(default=timezone.now)
 
     approved_comment = models.BooleanField(default=False)
-
-    def __str__(self):
-        return str(self.author)
-    # to be revisited
 
     def approve(self):
         self.approved_comment = True
         self.save()
+
+    def __str__(self):
+        return str(self.author)
+
+
+class Gallery(models.Model):
+    salon = models.ForeignKey(Salon,
+                              on_delete=models.CASCADE,
+                              related_name='gallery')
+    cover_image = models.ImageField(upload_to='images/', null=True, blank=True)

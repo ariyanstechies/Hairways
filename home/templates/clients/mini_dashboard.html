@@ -17,9 +17,11 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-
-                <img src="{{request.user.image.url}}"
-                    class="rounded" alt="my Profile" width="40" height="36">
+                {% if request.user.image %}
+                <img src="{{request.user.image.url}}" class="rounded" alt="my Profile" width="40" height="36">
+                {% else %}
+                no pic
+                {%endif%}
                 <strong>{{request.user.username}}</strong>
                 <span class="float-right"> <strong>Logout</strong>
 
@@ -50,9 +52,10 @@
                             {%else%} <a href="{% url 'client_update'%}">Update Your Profile </a>{%endif%}</p>
                         <p>Username: {{request.user.username}}</p>
                         <p>Profile Picture: </p>
-                        <img src="{{request.user.image.url}}"
-                            class="rounded" alt="Cinque Terre" width="404" height="336">
-
+                        {% if request.user.image %}
+                        <img src="{{request.user.image.url}}" class="rounded" alt="Cinque Terre" width="404"
+                            height="336">
+                        {%endif%}
                     </div>
                     <!-- /data area -->
 

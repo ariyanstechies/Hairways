@@ -14426,7 +14426,7 @@ legend {
 }
 
 .widget-content .widget-progress-wrapper {
-    margin-top: 1rem
+    /* margin-top: 1rem */
 }
 
 .widget-content .widget-progress-wrapper .progress-sub-label {

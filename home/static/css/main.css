@@ -316,6 +316,10 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	transition: 0.25s ease-out;
 }
 
+.text-teal{
+	color: teal;
+}
+
 /*==================  Salons Card Homepage ==================*/
 
 .img-fluid {

@@ -13,6 +13,15 @@ body {
 	font-weight: 300;
 }
 
+.wrapper {
+	min-height: 100vh;
+	position: relative;
+}
+
+.main {
+	padding-bottom: 100px;
+}
+
 /*==================  Navbar  ==================*/
 
 a {
@@ -526,4 +535,18 @@ p {
 
 .headshot-3 {
 	border-radius: 30% 10%;
+}
+
+/* Footer Style */
+
+.footer {
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.footer-link:hover {
+	color: rgb(29, 192, 34);
+	text-decoration: underline;
+	transition: none;
 }

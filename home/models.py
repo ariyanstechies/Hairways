@@ -65,10 +65,6 @@ class Salon(models.Model):
                                             null=True,
                                             blank=True)
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Salon, self).save(*args, **kwargs)
-
     def pending_appointments(self):
         return self.appointments.filter(status="Pending")
 
@@ -84,6 +80,9 @@ class Salon(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Salon, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
 
 
 class SalonSubscription(models.Model):

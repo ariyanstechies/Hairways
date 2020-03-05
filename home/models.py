@@ -212,8 +212,23 @@ class Comments(models.Model):
         return str(self.author)
 
 
+class Reply(models.Model):
+    comment = models.ForeignKey(
+        Comments, on_delete=models.CASCADE, related_name='my_replies')
+    body = models.TextField()
+    created_time = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.author
+
+
 class Gallery(models.Model):
+    POSITION_CHOICES = (('Cover Image', 'Cover Image'), ('Card Image', 'Card Image'),
+                        ('Prome Image', 'Prome Image'))
     salon = models.ForeignKey(Salon,
                               on_delete=models.CASCADE,
                               related_name='gallery')
-    cover_image = models.ImageField(upload_to='images/', null=True, blank=True)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
+
+    image_position = models.CharField(
+        max_length=60, choices=POSITION_CHOICES, default='Cover Image')

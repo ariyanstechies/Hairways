@@ -8,406 +8,460 @@
 {{ form.media }} {# Adds date-picker required JS and CSS #}
 
 <div>
-    <div class="container">
+  <div class="container">
 
-        {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong class="text-success"></strong> {{ message }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        {% endfor %}
-        {% endif %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong class="text-success"></strong> {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
+    {% endfor %}
+    {% endif %}
+  </div>
 
-    <!-- Image  -->
-    <div class="container card" style="background-image: url({% static 'css/images/salonss.jpg'%}); background-size: cover;  
+  <!-- Image  -->
+  <div class="container card" style="background-image: url({% static 'images/salonss.jpg'%}); background-size: cover;  
     background-position: center;  height: 500px; background-repeat: no-repeat;margin-top:10px">
 
-        <div class="row" style="margin-top: 0px;">
+    <div class="row" style="margin-top: 0px;">
 
-            <div class="col-sm-4 card" style="background-color: rgba(125, 173, 173, 0.644);">
+      <div class="col-sm-4 card" style="background-color: rgba(125, 173, 173, 0.644);">
 
-                <div class="headshot headshot-3">
-                    <h3 class="text-center " style="color:black;margin-bottom:0px;">
-                        {{salon.name}} <br><small>
-                            <span class="float-rigt"><i class="text-warning fa fa-star"></i></span>
-                            <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
-                            <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
-                            <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                            <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                        </small>
-                    </h3>
-                    <b>City:
-                        {{salon.town}}</b>
-                </div>
-
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs flex-column" role="tablist">
-
-                    <li class="nav-item">
-                        <a class="nav-link text-info" data-toggle="tab" href="#home"><b></b>
-                            <small style="color: black;">{{salon.location_description}}</small></b></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " style="color: black;" data-toggle="tab" href="#menu1"><b></b>
-                            <i>{{salon.description}}</i></b></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-info" data-toggle="tab" href="#menu3"><b>Comments and
-                                Reviews</b></a>
-                    </li>
-                </ul>
-                <h4 class="" style="color: rgb(2, 6, 29);"> Follow us: <i class="social fa fa-instagram"></i>
-                    |
-                    <i class="social fa fa-facebook"></i> |
-                    <i class="social fa fa-twitter"></i></h4>
-            </div>
-            <div class="col"></div>
+        <div class="headshot headshot-3">
+          <h3 class="text-center " style="color:black;margin-bottom:0px;">
+            {{salon.name}} <br><small>
+              <span class="float-rigt"><i class="text-warning fa fa-star"></i></span>
+              <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
+              <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
+              <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+              <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+            </small>
+          </h3>
+          <b>City:
+            {{salon.town}}</b>
         </div>
 
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs flex-column" role="tablist">
+
+          <li class="nav-item">
+            <a class="nav-link text-info" data-toggle="tab" href="#home"><b></b>
+              <small style="color: black;">{{salon.location_description}}</small></b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " style="color: black;" data-toggle="tab" href="#menu1"><b></b>
+              <i>{{salon.description}}</i></b></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-info" data-toggle="tab" href="#menu3"><b>Comments and
+                Reviews</b></a>
+          </li>
+        </ul>
+        <h4 class="" style="color: rgb(2, 6, 29);"> Follow us: <i class="social fa fa-instagram"></i>
+          |
+          <i class="social fa fa-facebook"></i> |
+          <i class="social fa fa-twitter"></i></h4>
+      </div>
+      <div class="col"></div>
     </div>
 
-
-    <!-- end of Image -->
-    <div class="container">
-
-    </div>
-
-    <!-- body  -->
-    <div class="container" style="background-image: url({% static 'css/images/isolated.svg'%});">
-        <section>
-
-            <div class="row">
-                <div class="card col-sm-12 text-white"
-                    style="background-color: rgba(12, 146, 84, 0.438);;font-style:bold">
-                    <!-- test  -->
-                    <div class="container-fluid card mb-3" style="background-color: rgba(12, 146, 84, 0.212);">
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-3 col-sm-3 pt-1">
-                                <div class="filters">
-                                    <h4>60 <i class="fa fa-envelope-o"></i><span class="d-none d-sm-inline">
-                                            Comments</span>
-                                    </h4>
-
-                                </div>
-                            </div>
-                            <div class="col-3 col-sm-2 pt-1">
-                                <div class="filters">
-                                    <h4>45 <i class="fa fa-eye"></i><span class="d-none d-sm-inline"> Views</span>
-                                    </h4>
-
-                                </div>
-                            </div>
-                            <div class="col-3 col-sm-2 pt-1">
-                                <div class="filters">
-                                    <h4>{{ salon.total_likes }}<i class="fa fa-thumbs-up"></i><span
-                                            class="d-none d-sm-inline">
-                                            Bookings</span></h4>
-                                    </h4>
-
-                                </div>
-                            </div>
-                            <div class="col-3 col-sm-2 pt-1">
-                                <div class="filters">
-                                    <h4> <i class="fa fa-share-alt "></i> <span class="d-none d-sm-inline">Share</span>
-                                    </h4>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- test  -->
-                    <div class="card-body">
-                        <h3 class="card-title">Our Services and Products</h3>
-                        <div class="card-ody  ">
-                            <!--Forform for Services Offered  -->
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <!-- Trial  -->
-                                    <form method="post">
-                                        {% csrf_token %}
-                                        <div class="form-row" style="margin: 0px;">
-                                            <div class="form-group col-6 mb-0">
-                                                {{ form.services|as_crispy_field }}
-                                            </div>
-
-                                            <div class="col-6" style="margin: 0px;">
-                                                <ul style="list-style: none;">
-                                                    <p>Amount</p>
-                                                    {% if services.count != 0 %}
-                                                    {% for service in services %}
-                                                    <li class="">Ksh. {{ service.cost }}</li>
-                                                    {% endfor %}
-                                                    {% else %}
-                                                </ul>
-                                                <!-- spanning across the five columns-->
-                                                <tr style="border: none">
-                                                    <td colspan="5" class="text-center text-muted">Sorry No Services For
-                                                        Now:)
-                                                    </td>
-                                                </tr>
-                                                {% endif%}
-
-                                            </div>
-                                            <p>If you wish to buy our products include them below</p>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-6">
-                                                {{ form.products|as_crispy_field }}
-                                            </div>
-                                            <div class="col-6 " style="margin:0px">
-                                                <ul style="list-style: none;">
-                                                    <p>Amount</p>
-                                                    {% if products.count != 0 %}
-                                                    {% for prod in products %}
-                                                    <li class="">Ksh. {{prod.price }}</li>
-                                                    {% endfor %}
-                                                    {% else %}
-                                                </ul>
-                                                <!-- spanning across the five columns-->
-                                                <tr style="border: none">
-                                                    <td colspan="5" class="text-center text-muted">Sorry No Services For
-                                                        Now:)
-                                                    </td>
-                                                </tr>
-                                                {% endif%}
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-6 mb-0">
-                                            {{ form.appointment_date|as_crispy_field }}
-                                        </div>
-
-                                        <button type="submit" class="btn btn-primary">Book Now</button>
-                                    </form>
-                                    <br>
-                                    <!-- End trial  -->
-
-                                </div>
+  </div>
 
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <!-- end of Image -->
+  <div class="container">
+
+  </div>
+
+  <!-- body  -->
+  <div class="container">
+    <section>
+      <div class="services-products">
+
+        <ul class="nav nav-justified services-products-toggler mt-3 mb-2">
+          <li class="nav-item"><a data-toggle="tab" href="#services" class="active nav-link">Services</a></li>
+          <li class="nav-item"><a data-toggle="tab" href="#products" class="nav-link">Products</a></li>
+        </ul>
+
+        <!-- Sticky filter -->
+        {% if services or products %}
+        <div class="container-fluid card sticky-top" style="background-color:white">
+          <div class="row align-items-center pt-3 justify-content-center">
+            <div class="col-3 col-sm-2">
+              <div class="filters">
+                <h5><i class="ti-bolt text-teal"></i><span class="d-none d-sm-inline"> Popular</span>
+                </h5>
+              </div>
             </div>
-            <div class="row">
+            <div class="col-3 col-sm-2">
+              <div class="filters">
+                <h5><i class="ti-location-pin text-teal"></i><span class="d-none d-sm-inline"> Near me</span>
+                </h5>
+              </div>
+            </div>
+            <div class="col-3 col-sm-2">
+              <div class="filters">
+                <h5><i class="ti-thumb-up text-teal"></i><span class="d-none d-sm-inline"> Recommended</span></h4>
+                </h5>
+              </div>
+            </div>
+            <div class="col-3 col-sm-2">
+              <div class="filters">
+                <h5> <i class="ti-gift text-teal"></i> <span class="d-none d-sm-inline">Offers</span>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
 
-                <!--For products  -->
-                <div class="card col-sm-12" style="background-color: rgba(12, 146, 84, 0.438);">
+
+        <div class="tab-content mt-3">
+          <div class="tab-pane active" id="services" role="tabpanel">
+            <div class="card border-0">
+              {% for service in services %}
+              <div class="row">
+                <div class="col-8">
+                  <h5 class="mb-0">{{service.name}}</h5>
+                  <p class="text-muted">{{service.duration}} Min</p>
+                </div>
+                <div class="col-4">
+                  <p class="mb-0">Ksh <b>{{service.cost}}</b></p>
+                  <button class="btn not-clicked mr-0 py-0 mt-2" id="{{service.id}}">Add</button>
+                </div>
+              </div>
+              <hr class="mt-1 mb-3">
+              {% empty %}
+              <div class="container my-3 text-muted text-center">
+                <p>We Have no services at the moment. Please check again later</p>
+              </div>
+              {% endfor %}
+            </div>
+
+          </div>
+          <div class="tab-pane" id="products" role="tabpanel">
+            <div class="card border-0">
+              {% for product in products %}
+              <div class="row">
+                <div class="col-8">
+                  <h5 class="mb-0">{{product.name}}</h5>
+                  <p class="text-muted">{{product.duration}} Min</p>
+                </div>
+                <div class="col-4">
+                  <p class="mb-0 font-weight-bold">Ksh {{product.price}}</p>
+                  <button class="btn btn-outline-success py-0">add</button>
+                </div>
+              </div>
+              <hr class="my-1">
+              {% empty %}
+              <div class="container my-3 text-muted text-center">
+                <p>We Have no products at the moment. Please check again later</p>
+              </div>
+              {% endfor %}
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!--For products  -->
+        <div class="card col-sm-12">
+          <div class="card-body">
+            <h3 class="card-title">Reviews and comments</h3>
+
+
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+              integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
+              crossorigin="anonymous">
+
+            <section>
+              <div class="container-fliud">
+                <div class="row ">
+                  <div class="col-md-3 border  text-center">
                     <div class="card-body">
-                        <h3 class="card-title">Reviews and comments</h3>
-
-
-                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
-                            rel="stylesheet"
-                            integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
-                            crossorigin="anonymous">
-
-                        <section>
-                            <div class="container-fliud">
-                                <div class="row ">
-                                    <div class="col-md-3 border  text-center">
-                                        <div class="card-body">
-                                            <h1 class="text-danger">{{average_rating}}</h1>
-                                            <div class="sub-row text-warning">
-                                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                    class="fa fa-star-half-o"></i>
-                                            </div>
-                                            <p>{{salon.comments.count}} Ratings</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5 border">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <h6>5 Stars</h6>
-                                                </div>
-                                                <div class="col-md-9 pt-1">
-                                                    <div class="progress">
-                                                        <div style="width: {{ps5}}%;"
-                                                            class="progress-bar text-dark text-bold  bg-success">
-                                                            {{stars_5}}</div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <h6>4 Stars</h6>
-                                                </div>
-                                                <div class="col-md-9 pt-1">
-                                                    <div class="progress">
-                                                        <div style="width: {{ps4}}%;"
-                                                            class="progress-bar text-dark text-bold bg-success">
-                                                            {{stars_4}}</div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <h6>3 Stars</h6>
-                                                </div>
-                                                <div class="col-md-9 pt-1">
-                                                    <div class="progress">
-                                                        <div style="width: {{ps3}}%;"
-                                                            class="progress-bar text-dark text-bold bg-warning">
-                                                            {{stars_3}}</div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <h6>2 Stars</h6>
-                                                </div>
-                                                <div class="col-md-9 pt-1">
-                                                    <div class="progress">
-                                                        <div style="width: {{ps2}}%;"
-                                                            class="progress-bar text-dark text-bold bg-danger">
-                                                            {{stars_2}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <h6>1 Star</h6>
-                                                </div>
-                                                <div class="col-md-9 pt-1">
-                                                    <div class="progress">
-                                                        <div class="progress-bar  text-dark text-bold bg-danger"
-                                                            style="width: {{ps1}}%;">
-                                                            {{stars_1}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 border text-center">
-                                        <div class="card-body">
-                                            <i class="fa fa-pencil-square fa-3x text-success"></i>
-                                            <a href="#comments">
-                                                <h4>Write Your Views</h4>
-                                            </a>
-                                            <small>share your experience/views about this Salon</small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </section>
-                        <br>
-
-                        <!-- comments  -->
-                        <section style="margin-top: 24px;">
-
-                            <!-- tryal phase -->
-                            <div class="row">
-                                {% if reviews %}
-
-                                {% for review in reviews %}
-                                <div class="col-6">
-                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" width="90"
-                                        class="img img-rounded img-fluid" />
-
-                                </div>
-                                <div class="col-6">
-                                    <p>
-                                        <a class="float-left"
-                                            href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>{{ review.author }}
-                                                | </strong></a>
-
-                                        {% if review.stars == '3 Stars' %}
-                                        <span class="float-rigt"><i class="text-warning fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                                        {% endif %}
-                                        {% if review.stars == '4 Stars' %}
-                                        <span class="float-rigt"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                                        {% endif %}
-                                        {% if review.stars == '2 Stars' %}
-                                        <span class="float-rigt"><i class="text-danger fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-danger fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                                        {% endif %}
-                                        {% if review.stars == '1 Star' %}
-                                        <span class="float-rigt"><i class="text-danger fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-dangr fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                                        {% endif %}
-
-                                        {% if review.stars == '5 Stars' %}
-                                        <span class="float-rigt"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        {% endif %}
-
-
-                                    </p>
-                                    <div class="clearfix"></div>
-                                    <p>{{ review.comment }}</p>
-
-                                    <small>
-                                        <p class="text-info ">{{ review.created_date }}</p>
-                                    </small>
-                                </div>
-
-                                <hr>
-                                {% endfor %}
-                                {% else %}
-                                <p class="text-center text-muted">No Reviews yet!</p>
-                                {% endif %}
-                            </div>
-
-                            <!-- end of trial phase  -->
-
-                        </section>
-                        <div id="comments">
-
-
-                            <!-- end comments -->
-                            <h5>Share your experience/views about this Salon</h5>
-                            <form method="POST" class="comment-form">
-                                {% csrf_token %}
-                                {{ comment_form | crispy }}
-                                {% if request.user.is_authenticated %}
-                                <button type="submit" class="save btn btn-success">Save</button>
-                                {% else %}
-                                <p>You must <a href="{% url 'login'%}" style="font-size: 34px;">Login</a> to submit a
-                                    review</p>
-                                {%endif%}
-                            </form>
-                        </div>
+                      <h1 class="text-danger">{{average_rating}}</h1>
+                      <div class="sub-row text-warning">
+                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                          class="fa fa-star"></i><i class="fa fa-star-half-o"></i>
+                      </div>
+                      <p>{{salon.comments.count}} Ratings</p>
                     </div>
+                  </div>
+                  <div class="col-md-5 border">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <h6>5 Stars</h6>
+                        </div>
+                        <div class="col-md-9 pt-1">
+                          <div class="progress">
+                            <div style="width: {{ps5}}%;" class="progress-bar text-dark text-bold  bg-success">
+                              {{stars_5}}</div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <h6>4 Stars</h6>
+                        </div>
+                        <div class="col-md-9 pt-1">
+                          <div class="progress">
+                            <div style="width: {{ps4}}%;" class="progress-bar text-dark text-bold bg-success">
+                              {{stars_4}}</div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <h6>3 Stars</h6>
+                        </div>
+                        <div class="col-md-9 pt-1">
+                          <div class="progress">
+                            <div style="width: {{ps3}}%;" class="progress-bar text-dark text-bold bg-warning">
+                              {{stars_3}}</div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <h6>2 Stars</h6>
+                        </div>
+                        <div class="col-md-9 pt-1">
+                          <div class="progress">
+                            <div style="width: {{ps2}}%;" class="progress-bar text-dark text-bold bg-danger">
+                              {{stars_2}}
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <h6>1 Star</h6>
+                        </div>
+                        <div class="col-md-9 pt-1">
+                          <div class="progress">
+                            <div class="progress-bar  text-dark text-bold bg-danger" style="width: {{ps1}}%;">
+                              {{stars_1}}
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 border text-center">
+                    <div class="card-body">
+                      <i class="fa fa-pencil-square fa-3x text-success"></i>
+                      <a href="#comments">
+                        <h4>Write Your Views</h4>
+                      </a>
+                      <small>share your experience/views about this Salon</small>
+                    </div>
+                  </div>
                 </div>
 
-            </div>
-        </section>
+              </div>
+            </section>
+            <br>
 
+            <!-- comments  -->
+            <section style="margin-top: 24px;">
+
+              <!-- tryal phase -->
+              <div class="row">
+                {% if reviews %}
+
+                {% for review in reviews %}
+                <div class="col-6">
+                  <img src="https://image.ibb.co/jw55Ex/def_face.jpg" width="90" class="img img-rounded img-fluid" />
+
+                </div>
+                <div class="col-6">
+                  <p>
+                    <a class="float-left"
+                      href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>{{ review.author }}
+                        | </strong></a>
+
+                    {% if review.stars == '3 Stars' %}
+                    <span class="float-rigt"><i class="text-warning fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+                    {% endif %}
+                    {% if review.stars == '4 Stars' %}
+                    <span class="float-rigt"><i class="text-success fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+                    {% endif %}
+                    {% if review.stars == '2 Stars' %}
+                    <span class="float-rigt"><i class="text-danger fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-danger fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+                    {% endif %}
+                    {% if review.stars == '1 Star' %}
+                    <span class="float-rigt"><i class="text-danger fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-dangr fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
+                    {% endif %}
+
+                    {% if review.stars == '5 Stars' %}
+                    <span class="float-rigt"><i class="text-success fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
+                    {% endif %}
+
+
+                  </p>
+                  <div class="clearfix"></div>
+                  <p>{{ review.comment }}</p>
+
+                  <small>
+                    <p class="text-info ">{{ review.created_date }}</p>
+                  </small>
+                </div>
+
+                <hr>
+                {% endfor %}
+                {% else %}
+                <p class="text-center text-muted">No Reviews yet!</p>
+                {% endif %}
+              </div>
+
+              <!-- end of trial phase  -->
+
+            </section>
+            <div id="comments">
+
+
+              <!-- end comments -->
+              <h5>Share your experience/views about this Salon</h5>
+              <form method="POST" class="comment-form">
+                {% csrf_token %}
+                {{ comment_form | crispy }}
+                {% if request.user.is_authenticated %}
+                <button type="submit" class="save btn btn-success">Save</button>
+                {% else %}
+                <p>You must <a href="{% url 'login'%}" style="font-size: 34px;">Login</a> to submit a
+                  review</p>
+                {%endif%}
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+  </div>
+  <section>
+    <div title="closed" class="cart">
+      <div class="row cart-buttons-container mx-0">
+        <div class="col-4 cart-amount container text-white">
+          <p class="mt-2 ml-2"><b class="cart-items-counter" id="total_items_booked">0</b></p>
+        </div>
+        <div class="col-4 cart-icon-container">
+          <div class="icon-container text-white col-4 rounded-circle">
+            <i class="ti-shopping-cart cart-icon"></i>
+          </div>
+        </div>
+        <div class="col-4 bg-danger cart-cost text-center text-white">
+          <p class="mt-3"><b>Ksh 500</b></p>
+        </div>
+      </div>
+      <div class="container display-selected-items pt-4 cart-items-container">
+          <p class="text-center text-muted">You have not selected any services or products.</p>
+      </div>
     </div>
-    <!-- end of body  -->
+  </section>
+
+  <!-- end of body  -->
 </div>
+
+<script>
+
+  // Adding elements to cart, toggling state of add to cart button and pushing items to array
+  var items_booked = 0
+  var services_selected = []
+  $(".not-clicked").on("click", function (event) {
+    var el = $(event.target);
+    if (el.text() == "Add") {
+      // Add selected service to array on clicking add
+      var selected_service = parseInt(event.target.id)
+      console.log(typeof (selected_service))
+      services_selected.indexOf(selected_service) === -1 ? services_selected.push(selected_service) :
+        console.log(services_selected)
+
+      el.text("Added");
+      $(this).addClass('clicked').removeClass('not-clicked');
+      items_booked += 1
+      $('#total_items_booked').html(items_booked)
+      console.log('items booked ' + items_booked)
+      console.log(services_selected)
+    } else {
+      // Removes item from cart when remove button is clicked
+      var selected_service = parseInt(event.target.id)
+      if (services_selected.includes(selected_service)){
+        var index = services_selected.indexOf(selected_service);
+        if (index !== -1) services_selected.splice(index, 1);
+      }
+  
+      el.text("Add");
+      $(this).addClass('not-clicked').removeClass('clicked');
+      if (items_booked != 0) {
+        items_booked -= 1
+        $('#total_items_booked').html(items_booked)
+        console.log('items booked ' + items_booked)
+      } else {
+        items_booked = 0
+        $('#total_items_booked').html(items_booked)
+        console.log(items_booked)
+      }
+      console.log(services_selected)
+    }
+  });
+
+  // Slide chart up or down
+  $('.cart-buttons-container').on('click', function () {
+    var cart_state = $('.cart').attr('title')
+    if (cart_state == 'closed') {
+      $('.cart').addClass('show-cart-items').removeClass('hide-cart-items');
+      $('.cart').prop('title', 'opened');
+    } else {
+      $('.cart').addClass('hide-cart-items').removeClass('show-cart-items');
+      $('.cart').prop('title', 'closed');
+    }
+
+    // Populate cart-items with selected services
+    console.log(services_selected)
+    if (services_selected.length >0 ){
+      // $('.display-selected-items').html('')
+      for (var i = 0; i < services_selected.length; i++){
+        data = string{{services.1.name}})
+      $('.display-selected-items').prepend("<div class='row my-2'><div class='col-10'><h6 class='mb-0'>{{services." + i +".name}}</h6><p class='text-muted'>Ksh {{services." + i +".cost}}</p></div><div class='col-2'><button class='btn btn-outline-success py-0'>add</button></div></div>")
+      }
+    }
+  });
+
+</script>
 {% endblock %}
+
+<!-- '<div class="row my-2"><div class="col-10"><h6 class="mb-0">'+ services.i.name +'</h6><p class="text-muted">Ksh '+ services.i.cost +'</p></div><div class="col-2"><button class="btn btn-outline-success py-0">add</button></div></div>' -->

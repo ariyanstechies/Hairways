@@ -391,6 +391,140 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	min-height: max-content;
 }
 
+.services-products-toggler li a {
+	color: #6c757d;
+	border-bottom: 2px solid white;
+}
+
+.services-products-toggler li a:hover {
+	color: teal;
+	border-bottom: 2px solid teal;
+}
+
+.services-products-toggler li a:focus {
+	color: teal;
+	border-bottom: 2px solid teal;
+}
+
+.not-clicked {
+	color: teal !important;
+	border: 2px solid teal !important;
+	box-shadow: none !important;
+}
+
+.not-clicked:hover {
+	color: white !important;
+	background-color: teal;
+}
+
+.clicked {
+	color: #dc3545 !important;
+	background-color: white !important;
+	border: 2px solid #dc3545 !important;
+	box-shadow: none !important;
+}
+
+.clicked:hover {
+	color: white !important;
+	background-color: #dc3545 !important;
+	border: 2px solid #dc3545 !important;
+}
+
+/* ================= cart ======================= */
+
+.cart-container {
+	height: auto;
+}
+
+.cart {
+	position: fixed;
+	z-index: 1030;
+	width: 100%;
+	background-color: teal;
+	height: 50px;
+	bottom: 0px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}
+
+.cart-buttons-container {
+	height: 50px;
+}
+
+.cart-cost {
+	min-height: 50px;
+	height: 100%;
+	border-top-right-radius: 20px;
+}
+
+.cart-amount {
+	height: 50px;
+	border-top-left-radius: 20px;
+}
+
+.cart-icon-container{
+	height: 50px;
+}
+
+.icon-container {
+	position: relative;
+	bottom: 30px;
+	height: 50px;
+	border-bottom: none;
+	padding: 40px !important;
+	margin: 0 auto;
+	background-color: teal;
+	border: 0.5px solid white;
+}
+
+.cart-icon {
+	font-size: xx-large;
+	font-weight: bold;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	animation: MoveUpDown 1s linear infinite;
+	position: absolute;
+}
+
+@keyframes MoveUpDown {
+	0%, 100% {
+		bottom: 0;
+	}
+	50% {
+		bottom: 20px;
+	}
+}
+
+.arrow-icon {
+	font-size: xx-large;
+	font-weight: bold;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -90%);
+}
+
+.cart-items-counter {
+	font-size: x-large;
+	font-weight: bold;
+}
+
+.show-cart-items {
+	max-height: 80vh;
+	height: auto;
+}
+
+.hide-cart-items {
+	max-height: 50px;
+}
+
+.cart-items-container {
+	height: 1900px;
+	background: whitesmoke;
+}
+
 /*==================  django forms  ==================*/
 
 .asteriskField {

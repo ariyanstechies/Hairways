@@ -85,6 +85,9 @@ class Salon(models.Model):
         self.slug = slugify(self.name)
         super(Salon, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.name
+
 
 class SalonSubscription(models.Model):
     salon = models.OneToOneField(Salon,

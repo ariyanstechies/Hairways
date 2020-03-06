@@ -137,3 +137,9 @@ class AppointmentUpdateForm(forms.ModelForm):
         widgets = {
             'services': forms.CheckboxSelectMultiple,
         }
+
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Gallery
+        fields = ('image', 'image_position')

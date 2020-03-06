@@ -58,13 +58,22 @@ urlpatterns = [
     path('appointments/complete/<int:pk>/',
          views.appointment_complete,
          name='appointment_complete'),
-     # staffs starts here
+    # staffs starts here
     path('dashboard/staffs/', views.staffs, name='staffs'),
     path('dashboard/staffs/new/', views.staff_new, name='staff_new'),
     path('dashboard/staff/<int:id>/edit', views.staff_edit, name='staff_edit'),
     path('dashboard/staff/<int:id>/remove/',
          views.staff_delete,
          name='staff_delete'),
+
+    # salon images starts here
+    path('dashboard/salon/images<slug:slug>',
+         views.salon_images,
+         name='salon_images'),
+
+    path('dashboard/salon/select/images<slug:slug>/<int:id>',
+         views.select_card_image,
+         name='select_images'),
 
     path('upload/', views.upload, name='upload'),
     path('about/client/<int:pk>/',

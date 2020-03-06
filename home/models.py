@@ -85,6 +85,9 @@ class Salon(models.Model):
         self.slug = slugify(self.name)
         super(Salon, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.name
+
 
 class SalonSubscription(models.Model):
     salon = models.OneToOneField(Salon,
@@ -102,6 +105,7 @@ class SalonSubscription(models.Model):
 
 
 class Services(models.Model):
+    service_identifier = models.CharField(max_length=200)
     salon = models.ForeignKey(Salon,
                               on_delete=models.CASCADE,
                               related_name='services')
@@ -109,6 +113,12 @@ class Services(models.Model):
     cost = models.IntegerField()
     duration = models.IntegerField()
     availability = models.BooleanField(default=True)
+
+    def save(self):
+        if not self.id:
+            super(Services, self).save()
+            self.service_identifier = ('SN' + str(self.id))
+        super(Services, self).save()
 
     def __str__(self):
         return self.name
@@ -118,9 +128,16 @@ class Products(models.Model):
     name = models.CharField(max_length=100)
     price = models.IntegerField()
     brand = models.CharField(max_length=100)
+    product_identifier = models.CharField(max_length=200)
     salon = models.ForeignKey(Salon,
                               on_delete=models.CASCADE,
                               related_name='products')
+
+    def save(self):
+        if not self.id:
+            super(Products, self).save()
+            self.product_identifier = ('PN' + str(self.id))
+        super(Products, self).save()
 
     def __str__(self):
         return self.name
@@ -229,6 +246,6 @@ class Gallery(models.Model):
                               on_delete=models.CASCADE,
                               related_name='gallery')
     image = models.ImageField(upload_to='images/', null=True, blank=True)
-
+    is_selected = models.BooleanField(default=False)
     image_position = models.CharField(
         max_length=60, choices=POSITION_CHOICES, default='Cover Image')

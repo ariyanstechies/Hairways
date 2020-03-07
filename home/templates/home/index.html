@@ -72,7 +72,7 @@
         {% get_visits salon.slug as visits %}
         <div class="col-sm-12 col-md-6 col-lg-4 card-min-height">
           <div class="card salon-card mb-4 m-0">
-            <img class="card-img-top img-fluid" src="{% static 'images/salon.jpg' %}" alt="Card image cap">
+            <img class="card-img-top img-fluid" src="{{salon.card_img}}" alt="Card image cap">
             <div class="card-body card-min-height">
               <h4 class="card-title">
                 {{ salon.name | truncatewords:3 }}

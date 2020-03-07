@@ -64,6 +64,13 @@ class Salon(models.Model):
     location_description = models.CharField(max_length=250,
                                             null=True,
                                             blank=True)
+    longitude = models.DecimalField(
+        max_digits=9, decimal_places=6,  null=True, blank=True)
+    latitude = models.DecimalField(
+        max_digits=9, decimal_places=6, blank=True, null=True)
+    card_img = models.CharField(max_length=250, blank=True, null=True)
+    cover_img = models.CharField(max_length=250, blank=True, null=True)
+    promo_img = models.CharField(max_length=250, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -248,4 +255,4 @@ class Gallery(models.Model):
     image = models.ImageField(upload_to='images/', null=True, blank=True)
     is_selected = models.BooleanField(default=False)
     image_position = models.CharField(
-        max_length=60, choices=POSITION_CHOICES, default='Cover Image')
+        max_length=60, choices=POSITION_CHOICES)

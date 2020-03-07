@@ -106,6 +106,7 @@
                             Select
                         </a>
                         {% endif %}
+
                     </div>
 
                 </div>
@@ -133,7 +134,7 @@
                     <!-- end comments -->
                     <form method="POST" enctype="multipart/form-data" class="comment-form">
                         {% csrf_token %}
-                        {{ form | crispy }}
+                        {% bootstrap_form form %}
 
                         <button type="submit" class="save btn btn-success">Save</button>
 

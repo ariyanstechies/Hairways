@@ -759,7 +759,6 @@ def salon_images(request, slug):
         if form.is_valid():
             imageAdd = form.save(commit=False)
             imageAdd.salon = salon
-            print(imageAdd)
             imageAdd.save()
             messages.success(request, 'Imabge succesfully added')
             return redirect('salon_images', request.user.owner.my_salons.slug)
@@ -773,20 +772,47 @@ def salon_images(request, slug):
     return render(request, 'dashboard/salon_images/index.html', context)
 
 
-def select_card_image(request, slug, id):
+def select_image(request, slug, id):
     salon = get_object_or_404(Salon, slug=slug)
     images = Gallery.objects.filter(salon=salon)
-    current_card_image = images.filter(
-        image_position="Card Image")
-    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++')
-    print(current_card_image)
-    for image in current_card_image:
-        if image.id == id:
-            print("iner________________")
-            image.is_selected = True
-            image.save()
-        else:
-            image.is_selected = False
-            image.save()
+    img = get_object_or_404(Gallery, id=id)
+    if img.image_position == "Card Image":
+        current_card_image = images.filter(
+            image_position="Card Image")
+        for image in current_card_image:
+            if image.id == id:
+                image.is_selected = True
+                image.save()
+                salon.card_img = image.image.url
+                salon.save()
+
+            else:
+                image.is_selected = False
+                image.save()
+
+    elif img.image_position == "Cover Image":
+        cover_image = images.filter(
+            image_position="Cover Image")
+        for image in cover_image:
+            if image.id == id:
+                image.is_selected = True
+                image.save()
+                salon.cover_img = image.image.url
+                salon.save()
+            else:
+                image.is_selected = False
+                image.save()
+    else:
+        cover_image = images.filter(
+            image_position="Prome Image")
+        for image in cover_image:
+            if image.id == id:
+                image.is_selected = True
+                image.save()
+                salon.promo_img = image.url
+                salon.save
+            else:
+                image.is_selected = False
+                image.save()
 
     return redirect('salon_images', request.user.owner.my_salons.slug)

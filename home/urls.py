@@ -72,7 +72,7 @@ urlpatterns = [
          name='salon_images'),
 
     path('dashboard/salon/select/images<slug:slug>/<int:id>',
-         views.select_card_image,
+         views.select_image,
          name='select_images'),
 
     path('upload/', views.upload, name='upload'),

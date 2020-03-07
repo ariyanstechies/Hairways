@@ -418,6 +418,8 @@ def product_delete(request, id):
 
 
 def salon_details(request, name):
+    print(request)
+    print(request.POST)
     # Page we are listening for unique urls visits
     Visit.objects.add_uri_visit(request, request.META["PATH_INFO"], 'home')
     salon = get_object_or_404(Salon, slug=name)

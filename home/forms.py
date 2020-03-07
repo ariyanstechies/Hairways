@@ -110,11 +110,12 @@ class ProductForm(forms.ModelForm):
 class clientAppointment(forms.ModelForm):
     class Meta:
         model = Appointments
-        fields = ['services', 'appointment_date', 'products']
+        fields = ['appointment_date',]
+        labels = {
+            'appointment_date': ''
+        }
         widgets = {
-            'services': forms.CheckboxSelectMultiple,
-            'appointment_date': DatePickerInput(),
-            'products': forms.CheckboxSelectMultiple,
+            'appointment_date': DatePickerInput()
         }
 
 

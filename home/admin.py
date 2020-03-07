@@ -1,5 +1,5 @@
 from django.contrib import admin
-from home.models import Owner, Comments, Services
+from home.models import Owner, Comments, Services, AppointmentPayment
 from home.models import Appointments, Salon, Products, Staff, Client, User, SalonSubscription
 
 admin.site.register(Owner)
@@ -12,3 +12,4 @@ admin.site.register(Staff)
 admin.site.register(Client)
 admin.site.register(User)
 admin.site.register(SalonSubscription)
+admin.site.register(AppointmentPayment)

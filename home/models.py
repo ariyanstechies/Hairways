@@ -72,10 +72,6 @@ class Salon(models.Model):
     cover_img = models.CharField(max_length=250, blank=True, null=True)
     promo_img = models.CharField(max_length=250, blank=True, null=True)
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Salon, self).save(*args, **kwargs)
-
     def pending_appointments(self):
         return self.appointments.filter(status="Pending")
 

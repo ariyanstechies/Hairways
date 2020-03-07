@@ -39,17 +39,17 @@
                 <li><a href="{% url 'client_update'%}">Edit Profile</a></li>
 
               </ul>
-              <p><a href="{% url 'client_dashboard' %}">Appointments</a>|<a href="#">Comments</a>|<a href="#">Reviews</a></p>
-              <h2>Bellow are your Comments </h2>
-              {% for comment in my_comments %}
-                <p><b>Comment Id:{{comment.id}}
-                  | Salon:{{comment.salons.saloonName}}
-                  | Texts:{{comment.reply}}
-                  | Date: {{comment.date_time}}| Status: {{ comment.approved_comment}}
+              <p><a href="{% url 'client_dashboard' %}">Appointments</a>|<a href="#">Reviews</a>|<a href="#">Reviews</a></p>
+              <h2>Bellow are your Reviews </h2>
+              {% for review in my_reviews %}
+                <p><b>Comment Id:{{review.id}}
+                  | Salon:{{review.salons.saloonName}}
+                  | Texts:{{review.reply}}
+                  | Date: {{review.date_time}}| Status: {{ review.approved_review}}
                   </b>
                 </p>
                 {% empty %}
-              <li>No comments yet.</li>
+              <li>No reviews yet.</li>
               {% endfor %}
 
 

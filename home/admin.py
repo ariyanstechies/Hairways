@@ -1,9 +1,9 @@
 from django.contrib import admin
-from home.models import Owner, Comments, Services
+from home.models import Owner, Reviews, Services
 from home.models import Appointments, Salon, Products, Staff, Client, User, SalonSubscription
 
 admin.site.register(Owner)
-admin.site.register(Comments)
+admin.site.register(Reviews)
 admin.site.register(Services)
 admin.site.register(Appointments)
 admin.site.register(Salon)

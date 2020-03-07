@@ -55,10 +55,37 @@ $(document).ready(function ($) {
       animateOut: 'fadeOut',
       animateIn: 'fadeIn',
     });
+    $('.salon-details-slider').owlCarousel({
+      loop: true,
+      margin: 0,
+      nav: true,
+      autoplay: true,
+      stagePadding: 0,
+      nav: true,
+      dots: false,
+      navText: ['<i class="ti-arrow-left">', '<i class="ti-arrow-right">'],
+      animateOut: 'fadeOut',
+      animateIn: 'fadeIn',
+      responsive: {
+        0: {
+          items: 1,
+          dots: true,
+          nav: false
+        },
+        600: {
+          items: 2,
+          dots: true,
+          nav: false
+        },
+        1000: {
+          items: 2
+        }
+      }
+    });
 
   };
   carousel();
-  
+
   // navigation
   var OnePageNav = function () {
     $(".smoothscroll[href^='#'], #main-nav ul li a[href^='#']").on('click', function (e) {
@@ -82,8 +109,17 @@ $(document).ready(function ($) {
     })
   };
   OnePageNav();
+  // Salon Details Page
+  const toggleReviewForm = function () {
+    $(".show-review-form").click(function () {
+      $(".review-form").slideToggle(300);
+    })
+  }
+  toggleReviewForm();
 
 });
+
+
 temporary = {};
 jQuery('.custom-select').children().each(function () {
   var txt = jQuery(this).attr('value');

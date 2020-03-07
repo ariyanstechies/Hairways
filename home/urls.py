@@ -5,7 +5,7 @@ from home import views, owners
 from home.owners import AppointmentUpdate, Appointment2CreateView
 from home.clients import ClientUpdate, AppointmentCreateView
 from home.clients import AppointmentListView, MiniDashboard
-from home.clients import CommentsListView, MyAppointments, MyComments
+from home.clients import ReviewsListView, MyAppointments, MyReviews
 
 urlpatterns = [
     path('home', views.index, name='home'),
@@ -76,11 +76,11 @@ urlpatterns = [
          AppointmentListView.as_view(),
          name='client_dashboard'),
     path('client/dashboard2',
-         CommentsListView.as_view(),
+         ReviewsListView.as_view(),
          name='client_dashboard2'),
     path('user/profile/', MiniDashboard.as_view(), name='mini_dashboard'),
     path('my/appointments', MyAppointments.as_view(), name='my_appointments'),
-    path('my/comments', MyComments.as_view(), name='my_comments'),
+    path('my/reviews', MyReviews.as_view(), name='my_reviews'),
     #     end of client dashboard
 ]
 

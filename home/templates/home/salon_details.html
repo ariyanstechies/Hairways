@@ -1,81 +1,71 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load crispy_forms_tags %}
 {% block content %}
-{% load bootstrap4 %} {# import bootstrap4/bootstrap3 #}
+{% load bootstrap4 %}
+{# import bootstrap4/bootstrap3 #}
 {% bootstrap_css %} {# Embed Bootstrap CSS #}
 {% bootstrap_javascript jquery='full' %} {# Embed Bootstrap JS+jQuery #}
 {{ form.media }} {# Adds date-picker required JS and CSS #}
 
 <div>
   <div class="container">
-
     {% if messages %}
     {% for message in messages %}
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <strong class="text-success"></strong> {{ message }}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <button type="button" class="close" data-dismiss="alert"
+        aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     {% endfor %}
     {% endif %}
   </div>
-
-  <!-- Image  -->
-  <div class="container card" style="background-image: url({% static 'images/salonss.jpg'%}); background-size: cover;  
-    background-position: center;  height: 500px; background-repeat: no-repeat;margin-top:10px">
-
-    <div class="row" style="margin-top: 0px;">
-
-      <div class="col-sm-4 card" style="background-color: rgba(125, 173, 173, 0.644);">
-
-        <div class="headshot headshot-3">
-          <h3 class="text-center " style="color:black;margin-bottom:0px;">
-            {{salon.name}} <br><small>
-              <span class="float-rigt"><i class="text-warning fa fa-star"></i></span>
-              <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
-              <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
-              <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-              <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-            </small>
-          </h3>
-          <b>City:
-            {{salon.town}}</b>
-        </div>
-
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs flex-column" role="tablist">
-
-          <li class="nav-item">
-            <a class="nav-link text-info" data-toggle="tab" href="#home"><b></b>
-              <small style="color: black;">{{salon.location_description}}</small></b></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " style="color: black;" data-toggle="tab" href="#menu1"><b></b>
-              <i>{{salon.description}}</i></b></a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link text-info" data-toggle="tab" href="#menu3"><b>Comments and
-                Reviews</b></a>
-          </li>
-        </ul>
-        <h4 class="" style="color: rgb(2, 6, 29);"> Follow us: <i class="social fa fa-instagram"></i>
-          |
-          <i class="social fa fa-facebook"></i> |
-          <i class="social fa fa-twitter"></i></h4>
+  <section>
+    <div class="owl-carousel salon-details-slider owl-theme">
+      <div class="item">
+        <img src="{% static 'images/'%}1.jpg" alt="{{ salon.name }}">
       </div>
-      <div class="col"></div>
+      <div class="item">
+        <img src="{% static 'images/'%}2.jpg" alt="{{ salon.name }}">
+      </div>
+      <div class="item">
+        <img src="{% static 'images/'%}3.jpg" alt="{{ salon.name }}">
+      </div>
+      <div class="item">
+        <img src="{% static 'images/'%}4.jpg" alt="{{ salon.name }}">
+      </div>
     </div>
-
-  </div>
-
-
-  <!-- end of Image -->
-  <div class="container">
-
-  </div>
+  </section>
+  <section>
+    <div class="container mt-1">
+      <div class="row">
+        <div class="col-sm-8">
+          <h3>{{ salon.name }}</h3>
+          <p>{{ salon.location_description }}</p>
+        </div>
+        <div class="col-sm-4">
+          <div class="review-card-summary row">
+            <div class="review-stars-average col-3 text-danger">
+              {{ average_rating }}
+            </div>
+            <div class="review-stars-wrapper col-9">
+              <div class="d-inline-flex">
+                <div class="rating_stars_container d-flex">
+                  <i class="ti-star icon-large"></i>
+                  <i class="ti-star icon-large"></i>
+                  <i class="ti-star icon-large"></i>
+                  <i class="ti-star icon-large"></i>
+                  <i class="ti-star icon-large"></i>
+                </div>
+              </div>
+              <p class="text-muted my-0">{{salon.reviews.count}} Ratings</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- body  -->
   <div class="container">
@@ -83,300 +73,238 @@
       <div class="services-products">
 
         <ul class="nav nav-justified services-products-toggler mt-3 mb-2">
-          <li class="nav-item"><a data-toggle="tab" href="#services" class="active nav-link">Services</a></li>
-          <li class="nav-item"><a data-toggle="tab" href="#products" class="nav-link">Products</a></li>
+          <li class="nav-item"><a data-toggle="tab" href="#services"
+              class="active nav-link">Services</a></li>
+          <li class="nav-item"><a data-toggle="tab" href="#products"
+              class="nav-link">Products</a></li>
         </ul>
 
         <!-- Sticky filter -->
         {% if services or products %}
-        <div class="container-fluid card sticky-top" style="background-color:white">
+        <div class="container-fluid card sticky-top"
+          style="background-color:white">
           <div class="row align-items-center pt-3 justify-content-center">
             <div class="col-3 col-sm-2">
               <div class="filters">
-                <h5><i class="ti-bolt text-teal"></i><span class="d-none d-sm-inline"> Popular</span>
+                <h5><i class="ti-bolt text-teal"></i><span class="d-none
+                    d-sm-inline"> Popular</span>
                 </h5>
               </div>
             </div>
             <div class="col-3 col-sm-2">
               <div class="filters">
-                <h5><i class="ti-location-pin text-teal"></i><span class="d-none d-sm-inline"> Near me</span>
+                <h5><i class="ti-location-pin text-teal"></i><span class="d-none
+                    d-sm-inline"> Near me</span>
                 </h5>
               </div>
             </div>
             <div class="col-3 col-sm-2">
               <div class="filters">
-                <h5><i class="ti-thumb-up text-teal"></i><span class="d-none d-sm-inline"> Recommended</span></h4>
-                </h5>
-              </div>
-            </div>
-            <div class="col-3 col-sm-2">
-              <div class="filters">
-                <h5> <i class="ti-gift text-teal"></i> <span class="d-none d-sm-inline">Offers</span>
-                </h5>
-              </div>
+                <h5><i class="ti-thumb-up text-teal"></i><span class="d-none
+                    d-sm-inline"> Recommended</span></h4>
+              </h5>
             </div>
           </div>
-        </div>
-        {% endif %}
-
-
-        <div class="tab-content mt-3">
-          <div class="tab-pane active" id="services" role="tabpanel">
-            <div class="card border-0">
-              {% for service in services %}
-              <div class="row">
-                <div class="col-8">
-                  <h5 class="mb-0">{{service.name}}</h5>
-                  <p class="text-muted">{{service.duration}} Min</p>
-                </div>
-                <div class="col-4">
-                  <p class="mb-0">Ksh <b>{{service.cost}}</b></p>
-                  <button class="btn not-clicked mr-0 py-0 mt-2" id="{{service.id}}">Add</button>
-                </div>
-              </div>
-              <hr class="mt-1 mb-3">
-              {% empty %}
-              <div class="container my-3 text-muted text-center">
-                <p>We Have no services at the moment. Please check again later</p>
-              </div>
-              {% endfor %}
+          <div class="col-3 col-sm-2">
+            <div class="filters">
+              <h5> <i class="ti-gift text-teal"></i> <span class="d-none
+                  d-sm-inline">Offers</span>
+              </h5>
             </div>
-
-          </div>
-          <div class="tab-pane" id="products" role="tabpanel">
-            <div class="card border-0">
-              {% for product in products %}
-              <div class="row">
-                <div class="col-8">
-                  <h5 class="mb-0">{{product.name}}</h5>
-                  <p class="text-muted">{{product.duration}} Min</p>
-                </div>
-                <div class="col-4">
-                  <p class="mb-0 font-weight-bold">Ksh {{product.price}}</p>
-                  <button class="btn btn-outline-success py-0">add</button>
-                </div>
-              </div>
-              <hr class="my-1">
-              {% empty %}
-              <div class="container my-3 text-muted text-center">
-                <p>We Have no products at the moment. Please check again later</p>
-              </div>
-              {% endfor %}
-            </div>
-
           </div>
         </div>
       </div>
-
-      <div class="row">
-        <!--For products  -->
-        <div class="card col-sm-12">
-          <div class="card-body">
-            <h3 class="card-title">Reviews and comments</h3>
+      {% endif %}
 
 
-            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
-              integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
-              crossorigin="anonymous">
-
-            <section>
-              <div class="container-fliud">
-                <div class="row ">
-                  <div class="col-md-3 border  text-center">
-                    <div class="card-body">
-                      <h1 class="text-danger">{{average_rating}}</h1>
-                      <div class="sub-row text-warning">
-                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                          class="fa fa-star"></i><i class="fa fa-star-half-o"></i>
-                      </div>
-                      <p>{{salon.comments.count}} Ratings</p>
-                    </div>
-                  </div>
-                  <div class="col-md-5 border">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-md-3">
-                          <h6>5 Stars</h6>
-                        </div>
-                        <div class="col-md-9 pt-1">
-                          <div class="progress">
-                            <div style="width: {{ps5}}%;" class="progress-bar text-dark text-bold  bg-success">
-                              {{stars_5}}</div>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="row">
-                        <div class="col-md-3">
-                          <h6>4 Stars</h6>
-                        </div>
-                        <div class="col-md-9 pt-1">
-                          <div class="progress">
-                            <div style="width: {{ps4}}%;" class="progress-bar text-dark text-bold bg-success">
-                              {{stars_4}}</div>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="row">
-                        <div class="col-md-3">
-                          <h6>3 Stars</h6>
-                        </div>
-                        <div class="col-md-9 pt-1">
-                          <div class="progress">
-                            <div style="width: {{ps3}}%;" class="progress-bar text-dark text-bold bg-warning">
-                              {{stars_3}}</div>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="row">
-                        <div class="col-md-3">
-                          <h6>2 Stars</h6>
-                        </div>
-                        <div class="col-md-9 pt-1">
-                          <div class="progress">
-                            <div style="width: {{ps2}}%;" class="progress-bar text-dark text-bold bg-danger">
-                              {{stars_2}}
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="row">
-                        <div class="col-md-3">
-                          <h6>1 Star</h6>
-                        </div>
-                        <div class="col-md-9 pt-1">
-                          <div class="progress">
-                            <div class="progress-bar  text-dark text-bold bg-danger" style="width: {{ps1}}%;">
-                              {{stars_1}}
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 border text-center">
-                    <div class="card-body">
-                      <i class="fa fa-pencil-square fa-3x text-success"></i>
-                      <a href="#comments">
-                        <h4>Write Your Views</h4>
-                      </a>
-                      <small>share your experience/views about this Salon</small>
-                    </div>
-                  </div>
-                </div>
-
+      <div class="tab-content mt-3">
+        <div class="tab-pane active" id="services" role="tabpanel">
+          <div class="card border-0">
+            {% for service in services %}
+            <div class="row">
+              <div class="col-8">
+                <h5 class="mb-0">{{service.name}}</h5>
+                <p class="text-muted">{{service.duration}} Min</p>
               </div>
-            </section>
-            <br>
-
-            <!-- comments  -->
-            <section style="margin-top: 24px;">
-
-              <!-- tryal phase -->
-              <div class="row">
-                {% if reviews %}
-
-                {% for review in reviews %}
-                <div class="col-6">
-                  <img src="https://image.ibb.co/jw55Ex/def_face.jpg" width="90" class="img img-rounded img-fluid" />
-
-                </div>
-                <div class="col-6">
-                  <p>
-                    <a class="float-left"
-                      href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>{{ review.author }}
-                        | </strong></a>
-
-                    {% if review.stars == '3 Stars' %}
-                    <span class="float-rigt"><i class="text-warning fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                    {% endif %}
-                    {% if review.stars == '4 Stars' %}
-                    <span class="float-rigt"><i class="text-success fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                    {% endif %}
-                    {% if review.stars == '2 Stars' %}
-                    <span class="float-rigt"><i class="text-danger fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-danger fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                    {% endif %}
-                    {% if review.stars == '1 Star' %}
-                    <span class="float-rigt"><i class="text-danger fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-dangr fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                    {% endif %}
-
-                    {% if review.stars == '5 Stars' %}
-                    <span class="float-rigt"><i class="text-success fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                    <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                    {% endif %}
-
-
-                  </p>
-                  <div class="clearfix"></div>
-                  <p>{{ review.comment }}</p>
-
-                  <small>
-                    <p class="text-info ">{{ review.created_date }}</p>
-                  </small>
-                </div>
-
-                <hr>
-                {% endfor %}
-                {% else %}
-                <p class="text-center text-muted">No Reviews yet!</p>
-                {% endif %}
+              <div class="col-4">
+                <p class="mb-0">Ksh <b>{{service.cost}}</b></p>
+                <button class="btn not-clicked mr-0 py-0 mt-2"
+                  id="{{service.id}}">Add</button>
               </div>
+            </div>
+            <hr class="mt-1 mb-3">
+            {% empty %}
+            <div class="container my-3 text-muted text-center">
+              <p>We Have no services at the moment. Please check again later</p>
+            </div>
+            {% endfor %}
+          </div>
 
-              <!-- end of trial phase  -->
+        </div>
+        <div class="tab-pane" id="products" role="tabpanel">
+          <div class="card border-0">
+            {% for product in products %}
+            <div class="row">
+              <div class="col-8">
+                <h5 class="mb-0">{{product.name}}</h5>
+                <p class="text-muted">{{product.duration}} Min</p>
+              </div>
+              <div class="col-4">
+                <p class="mb-0 font-weight-bold">Ksh {{product.price}}</p>
+                <button class="btn btn-outline-success py-0">add</button>
+              </div>
+            </div>
+            <hr class="my-1">
+            {% empty %}
+            <div class="container my-3 text-muted text-center">
+              <p>We Have no products at the moment. Please check again later</p>
+            </div>
+            {% endfor %}
+          </div>
 
-            </section>
-            <div id="comments">
-
-
-              <!-- end comments -->
-              <h5>Share your experience/views about this Salon</h5>
-              <form method="POST" class="comment-form">
-                {% csrf_token %}
-                {{ comment_form | crispy }}
-                {% if request.user.is_authenticated %}
-                <button type="submit" class="save btn btn-success">Save</button>
-                {% else %}
-                <p>You must <a href="{% url 'login'%}" style="font-size: 34px;">Login</a> to submit a
-                  review</p>
-                {%endif%}
-              </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<section>
+  <div class="container">
+    <h3 class="mb-3 review-title">Reviews Zone</h3>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="review-card-summary d-flex">
+          <div class="review-stars-average text-danger">
+            {{ average_rating }}
+          </div>
+          <div class="review-stars-wrapper d-flex">
+            <div class="d-inline-flex">
+              <div class="rating_stars_container d-flex">
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+              </div>
+            </div>
+            <p class="text-muted mt-3">{{salon.reviews.count}} Ratings</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="rate-criteria-item">
+          <p class="rate-criteria-name">Cleanliness</p>
+          <div class="d-inline-flex">
+            <div class="rating_stars_container d-flex">
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
             </div>
           </div>
         </div>
-
+        <div class="rate-criteria-item">
+          <p class="rate-criteria-name">Ambience</p>
+          <div class="d-inline-flex">
+            <div class="rating_stars_container d-flex">
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
-
-
-  </div>
+      <div class="col-sm-4">
+        <div class="rate-criteria-item">
+          <p class="rate-criteria-name">Staff</p>
+          <div class="d-inline-flex">
+            <div class="rating_stars_container d-flex">
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 offset-md-0 col-sm-8 offset-sm-4">
+        <div class="review-filters">
+          <h3 class="review-filter-title mb-3">Filter Reviews</h3>
+          <div class="review-filter-ratingField d-flex mb-2 mt-1">
+            Rating
+            <div class="review-filter-rating">
+              Filter by Rating
+              <i class="ti-angle-down"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-list col-xs-12 col-sm-8 offset-sm-4 offset-md-0">
+        <div class="col-sm-12 mb-3 px-0">
+          <div class="py-3 d-flex show-review-form">
+            <h4 class="write-review-title">Write your review</h4>
+            <i class="ti-pencil-alt text-success ml-auto"></i>
+          </div>
+          <form method="post" class="review-form">
+            {% csrf_token %}
+            {% include 'utils/star-widget-field.html' with category='ambience'%}
+            {% include 'utils/star-widget-field.html' with
+            category='cleanliness'%}
+            {% include 'utils/star-widget-field.html' with category='staff'%}
+            <div class="review-form">
+              {% bootstrap_form review_form %}
+            </div>
+            {% if request.user.is_authenticated %}
+            <button type="submit" class="btn btn-success">Submit</button>
+            {% else %}
+            <p>You must <a href="{% url 'login'%}" class="btn-link text-danger">Login</a>
+              to submit a review.</p>
+            {% endif %}
+          </form>
+        </div>
+        {% for review in reviews %}
+        <div class="review-item col-sm-12">
+          <div class="review-item-stars">
+            <div class="d-inline-flex">
+              <div class="rating_stars_container d-flex">
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+              </div>
+            </div>
+          </div>
+          <div class="review-item-content">
+            {{ review.message }}
+          </div>
+          <div class="review-item-meta text-muted d-flex">
+            <span class="review-item-author">{{ review.author }}</span>
+            <i class="ti-check-box text-success"></i>
+            <span class="review-item-seperator text-dark">•</span>
+            {{ review.created_date }}
+            <a href="/" class="btn-link text-danger ml-auto">Report</a>
+          </div>
+        </div>
+        {% empty %}
+        <div class="text-center col-sm-12">
+          <p class="text-capitalize text-muted">No Reviews yet!</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
   <section>
     <div title="closed" class="cart">
       <div class="row cart-buttons-container mx-0">
         <div class="col-4 cart-amount container text-white">
-          <p class="mt-2 ml-2"><b class="cart-items-counter" id="total_items_booked">0</b></p>
+          <p class="mt-2 ml-2"><b class="cart-items-counter"
+              id="total_items_booked">0</b></p>
         </div>
         <div class="col-4 cart-icon-container">
           <div class="icon-container text-white col-4 rounded-circle">
@@ -388,7 +316,8 @@
         </div>
       </div>
       <div class="container display-selected-items pt-4 cart-items-container">
-          <p class="text-center text-muted">You have not selected any services or products.</p>
+        <p class="text-center text-muted">You have not selected any services or
+          products.</p>
       </div>
     </div>
   </section>
@@ -419,11 +348,11 @@
     } else {
       // Removes item from cart when remove button is clicked
       var selected_service = parseInt(event.target.id)
-      if (services_selected.includes(selected_service)){
+      if (services_selected.includes(selected_service)) {
         var index = services_selected.indexOf(selected_service);
         if (index !== -1) services_selected.splice(index, 1);
       }
-  
+
       el.text("Add");
       $(this).addClass('not-clicked').removeClass('clicked');
       if (items_booked != 0) {
@@ -448,16 +377,6 @@
     } else {
       $('.cart').addClass('hide-cart-items').removeClass('show-cart-items');
       $('.cart').prop('title', 'closed');
-    }
-
-    // Populate cart-items with selected services
-    console.log(services_selected)
-    if (services_selected.length >0 ){
-      // $('.display-selected-items').html('')
-      for (var i = 0; i < services_selected.length; i++){
-        data = string{{services.1.name}})
-      $('.display-selected-items').prepend("<div class='row my-2'><div class='col-10'><h6 class='mb-0'>{{services." + i +".name}}</h6><p class='text-muted'>Ksh {{services." + i +".cost}}</p></div><div class='col-2'><button class='btn btn-outline-success py-0'>add</button></div></div>")
-      }
     }
   });
 

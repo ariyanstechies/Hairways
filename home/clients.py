@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from home.decorators import client_required
 from home.forms import ClientSignUpForm
-from home.models import User, Client, Appointments, Comments
+from home.models import User, Client, Appointments, Reviews
 from django.views import generic
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
@@ -72,13 +72,13 @@ class AppointmentCreateView(CreateView):
 
 
 @method_decorator([login_required, client_required], name='dispatch')
-class CommentsListView(ListView):
-    model = Comments
-    context_object_name = 'my_comments'
+class ReviewsListView(ListView):
+    model = Reviews
+    context_object_name = 'my_reviews'
     template_name = 'clients/dashboard2.html'
 
     def get_queryset(self):
-        queryset = self.request.user.my_comments \
+        queryset = self.request.user.my_reviews \
             .select_related('author')
         return queryset
 
@@ -103,12 +103,12 @@ class MyAppointments(ListView):
 
 
 @method_decorator([login_required, client_required], name='dispatch')
-class MyComments(ListView):
-    model = Comments
-    context_object_name = 'my_comments'
-    template_name = 'clients/client_comments.html'
+class MyReviews(ListView):
+    model = Reviews
+    context_object_name = 'my_reviews'
+    template_name = 'clients/client_reviews.html'
 
     def get_queryset(self):
-        queryset = self.request.user.my_comments \
+        queryset = self.request.user.my_reviews \
             .select_related('author')
         return queryset

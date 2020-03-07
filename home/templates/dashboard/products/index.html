@@ -20,16 +20,14 @@
       </div>
       <div class="page-title-actions">
         <div class="d-inline-block dropdown">
-          <button type="button" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false"
+          <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="btn-shadow dropdown-toggle btn btn-info">
             <span class="btn-icon-wrapper pr-2 opacity-7">
               <i class="ti-time fa-w-20"></i>
             </span>
             Buttons
           </button>
-          <div tabindex="-1" role="menu" aria-hidden="true"
-            class="dropdown-menu dropdown-menu-right">
+          <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a href="javascript:void(0);" class="nav-link">
@@ -91,13 +89,13 @@
             {% for product in products %}
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
+              <td>{{product.product_identifier}}</td>
               <td>{{ product.name }}</td>
               <td>{{ product.brand }}</td>
               <td>{{ product.price }}</td>
               <td><a href="{% url 'product_edit' id=product.id %}">
                   <i class="ti-pencil"></i></a></td>
-              <td><a href="{% url 'product_delete' id=product.id %}"><i
-                    class="ti-trash"></i></a></td>
+              <td><a href="{% url 'product_delete' id=product.id %}"><i class="ti-trash"></i></a></td>
             </tr>
             {% endfor %}
 

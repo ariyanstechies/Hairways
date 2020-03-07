@@ -23,7 +23,7 @@
     </div>
 
     <!-- Image  -->
-    <div class="container card" style="background-image: url({% static 'css/images/salonss.jpg'%}); background-size: cover;  
+    <div class="container card" style="background-image: url({{salon.cover_img}}); background-size: cover;  
     background-position: center;  height: 500px; background-repeat: no-repeat;margin-top:10px">
 
         <div class="row" style="margin-top: 0px;">
@@ -78,7 +78,7 @@
     </div>
 
     <!-- body  -->
-    <div class="container" style="background-image: url({% static 'css/images/isolated.svg'%});">
+    <div class="container" style="background-image: url({% static 'images/isolated.svg'%});">
         <section>
 
             <div class="row">
@@ -308,7 +308,177 @@
                             </div>
                         </section>
                         <br>
+                        <section>
+                            <div class="conainer">
+                                <!-- Comments Principal -->
+                                <div class="comments-container">
 
+                                    <ul id="comments-list" class="comments-list">
+                                        {% for review in reviews %}
+                                        <li>
+                                            <div class="comment-main-level">
+                                                <!-- Avatar -->
+                                                <div class="comment-avatar"><img
+                                                        src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
+                                                        alt=""></div>
+                                                <!-- Comment list -->
+                                                <div class="comment-box">
+                                                    <div class="comment-head">
+                                                        <h6 class="comment-name b-author">
+                                                            {% if review.stars == '3 Stars' %}
+                                                            <span class="float-rigt"><i
+                                                                    class="text-warning fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-warning fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-warning fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-warnin fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-warnin fa fa-star"></i></span>
+                                                            {% endif %}
+                                                            {% if review.stars == '4 Stars' %}
+                                                            <span class="float-rigt"><i
+                                                                    class="text-success fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-success fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-success fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-success fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-warnin fa fa-star"></i></span>
+                                                            {% endif %}
+                                                            {% if review.stars == '2 Stars' %}
+                                                            <span class="float-rigt"><i
+                                                                    class="text-danger fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-danger fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-succes fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-succes fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-warnin fa fa-star"></i></span>
+                                                            {% endif %}
+                                                            {% if review.stars == '1 Star' %}
+                                                            <span class="float-rigt"><i
+                                                                    class="text-danger fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-dangr fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-succes fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-succes fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-warnin fa fa-star"></i></span>
+                                                            {% endif %}
+
+                                                            {% if review.stars == '5 Stars' %}
+                                                            <span class="float-rigt"><i
+                                                                    class="text-success fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-success fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-success fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-success fa fa-star"></i></span>
+                                                            <span class="float-rght"><i
+                                                                    class="text-success fa fa-star"></i></span>
+                                                            {% endif %}
+
+                                                            <a href="http://creaticode.com/blog"></a>
+                                                            ({{ review.author }})</a>
+
+                                                        </h6>
+
+                                                        <i class="fa fa-reply"></i>
+
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        {{ review.comment }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Respuestas de los comentarios -->
+                                            <ul class="comments-list reply-list">
+                                                <li>
+                                                    <!-- Avatar -->
+                                                    <div class="comment-avatar"><img
+                                                            src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
+                                                            alt=""></div>
+                                                    <!-- Contenedor del Comentario -->
+                                                    <div class="comment-box">
+                                                        <div class="comment-head">
+                                                            <h6 class="comment-name"><a
+                                                                    href="http://creaticode.com/blog">Lorena Rojero</a>
+                                                            </h6>
+
+                                                            <i class="fa fa-reply"></i>
+                                                            <i class="fa fa-heart"></i>
+                                                        </div>
+                                                        <div class="comment-content">
+                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                            Velit omnis animi et iure
+                                                            laudantium vitae, praesentium optio, sapiente distinctio
+                                                            illo?
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <!-- Avatar -->
+                                                    <div class="comment-avatar"><img
+                                                            src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
+                                                            alt=""></div>
+                                                    <!-- Contenedor del Comentario -->
+                                                    <div class="comment-box">
+                                                        <div class="comment-head">
+                                                            <h6 class="comment-name by-author"><a
+                                                                    href="http://creaticode.com/blog">Agustin Ortiz</a>
+                                                            </h6>
+                                                            <span>hace 10 minutos</span>
+                                                            <i class="fa fa-reply"></i>
+                                                            <i class="fa fa-heart"></i>
+                                                        </div>
+                                                        <div class="comment-content">
+                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                            Velit omnis animi et iure
+                                                            laudantium vitae, praesentium optio, sapiente distinctio
+                                                            illo?
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        {% endfor %}
+                                        <li>
+                                            <div class="comment-main-level">
+                                                <!-- Avatar -->
+                                                <div class="comment-avatar"><img
+                                                        src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
+                                                        alt=""></div>
+                                                <!-- Contenedor del Comentario -->
+                                                <div class="comment-box">
+                                                    <div class="comment-head">
+                                                        <h6 class="comment-name"><a
+                                                                href="http://creaticode.com/blog">Lorena Rojero</a></h6>
+                                                        <span>hace 10 minutos</span>
+                                                        <i class="fa fa-reply"></i>
+                                                        <i class="fa fa-heart"></i>
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit
+                                                        omnis animi et iure laudantium
+                                                        vitae, praesentium optio, sapiente distinctio illo?
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
                         <!-- comments  -->
                         <section style="margin-top: 24px;">
 
@@ -325,8 +495,8 @@
                                 <div class="col-6">
                                     <p>
                                         <a class="float-left"
-                                            href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>{{ review.author }}
-                                                | </strong></a>
+                                            href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>({{ review.author }})
+                                            </strong></a>
 
                                         {% if review.stars == '3 Stars' %}
                                         <span class="float-rigt"><i class="text-warning fa fa-star"></i></span>
@@ -385,9 +555,8 @@
                             <!-- end of trial phase  -->
 
                         </section>
+
                         <div id="comments">
-
-
                             <!-- end comments -->
                             <h5>Share your experience/views about this Salon</h5>
                             <form method="POST" class="comment-form">

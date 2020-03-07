@@ -202,6 +202,20 @@ class Appointments(models.Model):
         return reverse('appointment_detail', kwargs={'pk': self.pk})
 
 
+class AppointmentPayment(models.Model):
+    PAYMENT_METHODS = (('M-pesa', 'M-pesa'), ('Cash', 'Cash'))
+    appointment = models.ForeignKey(Appointments,
+                                    on_delete=models.CASCADE,
+                                    related_name='appointment_payments')
+    total_amount = models.IntegerField()
+    payment_method = models.CharField(max_length=50,
+                                      choices=PAYMENT_METHODS,
+                                      default='Pending')
+
+    def __str__(self):
+        return str(self.appointment)
+
+
 class Comments(models.Model):
     STAR_CHOICES = (
         ('1 Star', '1 star'),

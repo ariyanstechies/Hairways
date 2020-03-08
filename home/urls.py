@@ -74,6 +74,9 @@ urlpatterns = [
     path('dashboard/salon/select/images<slug:slug>/<int:id>',
          views.select_image,
          name='select_images'),
+    path('user/profile', views.user_profile, name='user_profile'),
+
+
 
     path('upload/', views.upload, name='upload'),
     path('about/client/<int:pk>/',

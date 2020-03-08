@@ -1,0 +1,56 @@
+{% extends 'shared/dashboard-base.html' %}
+{% block content %}
+{% load bootstrap4 %}
+
+<br>
+<div class="row">
+    <div class="col-md-12 col-lg-4">
+        <div class="mb-3 card">
+            <div class="card-header-tab card-header-tab-animation card-header">
+                <div class="card-header-title">
+                    <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
+                    Picture
+                </div>
+
+            </div>
+            <div class="card-body">
+                <img src="{{request.user.owner.my_salons.cover_img}}" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-8">
+
+        <div class="mb-3 card">
+            <div class="card-header-tab card-header">
+                <div class="card-header-title">
+                    <i class="header-icon lnr-rocket icon-gradient bg-tempting-azure"> </i>
+                    Personal Information
+
+                </div>
+            </div>
+            <div class="card-body">
+                <form method="POST" class="post-form">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <div class="button-row d-flex mt-4">
+                        <button type="submit" class="save btn btn-success ml-auto text-uppercase">Updateg</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="mb-3 card">
+            <div class="card-header-tab card-header">
+                <div class="card-header-title">
+                    <i class="header-icon lnr-rocket icon-gradient bg-tempting-azure"> </i>
+                    Private information
+                </div>
+                <div class="btn-actions-pane-right">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

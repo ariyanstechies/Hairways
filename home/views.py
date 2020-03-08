@@ -816,3 +816,17 @@ def select_image(request, slug, id):
                 image.save()
 
     return redirect('salon_images', request.user.owner.my_salons.slug)
+
+
+def user_profile(request):
+    owner_to_update = get_object_or_404(Owner, pk=request.user.id)
+    if request.method == "POST":
+        form = ProfileUpdateForm(request.POST, instance=owner_to_update)
+        if form.is_valid():
+            form.save()
+            return redirect('user_profile')
+    else:
+        form = ProfileUpdateForm(instance=owner_to_update)
+    context = {'form': form}
+
+    return render(request, 'dashboard/user_profile/index.html', context)

@@ -143,3 +143,9 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Gallery
         fields = ('image', 'image_position')
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Owner
+        fields = ('ownerName', 'email', 'phone', 'location')

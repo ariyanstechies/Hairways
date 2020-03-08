@@ -20,7 +20,7 @@
               <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">Update info</button>
               <button class="multisteps-form__progress-btn" {% if request.user.OwnerName%}{%else%}disabled{%endif%} type="button" title="Address">Add salon</button>
               <button class="multisteps-form__progress-btn" {% if request.user.my_salons%}{%else%}disabled{%endif%} type="button" title="Order Info">Payment</button>
-              <button class="multisteps-form__progress-btn" {% if request.user.my_salons.is_paid%}{%else%}disabled{%endif%} type="button" title="Comments">Comments</button>
+              <button class="multisteps-form__progress-btn" {% if request.user.my_salons.is_paid%}{%else%}disabled{%endif%} type="button" title="Reviews">Reviews</button>
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@
               </div>
               <!--single form panel-->
               <div class="multisteps-form__panel shadow p-4 rounded bg-white" id="4" data-animation="slideHorz">
-                <h3 class="multisteps-form__title">Additional Comments</h3>
+                <h3 class="multisteps-form__title">Additional Reviews</h3>
                 <div class="multisteps-form__content">
                   
                   <h2>Congratulation You have successfully created your account</h2>

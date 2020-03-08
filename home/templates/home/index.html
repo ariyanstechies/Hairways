@@ -63,7 +63,7 @@
 <section>
   <div class="container">
     <!-- SALONS CONTAINER -->
-    <div class="row">      
+    <div class="row">
         <div class="card-deck">
         {% for salon in salons %}
         {% get_visits salon.slug as visits %}
@@ -87,7 +87,7 @@
                 <li class="list-inline-item">
                   <p class="text-muted mb-2">
                     {{ salon.rating }}
-                    ({{ salon.approved_comments.count }})
+                    ({{ salon.approved_reviews.count }})
                   </p>
                 </li>
               </ul>
@@ -102,13 +102,13 @@
                   <i class="metismenu-icon ml-2 ti-eye text-success"></i>
                   {% if visits %}{{ visits }}{% else %}0{% endif %}
                 </li>
-                <li data-toggle="tooltip" data-placement="top" 
+                <li data-toggle="tooltip" data-placement="top"
                   title="{{salon.town}}" class="list-inline-item mr-0">
                   <i class="metismenu-icon ml-2 ti-location-pin text-success"></i>
                   {{ salon.town | truncatewords:2 }}
                 </li>
               </div>
-              <p data-toggle="tooltip" data-placement="top" 
+              <p data-toggle="tooltip" data-placement="top"
                 title="{{salon.description}}" class="card-text">
                 {{ salon.description|truncatewords:10 }}
               </p>
@@ -128,7 +128,7 @@
       <div class="col-sm-12">
         <ul class="pagination justify-content-center">
           {% if salons.has_previous %}
-          <li class="page-item"><a class="page-link" 
+          <li class="page-item"><a class="page-link"
               href="?page={{ salons.previous_page_number }}">
               <i class="ti-arrow-left"></i>Previous</a>
             </li>
@@ -139,11 +139,11 @@
           {% endif %}
           {% for i in salons.paginator.page_range %}
           {% if salons.number == i %}
-          <li class="page-item active"><a class="page-link" 
+          <li class="page-item active"><a class="page-link"
               href="?page={{ i }}">{{ i }}<span class="sr-only">(current)</span></a>
             </li>
           {% else %}
-          <li class="page-item"><a class="page-link" 
+          <li class="page-item"><a class="page-link"
               href="?page={{ i }}">{{i}}</a>
           </li>
           {% endif %}

@@ -401,11 +401,63 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 
 /*==================  Moreinfo/show page  ==================*/
 
-.details_page .carousel-item img {
-	background-size: cover;
+.salon-details-slider .item img {
+	display: block;
 	width: 100%;
-	height: 100%;
-	min-height: max-content;
+	height: auto;
+}
+
+.salon-details-slider .owl-nav div {
+	background: transparent;
+	height: 40px;
+	left: 0px;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	-webkit-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+	width: 40px;
+	background-color: transparent;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	font-size: 12px;
+	line-height: 40px;
+	background: teal;
+	color: #ffffff !important;
+}
+.salon-details-slider .owl-dots {
+	transform: translateY(-100%);
+	margin-top: 0 !important;
+}
+
+.salon-details-slider .owl-nav div.owl-next {
+	left: auto;
+	right: 0px;
+}
+
+.salon-details-slider .owl-nav div.owl-next i {
+	position: relative;
+	right: 0;
+}
+
+.salon-details-slider .owl-nav div.owl-prev i {
+	position: relative;
+	top: 0px;
+}
+
+.salon-details-slider .owl-carousel:hover .owl-nav div {
+	opacity: 1;
+	visibility: visible;
+}
+
+.salon-details-slider .owl-carousel:hover .owl-nav div:hover {
+	color: #fff !important;
+	background: #FF3414;
 }
 
 .services-products-toggler h5 a {
@@ -450,6 +502,179 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	color: white !important;
 	background-color: #dc3545 !important;
 	border: 2px solid #dc3545 !important;
+}
+
+/* Salon Details Reviews */
+
+.review-title {
+	color: #4d4d4d;
+	font-size: 28px;
+	margin: 0 0 16px 0;
+	padding: 12px 0 25px 0;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.review-card-summary {
+	align-items: center;
+	cursor: pointer;
+	margin-bottom: 15px;
+}
+
+.review-stars-average {
+	font-size: 54px;
+	font-weight: 700;
+	letter-spacing: -4.5px;
+}
+
+.review-stars-wrapper {
+	flex-direction: column;
+	align-items: flex-end;
+	flex-grow: 1;
+}
+
+.rating_stars_container {
+	align-items: center;
+}
+
+.icon-large {
+	width: 20px;
+	height: 30px;
+	margin-left: 13px;
+}
+
+.icon-medium {
+	width: 15px;
+	height: 30px;
+	margin-left: 13px;
+}
+
+.icon-large:first-of-type, .icon-medium:first-of-type {
+	margin-left: 0;
+}
+
+.rate-criteria-item {
+	align-items: center;
+	display: flex;
+	padding-bottom: 20px;
+}
+
+.rate-criteria-name {
+	color: #4d4d4d;
+	flex-grow: 1;
+	font-size: 14px;
+}
+
+.review-filter-title, .write-review-title {
+	color: #4d4d4d;
+	font-size: 20px;
+	letter-spacing: .30px;
+}
+
+.review-filter-ratingField {
+	height: 40px;
+	color: grey;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+}
+
+.review-item {
+	margin-bottom: 30px;
+}
+
+.review-item:first-of-type {
+	margin-top: 10px;
+}
+
+.review-item-stars {
+	margin-bottom: 5px;
+}
+
+.show-review-form {
+	cursor: pointer;
+}
+
+.write_review_icon {
+	font-size: larger;
+	padding: 4px;
+}
+
+.review-form {
+	display: none;
+}
+
+/* Star Widget */
+
+.rateWidgetContainer {
+	height: 50px;
+}
+
+.rateWidgetTitle, .review-form label {
+	font-size: 1.1rem;
+	color: #4d4d4d;
+}
+
+.rate {
+	padding: 0 10px;
+}
+
+.rate:not(:checked)>input {
+	position: absolute;
+	margin: 1.3rem 0.5rem;
+	display: none;
+}
+
+.rate:not(:checked)>label {
+	width: 1em;
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: pointer;
+	font-size: 30px;
+	color: #ccc;
+}
+
+.rate:not(:checked)>label:before {
+	content: '★ ';
+}
+
+.rate>input:checked~label {
+	color: #ffc700;
+}
+
+.rate:not(:checked)>label:hover, .rate:not(:checked)>label:hover~label {
+	color: #deb217;
+}
+
+.rate>input:checked+label:hover, .rate>input:checked+label:hover~label, .rate>input:checked~label:hover, .rate>input:checked~label:hover~label, .rate>label:hover~input:checked~label {
+	color: #c59b08;
+}
+
+/* End of Star Widget */
+
+.review-item-content {
+	font-size: 14px;
+	line-height: 24px;
+	margin-bottom: 12px;
+}
+
+.review-item-meta {
+	align-items: center;
+	flex-flow: wrap;
+	font-size: 12px;
+}
+
+.review-item-author {
+	color: grey;
+	text-transform: capitalize;
+}
+
+.review-item-meta .ti-check-box {
+	margin-left: 5px;
+}
+
+.review-item-seperator {
+	font-size: 11px;
+	margin: 0 8px;
 }
 
 /* ================= cart ======================= */

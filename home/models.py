@@ -78,11 +78,11 @@ class Salon(models.Model):
     def completed_appointments(self):
         return self.appointments.filter(status="Completed")
 
-    def approved_comments(self):
-        return self.comments.filter(approved_comment=True)
+    def approved_reviews(self):
+        return self.reviews.filter(approved_review=True)
 
-    def pending_comments(self):
-        return self.comments.filter(approved_comment=False)
+    def pending_reviews(self):
+        return self.reviews.filter(approved_review=False)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -216,7 +216,7 @@ class AppointmentPayment(models.Model):
         return str(self.appointment)
 
 
-class Comments(models.Model):
+class Reviews(models.Model):
     STAR_CHOICES = (
         ('1 Star', '1 star'),
         ('2 Stars', '2 stars'),
@@ -226,34 +226,27 @@ class Comments(models.Model):
     )
     salon = models.ForeignKey(Salon,
                               on_delete=models.CASCADE,
-                              related_name='comments')
+                              related_name='reviews')
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
-                               related_name='my_comments')
+                               related_name='my_reviews')
     stars = models.CharField(max_length=10,
                              choices=STAR_CHOICES,
                              default='1 Star')
-    comment = models.TextField()
+    ambience_rating = models.FloatField()
+    cleanliness_rating = models.FloatField()
+    staff_rating = models.FloatField()
+    message = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
 
-    approved_comment = models.BooleanField(default=False)
+    approved_review = models.BooleanField(default=False)
 
     def approve(self):
-        self.approved_comment = True
+        self.approved_review = True
         self.save()
 
     def __str__(self):
         return str(self.author)
-
-
-class Reply(models.Model):
-    comment = models.ForeignKey(
-        Comments, on_delete=models.CASCADE, related_name='my_replies')
-    body = models.TextField()
-    created_time = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return self.author
 
 
 class Gallery(models.Model):

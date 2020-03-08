@@ -50,10 +50,18 @@ class OwnerAddInfoForm(forms.ModelForm):
         fields = ('ownerName', 'email', 'phone', 'location', 'gender')
 
 
-class CommentForm(forms.ModelForm):
+class ReviewForm(forms.ModelForm):
     class Meta:
-        model = Comments
-        fields = ('stars', 'comment')
+        model = Reviews
+        fields = ('message', )
+        widgets = {
+            'message':
+            forms.Textarea(
+                attrs={
+                    'rows': 3,
+                    'placeholder': 'Share your feedback about this salon'
+                })
+        }
 
 
 class TempUserForm(forms.ModelForm):
@@ -82,8 +90,15 @@ class SalonSubscriptionForm(forms.ModelForm):
 class StaffForm(forms.ModelForm):
     class Meta:
         model = Staff
-        fields = ('firstname', 'lastname', 'job_description', 'phone',
-                  'email', 'date_started', 'salary',)
+        fields = (
+            'firstname',
+            'lastname',
+            'job_description',
+            'phone',
+            'email',
+            'date_started',
+            'salary',
+        )
         widgets = {
             'date_started': DatePickerInput(),
         }
@@ -120,7 +135,6 @@ class clientAppointment(forms.ModelForm):
 
 
 class SalonAppointment(forms.ModelForm):
-
     class Meta:
         model = Appointments
         fields = ['services', 'appointment_date', 'products', 'clientphoneNo']

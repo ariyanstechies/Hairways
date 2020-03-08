@@ -13,6 +13,15 @@ body {
 	font-weight: 300;
 }
 
+.wrapper {
+	min-height: 100vh;
+	position: relative;
+}
+
+.main {
+	padding-bottom: 100px;
+}
+
 /*==================  Navbar  ==================*/
 
 a {
@@ -326,6 +335,14 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 
 .img-fluid {
 	min-height: 200px;
+	width: 100%;
+	height: 100%;
+}
+
+.cash-payment-container {
+	max-height: 200px;
+	height: 90px;
+	border: 2px solid teal !important;
 }
 
 .card-min-height {
@@ -384,11 +401,423 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 
 /*==================  Moreinfo/show page  ==================*/
 
-.details_page .carousel-item img {
-	background-size: cover;
+.salon-details-slider .item img {
+	display: block;
 	width: 100%;
+	height: auto;
+}
+
+.salon-details-slider .owl-nav div {
+	background: transparent;
+	height: 40px;
+	left: 0px;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	-webkit-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+	width: 40px;
+	background-color: transparent;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	font-size: 12px;
+	line-height: 40px;
+	background: teal;
+	color: #ffffff !important;
+}
+.salon-details-slider .owl-dots {
+	transform: translateY(-100%);
+	margin-top: 0 !important;
+}
+
+.salon-details-slider .owl-nav div.owl-next {
+	left: auto;
+	right: 0px;
+}
+
+.salon-details-slider .owl-nav div.owl-next i {
+	position: relative;
+	right: 0;
+}
+
+.salon-details-slider .owl-nav div.owl-prev i {
+	position: relative;
+	top: 0px;
+}
+
+.salon-details-slider .owl-carousel:hover .owl-nav div {
+	opacity: 1;
+	visibility: visible;
+}
+
+.salon-details-slider .owl-carousel:hover .owl-nav div:hover {
+	color: #fff !important;
+	background: #FF3414;
+}
+
+.services-products-toggler h5 a {
+	color: #6c757d;
+	border-bottom: 2px solid white;
+}
+
+.services-products-toggler h5 a:hover {
+	color: teal;
+	border-bottom: 2px solid teal;
+}
+
+.services-products-toggler h5 a:focus {
+	color: teal;
+	border-bottom: 2px solid teal;
+}
+
+.not-clicked {
+	color: teal !important;
+	border: 2px solid teal !important;
+	box-shadow: none !important;
+}
+
+.btn-outline-teal {
+	color: teal !important;
+	border: 2px solid teal !important;
+}
+
+.not-clicked:hover {
+	color: white !important;
+	background-color: teal;
+}
+
+.clicked {
+	color: #dc3545 !important;
+	background-color: white !important;
+	border: 2px solid #dc3545 !important;
+	box-shadow: none !important;
+}
+
+.clicked:hover {
+	color: white !important;
+	background-color: #dc3545 !important;
+	border: 2px solid #dc3545 !important;
+}
+
+/* Salon Details Reviews */
+
+.review-title {
+	color: #4d4d4d;
+	font-size: 28px;
+	margin: 0 0 16px 0;
+	padding: 12px 0 25px 0;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.review-card-summary {
+	align-items: center;
+	cursor: pointer;
+	margin-bottom: 15px;
+}
+
+.review-stars-average {
+	font-size: 54px;
+	font-weight: 700;
+	letter-spacing: -4.5px;
+}
+
+.review-stars-wrapper {
+	flex-direction: column;
+	align-items: flex-end;
+	flex-grow: 1;
+}
+
+.rating_stars_container {
+	align-items: center;
+}
+
+.icon-large {
+	width: 20px;
+	height: 30px;
+	margin-left: 13px;
+}
+
+.icon-medium {
+	width: 15px;
+	height: 30px;
+	margin-left: 13px;
+}
+
+.icon-large:first-of-type, .icon-medium:first-of-type {
+	margin-left: 0;
+}
+
+.rate-criteria-item {
+	align-items: center;
+	display: flex;
+	padding-bottom: 20px;
+}
+
+.rate-criteria-name {
+	color: #4d4d4d;
+	flex-grow: 1;
+	font-size: 14px;
+}
+
+.review-filter-title, .write-review-title {
+	color: #4d4d4d;
+	font-size: 20px;
+	letter-spacing: .30px;
+}
+
+.review-filter-ratingField {
+	height: 40px;
+	color: grey;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+}
+
+.review-item {
+	margin-bottom: 30px;
+}
+
+.review-item:first-of-type {
+	margin-top: 10px;
+}
+
+.review-item-stars {
+	margin-bottom: 5px;
+}
+
+.show-review-form {
+	cursor: pointer;
+}
+
+.write_review_icon {
+	font-size: larger;
+	padding: 4px;
+}
+
+.review-form {
+	display: none;
+}
+
+/* Star Widget */
+
+.rateWidgetContainer {
+	height: 50px;
+}
+
+.rateWidgetTitle, .review-form label {
+	font-size: 1.1rem;
+	color: #4d4d4d;
+}
+
+.rate {
+	padding: 0 10px;
+}
+
+.rate:not(:checked)>input {
+	position: absolute;
+	margin: 1.3rem 0.5rem;
+	display: none;
+}
+
+.rate:not(:checked)>label {
+	width: 1em;
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: pointer;
+	font-size: 30px;
+	color: #ccc;
+}
+
+.rate:not(:checked)>label:before {
+	content: '★ ';
+}
+
+.rate>input:checked~label {
+	color: #ffc700;
+}
+
+.rate:not(:checked)>label:hover, .rate:not(:checked)>label:hover~label {
+	color: #deb217;
+}
+
+.rate>input:checked+label:hover, .rate>input:checked+label:hover~label, .rate>input:checked~label:hover, .rate>input:checked~label:hover~label, .rate>label:hover~input:checked~label {
+	color: #c59b08;
+}
+
+/* End of Star Widget */
+
+.review-item-content {
+	font-size: 14px;
+	line-height: 24px;
+	margin-bottom: 12px;
+}
+
+.review-item-meta {
+	align-items: center;
+	flex-flow: wrap;
+	font-size: 12px;
+}
+
+.review-item-author {
+	color: grey;
+	text-transform: capitalize;
+}
+
+.review-item-meta .ti-check-box {
+	margin-left: 5px;
+}
+
+.review-item-seperator {
+	font-size: 11px;
+	margin: 0 8px;
+}
+
+/* ================= cart ======================= */
+
+.cart-container {
+	height: auto;
+}
+
+.image-card {
+	height: 90px;
+}
+
+.icon-after-open {
+	margin-top: 30px !important;
+}
+
+.cart {
+	position: fixed;
+	z-index: 1030;
+	width: 100%;
+	background-color: teal;
+	max-height: 80vh;
+	height: 50px;
+	bottom: 0px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}
+
+.cart-buttons-container {
+	height: 50px;
+}
+
+.cart-cost {
+	min-height: 50px;
 	height: 100%;
-	min-height: max-content;
+	border-top-right-radius: 20px;
+}
+
+.cart-amount {
+	height: 50px;
+	border-top-left-radius: 20px;
+}
+
+.cart-icon-container {
+	height: 50px;
+}
+
+.icon-container {
+	position: relative;
+	bottom: 30px;
+	height: 50px;
+	border-bottom: none;
+	padding: 40px !important;
+	margin: 0 auto;
+	background-color: teal;
+	border: 0.5px solid white;
+}
+
+.cart-icon {
+	font-size: xx-large;
+	font-weight: bold;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	animation: MoveUpDown 1s linear infinite;
+	position: absolute;
+}
+
+@keyframes MoveUpDown {
+	0%, 100% {
+		bottom: 0;
+	}
+	50% {
+		bottom: 20px;
+	}
+}
+
+.arrow-icon {
+	font-size: xx-large;
+	font-weight: bold;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -90%);
+}
+
+.cart-items-counter {
+	font-size: x-large;
+	font-weight: bold;
+}
+
+.show-cart-items {
+	max-height: 80vh;
+	height: auto;
+}
+
+.hide {
+	visibility: hidden;
+}
+
+.hide-cart-items {
+	max-height: 50px;
+}
+
+.cart-items-container {
+	height: auto;
+	background: whitesmoke;
+}
+
+.desktop-cart-icon-container {
+	z-index: 1050;
+	font-size: x-large;
+	position: fixed;
+	top: 50px;
+	right: 50px;
+	height: 50px;
+	width: 50px;
+}
+
+.desktop-cart-icon-container:hover {
+	box-shadow: 0 2px gray;
+}
+
+.desktop-cart-icon {
+	position: relative;
+	top: calc(50% - 10px);
+}
+
+.desktop-cart-items-container {
+	z-index: 1050;
+	border: 1px solid teal;
+	border-radius: 7px;
+	position: fixed;
+	top: 100px;
+	right: 50px;
+	background-color: whitesmoke;
+}
+
+/* ================== salon details =================== */
+
+.salon-details-map {
+	height: 350px !important;
 }
 
 /*==================  django forms  ==================*/
@@ -528,268 +957,14 @@ p {
 	border-radius: 30% 10%;
 }
 
-/* comments */
-
-/**
- * Oscuro: #283035
- * Azul: #03658c
- * Detalle: #c7cacb
- * Fondo: #dee1e3
- ----------------------------------*/
- * {
- 	margin: 0;
- 	padding: 0;
- 	-webkit-box-sizing: border-box;
- 	-moz-box-sizing: border-box;
- 	box-sizing: border-box;
- }
-
- a {
- 	color: #03658c;
- 	text-decoration: none;
- }
-
-ul {
-	list-style-type: none;
-}
-
-
-
-/** ====================
- * Lista de Comentarios
- =======================*/
-.comments-container {
-	margin: 0px auto 5px;
-	width: 768px;
-}
-
-.comments-container h1 {
-	font-size: 36px;
-	color: #283035;
-	font-weight: 400;
-}
-
-.comments-container h1 a {
-	font-size: 18px;
-	font-weight: 700;
-}
-
-.comments-list {
-	margin-top: 30px;
-	position: relative;
-}
-
-/**
- * Lineas / Detalles
- -----------------------*/
-.comments-list:before {
-	content: '';
-	width: 2px;
-	height: 100%;
-	background: #c7cacb;
-	position: absolute;
-	left: 22px;
-	top: 0;
-}
-
-.comments-list:after {
-	content: '';
-	position: absolute;
-	background: #c7cacb;
+.footer {
 	bottom: 0;
-	left: 27px;
-	width: 7px;
-	height: 7px;
-	border: 3px solid #dee1e3;
-	-webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
-	border-radius: 50%;
+	left: 0;
+	right: 0;
 }
 
-.reply-list:before, .reply-list:after {display: none;}
-.reply-list li:before {
-	content: '';
-	width: 60px;
-	height: 2px;
-	background: #c7cacb;
-	position: absolute;
-	top: 25px;
-	left: -55px;
-}
-
-
-.comments-list li {
-	margin-bottom: 15px;
-	display: block;
-	position: relative;
-}
-
-.comments-list li:after {
-	content: '';
-	display: block;
-	clear: both;
-	height: 0;
-	width: 0;
-}
-
-.reply-list {
-	padding-left: 88px;
-	clear: both;
-	margin-top: 15px;
-}
-/**
- * Avatar
- ---------------------------*/
-.comments-list .comment-avatar {
-	width: 55px;
-	height: 65px;
-	position: relative;
-	z-index: 99;
-	float: left;
-	border: 3px solid #FFF;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-	overflow: hidden;
-}
-
-.comments-list .comment-avatar img {
-	width: 100%;
-	height: 100%;
-}
-
-.reply-list .comment-avatar {
-	width: 50px;
-	height: 50px;
-}
-
-.comment-main-level:after {
-	content: '';
-	width: 0;
-	height: 0;
-	display: block;
-	clear: both;
-}
-/**
- * Caja del Comentario
- ---------------------------*/
-.comments-list .comment-box {
-	width: 680px;
-	float: right;
-	position: relative;
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
-	-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
-	box-shadow: 0 1px 1px rgba(0,0,0,0.15);
-}
-
-.comments-list .comment-box:before, .comments-list .comment-box:after {
-	content: '';
-	height: 0;
-	width: 0;
-	position: absolute;
-	display: block;
-	border-width: 10px 12px 10px 0;
-	border-style: solid;
-	border-color: transparent #FCFCFC;
-	top: 8px;
-	left: -11px;
-}
-
-.comments-list .comment-box:before {
-	border-width: 11px 13px 11px 0;
-	border-color: transparent rgba(0,0,0,0.05);
-	left: -12px;
-}
-
-.reply-list .comment-box {
-	width: 610px;
-}
-.comment-box .comment-head {
-	background: #FCFCFC;
-	padding: 5px 7px;
-	border-bottom: 1px solid #E5E5E5;
-	overflow: hidden;
-	-webkit-border-radius: 4px 4px 0 0;
-	-moz-border-radius: 4px 4px 0 0;
-	border-radius: 4px 4px 0 0;
-}
-
-.comment-box .comment-head i {
-	float: right;
-	margin-left: 5px;
-	position: relative;
-	top: 2px;
-	color: #A6A6A6;
-	cursor: pointer;
-	-webkit-transition: color 0.3s ease;
-	-o-transition: color 0.3s ease;
-	transition: color 0.3s ease;
-}
-
-.comment-box .comment-head i:hover {
-	color: #03658c;
-}
-
-.comment-box .comment-name {
-	color: #283035;
-	font-size: 14px;
-	font-weight: 700;
-	float: left;
-	margin-right: 2px;
-}
-
-.comment-box .comment-name a {
-	color: #283035;
-}
-
-.comment-box .comment-head span {
-	float: left;
-	color: #999;
-	font-size: 13px;
-	position: relative;
-	top: 1px;
-}
-
-.comment-box .comment-content {
-	background: #FFF;
-	padding: 7px;
-	font-size: 15px;
-	color: #595959;
-	-webkit-border-radius: 0 0 4px 4px;
-	-moz-border-radius: 0 0 4px 4px;
-	border-radius: 0 0 4px 4px;
-}
-
-.comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {color: #03658c;}
-.comment-box .comment-name.by-author:after {
-	content: 'autor';
-	background: #03658c;
-	color: #FFF;
-	font-size: 12px;
-	padding: 3px 5px;
-	font-weight: 700;
-	margin-left: 5px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-}
-
-/** =====================
- * Responsive
- ========================*/
-@media only screen and (max-width: 766px) {
-	.comments-container {
-		width: 290px;
-	}
-
-	.comments-list .comment-box {
-		width: 220px;
-	}
-
-	.reply-list .comment-box {
-		width: 150px;
-	}
+.footer-link:hover {
+	color: rgb(29, 192, 34);
+	text-decoration: underline;
+	transition: none;
 }

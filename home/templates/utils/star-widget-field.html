@@ -1,0 +1,16 @@
+<fieldset>
+    <div class="rateWidgetContainer d-flex">
+        <p class="my-auto rateWidgetTitle text-capitalize">{{ category }}</p>
+        <div class="rate ml-auto">
+
+            {% for value in '12345' %}
+            <input type="radio" id="{{ category }}{{ value }}"
+                name="{{ category }}" value="{{ value }}" />
+            <label for="{{ category }}{{ value }}"
+                title="{{ category }}">
+                {{ value }} star{{ value|pluralize }}
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+</fieldset>

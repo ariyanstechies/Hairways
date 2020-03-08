@@ -98,7 +98,7 @@
               <div class="progress-sub-label">
                 <div class="sub-label-left">Rated by: </div>
                 <div class="sub-label-right">
-                  {{ salon.comments.count }}
+                  {{ salon.reviews.count }}
                 </div>
               </div>
             </div>
@@ -140,24 +140,24 @@
           <div class="widget-content-outer">
             <div class="widget-content-wrapper">
               <div class="widget-content-left">
-                <div class="widget-heading">Total Comments</div>
+                <div class="widget-heading">Total Reviews</div>
               </div>
               <div class="widget-content-right">
                 <div class="widget-numbers text-warning">
-                  {{ salon.comments.count }}</div>
+                  {{ salon.reviews.count }}</div>
               </div>
             </div>
             <div class="widget-progress-wrapper">
               <div class="progress-sub-label">
                 <div class="sub-label-left">Pending</div>
                 <div class="sub-label-right">
-                  {{ salon.pending_comments.count }}
+                  {{ salon.pending_reviews.count }}
                 </div>
               </div>
               <div class="progress-sub-label">
                 <div class="sub-label-left">Approved</div>
                 <div class="sub-label-right">
-                  {{ salon.approved_comments.count }}
+                  {{ salon.approved_reviews.count }}
                 </div>
               </div>
             </div>
@@ -347,7 +347,7 @@
                 <button type="button" data-toggle="collapse" href="#collapseExample{{appointment.id}}"
                   class="btn btn-primary col-md-2" aria-expanded="true">Details</button>
               </div>
-              <div class="collapse " id="collapseExample{{appointment.id}}" style="">
+              <div class="collapse " id="collapseExample{{appointment.id}}">
                 <hr>
                 <div class="row">
                   <div class="col-md-12 col-lg-6">

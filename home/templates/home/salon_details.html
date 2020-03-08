@@ -7,576 +7,579 @@
 {% bootstrap_javascript jquery='full' %} {# Embed Bootstrap JS+jQuery #}
 {{ form.media }} {# Adds date-picker required JS and CSS #}
 
-<div>
-    <div class="container">
+<div class="container">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong class="text-success"></strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+<section>
+  <div class="owl-carousel salon-details-slider owl-theme">
+    <div class="item">
+      <img src="{% static 'images/'%}1.jpg" alt="{{ salon.name }}">
+    </div>
+    <div class="item">
+      <img src="{% static 'images/'%}2.jpg" alt="{{ salon.name }}">
+    </div>
+    <div class="item">
+      <img src="{% static 'images/'%}3.jpg" alt="{{ salon.name }}">
+    </div>
+    <div class="item">
+      <img src="{% static 'images/'%}4.jpg" alt="{{ salon.name }}">
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container mt-1">
+    <div class="row">
+      <div class="col-sm-8">
+        <h3>{{ salon.name }}</h3>
+        <p>{{ salon.location_description }}</p>
+      </div>
+      <div class="col-sm-4">
+        <div class="review-card-summary row">
+          <div class="review-stars-average col-3 text-danger">
+            {{ average_rating }}
+          </div>
+          <div class="review-stars-wrapper col-9">
+            <div class="d-inline-flex">
+              <div class="rating_stars_container d-flex">
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+              </div>
+            </div>
+            <p class="text-muted my-0">{{salon.reviews.count}} Ratings</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong class="text-success"></strong> {{ message }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+
+<!-- body  -->
+<div class="container">
+
+  <!-- Product Services Toggler -->
+  <section>
+    <div class="services-products">
+      <h4 class="text-teal mt-5">Products and Services</h4>
+      <div class="mt-5 mb-5">
+        <ul class="nav nav-justified services-products-toggler mt-3 mb-2">
+          <h5 class="nav-item"><a data-toggle="tab" href="#services"
+              class="active nav-link">Services</a></h5>
+          <h5 class="nav-item"><a data-toggle="tab" href="#products"
+              class="nav-link">Products</a></h5>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Sticky filter on phones and services / products displayed-->
+    <section>
+      {% if services or products %}
+      <div class="container-fluid card sticky-top d-block d-md-none d-lg-none"
+        style="background-color:white">
+        <div class="row align-items-center pt-3 justify-content-center">
+          <div class="col-3">
+            <div class="filters">
+              <h5><i class="ti-bolt text-teal"></i><span class="d-none
+                  d-md-inline"> Popular</span>
+              </h5>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="filters">
+              <h5><i class="ti-location-pin text-teal"></i><span class="d-none
+                  d-md-inline"> Near me</span>
+              </h5>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="filters">
+              <h5><i class="ti-thumb-up text-teal"></i><span class="d-none
+                  d-md-inline"> Recommended</span></h4>
+            </h5>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="filters">
+            <h5> <i class="ti-gift text-teal"></i> <span class="d-none
+                d-md-inline">Offers</span>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products and service display -->
+    <div class="tab-content mb-5 mt-3">
+      <div class="tab-pane active" id="services" role="tabpanel">
+        <div class="row mt-4">
+          <div class="card mt-3 col-md-4 d-none d-md-block d-lg-block border-0">
+            <p><i class="ti-bolt text-teal mr-2"></i><span class="text-muted
+                font-weight-bold">Popular</span></p>
+            <p><i class="ti-location-pin text-teal mr-2"></i><span
+                class="text-muted font-weight-bold">Near Me</span>
+            </p>
+            <p><i class="ti-thumb-up text-teal mr-2"></i><span class="text-muted
+                font-weight-bold">Recommended</span>
+            </p>
+            <p><i class="ti-gift text-teal mr-2"></i><span class="text-muted
+                font-weight-bold">Offers</span></p>
+          </div>
+          <div class="card col border-0">
+            {% for service in services %}
+            <div class="row my-3">
+              <div class="col-8">
+                <h5 class="mb-0">{{service.name}}</h5>
+                <p class="mt-2 text-muted">{{service.duration}} Min</p>
+              </div>
+              <div class="col-4">
+                <p class="mt-0">Ksh <b>{{service.cost}}</b></p>
+                <button class="btn not-clicked mr-0 py-0 mt-0"
+                  name="{{service.cost}}" id="{{service.id}}">Add</button>
+              </div>
+            </div>
+            {% empty %}
+            <div class="container my-3 text-muted text-center">
+              <p>We Have no services at the moment. Please check again later</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="products" role="tabpanel">
+        <div class="row mt-4">
+          <div class="card mt-3 col-md-4 d-none d-sm-block border-0">
+            <p><i class="ti-bolt text-teal mr-2"></i><span class="text-muted
+                font-weight-bold">Popular</span></p>
+            <p><i class="ti-location-pin text-teal mr-2"></i><span
+                class="text-muted font-weight-bold">Near Me</span>
+            </p>
+            <p><i class="ti-thumb-up text-teal mr-2"></i><span class="text-muted
+                font-weight-bold">Recommended</span>
+            </p>
+            <p><i class="ti-gift text-teal mr-2"></i><span class="text-muted
+                font-weight-bold">Offers</span></p>
+          </div>
+          <div class="card col border-0">
+            {% for product in products %}
+            <div class="row my-3">
+              <div class="col-8">
+                <h5 class="mb-0">{{product.name}}</h5>
+                <p class="mt-2 text-muted">{{product.brand}} Min</p>
+              </div>
+              <div class="col-4">
+                <p class="mt-0">Ksh <b>{{product.price}}</b></p>
+                <button class="btn not-clicked mr-0 py-0 mt-0"
+                  name="{{product.price}}" id="{{product.id}}">Add</button>
+              </div>
+            </div>
+            {% empty %}
+            <div class="container my-3 text-muted text-center">
+              <p>We Have no products at the moment. Please check again later</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </section>
+</div>
+<section>
+  <div class="container">
+    <h3 class="mb-3 review-title">Reviews Zone</h3>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="review-card-summary d-flex">
+          <div class="review-stars-average text-danger">
+            {{ average_rating }}
+          </div>
+          <div class="review-stars-wrapper d-flex">
+            <div class="d-inline-flex">
+              <div class="rating_stars_container d-flex">
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+              </div>
+            </div>
+            <p class="text-muted mt-3">{{salon.reviews.count}} Ratings</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="rate-criteria-item">
+          <p class="rate-criteria-name">Cleanliness</p>
+          <div class="d-inline-flex">
+            <div class="rating_stars_container d-flex">
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+            </div>
+          </div>
+        </div>
+        <div class="rate-criteria-item">
+          <p class="rate-criteria-name">Ambience</p>
+          <div class="d-inline-flex">
+            <div class="rating_stars_container d-flex">
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="rate-criteria-item">
+          <p class="rate-criteria-name">Staff</p>
+          <div class="d-inline-flex">
+            <div class="rating_stars_container d-flex">
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+              <i class="ti-star icon-medium"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 offset-md-0 col-sm-8 offset-sm-4">
+        <div class="review-filters">
+          <h3 class="review-filter-title mb-3">Filter Reviews</h3>
+          <div class="review-filter-ratingField d-flex mb-2 mt-1">
+            Rating
+            <div class="review-filter-rating">
+              Filter by Rating
+              <i class="ti-angle-down"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-list col-xs-12 col-sm-8 offset-sm-4 offset-md-0">
+        <div class="col-sm-12 mb-3 px-0">
+          <div class="py-3 d-flex show-review-form">
+            <h4 class="write-review-title">Write your review</h4>
+            <i class="ti-pencil-alt text-success ml-auto"></i>
+          </div>
+          <form method="post" class="review-form">
+            {% csrf_token %}
+            {% include 'utils/star-widget-field.html' with category='ambience'%}
+            {% include 'utils/star-widget-field.html' with
+            category='cleanliness'%}
+            {% include 'utils/star-widget-field.html' with category='staff'%}
+            <div class="review-form">
+              {% bootstrap_form review_form %}
+            </div>
+            {% if request.user.is_authenticated %}
+            <button type="submit" class="btn btn-success">Submit</button>
+            {% else %}
+            <p>You must <a href="{% url 'login'%}" class="btn-link text-danger">Login</a>
+              to submit a review.</p>
+            {% endif %}
+          </form>
+        </div>
+        {% for review in reviews %}
+        <div class="review-item col-sm-12">
+          <div class="review-item-stars">
+            <div class="d-inline-flex">
+              <div class="rating_stars_container d-flex">
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+              </div>
+            </div>
+          </div>
+          <div class="review-item-content">
+            {{ review.message }}
+          </div>
+          <div class="review-item-meta text-muted d-flex">
+            <span class="review-item-author">{{ review.author }}</span>
+            <i class="ti-check-box text-success"></i>
+            <span class="review-item-seperator text-dark">•</span>
+            {{ review.created_date }}
+            <a href="/" class="btn-link text-danger ml-auto">Report</a>
+          </div>
+        </div>
+        {% empty %}
+        <div class="text-center col-sm-12">
+          <p class="text-capitalize text-muted">No Reviews yet!</p>
         </div>
         {% endfor %}
-        {% endif %}
+      </div>
     </div>
-
-    <!-- Image  -->
-    <div class="container card" style="background-image: url({{salon.cover_img}}); background-size: cover;  
-    background-position: center;  height: 500px; background-repeat: no-repeat;margin-top:10px">
-
-        <div class="row" style="margin-top: 0px;">
-
-            <div class="col-sm-4 card" style="background-color: rgba(125, 173, 173, 0.644);">
-
-                <div class="headshot headshot-3">
-                    <h3 class="text-center " style="color:black;margin-bottom:0px;">
-                        {{salon.name}} <br><small>
-                            <span class="float-rigt"><i class="text-warning fa fa-star"></i></span>
-                            <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
-                            <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
-                            <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                            <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                        </small>
-                    </h3>
-                    <b>City:
-                        {{salon.town}}</b>
-                </div>
-
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs flex-column" role="tablist">
-
-                    <li class="nav-item">
-                        <a class="nav-link text-info" data-toggle="tab" href="#home"><b></b>
-                            <small style="color: black;">{{salon.location_description}}</small></b></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " style="color: black;" data-toggle="tab" href="#menu1"><b></b>
-                            <i>{{salon.description}}</i></b></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-info" data-toggle="tab" href="#menu3"><b>Comments and
-                                Reviews</b></a>
-                    </li>
-                </ul>
-                <h4 class="" style="color: rgb(2, 6, 29);"> Follow us: <i class="social fa fa-instagram"></i>
-                    |
-                    <i class="social fa fa-facebook"></i> |
-                    <i class="social fa fa-twitter"></i></h4>
-            </div>
-            <div class="col"></div>
+  </div>
+</section>
+<!-- Mobile version cart section -->
+<section>
+  <div name="closed" class="cart ml-0 hide d-block d-sm-none">
+    <div class="row cart-buttons-container mx-0">
+      <div class="col-4 cart-amount container text-white">
+        <p class="mt-2 ml-2"><b class="cart-items-counter"
+            id="total_items_booked">0</b></p>
+      </div>
+      <div class="col-4 cart-icon-container">
+        <div class="icon-container text-white col-4 rounded-circle">
+          <i class="ti-shopping-cart cart-icon"></i>
         </div>
+      </div>
+      <div class="col-4 bg-danger cart-cost text-center text-white">
+        <p class="mt-3">Ksh <b id="appointment_cost_display">0</b></p>
+      </div>
+    </div>
+    <div class="container display-selected-items pt-4 pb-5
+      cart-items-container">
+      <div class="container cart_content_container">
+        <p class="text-center cart-empty mt-4 text-muted">You have not
+          selected any services or products.</p>
+      </div>
+      <div class="container mt-3">
+        <form action="" id="appointment_form" method="POST">
+          {% csrf_token %}
+          <h5 class="text-teal my-2">Appointment Date</h5>
+          {% bootstrap_form form %}
+          <input type="text" id="appointment_details" hidden
+            name="appointment">
+          <button class="btn btn-outline-teal" type="submit">Place Appointment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- Desktop version cart -->
+<section>
+  <div class="desktop-cart d-none d-sm-block d-md-block">
+    <button name="hide" id="desktop_cart_button"
+      class="desktop-cart-icon-container hide btn btn-outline-teal my-auto
+      text-center rounded-circle">
+      <i class="desktop-cart-icon text-teal font-weight-bold my-auto py-3
+        ti-shopping-cart"></i>
+      <span id="desktop_cart_item_selected" class="font-weight-bold">6</span>
+    </button>
+  </div>
+
+
+  <div id="desktop_cart_container" class="container border-1 hide w-50
+    display-selected-items mt-3 d-none d-sm-block d-md-block
+    desktop-cart-items-container">
+    <div class="card-body">
+      <div class="container cart_content_container">
+        <p class="text-center cart-empty mt-4 text-muted">You have not
+          selected any services or products.</p>
+      </div>
+      <div class="container mt-3">
+        <form action="" id="appointment_form" method="POST">
+          {% csrf_token %}
+          <h5 class="text-teal my-2">Appointment Date</h5>
+          {% bootstrap_form form %}
+          <input type="text" id="appointment_details" hidden
+            name="appointment">
+          <button class="btn btn-outline-teal" type="submit">Place Appointment</button>
+        </form>
+      </div>
     </div>
 
-
-    <!-- end of Image -->
-    <div class="container">
-
-    </div>
-
-    <!-- body  -->
-    <div class="container" style="background-image: url({% static 'images/isolated.svg'%});">
-        <section>
-
-            <div class="row">
-                <div class="card col-sm-12 text-white"
-                    style="background-color: rgba(12, 146, 84, 0.438);;font-style:bold">
-                    <!-- test  -->
-                    <div class="container-fluid card mb-3" style="background-color: rgba(12, 146, 84, 0.212);">
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-3 col-sm-3 pt-1">
-                                <div class="filters">
-                                    <h4>60 <i class="fa fa-envelope-o"></i><span class="d-none d-sm-inline">
-                                            Comments</span>
-                                    </h4>
-
-                                </div>
-                            </div>
-                            <div class="col-3 col-sm-2 pt-1">
-                                <div class="filters">
-                                    <h4>45 <i class="fa fa-eye"></i><span class="d-none d-sm-inline"> Views</span>
-                                    </h4>
-
-                                </div>
-                            </div>
-                            <div class="col-3 col-sm-2 pt-1">
-                                <div class="filters">
-                                    <h4>{{ salon.total_likes }}<i class="fa fa-thumbs-up"></i><span
-                                            class="d-none d-sm-inline">
-                                            Bookings</span></h4>
-                                    </h4>
-
-                                </div>
-                            </div>
-                            <div class="col-3 col-sm-2 pt-1">
-                                <div class="filters">
-                                    <h4> <i class="fa fa-share-alt "></i> <span class="d-none d-sm-inline">Share</span>
-                                    </h4>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- test  -->
-                    <div class="card-body">
-                        <h3 class="card-title">Our Services and Products</h3>
-                        <div class="card-ody  ">
-                            <!--Forform for Services Offered  -->
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <!-- Trial  -->
-                                    <form method="post">
-                                        {% csrf_token %}
-                                        <div class="form-row" style="margin: 0px;">
-                                            <div class="form-group col-6 mb-0">
-                                                {{ form.services|as_crispy_field }}
-                                            </div>
-
-                                            <div class="col-6" style="margin: 0px;">
-                                                <ul style="list-style: none;">
-                                                    <p>Amount</p>
-                                                    {% if services.count != 0 %}
-                                                    {% for service in services %}
-                                                    <li class="">Ksh. {{ service.cost }}</li>
-                                                    {% endfor %}
-                                                    {% else %}
-                                                </ul>
-                                                <!-- spanning across the five columns-->
-                                                <tr style="border: none">
-                                                    <td colspan="5" class="text-center text-muted">Sorry No Services For
-                                                        Now:)
-                                                    </td>
-                                                </tr>
-                                                {% endif%}
-
-                                            </div>
-                                            <p>If you wish to buy our products include them below</p>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-6">
-                                                {{ form.products|as_crispy_field }}
-                                            </div>
-                                            <div class="col-6 " style="margin:0px">
-                                                <ul style="list-style: none;">
-                                                    <p>Amount</p>
-                                                    {% if products.count != 0 %}
-                                                    {% for prod in products %}
-                                                    <li class="">Ksh. {{prod.price }}</li>
-                                                    {% endfor %}
-                                                    {% else %}
-                                                </ul>
-                                                <!-- spanning across the five columns-->
-                                                <tr style="border: none">
-                                                    <td colspan="5" class="text-center text-muted">Sorry No Services For
-                                                        Now:)
-                                                    </td>
-                                                </tr>
-                                                {% endif%}
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-6 mb-0">
-                                            {{ form.appointment_date|as_crispy_field }}
-                                        </div>
-
-                                        <button type="submit" class="btn btn-primary">Book Now</button>
-                                    </form>
-                                    <br>
-                                    <!-- End trial  -->
-
-                                </div>
+  </div>
+</section>
 
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- About section -->
+<section>
+  <div class="about mt-4">
+    <h5 class="container text-teal">About</h5>
+    <div class="row mx-2 mt-4">
+      <div class="container col-md-7">
+        <div id="map" class="salon-details-map">
+          <script>
+            var map;
+            function initMap() {
+              map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8
+              });
+            }
+          </script>
+        </div>
+        <div class="container mt-5">
+          <h5 class="text-muted mb-3">Gallery</h5>
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">Images</div>
+              </div>
             </div>
-            <div class="row">
-
-                <!--For products  -->
-                <div class="card col-sm-12" style="background-color: rgba(12, 146, 84, 0.438);">
-                    <div class="card-body">
-                        <h3 class="card-title">Reviews and comments</h3>
-
-
-                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
-                            rel="stylesheet"
-                            integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
-                            crossorigin="anonymous">
-
-                        <section>
-                            <div class="container-fliud">
-                                <div class="row ">
-                                    <div class="col-md-3 border  text-center">
-                                        <div class="card-body">
-                                            <h1 class="text-danger">{{average_rating}}</h1>
-                                            <div class="sub-row text-warning">
-                                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                    class="fa fa-star-half-o"></i>
-                                            </div>
-                                            <p>{{salon.comments.count}} Ratings</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5 border">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <h6>5 Stars</h6>
-                                                </div>
-                                                <div class="col-md-9 pt-1">
-                                                    <div class="progress">
-                                                        <div style="width: {{ps5}}%;"
-                                                            class="progress-bar text-dark text-bold  bg-success">
-                                                            {{stars_5}}</div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <h6>4 Stars</h6>
-                                                </div>
-                                                <div class="col-md-9 pt-1">
-                                                    <div class="progress">
-                                                        <div style="width: {{ps4}}%;"
-                                                            class="progress-bar text-dark text-bold bg-success">
-                                                            {{stars_4}}</div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <h6>3 Stars</h6>
-                                                </div>
-                                                <div class="col-md-9 pt-1">
-                                                    <div class="progress">
-                                                        <div style="width: {{ps3}}%;"
-                                                            class="progress-bar text-dark text-bold bg-warning">
-                                                            {{stars_3}}</div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <h6>2 Stars</h6>
-                                                </div>
-                                                <div class="col-md-9 pt-1">
-                                                    <div class="progress">
-                                                        <div style="width: {{ps2}}%;"
-                                                            class="progress-bar text-dark text-bold bg-danger">
-                                                            {{stars_2}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <h6>1 Star</h6>
-                                                </div>
-                                                <div class="col-md-9 pt-1">
-                                                    <div class="progress">
-                                                        <div class="progress-bar  text-dark text-bold bg-danger"
-                                                            style="width: {{ps1}}%;">
-                                                            {{stars_1}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 border text-center">
-                                        <div class="card-body">
-                                            <i class="fa fa-pencil-square fa-3x text-success"></i>
-                                            <a href="#comments">
-                                                <h4>Write Your Views</h4>
-                                            </a>
-                                            <small>share your experience/views about this Salon</small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </section>
-                        <br>
-                        <section>
-                            <div class="conainer">
-                                <!-- Comments Principal -->
-                                <div class="comments-container">
-
-                                    <ul id="comments-list" class="comments-list">
-                                        {% for review in reviews %}
-                                        <li>
-                                            <div class="comment-main-level">
-                                                <!-- Avatar -->
-                                                <div class="comment-avatar"><img
-                                                        src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
-                                                        alt=""></div>
-                                                <!-- Comment list -->
-                                                <div class="comment-box">
-                                                    <div class="comment-head">
-                                                        <h6 class="comment-name b-author">
-                                                            {% if review.stars == '3 Stars' %}
-                                                            <span class="float-rigt"><i
-                                                                    class="text-warning fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-warning fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-warning fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-warnin fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-warnin fa fa-star"></i></span>
-                                                            {% endif %}
-                                                            {% if review.stars == '4 Stars' %}
-                                                            <span class="float-rigt"><i
-                                                                    class="text-success fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-success fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-success fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-success fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-warnin fa fa-star"></i></span>
-                                                            {% endif %}
-                                                            {% if review.stars == '2 Stars' %}
-                                                            <span class="float-rigt"><i
-                                                                    class="text-danger fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-danger fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-succes fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-succes fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-warnin fa fa-star"></i></span>
-                                                            {% endif %}
-                                                            {% if review.stars == '1 Star' %}
-                                                            <span class="float-rigt"><i
-                                                                    class="text-danger fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-dangr fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-succes fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-succes fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-warnin fa fa-star"></i></span>
-                                                            {% endif %}
-
-                                                            {% if review.stars == '5 Stars' %}
-                                                            <span class="float-rigt"><i
-                                                                    class="text-success fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-success fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-success fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-success fa fa-star"></i></span>
-                                                            <span class="float-rght"><i
-                                                                    class="text-success fa fa-star"></i></span>
-                                                            {% endif %}
-
-                                                            <a href="http://creaticode.com/blog"></a>
-                                                            ({{ review.author }})</a>
-
-                                                        </h6>
-
-                                                        <i class="fa fa-reply"></i>
-
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        {{ review.comment }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Respuestas de los comentarios -->
-                                            <ul class="comments-list reply-list">
-                                                <li>
-                                                    <!-- Avatar -->
-                                                    <div class="comment-avatar"><img
-                                                            src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
-                                                            alt=""></div>
-                                                    <!-- Contenedor del Comentario -->
-                                                    <div class="comment-box">
-                                                        <div class="comment-head">
-                                                            <h6 class="comment-name"><a
-                                                                    href="http://creaticode.com/blog">Lorena Rojero</a>
-                                                            </h6>
-
-                                                            <i class="fa fa-reply"></i>
-                                                            <i class="fa fa-heart"></i>
-                                                        </div>
-                                                        <div class="comment-content">
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Velit omnis animi et iure
-                                                            laudantium vitae, praesentium optio, sapiente distinctio
-                                                            illo?
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                                <li>
-                                                    <!-- Avatar -->
-                                                    <div class="comment-avatar"><img
-                                                            src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
-                                                            alt=""></div>
-                                                    <!-- Contenedor del Comentario -->
-                                                    <div class="comment-box">
-                                                        <div class="comment-head">
-                                                            <h6 class="comment-name by-author"><a
-                                                                    href="http://creaticode.com/blog">Agustin Ortiz</a>
-                                                            </h6>
-                                                            <span>hace 10 minutos</span>
-                                                            <i class="fa fa-reply"></i>
-                                                            <i class="fa fa-heart"></i>
-                                                        </div>
-                                                        <div class="comment-content">
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Velit omnis animi et iure
-                                                            laudantium vitae, praesentium optio, sapiente distinctio
-                                                            illo?
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        {% endfor %}
-                                        <li>
-                                            <div class="comment-main-level">
-                                                <!-- Avatar -->
-                                                <div class="comment-avatar"><img
-                                                        src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
-                                                        alt=""></div>
-                                                <!-- Contenedor del Comentario -->
-                                                <div class="comment-box">
-                                                    <div class="comment-head">
-                                                        <h6 class="comment-name"><a
-                                                                href="http://creaticode.com/blog">Lorena Rojero</a></h6>
-                                                        <span>hace 10 minutos</span>
-                                                        <i class="fa fa-reply"></i>
-                                                        <i class="fa fa-heart"></i>
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit
-                                                        omnis animi et iure laudantium
-                                                        vitae, praesentium optio, sapiente distinctio illo?
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- comments  -->
-                        <section style="margin-top: 24px;">
-
-                            <!-- tryal phase -->
-                            <div class="row">
-                                {% if reviews %}
-
-                                {% for review in reviews %}
-                                <div class="col-6">
-                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" width="90"
-                                        class="img img-rounded img-fluid" />
-
-                                </div>
-                                <div class="col-6">
-                                    <p>
-                                        <a class="float-left"
-                                            href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>({{ review.author }})
-                                            </strong></a>
-
-                                        {% if review.stars == '3 Stars' %}
-                                        <span class="float-rigt"><i class="text-warning fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warning fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                                        {% endif %}
-                                        {% if review.stars == '4 Stars' %}
-                                        <span class="float-rigt"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                                        {% endif %}
-                                        {% if review.stars == '2 Stars' %}
-                                        <span class="float-rigt"><i class="text-danger fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-danger fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                                        {% endif %}
-                                        {% if review.stars == '1 Star' %}
-                                        <span class="float-rigt"><i class="text-danger fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-dangr fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-succes fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-warnin fa fa-star"></i></span>
-                                        {% endif %}
-
-                                        {% if review.stars == '5 Stars' %}
-                                        <span class="float-rigt"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        <span class="float-rght"><i class="text-success fa fa-star"></i></span>
-                                        {% endif %}
-
-
-                                    </p>
-                                    <div class="clearfix"></div>
-                                    <p>{{ review.comment }}</p>
-
-                                    <small>
-                                        <p class="text-info ">{{ review.created_date }}</p>
-                                    </small>
-                                </div>
-
-                                <hr>
-                                {% endfor %}
-                                {% else %}
-                                <p class="text-center text-muted">No Reviews yet!</p>
-                                {% endif %}
-                            </div>
-
-                            <!-- end of trial phase  -->
-
-                        </section>
-
-                        <div id="comments">
-                            <!-- end comments -->
-                            <h5>Share your experience/views about this Salon</h5>
-                            <form method="POST" class="comment-form">
-                                {% csrf_token %}
-                                {{ comment_form | crispy }}
-                                {% if request.user.is_authenticated %}
-                                <button type="submit" class="save btn btn-success">Save</button>
-                                {% else %}
-                                <p>You must <a href="{% url 'login'%}" style="font-size: 34px;">Login</a> to submit a
-                                    review</p>
-                                {%endif%}
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="col">
+              <div class="card">
+                <div class="card-body">Images</div>
+              </div>
             </div>
-        </section>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">Images</div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">Images</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 container mt-4 salon-location-details">
+        <h5>{{salon.name}}</h5>
+        <p class="text-muted"><span><i class="ti-location-pin mr-2"></i></span>{{salon.location_description}}</p>
+        <p>{{salon.description}}</p>
 
+        <div class="container mt-5">
+          <h5 class="text-muted">Opening Hours</h5>
+          <p>Mon 8-10</p>
+          <p>Tue 8-10</p>
+          <p>Wed 8-10</p>
+          <p>Thu 8-10</p>
+          <p>Fri 8-10</p>
+          <p>Sat 8-10</p>
+          <p>Sun 8-10</p>
+        </div>
+      </div>
     </div>
-    <!-- end of body  -->
-</div>
+
+  </div>
+</section>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key={{MAPS_API_KEY}}&callback=initMap"
+  async defer></script>
+<!-- end of body  -->
+
+<script>
+  var services_selected = []
+
+  // Post booked items with form
+  $('#appointment_form').on('submit', function (event) {
+    $('#appointment_details').val(services_selected)
+  });
+
+  // Display large cart
+  $('#desktop_cart_button').on('click', function () {
+    var desktop_cart_state = $('#desktop_cart_button').attr('name')
+    if (desktop_cart_state == 'hide'){
+      $('#desktop_cart_container').removeClass('hide')
+      $('#desktop_cart_button').attr('name', 'show')
+    }else{
+      $('#desktop_cart_container').addClass('hide')
+      $('#desktop_cart_button').attr('name', 'hide')
+    }
+  });
+
+  // Adding elements to cart, toggling state of add to cart button and pushing items to array
+  var items_booked = 0
+  var appointment_cost = 0
+
+  $(".not-clicked").on("click", function (event) {
+    console.log('this is cost ' + appointment_cost)
+    var el = $(event.target);
+    if (el.text() == "Add") {
+      // Add selected service to array on clicking add
+      var selected_service = parseInt(event.target.id)
+      var item_cost = parseInt(el.attr('name'))
+      console.log(typeof (selected_service))
+
+      services_selected.indexOf(selected_service) === -1 ? services_selected.push(selected_service) :
+        console.log(services_selected)
+
+      // Copy selected element to cart
+      $('.cart-empty').html('')
+
+      var item_selected = el.parent().prev().children().first().clone(true);
+      var cost_item_selected = el.parent().children().first().clone(true);
+      var delete_cart_item = '<div class="col-2 pull-right"><i class="ti-trash remove_from_cart font-weight-bold text-danger text-center"></i></div>'
+      $('.cart_content_container').after(cost_item_selected);
+      $('.cart_content_container').after(item_selected);
+      $('.cart_content_container').after(delete_cart_item);
+
+      el.text("Added");
+      $(this).addClass('clicked').removeClass('not-clicked');
+      items_booked += 1
+      appointment_cost += item_cost
+      $('.cart').removeClass('hide')
+      $('#desktop_cart_button').removeClass('hide')
+      $('#total_items_booked').html(items_booked)
+      $('#desktop_cart_item_selected').html(items_booked)
+      $('#appointment_cost_display').html(appointment_cost)
+      console.log('items booked ' + items_booked)
+      console.log(services_selected)
+    } else {
+      // Removes item from cart when remove button is clicked
+      var selected_service = parseInt(event.target.id)
+      var item_cost = parseInt(el.attr('name'))
+      if (services_selected.includes(selected_service)) {
+        var index = services_selected.indexOf(selected_service);
+        if (index !== -1) services_selected.splice(index, 1);
+      }
+
+      el.text("Add");
+      $(this).addClass('not-clicked').removeClass('clicked');
+      if (items_booked != 0) {
+        items_booked -= 1
+        appointment_cost -= item_cost
+        $('#total_items_booked').html(items_booked)
+        $('#desktop_cart_item_selected').html(items_booked)
+        $('#appointment_cost_display').html(appointment_cost)
+        console.log('items booked ' + items_booked)
+      } else {
+        items_booked = 0
+        $('#total_items_booked').html(items_booked)
+        console.log(items_booked)
+      }
+      console.log(services_selected)
+    }
+  });
+
+  // Remove item from cart
+  $('.remove_from_cart').on('click', '.col-2', function(){
+    console.log('i neeedto')
+  });
+
+  // Slide chart up or down
+  $('.cart-buttons-container').on('click', function () {
+    var cart_state = $('.cart').attr('name')
+    if (cart_state == 'closed') {
+      $('.cart').addClass('show-cart-items overflow-auto').removeClass('hide-cart-items');
+      $('.icon-container').addClass('icon-after-open')
+      $('.cart-icon').removeClass('ti-shopping-cart').addClass('ti-angle-double-down')
+      $('.cart').attr('name', 'opened');
+    } else {
+      $('.cart').addClass('hide-cart-items').removeClass('show-cart-items overflow-auto');
+      $('.icon-container').removeClass('icon-after-open')
+      $('.cart-icon').removeClass('ti-angle-double-down').addClass('ti-shopping-cart')
+      $('.cart').attr('name', 'closed');
+    }
+
+    // Populate cart-items with selected services
+
+  });
+
+</script>
 {% endblock %}

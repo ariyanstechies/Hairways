@@ -9,17 +9,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
-# Salon Google Maps API key
+# import configurations
 MAPS_API_KEY = os.getenv("MAPS_API_KEY")
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
+DATABASE_NAME = os.getenv("DATABASE_NAME")
+DATABASRE_USERNAME = os.getenv("DATABASRE_USERNAME")
+DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', "localhost"]
-# ALLOWED_HOSTS = '*'
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', "localhost", '*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'visits',
 ]
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -72,6 +72,17 @@ WSGI_APPLICATION = 'base.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': DATABASE_NAME,
+#         'USER': DATABASRE_USERNAME,
+#         'PASSWORD': DATABASE_PASSWORD,
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -79,8 +90,7 @@ DATABASES = {
     }
 }
 
-# do necessary configuration for Heroku.
-
+# Heroku Configuration
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
@@ -121,17 +131,16 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'home.User'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-STATIC_URL = '/static/'
-# user redirected to home after successfull login
+# user redirected to home after successful login
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'home/static')]
 
 MEDIA_URL = '/media/'
@@ -142,5 +151,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 BOOTSTRAP4 = {
     'include_jquery': True,
 }
-# Django Visits Hit Count
+# Django Visits Configuration
 MIN_TIME_BETWEEN_VISITS = 1

@@ -1,1 +1,1 @@
-* Comments Section to be ready in more info
+* Reviews Section to be ready in more info

@@ -5,15 +5,17 @@
 <section class="block-31" style="position: relative;">
   <div class="owl-carousel loop-block-31">
     {% for salon in salons|slice:':5' %}
-    <div class="block-30 item" style="background-image:
-      url({% static 'images/'%}{{ forloop.counter }}.jpg);" data-stellar-background-ratio="0.5">
+    <div class="block-30 item"
+     style="background-image: url({% static 'images/'%}{{ forloop.counter }}.jpg);" 
+     data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-10">
             <span class="subheading-sm">Welcome to</span>
             <h2 class="heading">{{ salon.name }}</h2>
             <p>
-              <a href="{% url 'salon_details' name=salon.slug %}" class="btn py-4 px-5 btn-in-slider">Visit Salon</a>
+              <a href="{% url 'salon_details' name=salon.slug %}"
+               class="btn py-4 px-5 btn-in-slider"> Visit Salon</a>
             </p>
           </div>
         </div>
@@ -23,33 +25,32 @@
   </div>
 </section>
 <section class="sticky-top">
-
   <div class="container-fluid card mb-3" style="background-color:white">
     <div class="row align-items-center pt-3 justify-content-center">
       <div class="col-3 col-sm-2">
         <div class="filters">
-          <h5><i class="ti-bolt text-teal"></i><span class="d-none d-sm-inline"> Popular</span>
+          <h5><i class="ti-bolt text-teal"></i>
+            <span class="d-none d-sm-inline"> Popular</span>
           </h5>
-
         </div>
       </div>
       <div class="col-3 col-sm-2">
         <div class="filters">
-          <h5><i class="ti-location-pin text-teal"></i><span class="d-none d-sm-inline"> Near me</span>
+          <h5><i class="ti-location-pin text-teal"></i>
+            <span class="d-none d-sm-inline"> Near me</span>
           </h5>
-
         </div>
       </div>
       <div class="col-3 col-sm-2">
         <div class="filters">
           <h5><i class="ti-thumb-up text-teal"></i><span class="d-none d-sm-inline"> Recommended</span></h4>
           </h5>
-
         </div>
       </div>
       <div class="col-3 col-sm-2">
         <div class="filters">
-          <h5> <i class="ti-gift text-teal"></i> <span class="d-none d-sm-inline">Offers</span>
+          <h5><i class="ti-gift text-teal"></i>
+            <span class="d-none d-sm-inline">Offers</span>
           </h5>
         </div>
       </div>
@@ -58,21 +59,19 @@
       </div>
     </div>
   </div>
-
-
 </section>
-
-
 <section>
   <div class="container">
     <!-- SALONS CONTAINER -->
     <div class="row">
-      <div class="card-deck">
+        <div class="card-deck">
         {% for salon in salons %}
         {% get_visits salon.slug as visits %}
         <div class="col-sm-12 col-md-6 col-lg-4 card-min-height">
           <div class="card salon-card mb-4 m-0">
-            <img class="card-img-top img-fluid" src="{{salon.card_img}}" alt="Card image cap">
+            <img class="card-img-top img-fluid" 
+            src="{{salon.card_img}}" alt="Card image cap">
+
             <div class="card-body card-min-height">
               <h4 class="card-title">
                 {{ salon.name | truncatewords:3 }}
@@ -88,25 +87,29 @@
                 <li class="list-inline-item">
                   <p class="text-muted mb-2">
                     {{ salon.rating }}
-                    ({{ salon.approved_comments.count }})
+                    ({{ salon.approved_reviews.count }})
                   </p>
                 </li>
               </ul>
               <div class="mb-3">
-                <li data-toggle="tooltip" data-placement="top" title="Likes" class="list-inline-item mr-0"><i
-                    class="metismenu-icon ti-thumb-up text-success"></i>
+                <li data-toggle="tooltip" data-placement="top"
+                   title="Likes" class="list-inline-item mr-0">
+                  <i class="metismenu-icon ti-thumb-up text-success"></i>
                   {{ salon.rating }}
                 </li>
-                <li data-toggle="tooltip" data-placement="top" title="Views" class="list-inline-item mr-0"><i
-                    class="metismenu-icon ml-2 ti-eye text-success"></i>
+                <li data-toggle="tooltip" data-placement="top"
+                  title="Views" class="list-inline-item mr-0">
+                  <i class="metismenu-icon ml-2 ti-eye text-success"></i>
                   {% if visits %}{{ visits }}{% else %}0{% endif %}
                 </li>
-                <li data-toggle="tooltip" data-placement="top" title="{{salon.town}}" class="list-inline-item mr-0"><i
-                    class="metismenu-icon ml-2 ti-location-pin text-success"></i>
+                <li data-toggle="tooltip" data-placement="top"
+                  title="{{salon.town}}" class="list-inline-item mr-0">
+                  <i class="metismenu-icon ml-2 ti-location-pin text-success"></i>
                   {{ salon.town | truncatewords:2 }}
                 </li>
               </div>
-              <p data-toggle="tooltip" data-placement="top" title="{{salon.description}}" class="card-text">
+              <p data-toggle="tooltip" data-placement="top"
+                title="{{salon.description}}" class="card-text">
                 {{ salon.description|truncatewords:10 }}
               </p>
               <p class="card-text text-center"><small class="text-muted"><a type="button"
@@ -116,40 +119,46 @@
           </div>
         </div>
         {% empty %}
-        <p class="text-center">Salons will appear here</p>
+        <p class="col-sm-12 text-center">Salons will appear here</p>
         {% endfor %}
-      </div>
+    </div>
     </div>
     {% if salons.has_other_pages %}
     <div class="row">
       <div class="col-sm-12">
         <ul class="pagination justify-content-center">
           {% if salons.has_previous %}
-          <li class="page-item"><a class="page-link" href="?page={{
-                  salons.previous_page_number }}">
-              <i class="ti-arrow-left"></i> Previous</a></li>
+          <li class="page-item"><a class="page-link"
+              href="?page={{ salons.previous_page_number }}">
+              <i class="ti-arrow-left"></i>Previous</a>
+            </li>
           {% else %}
           <li class="page-item disabled"><a class="page-link" href="3" tabindex="-1">
-              <i class="ti-arrow-left"></i> Previous</a></li>
+              <i class="ti-arrow-left"></i>Previous</a>
+          </li>
           {% endif %}
           {% for i in salons.paginator.page_range %}
           {% if salons.number == i %}
-          <li class="page-item active"><a class="page-link" href="?page={{ i
-                  }}">{{ i }}<span class="sr-only">(current)</span></a></li>
+          <li class="page-item active"><a class="page-link"
+              href="?page={{ i }}">{{ i }}<span class="sr-only">(current)</span></a>
+            </li>
           {% else %}
-          <li class="page-item"><a class="page-link" href="?page={{ i }}">
-              {{i}}</a></li>
+          <li class="page-item"><a class="page-link"
+              href="?page={{ i }}">{{i}}</a>
+          </li>
           {% endif %}
           {% endfor %}
           {% if salons.has_next %}
-          <li class="page-item"><a class="page-link" href="?page={{
-                  salons.next_page_number }}">Next
-              <i class="ti-arrow-right"></i></a></li>
+          <li class="page-item"><a class="page-link" 
+              href="?page={{ salons.next_page_number }}">Next
+              <i class="ti-arrow-right"></i></a>
+          </li>
           {% else %}
-          <li class="page-item disabled"><a class="page-link" href="?page={[i}}" tabindex="+1">Next
-              <i class="ti-arrow-right"></i></a></li>
+          <li class="page-item disabled"><a class="page-link" 
+              href="?page={[i}}" tabindex="+1">Next
+              <i class="ti-arrow-right"></i></a>
+          </li>
           {% endif %}
-
         </ul>
       </div>
     </div>

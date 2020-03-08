@@ -39,7 +39,7 @@
                 <li><a href="{% url 'client_update'%}">Edit Profile</a></li>
 
               </ul>
-              <p><a href="#">Appointments</a>|<a href="{% url 'client_dashboard2'%}">Comments</a>|<a href="#">Reviews</a></p>
+              <p><a href="#">Appointments</a>|<a href="{% url 'client_dashboard2'%}">Reviews</a>|<a href="#">Reviews</a></p>
               <h2>Bellow are your appointments </h2>
               {% for appointment in my_appointments %}
                 <p><b>Appointment Id:{{appointment.id}}

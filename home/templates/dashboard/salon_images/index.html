@@ -1,0 +1,150 @@
+{% extends 'shared/dashboard-base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+{% load bootstrap4 %} {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %} {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %} {# Embed Bootstrap JS+jQuery #}
+{{ form.media }} {# Adds date-picker required JS and CSS #}
+
+<div class="container">
+
+    <div class="my-5">
+        <h5>Images <button class="btn pull-right btn-outline-primary" data-toggle="modal"
+                data-target="#exampleModal">Upload Image</button>
+        </h5>
+    </div>
+
+    <h5>Cover Images</h5>
+    <div class="row">
+        {% for img in images %}
+        {% if img.image %}
+        {% if img.image_position == 'Cover Image'%}
+        <div class="col-lg-6 col-xl-4">
+            <div class="card mb-3 wdget-content">
+                <div class="widget-cotent-outer">
+                    <div class="widget-content-wrapper">
+
+                        <img src="{{img.image.url}}" class="img-rounded" alt="Cinque Terre" width="100%" height="400">
+                        {% if img.is_selected %}
+                        <a href="{% url 'select_images' slug=request.user.owner.my_salons.slug id=img.id %}"
+                            class="btn btn-outline-success btn-lg text-warning btn-block">
+                            Current <img src="{% static 'images/success.png'%}" alt="selected" width="30">
+                        </a>
+                        {% else %}
+                        <a href="{% url 'select_images' slug=request.user.owner.my_salons.slug id=img.id %}"
+                            class="btn btn-outline-success btn-lg btn-block">
+                            Select
+                        </a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {%endif%}
+        {%endif%}
+        {% endfor %}
+
+    </div>
+
+
+    <h5>Card Image</h5>
+    <div class="row">
+        {% for img in images %}
+        {% if img.image %}
+        {% if img.image_position == 'Card Image'%}
+        <div class="col-lg-6 col-xl-4">
+            <div class="card mb-3 wdget-content">
+                <div class="widget-cotent-outer">
+                    <div class="widget-content-wrapper">
+
+                        <img src="{{img.image.url}}" class="img-rounded" alt="Cinque Terre" width="100%" height="250">
+                    </div>
+
+                    {% if img.is_selected %}
+                    <a href="{% url 'select_images' slug=request.user.owner.my_salons.slug id=img.id %}"
+                        class="btn btn-outline-success btn-lg text-warning btn-block">
+                        Current <img src="{% static 'images/success.png'%}" alt="selected" width="30">
+                    </a>
+                    {% else %}
+                    <a href="{% url 'select_images' slug=request.user.owner.my_salons.slug id=img.id %}"
+                        class="btn btn-outline-success btn-lg btn-block">
+                        Select
+                    </a>
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+        {%endif%}
+        {%endif%}
+        {% endfor %}
+
+    </div>
+
+    <h5>Promotion Image</h5>
+    <div class="row">
+        {% for img in images %}
+        {% if img.image %}
+        {% if img.image_position == 'Prome Image'%}
+        <div class="col-lg-6 col-xl-4">
+            <div class="card mb-3 wdget-content">
+                <div class="widget-cotent-outer">
+                    <div class="widget-content-wrapper">
+
+                        <img src="{{img.image.url}}" class="img-rounded" alt="Cinque Terre" width="100%" height="400">
+                        {% if img.is_selected %}
+                        <a href="{% url 'select_images' slug=request.user.owner.my_salons.slug id=img.id %}"
+                            class="btn btn-outline-success btn-lg text-warning btn-block">
+                            Current <img src="{% static 'images/success.png'%}" alt="selected" width="30">
+                        </a>
+                        {% else %}
+                        <a href="{% url 'select_images' slug=request.user.owner.my_salons.slug id=img.id %}"
+                            class="btn btn-outline-success btn-lg btn-block">
+                            Select
+                        </a>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {%endif%}
+        {%endif%}
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}
+{% block modal %}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal">Upload Images</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="comments">
+                    <!-- end comments -->
+                    <form method="POST" enctype="multipart/form-data" class="comment-form">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+
+                        <button type="submit" class="save btn btn-success">Save</button>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

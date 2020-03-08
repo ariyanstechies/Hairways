@@ -16,7 +16,7 @@ from django.shortcuts import render, get_object_or_404
 from django.core.serializers import serialize
 from django.views.generic import TemplateView, CreateView
 from home.forms import *
-from home.models import Salon, Services, Owner, Appointments, Products, Comments, SalonSubscription, Comments
+from home.models import Salon, Services, Gallery, Owner, Appointments, Products, Reviews, SalonSubscription
 from home.models import Client, Staff
 from visits.models import Visit
 
@@ -306,7 +306,7 @@ def profile(request, id):
 
 @login_required
 def reviews(request):
-    reviews = Comments.objects.all()
+    reviews = Reviews.objects.all()
     context = {'reviews': reviews}
     return render(request, "dashboard/reviews.html", context)
 
@@ -423,7 +423,7 @@ def salon_details(request, name):
     salon = get_object_or_404(Salon, slug=name)
     services = Services.objects.filter(salon__name=salon.name)
     products = Products.objects.filter(salon__name=salon.name)
-    comments = Comments.objects.filter(
+    reviews = Reviews.objects.filter(
         salon__id=salon.id).order_by("-created_date")
     MAPS_API_KEY = settings.MAPS_API_KEY
 
@@ -431,20 +431,20 @@ def salon_details(request, name):
     stars_1 = stars_2 = stars_3 = stars_4 = stars_5 = 0
     ps1 = ps2 = ps3 = ps4 = ps5 = 0
 
-    for comment in comments:
-        if comment.stars == '1 Star':
+    for review in reviews:
+        if review.stars == '1 Star':
             stars_1 += 1
 
-        if comment.stars == '2 Stars':
+        if review.stars == '2 Stars':
             stars_2 += 1
 
-        if comment.stars == '3 Stars':
+        if review.stars == '3 Stars':
             stars_3 += 1
 
-        if comment.stars == '4 Stars':
+        if review.stars == '4 Stars':
             stars_4 += 1
 
-        if comment.stars == '5 Stars':
+        if review.stars == '5 Stars':
             stars_5 += 1
 
     total_stars = stars_1 + stars_2 + stars_3 + stars_4 + stars_5
@@ -460,20 +460,24 @@ def salon_details(request, name):
         salon.rating = average_rating
         salon.save()
     if request.method == "POST":
-        comment_form = CommentForm(request.POST)
-        if comment_form.is_valid():
+        form = ReviewForm(request.POST)
+        data = request.POST.copy()
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.salon = salon
+            form.author = request.user
+            form.ambience_rating = data.get('ambience', 0.0)
+            form.cleanliness_rating = data.get('cleanliness', 0.0)
+            form.staff_rating = data.get('staff', 0.0)
 
-            comment = comment_form.save(commit=False)
-            comment.salon = salon
-            comment.author = request.user
-
-            comment.save()
+            form.save()
             messages.success(
                 request,
                 'Review Received Successfully! It will be posted soon. You can edit it on your Profile'
             )
             return redirect('salon_details', name=name)
-    comment_form = CommentForm()
+    else:
+        review_form = ReviewForm()
 
     if request.method == "POST":
         form = clientAppointment(request.POST)
@@ -492,9 +496,9 @@ def salon_details(request, name):
         'average_rating': average_rating,
         'services': services,
         'products': products,
-        'reviews': comments,
+        'reviews': reviews,
         'counter': 0,
-        'comment_form': comment_form,
+        'review_form': review_form,
         'total_stars': total_stars,
         'form': form,
         'clientAppointment': clientAppointment,
@@ -748,3 +752,71 @@ def appointment_reject(request, pk):
     appointment.is_accepted = False
     appointment.save()
     return redirect('appointments', pk=pk)
+
+
+def salon_images(request, slug):
+    salon = get_object_or_404(Salon, slug=slug)
+    images = Gallery.objects.filter(salon=salon)
+
+    if request.method == "POST":
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            imageAdd = form.save(commit=False)
+            imageAdd.salon = salon
+            imageAdd.save()
+            messages.success(request, 'Imabge succesfully added')
+            return redirect('salon_images', request.user.owner.my_salons.slug)
+    form = ImageForm()
+
+    context = {
+        'images': images,
+        'form': form
+    }
+
+    return render(request, 'dashboard/salon_images/index.html', context)
+
+
+def select_image(request, slug, id):
+    salon = get_object_or_404(Salon, slug=slug)
+    images = Gallery.objects.filter(salon=salon)
+    img = get_object_or_404(Gallery, id=id)
+    if img.image_position == "Card Image":
+        current_card_image = images.filter(
+            image_position="Card Image")
+        for image in current_card_image:
+            if image.id == id:
+                image.is_selected = True
+                image.save()
+                salon.card_img = image.image.url
+                salon.save()
+
+            else:
+                image.is_selected = False
+                image.save()
+
+    elif img.image_position == "Cover Image":
+        cover_image = images.filter(
+            image_position="Cover Image")
+        for image in cover_image:
+            if image.id == id:
+                image.is_selected = True
+                image.save()
+                salon.cover_img = image.image.url
+                salon.save()
+            else:
+                image.is_selected = False
+                image.save()
+    else:
+        cover_image = images.filter(
+            image_position="Prome Image")
+        for image in cover_image:
+            if image.id == id:
+                image.is_selected = True
+                image.save()
+                salon.promo_img = image.url
+                salon.save
+            else:
+                image.is_selected = False
+                image.save()
+
+    return redirect('salon_images', request.user.owner.my_salons.slug)

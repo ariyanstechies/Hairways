@@ -69,13 +69,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for comment in my_comments %}
+                                        {% for review in my_reviews %}
                                         <tr>
-                                            <td>#{{comment.id}}</td>
-                                            <td>{{comment.created_date}}</td>
-                                            <td>{{comment.salon}}</td>
+                                            <td>#{{review.id}}</td>
+                                            <td>{{review.created_date}}</td>
+                                            <td>{{review.salon}}</td>
 
-                                            <td>{% if comment.approved_comment%} Approved
+                                            <td>{% if review.approved_review%} Approved
 
                                                 {% else %}
                                                 Waiting Approval
@@ -99,13 +99,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for comment in my_comments %}
+                                        {% for review in my_reviews %}
                                         <tr>
-                                            <td>#{{comment.id}}</td>
-                                            <td>{{comment.created_date}}</td>
-                                            <td>{{comment.salon}}</td>
+                                            <td>#{{review.id}}</td>
+                                            <td>{{review.created_date}}</td>
+                                            <td>{{review.salon}}</td>
 
-                                            <td>{% if comment.approved_comment%} Approved
+                                            <td>{% if review.approved_review%} Approved
 
                                                 {% else %}
                                                 Waiting Approval

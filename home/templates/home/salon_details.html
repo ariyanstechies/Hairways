@@ -1,170 +1,200 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
-{% load bootstrap4 %}
-{# import bootstrap4/bootstrap3 #}
+{% load bootstrap4 %} {# import bootstrap4/bootstrap3 #}
 {% bootstrap_css %} {# Embed Bootstrap CSS #}
 {% bootstrap_javascript jquery='full' %} {# Embed Bootstrap JS+jQuery #}
 {{ form.media }} {# Adds date-picker required JS and CSS #}
 
-<div>
-  <div class="container">
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <strong class="text-success"></strong> {{ message }}
-      <button type="button" class="close" data-dismiss="alert"
-        aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% endfor %}
-    {% endif %}
+<div class="container">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong class="text-success"></strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-  <section>
-    <div class="owl-carousel salon-details-slider owl-theme">
-      <div class="item">
-        <img src="{% static 'images/'%}1.jpg" alt="{{ salon.name }}">
-      </div>
-      <div class="item">
-        <img src="{% static 'images/'%}2.jpg" alt="{{ salon.name }}">
-      </div>
-      <div class="item">
-        <img src="{% static 'images/'%}3.jpg" alt="{{ salon.name }}">
-      </div>
-      <div class="item">
-        <img src="{% static 'images/'%}4.jpg" alt="{{ salon.name }}">
-      </div>
+  {% endfor %}
+  {% endif %}
+</div>
+<section>
+  <div class="owl-carousel salon-details-slider owl-theme">
+    <div class="item">
+      <img src="{% static 'images/'%}1.jpg" alt="{{ salon.name }}">
     </div>
-  </section>
-  <section>
-    <div class="container mt-1">
-      <div class="row">
-        <div class="col-sm-8">
-          <h3>{{ salon.name }}</h3>
-          <p>{{ salon.location_description }}</p>
-        </div>
-        <div class="col-sm-4">
-          <div class="review-card-summary row">
-            <div class="review-stars-average col-3 text-danger">
-              {{ average_rating }}
-            </div>
-            <div class="review-stars-wrapper col-9">
-              <div class="d-inline-flex">
-                <div class="rating_stars_container d-flex">
-                  <i class="ti-star icon-large"></i>
-                  <i class="ti-star icon-large"></i>
-                  <i class="ti-star icon-large"></i>
-                  <i class="ti-star icon-large"></i>
-                  <i class="ti-star icon-large"></i>
-                </div>
+    <div class="item">
+      <img src="{% static 'images/'%}2.jpg" alt="{{ salon.name }}">
+    </div>
+    <div class="item">
+      <img src="{% static 'images/'%}3.jpg" alt="{{ salon.name }}">
+    </div>
+    <div class="item">
+      <img src="{% static 'images/'%}4.jpg" alt="{{ salon.name }}">
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container mt-1">
+    <div class="row">
+      <div class="col-sm-8">
+        <h3>{{ salon.name }}</h3>
+        <p>{{ salon.location_description }}</p>
+      </div>
+      <div class="col-sm-4">
+        <div class="review-card-summary row">
+          <div class="review-stars-average col-3 text-danger">
+            {{ average_rating }}
+          </div>
+          <div class="review-stars-wrapper col-9">
+            <div class="d-inline-flex">
+              <div class="rating_stars_container d-flex">
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
+                <i class="ti-star icon-large"></i>
               </div>
-              <p class="text-muted my-0">{{salon.reviews.count}} Ratings</p>
             </div>
+            <p class="text-muted my-0">{{salon.reviews.count}} Ratings</p>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- body  -->
-  <div class="container">
-    <section>
-      <div class="services-products">
 
+<!-- body  -->
+<div class="container">
+
+  <!-- Product Services Toggler -->
+  <section>
+    <div class="services-products">
+      <h4 class="text-teal mt-5">Products and Services</h4>
+      <div class="mt-5 mb-5">
         <ul class="nav nav-justified services-products-toggler mt-3 mb-2">
-          <li class="nav-item"><a data-toggle="tab" href="#services"
-              class="active nav-link">Services</a></li>
-          <li class="nav-item"><a data-toggle="tab" href="#products"
-              class="nav-link">Products</a></li>
+          <h5 class="nav-item"><a data-toggle="tab" href="#services"
+              class="active nav-link">Services</a></h5>
+          <h5 class="nav-item"><a data-toggle="tab" href="#products"
+              class="nav-link">Products</a></h5>
         </ul>
+      </div>
+    </section>
 
-        <!-- Sticky filter -->
-        {% if services or products %}
-        <div class="container-fluid card sticky-top"
-          style="background-color:white">
-          <div class="row align-items-center pt-3 justify-content-center">
-            <div class="col-3 col-sm-2">
-              <div class="filters">
-                <h5><i class="ti-bolt text-teal"></i><span class="d-none
-                    d-sm-inline"> Popular</span>
-                </h5>
-              </div>
-            </div>
-            <div class="col-3 col-sm-2">
-              <div class="filters">
-                <h5><i class="ti-location-pin text-teal"></i><span class="d-none
-                    d-sm-inline"> Near me</span>
-                </h5>
-              </div>
-            </div>
-            <div class="col-3 col-sm-2">
-              <div class="filters">
-                <h5><i class="ti-thumb-up text-teal"></i><span class="d-none
-                    d-sm-inline"> Recommended</span></h4>
+    <!-- Sticky filter on phones and services / products displayed-->
+    <section>
+      {% if services or products %}
+      <div class="container-fluid card sticky-top d-block d-md-none d-lg-none"
+        style="background-color:white">
+        <div class="row align-items-center pt-3 justify-content-center">
+          <div class="col-3">
+            <div class="filters">
+              <h5><i class="ti-bolt text-teal"></i><span class="d-none
+                  d-md-inline"> Popular</span>
               </h5>
             </div>
           </div>
-          <div class="col-3 col-sm-2">
+          <div class="col-3">
             <div class="filters">
-              <h5> <i class="ti-gift text-teal"></i> <span class="d-none
-                  d-sm-inline">Offers</span>
+              <h5><i class="ti-location-pin text-teal"></i><span class="d-none
+                  d-md-inline"> Near me</span>
               </h5>
             </div>
+          </div>
+          <div class="col-3">
+            <div class="filters">
+              <h5><i class="ti-thumb-up text-teal"></i><span class="d-none
+                  d-md-inline"> Recommended</span></h4>
+            </h5>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="filters">
+            <h5> <i class="ti-gift text-teal"></i> <span class="d-none
+                d-md-inline">Offers</span>
+            </h5>
           </div>
         </div>
       </div>
-      {% endif %}
+    </div>
 
-
-      <div class="tab-content mt-3">
-        <div class="tab-pane active" id="services" role="tabpanel">
-          <div class="card border-0">
+    <!-- Products and service display -->
+    <div class="tab-content mb-5 mt-3">
+      <div class="tab-pane active" id="services" role="tabpanel">
+        <div class="row mt-4">
+          <div class="card mt-3 col-md-4 d-none d-md-block d-lg-block border-0">
+            <p><i class="ti-bolt text-teal mr-2"></i><span class="text-muted
+                font-weight-bold">Popular</span></p>
+            <p><i class="ti-location-pin text-teal mr-2"></i><span
+                class="text-muted font-weight-bold">Near Me</span>
+            </p>
+            <p><i class="ti-thumb-up text-teal mr-2"></i><span class="text-muted
+                font-weight-bold">Recommended</span>
+            </p>
+            <p><i class="ti-gift text-teal mr-2"></i><span class="text-muted
+                font-weight-bold">Offers</span></p>
+          </div>
+          <div class="card col border-0">
             {% for service in services %}
-            <div class="row">
+            <div class="row my-3">
               <div class="col-8">
                 <h5 class="mb-0">{{service.name}}</h5>
-                <p class="text-muted">{{service.duration}} Min</p>
+                <p class="mt-2 text-muted">{{service.duration}} Min</p>
               </div>
               <div class="col-4">
-                <p class="mb-0">Ksh <b>{{service.cost}}</b></p>
-                <button class="btn not-clicked mr-0 py-0 mt-2"
-                  id="{{service.id}}">Add</button>
+                <p class="mt-0">Ksh <b>{{service.cost}}</b></p>
+                <button class="btn not-clicked mr-0 py-0 mt-0"
+                  name="{{service.cost}}" id="{{service.id}}">Add</button>
               </div>
             </div>
-            <hr class="mt-1 mb-3">
             {% empty %}
             <div class="container my-3 text-muted text-center">
               <p>We Have no services at the moment. Please check again later</p>
             </div>
             {% endfor %}
           </div>
-
         </div>
-        <div class="tab-pane" id="products" role="tabpanel">
-          <div class="card border-0">
+      </div>
+      <div class="tab-pane" id="products" role="tabpanel">
+        <div class="row mt-4">
+          <div class="card mt-3 col-md-4 d-none d-sm-block border-0">
+            <p><i class="ti-bolt text-teal mr-2"></i><span class="text-muted
+                font-weight-bold">Popular</span></p>
+            <p><i class="ti-location-pin text-teal mr-2"></i><span
+                class="text-muted font-weight-bold">Near Me</span>
+            </p>
+            <p><i class="ti-thumb-up text-teal mr-2"></i><span class="text-muted
+                font-weight-bold">Recommended</span>
+            </p>
+            <p><i class="ti-gift text-teal mr-2"></i><span class="text-muted
+                font-weight-bold">Offers</span></p>
+          </div>
+          <div class="card col border-0">
             {% for product in products %}
-            <div class="row">
+            <div class="row my-3">
               <div class="col-8">
                 <h5 class="mb-0">{{product.name}}</h5>
-                <p class="text-muted">{{product.duration}} Min</p>
+                <p class="mt-2 text-muted">{{product.brand}} Min</p>
               </div>
               <div class="col-4">
-                <p class="mb-0 font-weight-bold">Ksh {{product.price}}</p>
-                <button class="btn btn-outline-success py-0">add</button>
+                <p class="mt-0">Ksh <b>{{product.price}}</b></p>
+                <button class="btn not-clicked mr-0 py-0 mt-0"
+                  name="{{product.price}}" id="{{product.id}}">Add</button>
               </div>
             </div>
-            <hr class="my-1">
             {% empty %}
             <div class="container my-3 text-muted text-center">
               <p>We Have no products at the moment. Please check again later</p>
             </div>
             {% endfor %}
           </div>
-
         </div>
       </div>
     </div>
+    {% endif %}
   </section>
 </div>
 <section>
@@ -298,56 +328,212 @@
         {% endfor %}
       </div>
     </div>
-  </section>
-  <section>
-    <div title="closed" class="cart">
-      <div class="row cart-buttons-container mx-0">
-        <div class="col-4 cart-amount container text-white">
-          <p class="mt-2 ml-2"><b class="cart-items-counter"
-              id="total_items_booked">0</b></p>
-        </div>
-        <div class="col-4 cart-icon-container">
-          <div class="icon-container text-white col-4 rounded-circle">
-            <i class="ti-shopping-cart cart-icon"></i>
-          </div>
-        </div>
-        <div class="col-4 bg-danger cart-cost text-center text-white">
-          <p class="mt-3"><b>Ksh 500</b></p>
+  </div>
+</section>
+<!-- Mobile version cart section -->
+<section>
+  <div name="closed" class="cart ml-0 hide d-block d-sm-none">
+    <div class="row cart-buttons-container mx-0">
+      <div class="col-4 cart-amount container text-white">
+        <p class="mt-2 ml-2"><b class="cart-items-counter"
+            id="total_items_booked">0</b></p>
+      </div>
+      <div class="col-4 cart-icon-container">
+        <div class="icon-container text-white col-4 rounded-circle">
+          <i class="ti-shopping-cart cart-icon"></i>
         </div>
       </div>
-      <div class="container display-selected-items pt-4 cart-items-container">
-        <p class="text-center text-muted">You have not selected any services or
-          products.</p>
+      <div class="col-4 bg-danger cart-cost text-center text-white">
+        <p class="mt-3">Ksh <b id="appointment_cost_display">0</b></p>
       </div>
     </div>
-  </section>
+    <div class="container display-selected-items pt-4 pb-5
+      cart-items-container">
+      <div class="container cart_content_container">
+        <p class="text-center cart-empty mt-4 text-muted">You have not
+          selected any services or products.</p>
+      </div>
+      <div class="container mt-3">
+        <form action="" id="appointment_form" method="POST">
+          {% csrf_token %}
+          <h5 class="text-teal my-2">Appointment Date</h5>
+          {% bootstrap_form form %}
+          <input type="text" id="appointment_details" hidden
+            name="appointment">
+          <button class="btn btn-outline-teal" type="submit">Place Appointment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- end of body  -->
-</div>
+<!-- Desktop version cart -->
+<section>
+  <div class="desktop-cart d-none d-sm-block d-md-block">
+    <button name="hide" id="desktop_cart_button"
+      class="desktop-cart-icon-container hide btn btn-outline-teal my-auto
+      text-center rounded-circle">
+      <i class="desktop-cart-icon text-teal font-weight-bold my-auto py-3
+        ti-shopping-cart"></i>
+      <span id="desktop_cart_item_selected" class="font-weight-bold">6</span>
+    </button>
+  </div>
+
+
+  <div id="desktop_cart_container" class="container border-1 hide w-50
+    display-selected-items mt-3 d-none d-sm-block d-md-block
+    desktop-cart-items-container">
+    <div class="card-body">
+      <div class="container cart_content_container">
+        <p class="text-center cart-empty mt-4 text-muted">You have not
+          selected any services or products.</p>
+      </div>
+      <div class="container mt-3">
+        <form action="" id="appointment_form" method="POST">
+          {% csrf_token %}
+          <h5 class="text-teal my-2">Appointment Date</h5>
+          {% bootstrap_form form %}
+          <input type="text" id="appointment_details" hidden
+            name="appointment">
+          <button class="btn btn-outline-teal" type="submit">Place Appointment</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- About section -->
+<section>
+  <div class="about mt-4">
+    <h5 class="container text-teal">About</h5>
+    <div class="row mx-2 mt-4">
+      <div class="container col-md-7">
+        <div id="map" class="salon-details-map">
+          <script>
+            var map;
+            function initMap() {
+              map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8
+              });
+            }
+          </script>
+        </div>
+        <div class="container mt-5">
+          <h5 class="text-muted mb-3">Gallery</h5>
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">Images</div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">Images</div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">Images</div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">Images</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 container mt-4 salon-location-details">
+        <h5>{{salon.name}}</h5>
+        <p class="text-muted"><span><i class="ti-location-pin mr-2"></i></span>{{salon.location_description}}</p>
+        <p>{{salon.description}}</p>
+
+        <div class="container mt-5">
+          <h5 class="text-muted">Opening Hours</h5>
+          <p>Mon 8-10</p>
+          <p>Tue 8-10</p>
+          <p>Wed 8-10</p>
+          <p>Thu 8-10</p>
+          <p>Fri 8-10</p>
+          <p>Sat 8-10</p>
+          <p>Sun 8-10</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key={{MAPS_API_KEY}}&callback=initMap"
+  async defer></script>
+<!-- end of body  -->
 
 <script>
+  var services_selected = []
+
+  // Post booked items with form
+  $('#appointment_form').on('submit', function (event) {
+    $('#appointment_details').val(services_selected)
+  });
+
+  // Display large cart
+  $('#desktop_cart_button').on('click', function () {
+    var desktop_cart_state = $('#desktop_cart_button').attr('name')
+    if (desktop_cart_state == 'hide'){
+      $('#desktop_cart_container').removeClass('hide')
+      $('#desktop_cart_button').attr('name', 'show')
+    }else{
+      $('#desktop_cart_container').addClass('hide')
+      $('#desktop_cart_button').attr('name', 'hide')
+    }
+  });
 
   // Adding elements to cart, toggling state of add to cart button and pushing items to array
   var items_booked = 0
-  var services_selected = []
+  var appointment_cost = 0
+
   $(".not-clicked").on("click", function (event) {
+    console.log('this is cost ' + appointment_cost)
     var el = $(event.target);
     if (el.text() == "Add") {
       // Add selected service to array on clicking add
       var selected_service = parseInt(event.target.id)
+      var item_cost = parseInt(el.attr('name'))
       console.log(typeof (selected_service))
+
       services_selected.indexOf(selected_service) === -1 ? services_selected.push(selected_service) :
         console.log(services_selected)
+
+      // Copy selected element to cart
+      $('.cart-empty').html('')
+
+      var item_selected = el.parent().prev().children().first().clone(true);
+      var cost_item_selected = el.parent().children().first().clone(true);
+      var delete_cart_item = '<div class="col-2 pull-right"><i class="ti-trash remove_from_cart font-weight-bold text-danger text-center"></i></div>'
+      $('.cart_content_container').after(cost_item_selected);
+      $('.cart_content_container').after(item_selected);
+      $('.cart_content_container').after(delete_cart_item);
 
       el.text("Added");
       $(this).addClass('clicked').removeClass('not-clicked');
       items_booked += 1
+      appointment_cost += item_cost
+      $('.cart').removeClass('hide')
+      $('#desktop_cart_button').removeClass('hide')
       $('#total_items_booked').html(items_booked)
+      $('#desktop_cart_item_selected').html(items_booked)
+      $('#appointment_cost_display').html(appointment_cost)
       console.log('items booked ' + items_booked)
       console.log(services_selected)
     } else {
       // Removes item from cart when remove button is clicked
       var selected_service = parseInt(event.target.id)
+      var item_cost = parseInt(el.attr('name'))
       if (services_selected.includes(selected_service)) {
         var index = services_selected.indexOf(selected_service);
         if (index !== -1) services_selected.splice(index, 1);
@@ -357,7 +543,10 @@
       $(this).addClass('not-clicked').removeClass('clicked');
       if (items_booked != 0) {
         items_booked -= 1
+        appointment_cost -= item_cost
         $('#total_items_booked').html(items_booked)
+        $('#desktop_cart_item_selected').html(items_booked)
+        $('#appointment_cost_display').html(appointment_cost)
         console.log('items booked ' + items_booked)
       } else {
         items_booked = 0
@@ -368,19 +557,29 @@
     }
   });
 
+  // Remove item from cart
+  $('.remove_from_cart').on('click', '.col-2', function(){
+    console.log('i neeedto')
+  });
+
   // Slide chart up or down
   $('.cart-buttons-container').on('click', function () {
-    var cart_state = $('.cart').attr('title')
+    var cart_state = $('.cart').attr('name')
     if (cart_state == 'closed') {
-      $('.cart').addClass('show-cart-items').removeClass('hide-cart-items');
-      $('.cart').prop('title', 'opened');
+      $('.cart').addClass('show-cart-items overflow-auto').removeClass('hide-cart-items');
+      $('.icon-container').addClass('icon-after-open')
+      $('.cart-icon').removeClass('ti-shopping-cart').addClass('ti-angle-double-down')
+      $('.cart').attr('name', 'opened');
     } else {
-      $('.cart').addClass('hide-cart-items').removeClass('show-cart-items');
-      $('.cart').prop('title', 'closed');
+      $('.cart').addClass('hide-cart-items').removeClass('show-cart-items overflow-auto');
+      $('.icon-container').removeClass('icon-after-open')
+      $('.cart-icon').removeClass('ti-angle-double-down').addClass('ti-shopping-cart')
+      $('.cart').attr('name', 'closed');
     }
+
+    // Populate cart-items with selected services
+
   });
 
 </script>
 {% endblock %}
-
-<!-- '<div class="row my-2"><div class="col-10"><h6 class="mb-0">'+ services.i.name +'</h6><p class="text-muted">Ksh '+ services.i.cost +'</p></div><div class="col-2"><button class="btn btn-outline-success py-0">add</button></div></div>' -->

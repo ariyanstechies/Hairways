@@ -19,7 +19,7 @@ DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', "localhost"]
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', "localhost", '*']
 
 # Application definition
 INSTALLED_APPS = [

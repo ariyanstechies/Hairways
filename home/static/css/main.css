@@ -335,6 +335,14 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 
 .img-fluid {
 	min-height: 200px;
+	width: 100%;
+	height: 100%;
+}
+
+.cash-payment-container {
+	max-height: 200px;
+	height: 90px;
+	border: 2px solid teal !important;
 }
 
 .card-min-height {
@@ -452,17 +460,17 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	background: #FF3414;
 }
 
-.services-products-toggler li a {
+.services-products-toggler h5 a {
 	color: #6c757d;
 	border-bottom: 2px solid white;
 }
 
-.services-products-toggler li a:hover {
+.services-products-toggler h5 a:hover {
 	color: teal;
 	border-bottom: 2px solid teal;
 }
 
-.services-products-toggler li a:focus {
+.services-products-toggler h5 a:focus {
 	color: teal;
 	border-bottom: 2px solid teal;
 }
@@ -471,6 +479,11 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	color: teal !important;
 	border: 2px solid teal !important;
 	box-shadow: none !important;
+}
+
+.btn-outline-teal {
+	color: teal !important;
+	border: 2px solid teal !important;
 }
 
 .not-clicked:hover {
@@ -670,11 +683,20 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	height: auto;
 }
 
+.image-card {
+	height: 90px;
+}
+
+.icon-after-open {
+	margin-top: 30px !important;
+}
+
 .cart {
 	position: fixed;
 	z-index: 1030;
 	width: 100%;
 	background-color: teal;
+	max-height: 80vh;
 	height: 50px;
 	bottom: 0px;
 	border-top-left-radius: 20px;
@@ -750,13 +772,52 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	height: auto;
 }
 
+.hide {
+	visibility: hidden;
+}
+
 .hide-cart-items {
 	max-height: 50px;
 }
 
 .cart-items-container {
-	height: 1900px;
+	height: auto;
 	background: whitesmoke;
+}
+
+.desktop-cart-icon-container {
+	z-index: 1050;
+	font-size: x-large;
+	position: fixed;
+	top: 50px;
+	right: 50px;
+	height: 50px;
+	width: 50px;
+}
+
+.desktop-cart-icon-container:hover {
+	box-shadow: 0 2px gray;
+}
+
+.desktop-cart-icon {
+	position: relative;
+	top: calc(50% - 10px);
+}
+
+.desktop-cart-items-container {
+	z-index: 1050;
+	border: 1px solid teal;
+	border-radius: 7px;
+	position: fixed;
+	top: 100px;
+	right: 50px;
+	background-color: whitesmoke;
+}
+
+/* ================== salon details =================== */
+
+.salon-details-map {
+	height: 350px !important;
 }
 
 /*==================  django forms  ==================*/
@@ -895,8 +956,6 @@ p {
 .headshot-3 {
 	border-radius: 30% 10%;
 }
-
-/* Footer Style */
 
 .footer {
 	bottom: 0;

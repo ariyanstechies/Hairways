@@ -11,12 +11,31 @@
 
   <body>
     <div class="wrapper">
+      {% block nav %}
       {% include "shared/navbar.html" %}
-      <div class="main">
-      {% block content %}
       {% endblock %}
+      <div class="main">
+        {% block content %}
+        {% endblock %}
       </div>
       {% include "shared/footer.html" %}
+    </div>
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog"
+      aria-labelledby="signupModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h3 class="mb-4">I want to </h3>
+            <a href="{% url 'owner_signup' %}" class="btn btn-outline-success
+              d-block my-3 btn-rounded p-2 mx-4">
+              List a Business</a>
+            <a href="{% url 'client_signup' %}" class="btn btn-outline-info
+              d-block my-3 btn-rounded p-2 mx-4">
+              Sign up as User</a>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

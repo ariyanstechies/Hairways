@@ -14,8 +14,8 @@ class ClientSignUpForm(UserCreationForm):
             'username',
             'password1',
             'password2',
-            'image',
         )
+        widgets = {'username': forms.TextInput(attrs={'labels': ''})}
 
     @transaction.atomic
     def save(self):
@@ -125,13 +125,11 @@ class ProductForm(forms.ModelForm):
 class clientAppointment(forms.ModelForm):
     class Meta:
         model = Appointments
-        fields = ['appointment_date',]
-        labels = {
-            'appointment_date': ''
-        }
-        widgets = {
-            'appointment_date': DatePickerInput()
-        }
+        fields = [
+            'appointment_date',
+        ]
+        labels = {'appointment_date': ''}
+        widgets = {'appointment_date': DatePickerInput()}
 
 
 class SalonAppointment(forms.ModelForm):

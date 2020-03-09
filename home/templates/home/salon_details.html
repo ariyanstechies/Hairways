@@ -283,8 +283,7 @@
           <form method="post" class="review-form">
             {% csrf_token %}
             {% include 'utils/star-widget-field.html' with category='ambience'%}
-            {% include 'utils/star-widget-field.html' with
-            category='cleanliness'%}
+            {% include 'utils/star-widget-field.html' with category='cleanliness'%}
             {% include 'utils/star-widget-field.html' with category='staff'%}
             <div class="review-form">
               {% bootstrap_form review_form %}

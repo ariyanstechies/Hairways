@@ -1,9 +1,9 @@
 {% extends 'shared/dashboard-base.html' %}
 {% block content %}
 {% load bootstrap4 %}
-
+{% load static %}
 <br>
-<div class="row">
+<div class="row ml-3 mr-3">
     <div class="col-md-12 col-lg-4">
         <div class="mb-3 card">
             <div class="card-header-tab card-header-tab-animation card-header">
@@ -14,7 +14,21 @@
 
             </div>
             <div class="card-body">
-                <img src="{{request.user.owner.my_salons.cover_img}}" alt="">
+
+                {% if request.user.image %}
+                <img src="{{request.user.image.url}}" width="100%" alt="">
+                {% else %}
+                <img src="{% static 'images/isolated.svg'%}" alt="">
+                {% endif %}
+
+
+                <form method="POST" enctype="multipart/form-data" class="post-form">
+                    {% csrf_token %}
+                    {% bootstrap_form ppicform %}
+                    <div class="button-row d-flex mt-4">
+                        <button type="submit" class="save btn btn-success ml-auto text-uppercase">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -33,7 +47,7 @@
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     <div class="button-row d-flex mt-4">
-                        <button type="submit" class="save btn btn-success ml-auto text-uppercase">Updateg</button>
+                        <button type="submit" class="save btn btn-success ml-auto text-uppercase">Update</button>
                     </div>
                 </form>
             </div>

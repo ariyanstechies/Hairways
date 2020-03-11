@@ -18,6 +18,7 @@ class tempuser(models.Model):
 class User(AbstractUser):
     is_client = models.BooleanField(default=False)
     is_owner = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     nickname = models.CharField(max_length=30, null=True, blank=True)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
 
@@ -147,16 +148,20 @@ class Products(models.Model):
 
 
 class Staff(models.Model):
+    user = models.OneToOneField(User,
+                                on_delete=models.CASCADE,
+                                primary_key=True,
+                                related_name='staff')
     salon = models.ForeignKey(Salon,
                               on_delete=models.CASCADE,
                               related_name='staffs')
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
+    firstname = models.CharField(max_length=100, null=True, blank=True)
+    lastname = models.CharField(max_length=100, null=True, blank=True)
     date_started = models.DateField(default=timezone.now)
-    salary = models.IntegerField()
-    job_description = models.CharField(max_length=100)
-    phone = models.IntegerField()
-    email = models.CharField(max_length=100)
+    salary = models.IntegerField(null=True, blank=True)
+    job_description = models.CharField(max_length=100, null=True, blank=True)
+    phone = models.IntegerField(null=True, blank=True)
+    email = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.firstname

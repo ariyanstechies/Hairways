@@ -26,6 +26,15 @@ class ClientSignUpForm(UserCreationForm):
         return user
 
 
+class StaffSignUpForm(UserCreationForm):
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = (
+            'username',
+        )
+
+
 class OwnerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
@@ -125,7 +134,7 @@ class ProductForm(forms.ModelForm):
 class clientAppointment(forms.ModelForm):
     class Meta:
         model = Appointments
-        fields = ['appointment_date',]
+        fields = ['appointment_date', ]
         labels = {
             'appointment_date': ''
         }
@@ -164,3 +173,9 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Owner
         fields = ('ownerName', 'email', 'phone', 'location')
+
+
+class PpicUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('image',)

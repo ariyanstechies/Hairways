@@ -831,6 +831,17 @@ def user_profile(request):
             return redirect('user_profile')
     else:
         form = ProfileUpdateForm(instance=owner_to_update)
-    context = {'form': form}
+
+    if request.method == "POST":
+        ppicform = PpicUpdateForm(
+            request.POST, request.FILES, instance=request.user)
+        if ppicform.is_valid():
+            ppicform.save()
+            return redirect('user_profile')
+    else:
+        ppicform = PpicUpdateForm(instance=request.user)
+
+    context = {
+        'form': form, 'ppicform': ppicform}
 
     return render(request, 'dashboard/user_profile/index.html', context)

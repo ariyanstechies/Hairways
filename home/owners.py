@@ -16,7 +16,7 @@ from django.template.defaultfilters import slugify
 class OwnerSignUpView(CreateView):
     model = User
     form_class = OwnerSignUpForm
-    template_name = 'registration/signup_form.html'
+    template_name = 'registration/signup.html'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'owner'

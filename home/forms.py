@@ -15,7 +15,6 @@ class ClientSignUpForm(UserCreationForm):
             'password1',
             'password2',
         )
-        widgets = {'username': forms.TextInput(attrs={'labels': ''})}
 
     @transaction.atomic
     def save(self):
@@ -33,7 +32,6 @@ class OwnerSignUpForm(UserCreationForm):
             'username',
             'password1',
             'password2',
-            'image',
         )
 
     def save(self, commit=True):

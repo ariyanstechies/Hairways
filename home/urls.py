@@ -8,8 +8,7 @@ from home.clients import AppointmentListView, MiniDashboard
 from home.clients import ReviewsListView, MyAppointments, MyReviews
 
 urlpatterns = [
-    path('home', views.index, name='home'),
-    path('', views.comingsoon, name='comingsoon'),
+    path('', views.index, name='home'),
     path('current/registerd/salons', views.crs, name='crs'),
     path('about/', views.about, name='about'),
     path('faqs/', views.faqs, name='faqs'),
@@ -70,13 +69,10 @@ urlpatterns = [
     path('dashboard/salon/images<slug:slug>',
          views.salon_images,
          name='salon_images'),
-
     path('dashboard/salon/select/images<slug:slug>/<int:id>',
          views.select_image,
          name='select_images'),
     path('user/profile', views.user_profile, name='user_profile'),
-
-
 
     path('upload/', views.upload, name='upload'),
     path('about/client/<int:pk>/',

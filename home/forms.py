@@ -14,7 +14,6 @@ class ClientSignUpForm(UserCreationForm):
             'username',
             'password1',
             'password2',
-            'image',
         )
 
     @transaction.atomic
@@ -42,7 +41,6 @@ class OwnerSignUpForm(UserCreationForm):
             'username',
             'password1',
             'password2',
-            'image',
         )
 
     def save(self, commit=True):

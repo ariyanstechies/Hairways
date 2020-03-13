@@ -14,7 +14,6 @@ class ClientSignUpForm(UserCreationForm):
             'username',
             'password1',
             'password2',
-            'image',
         )
 
     @transaction.atomic
@@ -26,6 +25,15 @@ class ClientSignUpForm(UserCreationForm):
         return user
 
 
+class StaffSignUpForm(UserCreationForm):
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = (
+            'username',
+        )
+
+
 class OwnerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
@@ -33,7 +41,6 @@ class OwnerSignUpForm(UserCreationForm):
             'username',
             'password1',
             'password2',
-            'image',
         )
 
     def save(self, commit=True):
@@ -47,7 +54,7 @@ class OwnerSignUpForm(UserCreationForm):
 class OwnerAddInfoForm(forms.ModelForm):
     class Meta:
         model = Owner
-        fields = ('ownerName', 'email', 'phone', 'location', 'gender')
+        fields = ('name', 'email', 'phone', 'location')
 
 
 class ReviewForm(forms.ModelForm):
@@ -79,12 +86,6 @@ class addSalonForm(forms.ModelForm):
         model = Salon
         fields = ('name', 'description', 'paybill', 'town',
                   'location_description')
-
-
-class SalonSubscriptionForm(forms.ModelForm):
-    class Meta:
-        model = SalonSubscription
-        fields = ('package', 'amount', 'payment_method')
 
 
 class StaffForm(forms.ModelForm):
@@ -125,7 +126,7 @@ class ProductForm(forms.ModelForm):
 class clientAppointment(forms.ModelForm):
     class Meta:
         model = Appointments
-        fields = ['appointment_date',]
+        fields = ['appointment_date', ]
         labels = {
             'appointment_date': ''
         }
@@ -158,3 +159,15 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Gallery
         fields = ('image', 'image_position')
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Owner
+        fields = ('name', 'email', 'phone', 'location')
+
+
+class PpicUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('image',)

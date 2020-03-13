@@ -10,179 +10,184 @@
 {% block content %}
 {% get_visits salon.slug as visits %}
 <div class="app-main__inner">
-    <div class="app-page-title">
-      <div class="page-title-wrapper">
-        <div class="page-title-heading">
-          <div class="page-title-icon">
-            <i class="ti-truck icon-gradient bg-mean-fruit">
-            </i>
-          </div>
-          <div>Analytics Dashboard
-            <div class="page-title-subheading">This is an example
-              dashboard created using build-in elements and
-              components.
-            </div>
+  <div class="app-page-title">
+    <div class="page-title-wrapper">
+      <div class="page-title-heading">
+        <div class="page-title-icon">
+          <i class="ti-truck icon-gradient bg-mean-fruit">
+          </i>
+        </div>
+        <div>Analytics Dashboard
+          <div class="page-title-subheading">This is an example
+            dashboard created using build-in elements and
+            components.
           </div>
         </div>
-        <div class="page-title-actions">
-          <div class="d-inline-block dropdown">
-            <button type="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false"
-              class="btn-shadow dropdown-toggle btn btn-info">
-              <span class="btn-icon-wrapper pr-2 opacity-7">
-                <i class="fa fa-business-time fa-w-20"></i>
-              </span>
-              Buttons
-            </button>
-            <div tabindex="-1" role="menu" aria-hidden="true"
-              class="dropdown-menu dropdown-menu-right">
-              <ul class="nav flex-column">
-                <li class="nav-item">
-                  <a href="javascript:void(0);" class="nav-link">
-                    <i class="nav-link-icon lnr-inbox"></i>
-                    <span>
-                      Inbox
-                    </span>
-                    <div class="ml-auto badge badge-pill
+      </div>
+      <div class="page-title-actions">
+        <div class="d-inline-block dropdown">
+          <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            class="btn-shadow dropdown-toggle btn btn-info">
+            <span class="btn-icon-wrapper pr-2 opacity-7">
+              <i class="fa fa-business-time fa-w-20"></i>
+            </span>
+            Buttons
+          </button>
+          <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a href="javascript:void(0);" class="nav-link">
+                  <i class="nav-link-icon lnr-inbox"></i>
+                  <span>
+                    Inbox
+                  </span>
+                  <div class="ml-auto badge badge-pill
                       badge-secondary">86</div>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="javascript:void(0);" class="nav-link">
-                    <i class="nav-link-icon lnr-book"></i>
-                    <span>
-                      Book
-                    </span>
-                    <div class="ml-auto badge badge-pill
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="javascript:void(0);" class="nav-link">
+                  <i class="nav-link-icon lnr-book"></i>
+                  <span>
+                    Book
+                  </span>
+                  <div class="ml-auto badge badge-pill
                       badge-danger">5</div>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="javascript:void(0);" class="nav-link">
-                    <i class="nav-link-icon lnr-picture"></i>
-                    <span>
-                      Picture
-                    </span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a disabled href="javascript:void(0);"
-                    class="nav-link disabled">
-                    <i class="nav-link-icon lnr-file-empty"></i>
-                    <span>
-                      File Disabled
-                    </span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="javascript:void(0);" class="nav-link">
+                  <i class="nav-link-icon lnr-picture"></i>
+                  <span>
+                    Picture
+                  </span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a disabled href="javascript:void(0);" class="nav-link disabled">
+                  <i class="nav-link-icon lnr-file-empty"></i>
+                  <span>
+                    File Disabled
+                  </span>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-6 col-xl-3">
-        <div class="card mb-3 widget-content">
-          <div class="widget-content-outer">
-            <div class="widget-content-wrapper">
-              <div class="widget-content-left">
-                <div class="widget-heading">Average Rating</div>
-              </div>
-              <div class="widget-content-right">
-                <div class="widget-numbers text-warning">
-                  {{ salon.rating }}
-                </div>
-              </div>
+  </div>
+  {% for message in messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong class="text-success"></strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  <div class="row">
+    <div class="col-sm-6 col-xl-3">
+      <div class="card mb-3 widget-content">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Average Rating</div>
             </div>
-            <div class="widget-progress-wrapper">
-              <div class="progress-sub-label">
-                <div class="sub-label-left">Rated by: </div>
-                <div class="sub-label-right">
-                  {{ salon.reviews.count }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-xl-3">
-        <div class="card mb-3 widget-content">
-          <div class="widget-content-outer">
-            <div class="widget-content-wrapper">
-              <div class="widget-content-left">
-                <div class="widget-heading">Total Appointments</div>
-              </div>
-              <div class="widget-content-right">
-                <div class="widget-numbers text-warning">
-                  {{ salon.appointments.count }}
-                </div>
-              </div>
-            </div>
-            <div class="widget-progress-wrapper">
-              <div class="progress-sub-label">
-                <div class="sub-label-left">Completed</div>
-                <div class="sub-label-right">
-                  {{ salon.completed_appointments.count }}
-                </div>
-              </div>
-              <div class="progress-sub-label">
-                <div class="sub-label-left">Pending</div>
-                <div class="sub-label-right">
-                  {{ salon.pending_appointments.count }}
-                </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-warning">
+                {{ salon.rating }}
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-xl-3">
-        <div class="card mb-3 widget-content">
-          <div class="widget-content-outer">
-            <div class="widget-content-wrapper">
-              <div class="widget-content-left">
-                <div class="widget-heading">Total Reviews</div>
-              </div>
-              <div class="widget-content-right">
-                <div class="widget-numbers text-warning">
-                  {{ salon.reviews.count }}</div>
-              </div>
-            </div>
-            <div class="widget-progress-wrapper">
-              <div class="progress-sub-label">
-                <div class="sub-label-left">Pending</div>
-                <div class="sub-label-right">
-                  {{ salon.pending_reviews.count }}
-                </div>
-              </div>
-              <div class="progress-sub-label">
-                <div class="sub-label-left">Approved</div>
-                <div class="sub-label-right">
-                  {{ salon.approved_reviews.count }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-xl-3">
-        <div class="card mb-3 widget-content">
-          <div class="widget-content-outer">
-            <div class="widget-content-wrapper">
-              <div class="widget-content-left">
-                <div class="widget-heading">Total Visits</div>
-              </div>
-              <div class="widget-content-right">
-                <div class="widget-numbers text-warning">
-                  {% if visits %}
-                  {{ visits }} {% else %} 0 {% endif %}
-                </div>
+          <div class="widget-progress-wrapper">
+            <div class="progress-sub-label">
+              <div class="sub-label-left">Rated by: </div>
+              <div class="sub-label-right">
+                {{ salon.reviews.count }}
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-     <div class="row">
+    <div class="col-sm-6 col-xl-3">
+      <div class="card mb-3 widget-content">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total Appointments</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-warning">
+                {{ salon.appointments.count }}
+              </div>
+            </div>
+          </div>
+          <div class="widget-progress-wrapper">
+            <div class="progress-sub-label">
+              <div class="sub-label-left">Completed</div>
+              <div class="sub-label-right">
+                {{ salon.completed_appointments.count }}
+              </div>
+            </div>
+            <div class="progress-sub-label">
+              <div class="sub-label-left">Pending</div>
+              <div class="sub-label-right">
+                {{ salon.pending_appointments.count }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="card mb-3 widget-content">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total Reviews</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-warning">
+                {{ salon.reviews.count }}</div>
+            </div>
+          </div>
+          <div class="widget-progress-wrapper">
+            <div class="progress-sub-label">
+              <div class="sub-label-left">Pending</div>
+              <div class="sub-label-right">
+                {{ salon.pending_reviews.count }}
+              </div>
+            </div>
+            <div class="progress-sub-label">
+              <div class="sub-label-left">Approved</div>
+              <div class="sub-label-right">
+                {{ salon.approved_reviews.count }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="card mb-3 widget-content">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total Visits</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-warning">
+                {% if visits %}
+                {{ visits }} {% else %} 0 {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-12 col-lg-6">
       <div class="mb-3 card">
         <div class="card-header-tab card-header">
@@ -195,7 +200,8 @@
             <div class="nav">
               <ul class="tabs-animated-shadow tabs-animated nav">
                 <li class="nav-item">
-                  <a role="tab" class="nav-link show active" id="tab-c-0" data-toggle="tab" href="#weekly_linechart_tab" aria-selected="false">
+                  <a role="tab" class="nav-link show active" id="tab-c-0" data-toggle="tab" href="#weekly_linechart_tab"
+                    aria-selected="false">
                     <span>Weekly</span>
                   </a>
                 </li>
@@ -209,38 +215,38 @@
             </div>
           </div>
         </div>
-          <div class="card-body">
-            <div class="tab-content">
-              <div class="tab-pane show active" id="weekly_linechart_tab" role="tabpanel">
-                <div class="widget-chart p-3">
-              <canvas id="salon_weekly_linechart" width="400" height="400"></canvas>
-              <div class="widget-chart-content text-center mt-5">
-                <div class="widget-description mt-0
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane show active" id="weekly_linechart_tab" role="tabpanel">
+              <div class="widget-chart p-3">
+                <canvas id="salon_weekly_linechart" width="400" height="400"></canvas>
+                <div class="widget-chart-content text-center mt-5">
+                  <div class="widget-description mt-0
                   text-warning">
-                  <i class="fa fa-arrow-left"></i>
-                  <span class="pl-1">175.5%</span>
-                  <span class="text-muted opacity-8 pl-1">increased
-                    server resources</span>
+                    <i class="fa fa-arrow-left"></i>
+                    <span class="pl-1">175.5%</span>
+                    <span class="text-muted opacity-8 pl-1">increased
+                      server resources</span>
+                  </div>
                 </div>
               </div>
             </div>
-              </div>
-              <div class="tab-pane" id="monthly_linechart_tab" role="tabpanel">
-                <div class="widget-chart p-3">
-                  <canvas id="salon_monthly_linechart" width="400" height="400"></canvas>
-                  <div class="widget-chart-content text-center mt-5">
-                    <div class="widget-description mt-0
+            <div class="tab-pane" id="monthly_linechart_tab" role="tabpanel">
+              <div class="widget-chart p-3">
+                <canvas id="salon_monthly_linechart" width="400" height="400"></canvas>
+                <div class="widget-chart-content text-center mt-5">
+                  <div class="widget-description mt-0
                                   text-warning">
-                      <i class="fa fa-arrow-left"></i>
-                      <span class="pl-1">175.5%</span>
-                      <span class="text-muted opacity-8 pl-1">increased
-                        server resources</span>
-                    </div>
+                    <i class="fa fa-arrow-left"></i>
+                    <span class="pl-1">175.5%</span>
+                    <span class="text-muted opacity-8 pl-1">increased
+                      server resources</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
     <div class="col-md-12 col-lg-6">
@@ -276,28 +282,28 @@
               <div class="widget-chart p-3">
                 <canvas id="salon_weekly_piechart" width="400" height="400"></canvas>
                 <div class="widget-chart-content text-center mt-5">
-                    <div class="widget-description mt-0
+                  <div class="widget-description mt-0
                                   text-warning">
-                      <i class="fa fa-arrow-left"></i>
-                      <span class="pl-1">175.5%</span>
-                      <span class="text-muted opacity-8 pl-1">increased
-                        server resources</span>
-                    </div>
+                    <i class="fa fa-arrow-left"></i>
+                    <span class="pl-1">175.5%</span>
+                    <span class="text-muted opacity-8 pl-1">increased
+                      server resources</span>
                   </div>
+                </div>
               </div>
             </div>
             <div class="tab-pane" id="monthly_piechart_tab" role="tabpanel">
               <div class="widget-chart p-3">
                 <canvas id="salon_monthly_piechart" width="400" height="400"></canvas>
                 <div class="widget-chart-content text-center mt-5">
-                    <div class="widget-description mt-0
+                  <div class="widget-description mt-0
                                   text-warning">
-                      <i class="fa fa-arrow-left"></i>
-                      <span class="pl-1">175.5%</span>
-                      <span class="text-muted opacity-8 pl-1">increased
-                        server resources</span>
-                    </div>
+                    <i class="fa fa-arrow-left"></i>
+                    <span class="pl-1">175.5%</span>
+                    <span class="text-muted opacity-8 pl-1">increased
+                      server resources</span>
                   </div>
+                </div>
               </div>
             </div>
           </div>
@@ -305,95 +311,95 @@
       </div>
     </div>
   </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="main-card mb-3 card">
-          <div class="card-header">Open Appointments
-            <div class="btn-actions-pane-right">
-              <div role="group" class="btn-group-sm btn-group">
-                <button class="active btn btn-focus">Last Week</button>
-                <button class="btn btn-focus">All Month</button>
-              </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">Open Appointments
+          <div class="btn-actions-pane-right">
+            <div role="group" class="btn-group-sm btn-group">
+              <button class="active btn btn-focus">Last Week</button>
+              <button class="btn btn-focus">All Month</button>
             </div>
           </div>
-          <div class="container mt-3">
-            <div class="row">
-              <h5 class="card-title text-center col-md-2">
-                #
-              </h5>
-              <h5 class="card-title text-center col-md-4">
-                Client
-              </h5>
-              <h5 class="card-title text-center col-md-4">
-                Date
-              </h5>
-            </div>
-          </div>
-          {% for appointment in appointments %}
-          {% if appointment.status == 'Pending'%}
-          <div class="main-card mb-3 card">
-            <div class="card-body">
-              <div class="row">
-                <h5 class="card-title text-center col-md-2 text-muted">
-                  APN-{{appointment.id}}
-                </h5>
-                <h5 class="card-title text-center col-md-4 text-muted">
-                  {{appointment.client}}
-                </h5>
-                <h5 class="card-title text-center col-md-4 text-muted">
-                  {{appointment.appointment_date|date:'d/m/y' }}
-                  <span class="badge badge-focus"> {{appointment.appointment_date|date:'h:m'}}</span>
-                </h5>
-                <button type="button" data-toggle="collapse" href="#collapseExample{{appointment.id}}"
-                  class="btn btn-primary col-md-2" aria-expanded="true">Details</button>
-              </div>
-              <div class="collapse " id="collapseExample{{appointment.id}}">
-                <hr>
-                <div class="row">
-                  <div class="col-md-12 col-lg-6">
-                    <ul>
-                      <h5>Services Booked</h5>
-                      {% for service in appointment.services.all %}
-                      <li>
-                        <h6>{{service.name}}</h6>
-                      </li>
-                      {% endfor %}
-    
-    
-                    </ul>
-                  </div>
-                  <div class="col-md-12 col-lg-6">
-                    <ul>
-                      <h5>Products Booked</h5>
-                      {% for prod in appointment.products.all %}
-                      <li>
-                        <h6>{{prod}}</h6>
-                      </li>
-                      {% endfor %}
-    
-                    </ul>
-                  </div>
-                  <div>
-    
-                    <a class="ml-3 mb-2 mr-2 btn btn-primary  text-white"
-                      href="{% url 'client_profile_for_salons' pk=appointment.client.id%}">Client
-                      Profile</a>
-                    <a class="ml-3 mb-2 mr-2 btn btn-primary  text-white" href="{% url 'dashboard' %}">Complete</a>
-    
-    
-                  </div>
-    
-                </div>
-    
-              </div>
-            </div>
-    
-          </div>
-          {%endif%}
-          {% endfor%}    
         </div>
+        <div class="container mt-3">
+          <div class="row">
+            <h5 class="card-title text-center col-md-2">
+              #
+            </h5>
+            <h5 class="card-title text-center col-md-4">
+              Client
+            </h5>
+            <h5 class="card-title text-center col-md-4">
+              Date
+            </h5>
+          </div>
+        </div>
+        {% for appointment in appointments %}
+        {% if appointment.status == 'Pending'%}
+        <div class="main-card mb-3 card">
+          <div class="card-body">
+            <div class="row">
+              <h5 class="card-title text-center col-md-2 text-muted">
+                APN-{{appointment.id}}
+              </h5>
+              <h5 class="card-title text-center col-md-4 text-muted">
+                {{appointment.client}}
+              </h5>
+              <h5 class="card-title text-center col-md-4 text-muted">
+                {{appointment.appointment_date|date:'d/m/y' }}
+                <span class="badge badge-focus"> {{appointment.appointment_date|date:'h:m'}}</span>
+              </h5>
+              <button type="button" data-toggle="collapse" href="#collapseExample{{appointment.id}}"
+                class="btn btn-primary col-md-2" aria-expanded="true">Details</button>
+            </div>
+            <div class="collapse " id="collapseExample{{appointment.id}}">
+              <hr>
+              <div class="row">
+                <div class="col-md-12 col-lg-6">
+                  <ul>
+                    <h5>Services Booked</h5>
+                    {% for service in appointment.services.all %}
+                    <li>
+                      <h6>{{service.name}}</h6>
+                    </li>
+                    {% endfor %}
+
+
+                  </ul>
+                </div>
+                <div class="col-md-12 col-lg-6">
+                  <ul>
+                    <h5>Products Booked</h5>
+                    {% for prod in appointment.products.all %}
+                    <li>
+                      <h6>{{prod}}</h6>
+                    </li>
+                    {% endfor %}
+
+                  </ul>
+                </div>
+                <div>
+
+                  <a class="ml-3 mb-2 mr-2 btn btn-primary  text-white"
+                    href="{% url 'client_profile_for_salons' pk=appointment.client.id%}">Client
+                    Profile</a>
+                  <a class="ml-3 mb-2 mr-2 btn btn-primary  text-white" href="{% url 'dashboard' %}">Complete</a>
+
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        {%endif%}
+        {% endfor%}
       </div>
     </div>
+  </div>
 </div>
 {% block script %}
 <!-- ChartJs CDN js-->
@@ -410,44 +416,44 @@
   // Weekly line chart
   labels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']
   var ctx = document.getElementById('salon_weekly_linechart').getContext('2d');
-var myChart = new Chart(ctx, {
+  var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: labels,
-        datasets: [{
-            label: 'Appointments',
-            data: {{weekly_chart_data}},
-            backgroundColor: [
-                "rgba(0, 0, 0, 0)",
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 2
-        }]
+      labels: labels,
+      datasets: [{
+        label: 'Appointments',
+        data: {{ weekly_chart_data }},
+    backgroundColor: [
+      "rgba(0, 0, 0, 0)",
+    ],
+    borderColor: [
+      'rgba(255, 99, 132, 1)',
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(75, 192, 192, 1)',
+      'rgba(153, 102, 255, 1)',
+      'rgba(255, 159, 64, 1)'
+    ],
+    borderWidth: 2
+  }]
     },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                },
-                gridLines: {
-                color: "rgba(245, 245, 245, .4)",
-              }
-            }],
-            xAxes: [{
-              gridLines: {
-                color: "rgba(245, 245, 245, .4)",
-              }
-            }],
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        },
+        gridLines: {
+          color: "rgba(245, 245, 245, .4)",
         }
-    }
+      }],
+        xAxes: [{
+          gridLines: {
+            color: "rgba(245, 245, 245, .4)",
+          }
+        }],
+        }
+  }
 });
 
   // Monthly line chart
@@ -532,40 +538,40 @@ var myChart = new Chart(ctx, {
   }
 });
 
-    // Monthly pie chart
-    labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
-    var ctx = document.getElementById('salon_monthly_piechart').getContext('2d');
-    var myChart = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Appointments',
-          data: {{ monthly_appointments_data }},
-      backgroundColor: [
-        "rgba(0, 0, 0, 0)",
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderWidth: 2
-    }]
+  // Monthly pie chart
+  labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+  var ctx = document.getElementById('salon_monthly_piechart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Appointments',
+        data: {{ monthly_appointments_data }},
+    backgroundColor: [
+      "rgba(0, 0, 0, 0)",
+    ],
+    borderColor: [
+      'rgba(255, 99, 132, 1)',
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(75, 192, 192, 1)',
+      'rgba(153, 102, 255, 1)',
+      'rgba(255, 159, 64, 1)'
+    ],
+    borderWidth: 2
+  }]
     },
-    options: {
-      scales: {
-        yAxes: [{
+  options: {
+    scales: {
+      yAxes: [{
+        display: false,
+      }],
+        xAxes: [{
           display: false,
         }],
-          xAxes: [{
-            display: false,
-          }],
         }
-    }
+  }
 });
 </script>
 {% endblock %}

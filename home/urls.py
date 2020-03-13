@@ -7,9 +7,13 @@ from home.clients import ClientUpdate, AppointmentCreateView
 from home.clients import AppointmentListView, MiniDashboard
 from home.clients import ReviewsListView, MyAppointments, MyReviews
 
+
 urlpatterns = [
-    path('home', views.index, name='home'),
-    path('', views.comingsoon, name='comingsoon'),
+    path('api/v1/confirmation', views.confirmation, name='confirmation'),
+    path('transaction/inprogress', views.transaction_progress, name='transaction_progress'),
+    path('api/v1/validation', views.validation, name='validation'),
+    path('mpesa', views.mpesa, name='mpesa'),
+    path('', views.index, name='home'),
     path('current/registerd/salons', views.crs, name='crs'),
     path('about/', views.about, name='about'),
     path('faqs/', views.faqs, name='faqs'),
@@ -70,10 +74,10 @@ urlpatterns = [
     path('dashboard/salon/images<slug:slug>',
          views.salon_images,
          name='salon_images'),
-
     path('dashboard/salon/select/images<slug:slug>/<int:id>',
          views.select_image,
          name='select_images'),
+    path('user/profile', views.user_profile, name='user_profile'),
 
     path('upload/', views.upload, name='upload'),
     path('about/client/<int:pk>/',

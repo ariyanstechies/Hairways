@@ -18,7 +18,7 @@ from django.urls import reverse_lazy
 class ClientSignUpView(CreateView):
     model = User
     form_class = ClientSignUpForm
-    template_name = 'registration/signup_form.html'
+    template_name = 'registration/signup.html'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'Client'

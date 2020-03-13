@@ -8,7 +8,8 @@ const DOMstrings = {
   stepFormPanelClass: 'multisteps-form__panel',
   stepFormPanels: document.querySelectorAll('.multisteps-form__panel'),
   stepPrevBtnClass: 'js-btn-prev',
-  stepNextBtnClass: 'js-btn-next' };
+  stepNextBtnClass: 'js-btn-next'
+};
 
 
 //remove class from a set of items
@@ -87,7 +88,7 @@ const setActivePanel = activePanelNum => {
 
       elem.classList.add('js-active');
 
-      setFormHeight(elem);
+      // setFormHeight(elem);
 
     }
   });
@@ -95,19 +96,19 @@ const setActivePanel = activePanelNum => {
 };
 
 //set form height equal to current panel height
-const formHeight = activePanel => {
+// const formHeight = activePanel => {
 
-  const activePanelHeight = activePanel.offsetHeight;
+//   const activePanelHeight = activePanel.offsetHeight;
 
-  DOMstrings.stepsForm.style.height = `${activePanelHeight}px`;
+//   DOMstrings.stepsForm.style.height = `${activePanelHeight}px`;
 
-};
+// };
 
-const setFormHeight = () => {
-  const activePanel = getActivePanel();
+// const setFormHeight = () => {
+//   const activePanel = getActivePanel();
 
-  formHeight(activePanel);
-};
+//   formHeight(activePanel);
+// };
 
 //STEPS BAR CLICK FUNCTION
 DOMstrings.stepsBar.addEventListener('click', e => {
@@ -135,8 +136,7 @@ DOMstrings.stepsForm.addEventListener('click', e => {
   const eventTarget = e.target;
 
   //check if we clicked on `PREV` or NEXT` buttons
-  if (!(eventTarget.classList.contains(`${DOMstrings.stepPrevBtnClass}`) || eventTarget.classList.contains(`${DOMstrings.stepNextBtnClass}`)))
-  {
+  if (!(eventTarget.classList.contains(`${DOMstrings.stepPrevBtnClass}`) || eventTarget.classList.contains(`${DOMstrings.stepNextBtnClass}`))) {
     return;
   }
 
@@ -149,7 +149,7 @@ DOMstrings.stepsForm.addEventListener('click', e => {
   if (eventTarget.classList.contains(`${DOMstrings.stepPrevBtnClass}`)) {
     activePanelNum--;
 
-  } 
+  }
 
   // REVIEW: Disabled next button so as form submitting could happen
   // else {
@@ -164,10 +164,10 @@ DOMstrings.stepsForm.addEventListener('click', e => {
 });
 
 //SETTING PROPER FORM HEIGHT ONLOAD
-window.addEventListener('load', setFormHeight, false);
+// window.addEventListener('load', setFormHeight, false);
 
-//SETTING PROPER FORM HEIGHT ONRESIZE
-window.addEventListener('resize', setFormHeight, false);
+// //SETTING PROPER FORM HEIGHT ONRESIZE
+// window.addEventListener('resize', setFormHeight, false);
 
 //changing animation via animation select !!!YOU DON'T NEED THIS CODE (if you want to change animation type, just change form panels data-attr)
 

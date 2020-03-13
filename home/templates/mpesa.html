@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="package_form" class="form-inline row" method="POST">
+        {% csrf_token %}
+        <label class="col-sm-4 text-muted text-weight-bold col-form-label">Phone
+            number</label>
+        <div class="col-sm-8">
+            <input type="tel" name="phone" required class="form-control">
+        </div>
+        <button form="package_form" class="btn w-100 justify-content-center btn-outline-success px-5 btn-rounded mt-5"
+            type="submit">Proceed</button>
+    </form>
+</body>
+
+</html>

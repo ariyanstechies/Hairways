@@ -18,6 +18,7 @@ class tempuser(models.Model):
 class User(AbstractUser):
     is_client = models.BooleanField(default=False)
     is_owner = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     nickname = models.CharField(max_length=30, null=True, blank=True)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
 
@@ -26,14 +27,14 @@ class Owner(models.Model):
     user = models.OneToOneField(User,
                                 on_delete=models.CASCADE,
                                 primary_key=True)
-    ownerName = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
     email = models.CharField(max_length=150)
     phone = models.PositiveIntegerField(default='07000000')
     location = models.CharField(max_length=25, default='Kisumu')
     gender = models.CharField(max_length=150, default='Female')
 
     def __str__(self):
-        return self.ownerName
+        return self.name
 
 
 @receiver(post_save, sender=User)
@@ -92,19 +93,34 @@ class Salon(models.Model):
         return self.name
 
 
-class SalonSubscription(models.Model):
-    salon = models.OneToOneField(Salon,
-                                 on_delete=models.CASCADE,
-                                 related_name='salon_subscriptions_salon')
-    package = models.CharField(max_length=100)
+class Package(models.Model):
+    name = models.CharField(max_length=100)
     amount = models.IntegerField()
-    payment_method = models.CharField(max_length=100, default='M-Pesa')
-    who_payed = models.ForeignKey(Owner,
-                                  on_delete=models.CASCADE,
-                                  related_name='salon_subscriptions_owner')
 
     def __str__(self):
-        return f'{str(self.salon)} {self.amount}'
+        return self.name
+
+
+class PackageDetail(models.Model):
+    package = models.ForeignKey(
+        Package, on_delete=models.CASCADE, related_name='package_details')
+    detail = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.package)
+
+
+class MpesaTransaction(models.Model):
+    salon = models.ForeignKey(Salon, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=100, decimal_places=2)
+    mpesa_receipt_number = models.CharField(max_length=100)
+    transaction_date = models.DateTimeField(blank=True, null=True)
+    phone_number = models.CharField(max_length=100)
+    is_successfull = models.BooleanField(default=False)
+    failure_cause = models.TextField(max_length=200)
+
+    def __str__(self):
+        return self.MpesaReceiptNumber
 
 
 class Services(models.Model):
@@ -147,16 +163,20 @@ class Products(models.Model):
 
 
 class Staff(models.Model):
+    user = models.OneToOneField(User,
+                                on_delete=models.CASCADE,
+                                primary_key=True,
+                                related_name='staff')
     salon = models.ForeignKey(Salon,
                               on_delete=models.CASCADE,
                               related_name='staffs')
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
+    firstname = models.CharField(max_length=100, null=True, blank=True)
+    lastname = models.CharField(max_length=100, null=True, blank=True)
     date_started = models.DateField(default=timezone.now)
-    salary = models.IntegerField()
-    job_description = models.CharField(max_length=100)
-    phone = models.IntegerField()
-    email = models.CharField(max_length=100)
+    salary = models.IntegerField(null=True, blank=True)
+    job_description = models.CharField(max_length=100, null=True, blank=True)
+    phone = models.IntegerField(null=True, blank=True)
+    email = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.firstname

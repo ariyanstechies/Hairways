@@ -16,7 +16,7 @@ from django.template.defaultfilters import slugify
 class OwnerSignUpView(CreateView):
     model = User
     form_class = OwnerSignUpForm
-    template_name = 'registration/signup_form.html'
+    template_name = 'registration/signup.html'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'owner'
@@ -31,7 +31,7 @@ class OwnerSignUpView(CreateView):
 @method_decorator([login_required, owner_required], name='dispatch')
 class OwnerUpdate(UpdateView):
     model = Owner
-    fields = ['email', 'ownerName', 'phone', 'location', 'gender']
+    fields = ['email', 'name', 'phone', 'location', 'gender']
     template_name = 'owners/owner_update_form.html'
 
     def get_object(self):

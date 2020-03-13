@@ -7,7 +7,12 @@ from home.clients import ClientUpdate, AppointmentCreateView
 from home.clients import AppointmentListView, MiniDashboard
 from home.clients import ReviewsListView, MyAppointments, MyReviews
 
+
 urlpatterns = [
+    path('api/v1/confirmation', views.confirmation, name='confirmation'),
+    path('transaction/inprogress', views.transaction_progress, name='transaction_progress'),
+    path('api/v1/validation', views.validation, name='validation'),
+    path('mpesa', views.mpesa, name='mpesa'),
     path('', views.index, name='home'),
     path('current/registerd/salons', views.crs, name='crs'),
     path('about/', views.about, name='about'),

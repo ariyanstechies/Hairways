@@ -6,15 +6,17 @@ load_dotenv(verbose=True)
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
 # import configurations
 MAPS_API_KEY = os.getenv("MAPS_API_KEY")
 SECRET_KEY = os.getenv("SECRET_KEY")
 DATABASE_NAME = os.getenv("DATABASE_NAME")
-DATABASRE_USERNAME = os.getenv("DATABASRE_USERNAME")
+DATABASE_USERNAME = os.getenv("DATABASE_USERNAME")
 DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
+
+CONSUMER_KEY = os.getenv("CONSUMER_KEY")
+CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
+PASS_KEY = os.getenv("PASS_KEY")
+SHORT_CODE = os.getenv("SHORT_CODE")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,7 +78,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': DATABASE_NAME,
-        'USER': DATABASRE_USERNAME,
+        'USER': DATABASE_USERNAME,
         'PASSWORD': DATABASE_PASSWORD,
         'HOST': 'localhost',
         'PORT': '',

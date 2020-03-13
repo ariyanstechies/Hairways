@@ -6,10 +6,10 @@
 
 <!--PEN CONTENT     -->
 <div class="content">
-	<div id="results"></div>
+  <div id="results"></div>
   <!--content inner-->
   <div class="content__inner">
-    
+
     <div class="container overflow-hidden">
       <!--multisteps-form-->
       <div class="multisteps-form">
@@ -17,22 +17,28 @@
         <div class="row progess-bar">
           <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
             <div class="multisteps-form__progress">
-              <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">Update info</button>
-              <button class="multisteps-form__progress-btn" {% if request.user.OwnerName%}{%else%}disabled{%endif%} type="button" title="Address">Add salon</button>
-              <button class="multisteps-form__progress-btn" {% if request.user.my_salons%}{%else%}disabled{%endif%} type="button" title="Order Info">Payment</button>
-              <button class="multisteps-form__progress-btn" {% if request.user.my_salons.is_paid%}{%else%}disabled{%endif%} type="button" title="Reviews">Reviews</button>
+              <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">Update
+                info</button>
+              <button class="multisteps-form__progress-btn" {% if request.user.OwnerName%}{%else%}disabled{%endif%}
+                type="button" title="Address">Add salon</button>
+              <button class="multisteps-form__progress-btn" {% if request.user.my_salons%}{%else%}disabled{%endif%}
+                type="button" title="Order Info">Payment</button>
+              <button class="multisteps-form__progress-btn"
+                {% if request.user.my_salons.is_paid%}{%else%}disabled{%endif%} type="button"
+                title="Reviews">Reviews</button>
             </div>
           </div>
         </div>
         <!--form panels-->
         <div class="row">
-          <div class="col-12 col-lg-8 m-auto">
+          <div class="col-md-12 m-auto">
             <div class="multisteps-form__form">
-              <!--single form panel-->
-              <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" id="1" data-animation="slideHorz">
+              <!--Update owner details form panel-->
+              <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" id="1"
+                data-animation="slideHorz">
                 <h3 class="multisteps-form__title">Update info</h3>
                 <div class="multisteps-form__content">
-                  
+
                   <!-- Form to update owner details -->
                   <div class="container">
                     <form action="" class="ajax-form" id="owner-details-form" method="POST">
@@ -40,60 +46,121 @@
 
                       {% buttons %}
                       <div class="button-row d-flex mt-4">
-                        <button class="btn btn-primary ml-auto js-btn-next" id="next_salon" type="submit" title="Next">Next</button>
+                        <button class="btn btn-primary ml-auto js-btn-next" id="next_salon" type="submit"
+                          title="Next">Next</button>
                       </div>
                       {% endbuttons %}
                     </form>
                   </div>
-                  
+
                 </div>
               </div>
-              <!--single form panel-->
+              <!--Add salon details  form panel-->
               <div class="multisteps-form__panel shadow p-4 rounded bg-white" id="2" data-animation="slideHorz">
                 <h3 class="multisteps-form__title">Add a salon</h3>
                 <div class="multisteps-form__content">
-                  
+
                   <!-- Form to add salon -->
                   <div class="container">
                     <form action="" class="ajax-form" id="add-salon-form" method="POST">
                       {% bootstrap_form add_salon %}
-                  
+
                       {% buttons %}
                       <div class="button-row d-flex mt-4">
                         <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                        <button class="btn btn-primary ml-auto js-btn-next" id="next_salon" type="submit" title="Next">Next</button>
+                        <button class="btn btn-primary ml-auto js-btn-next" id="next_salon" type="submit"
+                          title="Next">Next</button>
                       </div>
                       {% endbuttons %}
                     </form>
                   </div>
                 </div>
               </div>
-              <!--single form panel-->
-              <div class="multisteps-form__panel shadow p-4 rounded bg-white" id="3" data-animation="slideHorz">
-                <h3 class="multisteps-form__title">Payment</h3>
+              <!--Choose package form panel-->
+              <div class="multisteps-form__panel p-4 rounded bg-white" id="3" data-animation="slideHorz">
+                <h3 class="mb-5 text-center multisteps-form__title">Choose a subscription plan</h3>
                 <div class="multisteps-form__content">
-              
+
                   <!-- Payment form -->
-                  <div class="container">
-                    <form action="" class="ajax-form" id="owner-details-form" method="POST">
-                      {% bootstrap_form salon_subsription %}
-                  
-                      {% buttons %}
-                      <div class="button-row d-flex mt-4">
-                        <button class="btn btn-primary ml-auto js-btn-next" id="next_salon" type="submit" title="Next">Next</button>
+                  <div class="container mt-5 payment">
+                    <div class="row">
+                      {% for package in packages %}
+                      <div class="col-md-4 my-3">
+                        <div class="card package pt-3 col-md-12">
+                          <div class="name">{{package.name}}</div>
+                          <div class="price">Ksh {{package.amount}} / month</div>
+                          <div class="trial">21 days free trial</div>
+                          <hr />
+
+                          {{package.detail}}
+                          {% for detail in package_details %}
+
+                          <!-- <strong>8</strong> -->
+
+                          <p>{% if package.id == detail.package.id %}
+                            {{detail.detail}}</p>
+                          <hr>
+                          {% endif %}
+
+                          {% endfor %}
+
+                          <a data-toggle="modal" id="{{package.name}}" name={{package.amount}}
+                            data-target="#package_modal"
+                            class="btn btn-outline-success my-4 w-100 package-modal-button btn-rounded">Select</a>
+                        </div>
                       </div>
-                      {% endbuttons %}
-                    </form>
+                      {% endfor %}
+                    </div>
                   </div>
+
+                  <div class="modal fade" id="package_modal" tabindex="-1" role="dialog" aria-labelledby="package_modal"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <h3>Mpesa Account</h3>
+                          <div class="container">
+                            <p class="font-weight-bold">To intiate a payment of <b id="package-amount-modal"
+                                class="text-info"></b> for
+                              the
+                              <b id="package-name-modal" class="text-success"></b> package</p>
+                            <div class="my-4">
+                              <ol class="font-weight-bold">
+                                <li>Enter phone number in the field below and click Proceed.</li>
+                                <li>This will prompt you to enter your M-pesa PIN on your phone</li>
+                                <li>Enter your M-Pesa pin and complete the payment</li>
+                              </ol>
+                              <form id="package_form" class="form-inline row" method="POST">
+                                {% csrf_token %}
+                                <label class="col-sm-4 text-muted font-weight-bold col-form-label">Phone
+                                  number</label>
+                                <div class="col-sm-8">
+                                  <input type="tel" name="phone_no" placeholder="0712345678" required
+                                    class="form-control">
+                                  <input id="package_name_input" type="hidden" name="package_name">
+                                  <input id="package_amount_input" type="hidden" name="package_amount">
+                                </div>
+                                <button form="package_form"
+                                  class="btn w-100 justify-content-center btn-outline-success px-5 btn-rounded mt-5"
+                                  type="submit">Proceed</button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
                 </div>
               </div>
               <!--single form panel-->
               <div class="multisteps-form__panel shadow p-4 rounded bg-white" id="4" data-animation="slideHorz">
                 <h3 class="multisteps-form__title">Additional Reviews</h3>
                 <div class="multisteps-form__content">
-                  
+
                   <h2>Congratulation You have successfully created your account</h2>
-                  
+
                 </div>
               </div>
             </div>
@@ -104,97 +171,226 @@
   </div>
 </div>
 <!-- partial -->
-  <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'></script> -->
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'></script> -->
 <script src="{% static 'js/add-salon.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>  
-
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 <style>
-  .hide{
+  .payment .wrapper {
+    top: 50%;
+    left: 50%;
+    margin: -190px 0 0 -468px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #9f9f9f;
+    font-size: 15px;
+  }
+
+  .payment .package {
+    box-sizing: border-box;
+    border: 3px solid #e8e8e8;
+    border-radius: 7px;
+    display: inline-block;
+    text-align: center;
+    float: left;
+    transition: margin-top 0.5s linear;
+    position: relative;
+  }
+
+  .payment .package:hover {
+    margin-top: -30px;
+    transition: margin-top 0.3s linear;
+  }
+
+  .payment .name {
+    color: #565656;
+    font-weight: 300;
+    font-size: 3rem;
+    margin-top: -5px;
+  }
+
+  .payment .price {
+    margin-top: 7px;
+    font-weight: bold;
+  }
+
+  .payment .price::after {
+    font-weight: normal;
+  }
+
+  .payment hr {
+    background-color: #dedede;
+    border: none;
+    height: 1px;
+  }
+
+  .payment .trial {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 2px 21px 2px 21px;
+    color: #33c4b6;
+    border: 1px solid #e4e4e4;
+    display: inline-block;
+    border-radius: 15px;
+    background-color: white;
+    position: relative;
+    bottom: -30px;
+  }
+
+  .payment ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin-top: 29px;
+  }
+
+  .payment li {
+    margin-bottom: 15px;
+  }
+
+  .payment li:before {
+    font-size: 1.3rem;
+    color: #33c4b6;
+    margin-right: 3px;
+  }
+
+  .payment .checkIcon,
+  .payment li:before,
+  .payment .brilliant::after {
+    font-family: "FontAwesome";
+    content: "\f00c";
+  }
+
+  .payment .brilliant {
+    border-color: #33c4b6;
+  }
+
+  .payment .brilliant::before {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 64px 64px 0 0;
+    border-color: #3bc6b8 transparent transparent transparent;
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+  }
+
+  .payment .brilliant::after {
+    color: white;
+    position: absolute;
+    left: 9px;
+    top: 6px;
+    text-shadow: 0 0 2px #37c5b6;
+    font-size: 1.4rem;
+  }
+
+  .hide {
     visibility: hidden;
   }
-	#results{
-		position: fixed;
-		right: 50px;
-		top: 50px;
-		z-index: 1;
-	}
-  .content{
+
+  #results {
+    position: fixed;
+    right: 50px;
+    top: 50px;
+    z-index: 1;
+  }
+
+  .content {
     margin-top: 20px;
     padding-top: 20px;
   }
-  
-  .progess-bar{
+
+  .progess-bar {
     margin-bottom: 20px;
   }
 </style>
 
 <script>
+
+  $('.package-modal-button').on('click', function (event) {
+    var package_name = event.target.id
+    var package_amount = $(event.target).attr('name')
+    console.log('clicked me')
+    console.log(package_amount, package_name)
+    $('#package-amount-modal').html(package_amount)
+    $('#package-name-modal').html(package_name)
+    $('#package_name_input').val(package_name)
+    $('#package_amount_input').val(package_amount)
+  });
+
+  $('.package').on('click', function () {
+    $('.package').removeClass('brilliant')
+    $(this).addClass('brilliant')
+  });
+
   // Get active tab
   function get_active_tab() {
     var active_step_tab = $('.multisteps-form__panel.js-active').attr('id')
     console.log(active_step_tab)
   }
-  
+
 
   // Set active tab to 0
   var activePanelNum = 0
 
   // After a successful post increase value by one to get to the next step tab
   function next_step() {
-      activePanelNum++;
-      setActiveStep(activePanelNum);
-      setActivePanel(activePanelNum);
+    activePanelNum++;
+    setActiveStep(activePanelNum);
+    setActivePanel(activePanelNum);
   }
-  
+
 
   $(function () {
-    
 
-	data_to_views = []
 
-	// Get values for add owner details
-	function getOwnerDetails() {
-		var owner_name = $('#id_ownerName').val()
-		var email = $('#id_email').val()
-		var phone = $('#id_phone').val()
-		var location = $('#id_location').val()
-		var gender = $('#id_gender').val()
+    data_to_views = []
 
-		data_to_views.push({
-			'owner_name': owner_name,
-			'email': email,
-			'phone': phone,
-			'location': location,
-			'gender': gender,
-		});
+    // Get values for add owner details
+    function getOwnerDetails() {
+      var owner_name = $('#id_name').val()
+      var email = $('#id_email').val()
+      var phone = $('#id_phone').val()
+      var location = $('#id_location').val()
+      var gender = $('#id_gender').val()
 
-		console.log(data_to_views)
-		AddOwnerDetails()
-	}
+      data_to_views.push({
+        'owner_name': owner_name,
+        'email': email,
+        'phone': phone,
+        'location': location,
+        'gender': gender,
+      });
 
-  // Get values for salon details form
-  function getSalonDetails() {
-    var salon_name = $('#id_name').val()
-    var description = $('#id_description').val()
-    var paybill = $('#id_paybill').val()
-    var town = $('#id_town').val()
+      console.log(data_to_views)
+      AddOwnerDetails()
+    }
 
-    data_to_views.push({
-      'salon_name': salon_name,
-      'description': description,
-      'paybill': paybill,
-      'town': town,
-    });
+    // Get values for salon details form
+    function getSalonDetails() {
+      var salon_name = $('#id_name').val()
+      var description = $('#id_description').val()
+      var paybill = $('#id_paybill').val()
+      var town = $('#id_town').val()
 
-    console.log(data_to_views)
-    AddOwnerDetails()
-  }
+      data_to_views.push({
+        'salon_name': salon_name,
+        'description': description,
+        'paybill': paybill,
+        'town': town,
+      });
 
-  // Get values for payment subscription
-  function getSalonSubscription() {
+      console.log(data_to_views)
+      AddOwnerDetails()
+    }
+
+    // Get values for payment subscription
+    function getSalonSubscription() {
       var package = $('#id_package').val()
       var amount = $('#id_amount').val()
       var payment_method = $('#id_payment_method').val()
@@ -205,61 +401,61 @@
         'payment_method': payment_method,
       });
 
-    console.log(data_to_views)
-    AddOwnerDetails()
+      console.log(data_to_views)
+      AddOwnerDetails()
     }
 
-	// Get the ajax form that was submitted
-	  function getAjaxForm() {
-		  $(".ajax-form").on('submit', function (event) {
-			  event.preventDefault();
-			  submitted_form = event.target.id;
-			  console.log(submitted_form);
+    // Get the ajax form that was submitted
+    function getAjaxForm() {
+      $(".ajax-form").on('submit', function (event) {
+        event.preventDefault();
+        submitted_form = event.target.id;
+        console.log(submitted_form);
         data_to_views = []
-			  if (submitted_form == 'owner-details-form') {
-				  getOwnerDetails()
-			  }
-			  else if (submitted_form == 'add-salon-form') {
-				  getSalonDetails();
-			  }
+        if (submitted_form == 'owner-details-form') {
+          getOwnerDetails()
+        }
+        else if (submitted_form == 'add-salon-form') {
+          getSalonDetails();
+        }
 
-			  else if (submitted_form == 'salon_subscription-form') {
-				  getSalonSubscription();
-			  }
-		  });
-	  }
+        else if (submitted_form == 'salon_subscription-form') {
+          getSalonSubscription();
+        }
+      });
+    }
 
-	getAjaxForm()
+    getAjaxForm()
 
-	function AddOwnerDetails() {
-	// console.log("filter record method is working!") // sanity check
-	  $.ajax({
-		  url: "add_salon", // the endpoint
-		  type: "POST", // http method
-		  data: { input_data: JSON.stringify(data_to_views) }, // data sent with the post request
-		  // handle a successful response
-		  success: function (json) {
-        response_type = json.results['']
-			  console.log(json.results)
-			  $('#results').html('<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Success!</strong> '+ json.results +' <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-        $('.alert').removeClass('hide')
-        setTimeout(function () {
-          $('.alert').addClass('hide')
-        }, 5000);
-        next_step()
-        console.log(activePanelNum)
-      },
-		  // handle a non-successful response
-		  error: function (xhr, errmsg, err) {
-			  $('#results').html('<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Error!</strong> Sorry we have encountered the following error: ' + errmsg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'); // add the error to the dom
-			  console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-		  setTimeout(function () {
-          $('.alert').addClass('hide')
-        }, 5000);
-        next_step()
-      }
-	  });
-	}
+    function AddOwnerDetails() {
+      // console.log("filter record method is working!") // sanity check
+      $.ajax({
+        url: "add_salon", // the endpoint
+        type: "POST", // http method
+        data: { input_data: JSON.stringify(data_to_views) }, // data sent with the post request
+        // handle a successful response
+        success: function (json) {
+          response_type = json.results['']
+          console.log(json.results)
+          $('#results').html('<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Success!</strong> ' + json.results + ' <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+          $('.alert').removeClass('hide')
+          setTimeout(function () {
+            $('.alert').addClass('hide')
+          }, 5000);
+          next_step()
+          console.log(activePanelNum)
+        },
+        // handle a non-successful response
+        error: function (xhr, errmsg, err) {
+          $('#results').html('<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Error!</strong> Sorry we have encountered the following error: ' + errmsg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'); // add the error to the dom
+          console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+          setTimeout(function () {
+            $('.alert').addClass('hide')
+          }, 5000);
+          next_step()
+        }
+      });
+    }
 
     // This function gets cookie with a given name
     function getCookie(name) {

@@ -54,7 +54,7 @@ class OwnerSignUpForm(UserCreationForm):
 class OwnerAddInfoForm(forms.ModelForm):
     class Meta:
         model = Owner
-        fields = ('ownerName', 'email', 'phone', 'location', 'gender')
+        fields = ('name', 'email', 'phone', 'location')
 
 
 class ReviewForm(forms.ModelForm):
@@ -86,12 +86,6 @@ class addSalonForm(forms.ModelForm):
         model = Salon
         fields = ('name', 'description', 'paybill', 'town',
                   'location_description')
-
-
-class SalonSubscriptionForm(forms.ModelForm):
-    class Meta:
-        model = SalonSubscription
-        fields = ('package', 'amount', 'payment_method')
 
 
 class StaffForm(forms.ModelForm):
@@ -170,7 +164,7 @@ class ImageForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Owner
-        fields = ('ownerName', 'email', 'phone', 'location')
+        fields = ('name', 'email', 'phone', 'location')
 
 
 class PpicUpdateForm(forms.ModelForm):

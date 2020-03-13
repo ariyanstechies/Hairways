@@ -12,13 +12,65 @@ from django.http import HttpResponse, JsonResponse
 import json
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
+from dateutil import parser
 from django.shortcuts import render, get_object_or_404
 from django.core.serializers import serialize
 from django.views.generic import TemplateView, CreateView
 from home.forms import *
-from home.models import Salon, Services, Gallery, Owner, Appointments, Products, Reviews, SalonSubscription
-from home.models import Client, Staff
+from home.models import Salon, Services, Gallery, Owner, Appointments, Products, Reviews, MpesaTransaction
+from home.models import Client, Staff, Package
 from visits.models import Visit
+from home.mpesa_functions import Mpesa
+from django.views.decorators.csrf import csrf_exempt
+
+def transaction_progress(request):
+    salon = get_object_or_404(Salon,owner = request.user.owner)
+    return render(request, 'home/transactio_progress.html', {})
+    
+
+@csrf_exempt
+def confirmation(request):
+    salon = get_object_or_404(Salon, owner__name=request.user.owner)
+    response = json.loads(request.body)['Body']['stkCallback']
+    response_data = response['CallbackMetadata']['Item']
+    response_status = response['ResultCode']
+    if response_status == 0:
+        raw_date = str(response_data[3]['Value'])
+        date = parser.parse(str(raw_date))
+        payment = MpesaTransaction(
+            salon = salon,
+            amount=response_data[0]['Value'],
+            mpesa_receipt_number=response_data[1]['Value'],
+            transaction_date=date,
+            phone_number=response_data[4]['Value'],
+            is_successfull=True
+            )
+        payment.save()
+        salon.is_paid = True
+        salon.save()
+
+    elif response_status == 1:
+        payment = MpesaTransaction(
+            salon = salon,
+            mpesa_receipt_number=response_data[1]['Value'],
+            transaction_date=date,
+            phone_number=response_data[4]['Value'],
+            is_successfull=False
+        )
+
+
+def validation(request):
+    return HttpResponse('validation')
+
+
+def mpesa(phone_no, package_amount, package_name, salon_owner):
+    mpesa = Mpesa()
+    access_token = mpesa.get_access_token()
+    mpesa.register_url(access_token)
+    timestamp = mpesa.timestamp()
+    password = mpesa.lipa_na_mpesa_password(timestamp)
+    mpesa.lipa_na_mpesa_online(
+        access_token, password, timestamp, phone_no, package_amount, package_name, salon_owner)
 
 
 def index(request):
@@ -37,12 +89,13 @@ def index(request):
 def signup_steps(request):
 
     if request.method == "POST":
+        
         logged_in_user = request.user
 
         owner = Owner.objects.get(user__username=logged_in_user)
 
         # Processing form data
-        if request.POST['input_data']:
+        if 'input_data' in request.POST:
 
             input_data = json.loads(request.POST['input_data'])[0]
 
@@ -52,14 +105,13 @@ def signup_steps(request):
                 email = input_data['email']
                 phone = input_data['phone']
                 location = input_data['location']
-                gender = input_data['gender']
 
                 Owner.objects.filter(user=logged_in_user).update(
-                    ownerName=name,
+                    name=name,
                     email=email,
                     phone=phone,
-                    location=location,
-                    gender=gender)
+                    location=location
+                )
 
                 results = {
                     'message_type': 'success',
@@ -97,24 +149,17 @@ def signup_steps(request):
                     }
                     return JsonResponse(results)
 
-            elif 'salon_name' in input_data:
-                package = input_data['package']
-                amount = input_data['amount']
-                payment_method = input_data['payment_method']
+        elif 'phone_no' in request.POST:
+            phone_no = '254'+request.POST['phone_no'][-9:]
+            package_amount = request.POST['package_amount']
+            package_name = request.POST['package_name']
+            salon_owner = str(request.user)
 
-                salon = Salon.objects.get(owner=owner)
-                subscription = SalonSubscription(salon=salon,
-                                                 package=package,
-                                                 amount=amount,
-                                                 payment_method=payment_method,
-                                                 who_payed=owner)
-                subscription.save()
+            mpesa(phone_no, package_amount, package_name, salon_owner)
 
-                results = {
-                    'message_type': 'success',
-                    'results': 'Payment completed'
-                }
-                return JsonResponse(results)
+            return redirect('transaction_progress')
+
+
 
         # Forms
         owner_details = OwnerAddInfoForm(request.POST)
@@ -129,23 +174,20 @@ def signup_steps(request):
             salonadd.save()
             return redirect('add_salon')
 
-        salon_subsription = SalonSubscriptionForm(request.POST)
-        if salon_subsription.is_valid():
-            salonadd = salon_subsription.save(commit=False)
-            salonadd.save()
-            return redirect('add_salon')
 
     else:
         owner_details = OwnerAddInfoForm()
         add_salon = addSalonForm
-        salon_subsription = SalonSubscriptionForm
+        packages = Package.objects.all()
+        package_details = PackageDetail.objects.all()
 
-    context = {
-        'owner_details': owner_details,
-        'add_salon': add_salon,
-        'salon_subsription': salon_subsription
-    }
-    return render(request, 'sign-up-steps.html', context)
+        context = {
+            'packages': packages,
+            'owner_details': owner_details,
+            'add_salon': add_salon,
+            'package_details':package_details
+        }
+        return render(request, 'sign-up-steps.html', context)
 
 
 def comingsoon(request):
@@ -228,7 +270,7 @@ monthly_chart_datas = []
 @login_required
 @owner_required
 def dashboard(request):
-    salon = get_object_or_404(Salon, owner__ownerName=request.user.owner)
+    salon = get_object_or_404(Salon, owner__name=request.user.owner)
     visits = Visit.objects.get_uri_visits_for(request, uri=salon.slug)
     end_date = datetime.date(datetime.now())
     start_date = end_date - timedelta(days=7)
@@ -318,7 +360,7 @@ def reviews(request):
 
 @login_required
 def services(request):
-    salon = get_object_or_404(Salon, owner__ownerName=request.user.owner)
+    salon = get_object_or_404(Salon, owner__name=request.user.owner)
     services = Services.objects.filter(salon=salon)
 
     context = {'services': services, 'salon': salon}
@@ -371,7 +413,7 @@ def service_delete(request, id):
 
 @login_required
 def products(request):
-    salon = get_object_or_404(Salon, owner__ownerName=request.user.owner)
+    salon = get_object_or_404(Salon, owner__name=request.user.owner)
     products = Products.objects.filter(salon=salon)
 
     context = {'products': products, 'salon': salon}

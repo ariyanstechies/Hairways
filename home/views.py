@@ -166,13 +166,13 @@ def signup_steps(request):
         if owner_details.is_valid():
             salonadd = owner_details.save(commit=False)
             salonadd.save()
-            return redirect('add_salon')
+            return redirect('new_salon')
 
         add_salon = addSalonForm(request.POST)
         if add_salon.is_valid():
             salonadd = add_salon.save(commit=False)
             salonadd.save()
-            return redirect('add_salon')
+            return redirect('new_salon')
 
 
     else:

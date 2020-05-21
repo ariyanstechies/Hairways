@@ -9,20 +9,20 @@ from home.clients import ReviewsListView, MyAppointments, MyReviews
 
 
 urlpatterns = [
+    path('', views.index, name='home'),
+    path('salon/new/', owners.SalonCreateView.as_view(), name='new_salon'),
+    path('salon/<slug:name>/', views.salon_details, name='salon_details'),
     path('api/v1/confirmation', views.confirmation, name='confirmation'),
     path('transaction/inprogress', views.transaction_progress, name='transaction_progress'),
     path('api/v1/validation', views.validation, name='validation'),
     path('mpesa', views.mpesa, name='mpesa'),
-    path('', views.index, name='home'),
     path('current/registerd/salons', views.crs, name='crs'),
     path('about/', views.about, name='about'),
     path('faqs/', views.faqs, name='faqs'),
-    path('salon/<slug:name>/', views.salon_details, name='salon_details'),
     path('add_salon', views.signup_steps, name='add_salon'),
     path('client/update/', ClientUpdate.as_view(), name='client_update'),
     path('owner/update/', owners.OwnerUpdate.as_view(), name='owner_update'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('salon/add/', owners.SalonCreateView.as_view(), name='salon_add'),
     path('preference/', views.preference, name='preference'),
     path('Salon/payment/', views.clientPayment, name='clientPayment'),
     # profile starts here

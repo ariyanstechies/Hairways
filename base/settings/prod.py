@@ -1,5 +1,7 @@
 from base.settings.base import *
 import os
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -18,7 +20,20 @@ INSTALLED_APPS.append(
     'storages'
 )
 
-# TODO ADD SENTRY
+# SENTRY SETUP
+SENTRY_KEY = os.getenv('SENTRY_KEY')
+SENTRY_ORG = os.getenv('SENTRY_ORG')
+SENTRY_PROJECT = os.getenv('SENTRY_PROJECT')
+
+# Configuring sentry on production
+sentry_sdk.init(
+    dsn=f"https://{SENTRY_KEY}@{SENTRY_ORG}.ingest.sentry.io/{SENTRY_PROJECT}",
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True)
+
 
 # AWS
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')

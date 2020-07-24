@@ -6,22 +6,21 @@ load_dotenv(verbose=True)
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# import configurations
+# import credentials
+# Google maps
 MAPS_API_KEY = os.getenv("MAPS_API_KEY")
 SECRET_KEY = os.getenv("SECRET_KEY")
+# Datase
 DATABASE_NAME = os.getenv("DATABASE_NAME")
 DATABASE_USERNAME = os.getenv("DATABASE_USERNAME")
 DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
-
+#Mpesa
 CONSUMER_KEY = os.getenv("CONSUMER_KEY")
 CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
 PASS_KEY = os.getenv("PASS_KEY")
 SHORT_CODE = os.getenv("SHORT_CODE")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', "localhost", '*']
+# Server
+HOST_USERNAME = os.getenv("HOST_USERNAME")
 
 # Application definition
 INSTALLED_APPS = [
@@ -55,7 +54,7 @@ ROOT_URLCONF = 'base.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'home/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,21 +79,10 @@ DATABASES = {
         'NAME': DATABASE_NAME,
         'USER': DATABASE_USERNAME,
         'PASSWORD': DATABASE_PASSWORD,
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
-# Heroku Configuration
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -136,14 +124,11 @@ AUTH_USER_MODEL = 'home.User'
 # user redirected to home after successful login
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'home/static')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

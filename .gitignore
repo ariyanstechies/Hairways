@@ -133,3 +133,4 @@ dmypy.json
 migrations
 static/
 media
+temp/

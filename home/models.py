@@ -92,6 +92,13 @@ class Salon(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+  
+        verbose_name        = _('Salon')
+        verbose_name_plural = _('Salons')
+
+
+
 
 class Package(models.Model):
     name = models.CharField(max_length=100)
@@ -99,6 +106,13 @@ class Package(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+  
+        verbose_name        = _('Package')
+        verbose_name_plural = _('Packages')
+
+
 
 
 class PackageDetail(models.Model):
@@ -108,6 +122,13 @@ class PackageDetail(models.Model):
 
     def __str__(self):
         return str(self.package)
+
+    class Meta:
+  
+        verbose_name        = _('PackageDetail')
+        verbose_name_plural = _('PackageDetails')
+
+
 
 
 class MpesaTransaction(models.Model):
@@ -121,6 +142,13 @@ class MpesaTransaction(models.Model):
 
     def __str__(self):
         return self.MpesaReceiptNumber
+
+    class Meta:
+  
+        verbose_name        = _('MpesaTransaction')
+        verbose_name_plural = _('MpesaTransactions')
+
+
 
 
 class Services(models.Model):
@@ -142,6 +170,13 @@ class Services(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+  
+        verbose_name        = _('Service')
+        verbose_name_plural = _('Services')
+
+
+
 
 class Products(models.Model):
     name = models.CharField(max_length=100)
@@ -160,6 +195,13 @@ class Products(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+  
+        verbose_name        = _('Product')
+        verbose_name_plural = _('Products')
+
+
 
 
 class Staff(models.Model):
@@ -221,6 +263,13 @@ class Appointments(models.Model):
     def get_absolute_url(self):
         return reverse('appointment_detail', kwargs={'pk': self.pk})
 
+    class Meta:
+  
+        verbose_name        = _('Appointment')
+        verbose_name_plural = _('Appointments')
+
+
+
 
 class AppointmentPayment(models.Model):
     PAYMENT_METHODS = (('M-pesa', 'M-pesa'), ('Cash', 'Cash'))
@@ -234,6 +283,11 @@ class AppointmentPayment(models.Model):
 
     def __str__(self):
         return str(self.appointment)
+
+    class Meta:
+  
+        verbose_name        = _('AppointmentPayment')
+        verbose_name_plural = _('AppointmentPayments')
 
 
 class Reviews(models.Model):
@@ -268,6 +322,12 @@ class Reviews(models.Model):
     def __str__(self):
         return str(self.author)
 
+    class Meta:
+   
+        verbose_name        = _('Review')
+        verbose_name_plural = _('Reviews')
+
+
 
 class Gallery(models.Model):
     POSITION_CHOICES = (('Cover Image', 'Cover Image'), ('Card Image', 'Card Image'),
@@ -279,3 +339,10 @@ class Gallery(models.Model):
     is_selected = models.BooleanField(default=False)
     image_position = models.CharField(
         max_length=60, choices=POSITION_CHOICES)
+
+    class Meta:
+   
+        verbose_name        = _('Gallery')
+        verbose_name_plural = _('Gallerys')
+    def __str__(self):
+        return str(self.id)

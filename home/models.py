@@ -347,7 +347,7 @@ class Gallery(models.Model):
     class Meta:
    
         verbose_name        = _('Gallery')
-        verbose_name_plural = _('Gallerys')
+        verbose_name_plural = _('Galleries')
 
     def __str__(self):
         return str(self.id)

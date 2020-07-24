@@ -1,7 +1,7 @@
 import os
 import dj_database_url
 from dotenv import load_dotenv
-load_dotenv(verbose=True)
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -10,7 +10,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Google maps
 MAPS_API_KEY = os.getenv("MAPS_API_KEY")
 SECRET_KEY = os.getenv("SECRET_KEY")
-# Datase
+
+# Databse
 DATABASE_NAME = os.getenv("DATABASE_NAME")
 DATABASE_USERNAME = os.getenv("DATABASE_USERNAME")
 DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")

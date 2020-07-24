@@ -89,16 +89,30 @@ class Salon(models.Model):
         self.slug = slugify(self.name)
         super(Salon, self).save(*args, **kwargs)
 
+    class Meta:
+  
+        verbose_name        = _('Salon')
+        verbose_name_plural = _('Salons')
+
+
     def __str__(self):
         return self.name
+
 
 
 class Package(models.Model):
     name = models.CharField(max_length=100)
     amount = models.IntegerField()
 
+    class Meta:
+  
+        verbose_name        = _('Package')
+        verbose_name_plural = _('Packages')
+
+
     def __str__(self):
         return self.name
+
 
 
 class PackageDetail(models.Model):
@@ -106,8 +120,16 @@ class PackageDetail(models.Model):
         Package, on_delete=models.CASCADE, related_name='package_details')
     detail = models.CharField(max_length=100)
 
+   
+    class Meta:
+  
+        verbose_name        = _('PackageDetail')
+        verbose_name_plural = _('PackageDetails')
+            
     def __str__(self):
-        return str(self.package)
+            return str(self.package)
+
+
 
 
 class MpesaTransaction(models.Model):
@@ -119,8 +141,15 @@ class MpesaTransaction(models.Model):
     is_successfull = models.BooleanField(default=False)
     failure_cause = models.TextField(max_length=200)
 
+    class Meta:
+  
+        verbose_name        = _('MpesaTransaction')
+        verbose_name_plural = _('MpesaTransactions')
+
+
     def __str__(self):
         return self.MpesaReceiptNumber
+
 
 
 class Services(models.Model):
@@ -139,8 +168,15 @@ class Services(models.Model):
             self.service_identifier = ('SN' + str(self.id))
         super(Services, self).save()
 
+    class Meta:
+  
+        verbose_name        = _('Service')
+        verbose_name_plural = _('Services')
+
     def __str__(self):
         return self.name
+
+
 
 
 class Products(models.Model):
@@ -158,8 +194,15 @@ class Products(models.Model):
             self.product_identifier = ('PN' + str(self.id))
         super(Products, self).save()
 
+    class Meta:
+  
+        verbose_name        = _('Product')
+        verbose_name_plural = _('Products')
+
     def __str__(self):
         return self.name
+
+
 
 
 class Staff(models.Model):
@@ -215,11 +258,19 @@ class Appointments(models.Model):
                               choices=STATUS_CHOICES,
                               default='Pending')
 
-    def __str__(self):
-        return f'{str(self.id)} {str(self.created_date)}'
-
+  
     def get_absolute_url(self):
         return reverse('appointment_detail', kwargs={'pk': self.pk})
+
+    class Meta:
+  
+        verbose_name        = _('Appointment')
+        verbose_name_plural = _('Appointments')
+
+  def __str__(self):
+        return f'{str(self.id)} {str(self.created_date)}'
+
+
 
 
 class AppointmentPayment(models.Model):
@@ -231,6 +282,11 @@ class AppointmentPayment(models.Model):
     payment_method = models.CharField(max_length=50,
                                       choices=PAYMENT_METHODS,
                                       default='Pending')
+
+    class Meta:
+  
+        verbose_name        = _('AppointmentPayment')
+        verbose_name_plural = _('AppointmentPayments')
 
     def __str__(self):
         return str(self.appointment)
@@ -265,8 +321,16 @@ class Reviews(models.Model):
         self.approved_review = True
         self.save()
 
+
+    class Meta:
+   
+        verbose_name        = _('Review')
+        verbose_name_plural = _('Reviews')
+
+
     def __str__(self):
         return str(self.author)
+
 
 
 class Gallery(models.Model):
@@ -279,3 +343,11 @@ class Gallery(models.Model):
     is_selected = models.BooleanField(default=False)
     image_position = models.CharField(
         max_length=60, choices=POSITION_CHOICES)
+
+    class Meta:
+   
+        verbose_name        = _('Gallery')
+        verbose_name_plural = _('Galleries')
+
+    def __str__(self):
+        return str(self.id)

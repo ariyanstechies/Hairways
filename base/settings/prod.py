@@ -6,7 +6,7 @@ DEBUG = False
 
 
 # For extra security --run python manage.py check --deploy
- 
+
 CSRF_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
@@ -14,7 +14,7 @@ SESSION_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = ['.hairwayskenya.com']
 
-# TODO ADD SENTRY 
+# TODO ADD SENTRY
 
 
 # Static

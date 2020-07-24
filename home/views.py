@@ -83,7 +83,7 @@ def index(request):
         salons = paginator.page(1)
     except EmptyPage:
         salons = paginator.page(paginator.num_pages)
-    return render(request, 'home/index.html', {"salons": salons})
+    return render(request, 'index.html', {"salons": salons})
 
 
 def signup_steps(request):

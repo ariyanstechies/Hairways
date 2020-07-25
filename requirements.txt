@@ -26,7 +26,6 @@ Pillow==7.0.0
 pip-upgrader==1.4.15
 psycopg2-binary==2.8.4
 pycodestyle==2.6.0
-pygraphviz==1.5
 PyJWT==1.7.1
 pyparsing==2.4.6
 python-dateutil==2.8.1

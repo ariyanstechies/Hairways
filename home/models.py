@@ -267,8 +267,8 @@ class Appointments(models.Model):
         verbose_name        = _('Appointment')
         verbose_name_plural = _('Appointments')
 
-  def __str__(self):
-        return f'{str(self.id)} {str(self.created_date)}'
+    def __str__(self):
+            return f'{str(self.id)} {str(self.created_date)}'
 
 
 

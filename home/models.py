@@ -91,8 +91,8 @@ class Salon(models.Model):
 
     class Meta:
 
-        verbose_name = _('Salon')
-        verbose_name_plural = _('Salons')
+        verbose_name = 'Salon'
+        verbose_name_plural = 'Salons'
 
     def __str__(self):
         return self.name
@@ -104,8 +104,8 @@ class Package(models.Model):
 
     class Meta:
 
-        verbose_name = _('Package')
-        verbose_name_plural = _('Packages')
+        verbose_name = 'Package'
+        verbose_name_plural = 'Packages'
 
     def __str__(self):
         return self.name
@@ -118,8 +118,8 @@ class PackageDetail(models.Model):
 
     class Meta:
 
-        verbose_name = _('PackageDetail')
-        verbose_name_plural = _('PackageDetails')
+        verbose_name = 'PackageDetail'
+        verbose_name_plural = 'PackageDetails'
 
     def __str__(self):
         return str(self.package)
@@ -136,8 +136,8 @@ class MpesaTransaction(models.Model):
 
     class Meta:
 
-        verbose_name = _('MpesaTransaction')
-        verbose_name_plural = _('MpesaTransactions')
+        verbose_name = 'MpesaTransaction'
+        verbose_name_plural = 'MpesaTransactions'
 
     def __str__(self):
         return self.MpesaReceiptNumber
@@ -161,8 +161,8 @@ class Services(models.Model):
 
     class Meta:
 
-        verbose_name = _('Service')
-        verbose_name_plural = _('Services')
+        verbose_name = 'Service'
+        verbose_name_plural = 'Services'
 
     def __str__(self):
         return self.name
@@ -185,8 +185,8 @@ class Products(models.Model):
 
     class Meta:
 
-        verbose_name = _('Product')
-        verbose_name_plural = _('Products')
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
 
     def __str__(self):
         return self.name
@@ -250,8 +250,8 @@ class Appointments(models.Model):
 
     class Meta:
 
-        verbose_name = _('Appointment')
-        verbose_name_plural = _('Appointments')
+        verbose_name = 'Appointment'
+        verbose_name_plural = 'Appointments'
 
     def __str__(self):
         return f'{str(self.id)} {str(self.created_date)}'
@@ -269,8 +269,8 @@ class AppointmentPayment(models.Model):
 
     class Meta:
 
-        verbose_name = _('AppointmentPayment')
-        verbose_name_plural = _('AppointmentPayments')
+        verbose_name = 'AppointmentPayment'
+        verbose_name_plural = 'AppointmentPayments'
 
     def __str__(self):
         return str(self.appointment)
@@ -307,8 +307,8 @@ class Reviews(models.Model):
 
     class Meta:
 
-        verbose_name = _('Review')
-        verbose_name_plural = _('Reviews')
+        verbose_name = 'Review'
+        verbose_name_plural = 'Reviews'
 
     def __str__(self):
         return str(self.author)
@@ -327,8 +327,8 @@ class Gallery(models.Model):
 
     class Meta:
 
-        verbose_name = _('Gallery')
-        verbose_name_plural = _('Galleries')
+        verbose_name = 'Gallery'
+        verbose_name_plural = 'Galleries'
 
     def __str__(self):
         return str(self.id)

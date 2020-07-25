@@ -1,15 +1,15 @@
 from django.contrib import admin
-from home.models import Owner, Reviews, Services, AppointmentPayment, Package, MpesaTransaction, PackageDetail
-from home.models import Appointments, Salon, Products, Staff, Gallery, Client, User
+from home.models import Vendor, Review, Service, AppointmentPayment, Package, MpesaTransaction, PackageDetail
+from home.models import Appointment, Salon, Product, Gallery, Customer, User, Location
 
-admin.site.register(Owner)
-admin.site.register(Reviews)
-admin.site.register(Services)
-admin.site.register(Appointments)
+admin.site.register(Vendor)
+admin.site.register(Review)
+admin.site.register(Service)
+admin.site.register(Appointment)
 admin.site.register(Salon)
-admin.site.register(Products)
-admin.site.register(Staff)
-admin.site.register(Client)
+admin.site.register(Location)
+admin.site.register(Product)
+admin.site.register(Customer)
 admin.site.register(User)
 admin.site.register(AppointmentPayment)
 admin.site.register(Gallery)

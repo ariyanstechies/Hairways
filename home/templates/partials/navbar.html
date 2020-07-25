@@ -1,5 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark main_navbar bg-teal
-  main-navbar-light" id="main-navbar">
+<nav class="navbar navbar-expand-lg navbar-dark main_navbar bg-teal" id="main-navbar">
   <div class="container">
     <a class="navbar-brand" class="" href="/">Hairways</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav"
@@ -19,7 +18,7 @@
           <a href="{% url 'faqs' %}" class="nav-link">Faqs</a>
         </li>
         {% if user.is_authenticated %}
-        {% if user.is_client %}
+        {% if user.is_customer %}
         <li class="nav-item">
           <a href="{% url 'mini_dashboard' %}" class="nav-link">
             {{request.user.username}}

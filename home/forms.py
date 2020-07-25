@@ -1,17 +1,18 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, SetPasswordForm
 from django.db import transaction
-from home.models import *
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row, Column
+from home.models import User, Customer, Vendor, Review, Salon, Service, Product, Appointment, Gallery, Profile
 from bootstrap_datepicker_plus import DatePickerInput
+from django.utils.translation import ugettext_lazy as _
 
 
-class ClientSignUpForm(UserCreationForm):
+class UserSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = (
             'username',
+            'email',
+            'phone_number',
             'password1',
             'password2',
         )
@@ -19,50 +20,58 @@ class ClientSignUpForm(UserCreationForm):
     @transaction.atomic
     def save(self):
         user = super().save(commit=False)
-        user.is_client = True
+        # TODO determine type of user and create appropriate model
+        user.is_customer = True
         user.save()
-        client = Client.objects.create(user=user)
+        Customer.objects.create(user=user)
         return user
-
-
-class StaffSignUpForm(UserCreationForm):
-
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = (
-            'username',
-        )
-
-
-class OwnerSignUpForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = (
-            'username',
-            'password1',
-            'password2',
-        )
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.is_owner = True
-        if commit:
-            user.save()
+        user.is_vendor = True
+        user.save()
+        Vendor.objects.create(user=user)
         return user
 
 
-class OwnerAddInfoForm(forms.ModelForm):
+class UserPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        label=_("Current password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autofocus': True}),
+    )
+    new_password1 = forms.CharField(
+        label=_("New password"),
+        widget=forms.PasswordInput,
+        strip=False)
+
+
+class UserSetPasswordForm(SetPasswordForm):
+
+    new_password1 = forms.CharField(
+        label=_("New password"),
+        widget=forms.PasswordInput,
+        strip=False)
+
+
+class UserUpdateForm(forms.ModelForm):
     class Meta:
-        model = Owner
-        fields = ('name', 'email', 'phone', 'location')
+        model = User
+        fields = ('first_name', 'last_name', 'phone_number')
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']
 
 
 class ReviewForm(forms.ModelForm):
     class Meta:
-        model = Reviews
-        fields = ('message', )
+        model = Review
+        fields = ('content', )
         widgets = {
-            'message':
+            'contet':
             forms.Textarea(
                 attrs={
                     'rows': 3,
@@ -71,61 +80,28 @@ class ReviewForm(forms.ModelForm):
         }
 
 
-class TempUserForm(forms.ModelForm):
-    class Meta:
-        model = tempuser
-        fields = (
-            'name',
-            'phone_no',
-            'email',
-        )
-
-
-class addSalonForm(forms.ModelForm):
+class CreateSalonForm(forms.ModelForm):
     class Meta:
         model = Salon
-        fields = ('name', 'description', 'paybill', 'town',
-                  'location_description')
-
-
-class StaffForm(forms.ModelForm):
-    class Meta:
-        model = Staff
-        fields = (
-            'firstname',
-            'lastname',
-            'job_description',
-            'phone',
-            'email',
-            'date_started',
-            'salary',
-        )
-        widgets = {
-            'date_started': DatePickerInput(),
-        }
-
-
-class addClientForm(forms.ModelForm):
-    class Meta:
-        model = Client
-        fields = ('user', 'Full_Name', 'email', 'phone')
+        fields = ('name', 'description',
+                  'paybill', 'location')
 
 
 class ServiceForm(forms.ModelForm):
     class Meta:
-        model = Services
+        model = Service
         fields = ('name', 'cost', 'duration', 'availability')
 
 
 class ProductForm(forms.ModelForm):
     class Meta:
-        model = Products
+        model = Product
         fields = ('name', 'price', 'brand')
 
 
-class clientAppointment(forms.ModelForm):
+class CustomerAppointmentForm(forms.ModelForm):
     class Meta:
-        model = Appointments
+        model = Appointment
         fields = ['appointment_date', ]
         labels = {
             'appointment_date': ''
@@ -135,10 +111,10 @@ class clientAppointment(forms.ModelForm):
         }
 
 
-class SalonAppointment(forms.ModelForm):
+class SalonAppointmentForm(forms.ModelForm):
     class Meta:
-        model = Appointments
-        fields = ['services', 'appointment_date', 'products', 'clientphoneNo']
+        model = Appointment
+        fields = ['services', 'appointment_date', 'products']
         widgets = {
             'services': forms.CheckboxSelectMultiple,
             'appointment_date': DatePickerInput(),
@@ -148,7 +124,7 @@ class SalonAppointment(forms.ModelForm):
 
 class AppointmentUpdateForm(forms.ModelForm):
     class Meta:
-        model = Appointments
+        model = Appointment
         fields = ['services']
         widgets = {
             'services': forms.CheckboxSelectMultiple,
@@ -158,16 +134,4 @@ class AppointmentUpdateForm(forms.ModelForm):
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Gallery
-        fields = ('image', 'image_position')
-
-
-class ProfileUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Owner
-        fields = ('name', 'email', 'phone', 'location')
-
-
-class PpicUpdateForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('image',)
+        fields = ('image', 'is_selected', 'image_type')

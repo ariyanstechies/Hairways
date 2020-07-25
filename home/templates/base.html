@@ -6,19 +6,19 @@
       For the best Salons, Barber shop in town
       {% endblock %}
     </title>
-    {% include "shared/header.html" %}
+    {% include "partials/header.html" %}
   </head>
 
   <body>
     <div class="wrapper">
       {% block nav %}
-      {% include "shared/navbar.html" %}
+      {% include "partials/navbar.html" %}
       {% endblock %}
       <div class="main">
         {% block content %}
         {% endblock content %}
       </div>
-      {% include "shared/footer.html" %}
+      {% include "partials/footer.html" %}
     </div>
     <!-- Signup Modal -->
     <div class="modal fade" id="signupModal" tabindex="-1" role="dialog"
@@ -27,10 +27,10 @@
         <div class="modal-content">
           <div class="modal-body">
             <h3 class="mb-4">I want to </h3>
-            <a href="{% url 'owner_signup' %}" class="btn btn-outline-success
+            <a href="{% url 'register' %}" class="btn btn-outline-success
               d-block my-3 btn-rounded p-2 mx-4">
               List a Business</a>
-            <a href="{% url 'client_signup' %}" class="btn btn-outline-info
+            <a href="{% url 'register' %}" class="btn btn-outline-info
               d-block my-3 btn-rounded p-2 mx-4">
               Sign up as User</a>
           </div>

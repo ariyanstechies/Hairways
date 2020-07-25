@@ -4,9 +4,8 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from home.decorators import client_required
-from home.forms import ClientSignUpForm
-from home.models import User, Client, Appointments, Reviews
+from home.decorators import customer_required
+from home.models import User, Customer, Appointment, Review
 from django.views import generic
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
@@ -15,39 +14,24 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from django.urls import reverse_lazy
 
 
-class ClientSignUpView(CreateView):
-    model = User
-    form_class = ClientSignUpForm
-    template_name = 'registration/signup.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'Client'
-        return super().get_context_data(**kwargs)
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('home')
-
-
-@method_decorator([login_required, client_required], name='dispatch')
-class ClientUpdate(UpdateView):
-    model = Client
-    fields = ['Full_Name', 'phone', 'email']
-    template_name = 'clients/client_update_form.html'
+@ method_decorator([login_required, customer_required], name='dispatch')
+class CustomerUpdateView(UpdateView):
+    model = Customer
+    fields = ['full_name', 'phone_number', 'email']
+    template_name = 'customer/client_update_form.html'
     success_url = reverse_lazy('mini_dashboard')
 
     def get_object(self):
-        return get_object_or_404(Client, pk=self.request.user.id)
+        return get_object_or_404(Customer, pk=self.request.user.id)
         messages.success(
             self.request, 'The appointment was created succesfully.')
 
 
-@method_decorator([login_required, client_required], name='dispatch')
+@method_decorator([login_required, customer_required], name='dispatch')
 class AppointmentListView(ListView):
-    model = Appointments
+    model = Appointment
     context_object_name = 'my_appointments'
-    template_name = 'clients/dashboard.html'
+    template_name = 'customer/dashboard.html'
 
     def get_queryset(self):
         queryset = self.request.user.my_appointments \
@@ -55,12 +39,12 @@ class AppointmentListView(ListView):
         return queryset
 
 
-@method_decorator([login_required, client_required], name='dispatch')
+@method_decorator([login_required, customer_required], name='dispatch')
 class AppointmentCreateView(CreateView):
-    model = Appointments
+    model = Appointment
     fields = ('services', 'salons',
               'date_time', 'totalCost')
-    template_name = 'clients/order_add_form.html'
+    template_name = 'customer/order_add_form.html'
 
     def form_valid(self, form):
         appointment = form.save(commit=False)
@@ -71,11 +55,11 @@ class AppointmentCreateView(CreateView):
         return redirect('client_dashboard')
 
 
-@method_decorator([login_required, client_required], name='dispatch')
-class ReviewsListView(ListView):
-    model = Reviews
+@method_decorator([login_required, customer_required], name='dispatch')
+class ReviewListView(ListView):
+    model = Review
     context_object_name = 'my_reviews'
-    template_name = 'clients/dashboard2.html'
+    template_name = 'customer/dashboard2.html'
 
     def get_queryset(self):
         queryset = self.request.user.my_reviews \
@@ -83,18 +67,18 @@ class ReviewsListView(ListView):
         return queryset
 
 
-@method_decorator([login_required, client_required], name='dispatch')
+@method_decorator([login_required, customer_required], name='dispatch')
 class MiniDashboard(ListView):
-    model = Appointments
+    model = Appointment
     context_object_name = 'my_appointments'
-    template_name = 'clients/mini_dashboard.html'
+    template_name = 'customer/mini_dashboard.html'
 
 
-@method_decorator([login_required, client_required], name='dispatch')
-class MyAppointments(ListView):
-    model = Appointments
+@method_decorator([login_required, customer_required], name='dispatch')
+class MyAppointment(ListView):
+    model = Appointment
     context_object_name = 'my_appointments'
-    template_name = 'clients/client_appointment.html'
+    template_name = 'customer/client_appointment.html'
 
     def get_queryset(self):
         queryset = self.request.user.my_appointments \
@@ -102,11 +86,11 @@ class MyAppointments(ListView):
         return queryset
 
 
-@method_decorator([login_required, client_required], name='dispatch')
-class MyReviews(ListView):
-    model = Reviews
+@method_decorator([login_required, customer_required], name='dispatch')
+class MyReview(ListView):
+    model = Review
     context_object_name = 'my_reviews'
-    template_name = 'clients/client_reviews.html'
+    template_name = 'customer/client_reviews.html'
 
     def get_queryset(self):
         queryset = self.request.user.my_reviews \

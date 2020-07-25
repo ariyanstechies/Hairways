@@ -75,7 +75,7 @@
                                             <td>{{review.created_date}}</td>
                                             <td>{{review.salon}}</td>
 
-                                            <td>{% if review.approved_review%} Approved
+                                            <td>{% if review.approved%} Approved
 
                                                 {% else %}
                                                 Waiting Approval
@@ -105,7 +105,7 @@
                                             <td>{{review.created_date}}</td>
                                             <td>{{review.salon}}</td>
 
-                                            <td>{% if review.approved_review%} Approved
+                                            <td>{% if review.approved%} Approved
 
                                                 {% else %}
                                                 Waiting Approval
@@ -132,7 +132,7 @@
 
 
     </div>
-    {% include "shared/footer.html" %}
+    {% include "partials/footer.html" %}
 </body>
 
 </html>

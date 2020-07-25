@@ -1,3 +1,4 @@
+
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
@@ -29,17 +30,33 @@
         <div class="col-6">
           <div class="card">
             <div class="card-body">
-              <h1 class="mt-2">Login Section</h1>
+              <h1 class="mt-2">Client mini dashboard</h1>
               <hr class="mt-0 mb-4">
-              <form method="POST" novalidate>
-                {% csrf_token %}
-                {{ form|crispy }}
-                <button type="submit" class="btn btn-primary">Login</button>
-              <a href="{% url 'password_reset' %}" class="btn btn-link">Forgot your Password?</a>
-              <a href="{% url 'signup' %}">Sign Up now!</a>
-            </form>
+              <h4>Edit Your depails by clicking the edit profile bellow</h4>
+              <ul>
+                <li>Name:<b>{{ request.user.username}}</b></li>
+                <li>{{ request.user.nickname}}</li>
+                <li><a href="{% url 'client_update'%}">Edit Profile</a></li>
+
+              </ul>
+              <p><a href="{% url 'client_dashboard' %}">Appointments</a>|<a href="#">Reviews</a>|<a href="#">Reviews</a></p>
+              <h2>Bellow are your Reviews </h2>
+              {% for review in my_reviews %}
+                <p><b>Comment Id:{{review.id}}
+                  | Salon:{{review.salons.saloonName}}
+                  | Texts:{{review.reply}}
+                  | Date: {{review.date_time}}| Status: {{ review.approved}}
+                  </b>
+                </p>
+                {% empty %}
+              <li>No reviews yet.</li>
+              {% endfor %}
+
+
             <!-- GOOGLE AUTHENTICATION -->
             <br>
+
+            <p><a href="{% url 'appointment_add'%}">Make New Appointment</a></p>
           </div>
       </div>
     </div>

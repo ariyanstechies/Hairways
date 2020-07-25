@@ -9,43 +9,77 @@ from django.utils import timezone
 from phone_field import PhoneField
 
 
-class tempuser(models.Model):
-    name = models.CharField(max_length=254, )
-    phone_no = PhoneField()
-    email = models.EmailField(max_length=254, blank=True, null=True)
-
-
 class User(AbstractUser):
     is_client = models.BooleanField(default=False)
     is_owner = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    nickname = models.CharField(max_length=30, null=True, blank=True)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
+    phone = models.IntegerField(null=True, blank=True)
 
 
-class Owner(models.Model):
+class Vendor(models.Model):
     user = models.OneToOneField(User,
                                 on_delete=models.CASCADE,
                                 primary_key=True)
-    name = models.CharField(max_length=30)
-    email = models.CharField(max_length=150)
-    phone = models.PositiveIntegerField(default='07000000')
-    location = models.CharField(max_length=25, default='Kisumu')
-    gender = models.CharField(max_length=150, default='Female')
 
     def __str__(self):
-        return self.name
+        return self.user.first_name
+
+
+class Customer(models.Model):
+    user = models.OneToOneField(User,
+                                on_delete=models.CASCADE,
+                                primary_key=True,
+                                related_name='client')
+
+    def __str__(self):
+        return self.user.first_name
 
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Owner.objects.create(user=instance)
+        Vendor.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-    instance.owner.save()
+    instance.vendor.save()
+
+
+class Location(models.Model):
+    city = models.CharField(max_length=30)
+    description = models.CharField(max_length=250,
+                                   null=True,
+                                   blank=True)
+    longitude = models.DecimalField(
+        max_digits=9, decimal_places=6,  null=True, blank=True)
+    latitude = models.DecimalField(
+        max_digits=9, decimal_places=6, blank=True, null=True)
+
+
+class Gallery(models.Model):
+    POSITION_CHOICES = (('Cover Image', 'Cover Image'), ('Card Image', 'Card Image'),
+                        ('Prome Image', 'Prome Image'))
+    salon = models.ForeignKey(Salon,
+                              on_delete=models.CASCADE,
+                              related_name='gallery')
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    is_selected = models.BooleanField(default=False)
+    image_position = models.CharField(
+        max_length=60, choices=POSITION_CHOICES)
+
+    card_img = models.ImageField()
+    cover_img = models.CharField(max_length=250, blank=True, null=True)
+    promo_img = models.CharField(max_length=250, blank=True, null=True)
+
+    class Meta:
+
+        verbose_name = 'Gallery'
+        verbose_name_plural = 'Galleries'
+
+    def __str__(self):
+        return str(self.id)
 
 
 class Salon(models.Model):
@@ -55,23 +89,13 @@ class Salon(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     owner = models.OneToOneField(Owner,
                                  on_delete=models.CASCADE,
-                                 related_name='my_salons')
+                                 related_name='salons')
     rating = models.FloatField(default=0.0)
-    status = models.BooleanField(default=0)
-    shares = models.IntegerField(default=0)
     paybill = models.IntegerField(null=True, blank=True)
     is_paid = models.BooleanField(default=False)
-    town = models.CharField(max_length=30)
-    location_description = models.CharField(max_length=250,
-                                            null=True,
-                                            blank=True)
-    longitude = models.DecimalField(
-        max_digits=9, decimal_places=6,  null=True, blank=True)
-    latitude = models.DecimalField(
-        max_digits=9, decimal_places=6, blank=True, null=True)
-    card_img = models.CharField(max_length=250, blank=True, null=True)
-    cover_img = models.CharField(max_length=250, blank=True, null=True)
-    promo_img = models.CharField(max_length=250, blank=True, null=True)
+    location = models.OneToOneField(Location,
+                                    on_delete=models.CASCADE,
+                                    related_name='location')
 
     def pending_appointments(self):
         return self.appointments.filter(status="Pending")
@@ -192,39 +216,6 @@ class Products(models.Model):
         return self.name
 
 
-class Staff(models.Model):
-    user = models.OneToOneField(User,
-                                on_delete=models.CASCADE,
-                                primary_key=True,
-                                related_name='staff')
-    salon = models.ForeignKey(Salon,
-                              on_delete=models.CASCADE,
-                              related_name='staffs')
-    firstname = models.CharField(max_length=100, null=True, blank=True)
-    lastname = models.CharField(max_length=100, null=True, blank=True)
-    date_started = models.DateField(default=timezone.now)
-    salary = models.IntegerField(null=True, blank=True)
-    job_description = models.CharField(max_length=100, null=True, blank=True)
-    phone = models.IntegerField(null=True, blank=True)
-    email = models.CharField(max_length=100, null=True, blank=True)
-
-    def __str__(self):
-        return self.firstname
-
-
-class Client(models.Model):
-    user = models.OneToOneField(User,
-                                on_delete=models.CASCADE,
-                                primary_key=True,
-                                related_name='client')
-    Full_Name = models.CharField(max_length=30)
-    email = models.CharField(max_length=30, default='myemail@gmail.com')
-    phone = models.IntegerField(null=True, blank=True)
-
-    def __str__(self):
-        return self.nickname
-
-
 class Appointments(models.Model):
     STATUS_CHOICES = (('Accepted', 'Accepted'), ('Rejected', 'Rejected'),
                       ('Pending', 'Pending'), ('Completed', 'Completed'))
@@ -312,23 +303,3 @@ class Reviews(models.Model):
 
     def __str__(self):
         return str(self.author)
-
-
-class Gallery(models.Model):
-    POSITION_CHOICES = (('Cover Image', 'Cover Image'), ('Card Image', 'Card Image'),
-                        ('Prome Image', 'Prome Image'))
-    salon = models.ForeignKey(Salon,
-                              on_delete=models.CASCADE,
-                              related_name='gallery')
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
-    is_selected = models.BooleanField(default=False)
-    image_position = models.CharField(
-        max_length=60, choices=POSITION_CHOICES)
-
-    class Meta:
-
-        verbose_name = 'Gallery'
-        verbose_name_plural = 'Galleries'
-
-    def __str__(self):
-        return str(self.id)

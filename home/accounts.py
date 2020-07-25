@@ -45,7 +45,6 @@ class UserSignUpView(SessionWizardView):
             userType = form_dict['0'].cleaned_data.get("userTypes")
 
             # Create User
-            print(userType)
             user = form_dict['1'].save(commit=False)
             if userType == "is_vendor":
                 user.is_vendor = True

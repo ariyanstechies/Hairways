@@ -1,18 +1,49 @@
-{% load static %}
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<!-- TODO move add-salon css from header file -->
-<link rel="stylesheet" href="{% static 'css/add-salon.css' %}">
-<link rel="stylesheet" type="text/css"
-    href="{% static 'css/bootstrap/css/bootstrap.css' %}">
-<link rel="stylesheet" type="text/css"
-    href="{% static 'css/bootstrap/css/bootstrap-grid.css' %}">
-<link
-    href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800'
-    rel='stylesheet' type='text/css'>
-<link href="{% static 'css/themify-icons.css' %}" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-<link href="{% static 'css/main.css' %}" rel="stylesheet" />
-<link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet">
-<link href="{% static 'css/owl.theme.default.min.css' %}" rel="stylesheet">
-<link href="{% static 'css/themify-icons.css' %}" rel="stylesheet" />
+<nav class="navbar navbar-expand-lg navbar-dark main_navbar bg-teal" id="main-navbar">
+  <div class="container">
+    <a class="navbar-brand" class="" href="/">Hairways</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="ti-menu text-white"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="main-nav">
+      <ul class="navbar-nav ml-auto text-capitalize">
+        <li class="nav-item active">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'about' %}" class="nav-link">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'faqs' %}" class="nav-link">Faqs</a>
+        </li>
+        {% if user.is_authenticated %}
+        {% if user.is_customer %}
+        <li class="nav-item">
+          <a href="{% url 'mini_dashboard' %}" class="nav-link">
+            {{request.user.username}}
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="{% url 'vendor_dashboard' %}" class="nav-link">Dashboard</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a href="{% url 'logout' %}" class="nav-link">Log Out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="{% url 'login' %}" class="nav-link">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'register' %}" class="nav-link">Sign Up</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a href="{% url 'home' %}" class="nav-link">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

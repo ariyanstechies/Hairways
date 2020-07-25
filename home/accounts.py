@@ -10,12 +10,13 @@ from django.contrib.auth.views import (LoginView, LogoutView,
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView
+from formtools.wizard.views import SessionWizardView
 
-from home.forms import (ProfileUpdateForm, UserPasswordChangeForm,
+
+from home.forms import (ProfileUpdateForm, UserPasswordChangeForm, UserTypeForm,
                         UserSignUpForm, UserSetPasswordForm,
                         UserUpdateForm)
-from home.models import Profile, User
+from home.models import Profile, User, Vendor, Customer
 
 
 class Login(LoginView):
@@ -35,25 +36,38 @@ class Logout(LogoutView):
     next_page = reverse_lazy('home')
 
 
-class UserSignUpView(CreateView):
-    model = User
-    form_class = UserSignUpForm
+class UserSignUpView(SessionWizardView):
+    form_list = [UserTypeForm, UserSignUpForm]
     template_name = "accounts/register.html"
 
-    def form_valid(self, form):
-        user = form.save()
+    def done(self, form_list, form_dict, **kwargs):
+        if self.steps.current == '1':
+            userType = form_dict['0'].cleaned_data.get("userTypes")
 
-        messages.success(self.request, f'Your account has been created!')
+            # Create User
+            print(userType)
+            user = form_dict['1'].save(commit=False)
+            if userType == "is_vendor":
+                user.is_vendor = True
+            else:
+                user.is_customer = True
 
-        login(self.request, user)
+            user.save()
 
-        return redirect('home')
+            # Create User Profile
+            Profile.objects.create(user=user)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Set appropriate user_type
-        context['user_type'] = 'Customer'
-        return context
+            # Determine UserType and create corresponding profile
+            if user.is_vendor:
+                Vendor.objects.create(user=user)
+            else:
+                Customer.objects.create(user=user)
+
+            messages.success(self.request, f'Your account has been created!')
+
+            login(self.request, user)
+
+            return redirect('home')
 
 
 @method_decorator(login_required, name='dispatch')

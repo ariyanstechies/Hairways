@@ -245,7 +245,7 @@ monthly_chart_datas = []
 @login_required
 @vendor_required
 def dashboard(request):
-    salon = get_object_or_404(Salon, owner__name=request.user.owner)
+    salon = get_object_or_404(Salon, vendor=request.user.vendor)
     visits = Visit.objects.get_uri_visits_for(request, uri=salon.slug)
     end_date = datetime.date(datetime.now())
     start_date = end_date - timedelta(days=7)
@@ -493,6 +493,7 @@ def upload(request):
         name = fs.save(uploaded_file.name, uploaded_file)
         context['url'] = fs.url(name)
     return render(request, 'upload.html', context)
+
 
 def appointments(request):
     my_salon = Appointment.objects.filter(salon__owner=request.user.owner)

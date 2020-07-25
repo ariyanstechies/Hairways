@@ -30,8 +30,7 @@ urlpatterns = [
     path('owner/update/', vendors.VendorUpdate.as_view(), name='owner_update'),
 
     # Vendor Dashboard
-    path('dashboard/', views.dashboard, name='dashboard'),
-    path('preference/', views.preference, name='preference'),
+    path('dashboard/', views.dashboard, name='vendor_dashboard'),
     path('dashboard/profile/', views.profile, name='profile'),
     path('dashboard/reviews/', views.reviews, name='reviews'),
     path('dashboard/customers/', views.customers, name='customers'),
@@ -43,28 +42,23 @@ urlpatterns = [
     path('dashboard/service/<int:id>/remove/',
          views.service_delete,
          name='service_delete'),
-    # products starts here
+    # Products
     path('dashboard/products', views.products, name='products'),
     path('dashboard/products/new', views.product_new, name='product_new'),
-    path('dashboard/product/<int:id>/edit',
-         views.product_edit,
-         name='product_edit'),
+    path('dashboard/products/<int:id>/edit',
+         views.product_edit, name='product_edit'),
     path('dashboard/product/<int:id>/remove/',
-         views.product_delete,
-         name='product_delete'),
-    # appointments starts here
+         views.product_delete, name='product_delete'),
+
+    # Appointments
     path('dashboard/appointments',
-         views.appointments,
-         name='dashboard_appointments'),
+         views.appointments, name='dashboard_appointments'),
     path('appointment/update/<int:pk>/',
-         AppointmentUpdate.as_view(),
-         name='a_update'),
+         AppointmentUpdate.as_view(), name='a_update'),
     path('dashboard/appointments/new/',
-         views.dashboard_appointments_new,
-         name='dashboard_appointments_new'),
+         views.dashboard_appointments_new, name='dashboard_appointments_new'),
     path('appointments/complete/<int:pk>/',
-         views.appointment_complete,
-         name='appointment_complete'),
+         views.appointment_complete,  name='appointment_complete'),
 
     # salon images starts here
     path('dashboard/salon/images<slug:slug>',
@@ -80,11 +74,13 @@ urlpatterns = [
          views.client_profile_for_salons,
          name='client_profile_for_salons'),
 
-    #     client dashboard A.K.A Mini dashboard
-    path('client/dashboard',
+    # Customer dashboard A.K.A Mini dashboard
+    path('customer/dashboard',
          AppointmentListView.as_view(),
-         name='client_dashboard'),
+         name='customer_dashboard'),
     path('user/profile/', MiniDashboard.as_view(), name='mini_dashboard'),
+    path('preference/', views.preference, name='preference'),
+
 ]
 
 if settings.DEBUG:

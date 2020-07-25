@@ -52,7 +52,7 @@ class AppointmentCreateView(CreateView):
         appointment.save()
         messages.success(
             self.request, 'The appointment was created succesfully.')
-        return redirect('client_dashboard')
+        return redirect('customer_dashboard')
 
 
 @method_decorator([login_required, customer_required], name='dispatch')

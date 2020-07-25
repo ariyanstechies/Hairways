@@ -17,21 +17,17 @@ class UserSignUpForm(UserCreationForm):
             'password2',
         )
 
-    @transaction.atomic
-    def save(self):
-        user = super().save(commit=False)
-        # TODO determine type of user and create appropriate model
-        user.is_customer = True
-        user.save()
-        Customer.objects.create(user=user)
-        return user
 
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.is_vendor = True
-        user.save()
-        Vendor.objects.create(user=user)
-        return user
+class UserTypeForm(forms.Form):
+    USER_TYPES = [
+        ('is_vendor', "List a business"),
+        ('is_customer', "Sign Up a User")
+    ]
+    userTypes = forms.ChoiceField(
+        label="Choose an action below",
+        widget=forms.RadioSelect,
+        choices=USER_TYPES
+    )
 
 
 class UserPasswordChangeForm(PasswordChangeForm):

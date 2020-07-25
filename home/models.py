@@ -7,7 +7,9 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
+from io import BytesIO
+from django.core.files.storage import default_storage
+from PIL import Image
 
 class User(AbstractUser):
     is_customer = models.BooleanField(default=False)
@@ -58,18 +60,6 @@ class Profile(models.Model):
             memfile.close()
             img.close()
 
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Vendor.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.vendor.save()
-
-
 class Location(models.Model):
     city = models.CharField(max_length=30)
     description = models.CharField(max_length=250,
@@ -106,7 +96,7 @@ class Salon(models.Model):
     slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField(max_length=250)
     created_date = models.DateTimeField(default=timezone.now)
-    owner = models.OneToOneField(Vendor,
+    vendor = models.OneToOneField(Vendor,
                                  on_delete=models.CASCADE,
                                  related_name='salons')
     paybill = models.IntegerField(null=True, blank=True)

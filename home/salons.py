@@ -121,4 +121,4 @@ def salon_details(request, name):
         'stars_4': stars_4,
         'stars_5': stars_5
     }
-    return render(request, "home/salon_details.html", context)
+    return render(request, "salon/details.html", context)

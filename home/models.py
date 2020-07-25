@@ -1,11 +1,11 @@
-from django.db import models
-from django.utils import timezone
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.urls import reverse
 from django.template.defaultfilters import slugify
+from django.urls import reverse
+from django.utils import timezone
 from phone_field import PhoneField
 
 
@@ -90,14 +90,12 @@ class Salon(models.Model):
         super(Salon, self).save(*args, **kwargs)
 
     class Meta:
-  
-        verbose_name        = _('Salon')
-        verbose_name_plural = _('Salons')
 
+        verbose_name = _('Salon')
+        verbose_name_plural = _('Salons')
 
     def __str__(self):
         return self.name
-
 
 
 class Package(models.Model):
@@ -105,14 +103,12 @@ class Package(models.Model):
     amount = models.IntegerField()
 
     class Meta:
-  
-        verbose_name        = _('Package')
-        verbose_name_plural = _('Packages')
 
+        verbose_name = _('Package')
+        verbose_name_plural = _('Packages')
 
     def __str__(self):
         return self.name
-
 
 
 class PackageDetail(models.Model):
@@ -120,16 +116,13 @@ class PackageDetail(models.Model):
         Package, on_delete=models.CASCADE, related_name='package_details')
     detail = models.CharField(max_length=100)
 
-   
     class Meta:
-  
-        verbose_name        = _('PackageDetail')
+
+        verbose_name = _('PackageDetail')
         verbose_name_plural = _('PackageDetails')
-            
+
     def __str__(self):
-            return str(self.package)
-
-
+        return str(self.package)
 
 
 class MpesaTransaction(models.Model):
@@ -142,14 +135,12 @@ class MpesaTransaction(models.Model):
     failure_cause = models.TextField(max_length=200)
 
     class Meta:
-  
-        verbose_name        = _('MpesaTransaction')
-        verbose_name_plural = _('MpesaTransactions')
 
+        verbose_name = _('MpesaTransaction')
+        verbose_name_plural = _('MpesaTransactions')
 
     def __str__(self):
         return self.MpesaReceiptNumber
-
 
 
 class Services(models.Model):
@@ -169,14 +160,12 @@ class Services(models.Model):
         super(Services, self).save()
 
     class Meta:
-  
-        verbose_name        = _('Service')
+
+        verbose_name = _('Service')
         verbose_name_plural = _('Services')
 
     def __str__(self):
         return self.name
-
-
 
 
 class Products(models.Model):
@@ -195,14 +184,12 @@ class Products(models.Model):
         super(Products, self).save()
 
     class Meta:
-  
-        verbose_name        = _('Product')
+
+        verbose_name = _('Product')
         verbose_name_plural = _('Products')
 
     def __str__(self):
         return self.name
-
-
 
 
 class Staff(models.Model):
@@ -258,19 +245,16 @@ class Appointments(models.Model):
                               choices=STATUS_CHOICES,
                               default='Pending')
 
-  
     def get_absolute_url(self):
         return reverse('appointment_detail', kwargs={'pk': self.pk})
 
     class Meta:
-  
-        verbose_name        = _('Appointment')
+
+        verbose_name = _('Appointment')
         verbose_name_plural = _('Appointments')
 
-  def __str__(self):
+    def __str__(self):
         return f'{str(self.id)} {str(self.created_date)}'
-
-
 
 
 class AppointmentPayment(models.Model):
@@ -284,8 +268,8 @@ class AppointmentPayment(models.Model):
                                       default='Pending')
 
     class Meta:
-  
-        verbose_name        = _('AppointmentPayment')
+
+        verbose_name = _('AppointmentPayment')
         verbose_name_plural = _('AppointmentPayments')
 
     def __str__(self):
@@ -321,16 +305,13 @@ class Reviews(models.Model):
         self.approved_review = True
         self.save()
 
-
     class Meta:
-   
-        verbose_name        = _('Review')
-        verbose_name_plural = _('Reviews')
 
+        verbose_name = _('Review')
+        verbose_name_plural = _('Reviews')
 
     def __str__(self):
         return str(self.author)
-
 
 
 class Gallery(models.Model):
@@ -345,8 +326,8 @@ class Gallery(models.Model):
         max_length=60, choices=POSITION_CHOICES)
 
     class Meta:
-   
-        verbose_name        = _('Gallery')
+
+        verbose_name = _('Gallery')
         verbose_name_plural = _('Galleries')
 
     def __str__(self):

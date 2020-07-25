@@ -19,10 +19,10 @@ class TestUrls(SimpleTestCase):
         url = reverse('salon_details', args=['sample-salon-slug'])
         self.assertEqual(resolve(url).func, salon_details)
 
-    def test_client_signup_url_resolves(self):
-        url = reverse('client_signup')
+    def test_register_url_resolves(self):
+        url = reverse('register')
         self.assertEqual(resolve(url).func.view_class, ClientSignUpView)
 
-    def test_owner_signup_url_resolves(self):
-        url = reverse('owner_signup')
+    def test_register_url_resolves(self):
+        url = reverse('register')
         self.assertEqual(resolve(url).func.view_class, OwnerSignUpView)

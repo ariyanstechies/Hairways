@@ -1,41 +1,38 @@
 {% load static %}
 <!DOCTYPE HTML>
-<html>
-  <head>
-    <title>{% block title %}
-      For the best Salons, Barber shop in town
-      {% endblock %}
-    </title>
-    {% include "shared/header.html" %}
-  </head>
+<html lang="en">
 
-  <body>
-    <div class="wrapper">
-      {% block nav %}
-      {% include "shared/navbar.html" %}
-      {% endblock %}
-      <div class="main">
-        {% block content %}
-        {% endblock content %}
-      </div>
-      {% include "shared/footer.html" %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>
+    {% block title %}
+    For the best Salons, Barber shop in town
+    {% endblock %}
+  </title>
+  <link rel="stylesheet" href="{% static 'css/add-salon.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap-grid.css' %}">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link href="{% static 'css/themify-icons.css' %}" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/owl.theme.default.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/themify-icons.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="wrapper">
+    {% block nav %}
+    {% include "partials/header.html" %}
+    {% endblock %}
+    <div class="main">
+      {% block content %}
+      {% endblock content %}
     </div>
-    <!-- Signup Modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog"
-      aria-labelledby="signupModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <h3 class="mb-4">I want to </h3>
-            <a href="{% url 'owner_signup' %}" class="btn btn-outline-success
-              d-block my-3 btn-rounded p-2 mx-4">
-              List a Business</a>
-            <a href="{% url 'client_signup' %}" class="btn btn-outline-info
-              d-block my-3 btn-rounded p-2 mx-4">
-              Sign up as User</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+    {% include "partials/footer.html" %}
+  </div>
+</body>
+
 </html>

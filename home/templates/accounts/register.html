@@ -3,22 +3,9 @@
 {% load bootstrap4 %}
 
 {% block content %}
-<style>
-    .form-text.text-muted {
-        visibility: hidden;
-        display: none;
-    }
-
-    .main {
-        height: 100vh;
-        background-image: url("{% static 'images/signup.jpg' %}");
-        background-position: 50% 50%;
-        background-size: cover;
-    }
-</style>
 <div class="container">
-    <div class="row">
-        <div class="col-sm-12">
+    <div class="row justify-content-center">
+        <div class="col-6">
             <div class="card mt-4 w-80">
                 <div class="card-body">
                     <form method="post">
@@ -34,12 +21,12 @@
                         {% endif %}
                         <div class="form-group d-flex justify-content-between">
                             {% if wizard.steps.prev %}
-                            <button name="wizard_goto_step" type="submit" class="btn btn-outline-primary"
+                            <button name="wizard_goto_step" type="submit" class="btn btn-primary"
                                 value="{{ wizard.steps.prev }}">Previous Step </button>
                             {% else %}
                             <div></div>
                             {% endif %}
-                            <input type="submit" class="btn btn-outline-primary" value="Next Step" />
+                            <input type="submit" class="btn btn-primary" value="Next Step" />
                         </div>
                     </form>
                 </div>

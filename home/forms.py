@@ -7,15 +7,21 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class UserSignUpForm(UserCreationForm):
+
+    username = forms.CharField(
+        label=_("Username"),
+        required=True,
+        max_length=50,
+    )
+    password1 = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput,
+    )
+
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = (
-            'username',
-            'email',
-            'phone_number',
-            'password1',
-            'password2',
-        )
+        fields = ('username','email', 'phone_number',)
 
 
 class UserTypeForm(forms.Form):

@@ -25,15 +25,23 @@ SENTRY_KEY = os.getenv('SENTRY_KEY')
 SENTRY_ORG = os.getenv('SENTRY_ORG')
 SENTRY_PROJECT = os.getenv('SENTRY_PROJECT')
 
-# Configuring sentry on production
 sentry_sdk.init(
     dsn=f"https://{SENTRY_KEY}@{SENTRY_ORG}.ingest.sentry.io/{SENTRY_PROJECT}",
     integrations=[DjangoIntegration()],
 
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
+    # To associate users to errors
     send_default_pii=True)
 
+
+# Email
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 
 # AWS
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')

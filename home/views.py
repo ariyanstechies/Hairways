@@ -245,72 +245,73 @@ monthly_chart_datas = []
 @login_required
 @vendor_required
 def dashboard(request):
-    salon = get_object_or_404(Salon, vendor=request.user.vendor)
-    visits = Visit.objects.get_uri_visits_for(request, uri=salon.slug)
-    end_date = datetime.date(datetime.now())
-    start_date = end_date - timedelta(days=7)
-    end_month = datetime.date(datetime.now())
-    start_month = end_month - relativedelta(months=12)
-    weekly_appointments = Appointment.objects.filter(
-        salon=salon,
-        created_date__range=(start_date,
-                             end_date)).order_by('created_date').all()
-    monthly_appointments = Appointment.objects.filter(
-        salon=salon,
-        created_date__range=(start_month,
-                             end_month)).order_by('created_date').all()
 
-    weekly_chart_data = {
-        'mon': 0,
-        'tue': 0,
-        'wed': 0,
-        'thu': 0,
-        'fri': 0,
-        'sat': 0,
-        'sun': 0
-    }
-    monthly_chart_data = {
-        'jan': 0,
-        'feb': 0,
-        'mar': 0,
-        'apr': 0,
-        'may': 0,
-        'jun': 0,
-        'jul': 0,
-        'aug': 0,
-        'sep': 0,
-        'oct': 0,
-        'nov': 0,
-        'dec': 0,
-    }
-    for appointment in weekly_appointments:
-        weekly_chart_data[day_of_week(
-            appointment.created_date)] = weekly_appointments.filter(
-                created_date=appointment.created_date).count()
-    weekly_chart_data = [
-        weekly_chart_data['mon'], weekly_chart_data['tue'],
-        weekly_chart_data['wed'], weekly_chart_data['thu'],
-        weekly_chart_data['fri'], weekly_chart_data['sat'],
-        weekly_chart_data['sun']
-    ]
-    monthly_appointments_data = []
-    for appointment in monthly_appointments:
-        monthly_chart_data[month_of_year(
-            appointment.created_date)] = monthly_appointments.filter(
-                created_date=appointment.created_date).count()
+    # salon = get_object_or_404(Salon, vendor=request.user.vendor)
+    # visits = Visit.objects.get_uri_visits_for(request, uri=salon.slug)
+    # end_date = datetime.date(datetime.now())
+    # start_date = end_date - timedelta(days=7)
+    # end_month = datetime.date(datetime.now())
+    # start_month = end_month - relativedelta(months=12)
+    # weekly_appointments = Appointment.objects.filter(
+    #     salon=salon,
+    #     created_date__range=(start_date,
+    #                          end_date)).order_by('created_date').all()
+    # monthly_appointments = Appointment.objects.filter(
+    #     salon=salon,
+    #     created_date__range=(start_month,
+    #                          end_month)).order_by('created_date').all()
 
-        for month in months_of_year():
-            monthly_appointments_data.append(monthly_chart_data[month.lower()])
+    # weekly_chart_data = {
+    #     'mon': 0,
+    #     'tue': 0,
+    #     'wed': 0,
+    #     'thu': 0,
+    #     'fri': 0,
+    #     'sat': 0,
+    #     'sun': 0
+    # }
+    # monthly_chart_data = {
+    #     'jan': 0,
+    #     'feb': 0,
+    #     'mar': 0,
+    #     'apr': 0,
+    #     'may': 0,
+    #     'jun': 0,
+    #     'jul': 0,
+    #     'aug': 0,
+    #     'sep': 0,
+    #     'oct': 0,
+    #     'nov': 0,
+    #     'dec': 0,
+    # }
+    # for appointment in weekly_appointments:
+    #     weekly_chart_data[day_of_week(
+    #         appointment.created_date)] = weekly_appointments.filter(
+    #             created_date=appointment.created_date).count()
+    # weekly_chart_data = [
+    #     weekly_chart_data['mon'], weekly_chart_data['tue'],
+    #     weekly_chart_data['wed'], weekly_chart_data['thu'],
+    #     weekly_chart_data['fri'], weekly_chart_data['sat'],
+    #     weekly_chart_data['sun']
+    # ]
+    # monthly_appointments_data = []
+    # for appointment in monthly_appointments:
+    #     monthly_chart_data[month_of_year(
+    #         appointment.created_date)] = monthly_appointments.filter(
+    #             created_date=appointment.created_date).count()
 
-    appointments = Appointment.objects.filter(salon__owner=request.user.owner)
-    context = {
-        'salon': salon,
-        'months_of_year': months_of_year(),
-        'weekly_chart_data': weekly_chart_data,
-        'monthly_appointments_data': monthly_appointments_data,
-        'appointments': appointments
-    }
-    return render(request, "dashboard/dashboard.html", context)
+    #     for month in months_of_year():
+    #         monthly_appointments_data.append(monthly_chart_data[month.lower()])
+
+    # appointments = Appointment.objects.filter(salon__owner=request.user.owner)
+    # context = {
+    #     'salon': salon,
+    #     'months_of_year': months_of_year(),
+    #     'weekly_chart_data': weekly_chart_data,
+    #     'monthly_appointments_data': monthly_appointments_data,
+    #     'appointments': appointments
+    # }
+    return render(request, "dashboard/dashboard.html", {})
 
 
 @login_required

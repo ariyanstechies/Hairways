@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{% block title %} Hairways | For best salons and barber shops in town {% endblock %}</title>
   {% bootstrap_css %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/css/bootstrap-grid.css' %}">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
   <link href="{% static 'css/themify-icons.css' %}" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
@@ -25,13 +24,13 @@
   {% block nav %}
   {% include "partials/header.html" %}
   {% endblock %}
-  <div class="pb-5 {% if request.path != '/' %}mt-10{% endif %}">
+  <div {% if request.path != '/' %}class="mt-5 pt-3 pb-5" {% endif %}>
     {% block content %}
     {% endblock content %}
   </div>
   {% include "partials/footer.html" %}
 
-  {% bootstrap_jquery %}
+  {% bootstrap_javascript jquery='full' %}
   <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
   <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
   <script src="{% static 'js/owl.carousel.min.js' %}"></script>

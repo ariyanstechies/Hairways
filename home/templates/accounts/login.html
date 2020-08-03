@@ -9,25 +9,23 @@ Login
 {% block content %}
 <div class="container">
   <div class="row justify-content-center mt-5">
-    <div class="col-6">
-      <div class="card">
-        <div class="card-body">
-          <h1 class="mt-2">Login Section</h1>
-          <hr class="mt-0 mb-4">
-          <form method="POST">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <div class="form-group d-flex justify-content-between">
-              <a href="{% url 'register' %}">Sign Up now!</a>
-              <button type="submit" class="btn btn-primary">Login</button>
-            </div>
-            <hr>
-            <div class="form-group text-center">
-              <a href="{% url 'password_reset' %}" class="btn btn-link">Forgot your Password?</a>
-            </div>
-          </form>
-          <br>
-        </div>
+    <div class="card">
+      <div class="card-body">
+        <h1 class="mt-2">Login Section</h1>
+        <hr class="mt-0 mb-4">
+        <form method="POST">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <div class="form-group d-flex justify-content-between">
+            <a href="{% url 'register' %}">Sign Up now!</a>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+          <hr>
+          <div class="form-group text-center">
+            <a href="{% url 'password_reset' %}" class="btn btn-link">Forgot your Password?</a>
+          </div>
+        </form>
+        <br>
       </div>
     </div>
   </div>

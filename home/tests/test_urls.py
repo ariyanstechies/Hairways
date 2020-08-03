@@ -1,8 +1,8 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
-from home.views import index, salon_details
-from home.clients import ClientSignUpView
-from home.owners import SalonCreateView, OwnerSignUpView
+from home.views import index
+from home.salons import salon_details, SalonCreateView
+from home.accounts import UserSignUpView
 
 
 class TestUrls(SimpleTestCase):
@@ -21,8 +21,4 @@ class TestUrls(SimpleTestCase):
 
     def test_register_url_resolves(self):
         url = reverse('register')
-        self.assertEqual(resolve(url).func.view_class, ClientSignUpView)
-
-    def test_register_url_resolves(self):
-        url = reverse('register')
-        self.assertEqual(resolve(url).func.view_class, OwnerSignUpView)
+        self.assertEqual(resolve(url).func.view_class, UserSignUpView)

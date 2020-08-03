@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
-{% load static %}
 {% load bootstrap4 %}
+
+
+{% block title %}
+Login
+{% endblock title %}
 
 {% block content %}
 <div class="container">
@@ -10,7 +14,7 @@
         <div class="card-body">
           <h1 class="mt-2">Login Section</h1>
           <hr class="mt-0 mb-4">
-          <form method="POST" novalidate>
+          <form method="POST">
             {% csrf_token %}
             {% bootstrap_form form %}
             <div class="form-group d-flex justify-content-between">

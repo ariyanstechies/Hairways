@@ -82,7 +82,7 @@ def salon_details(request, name):
                 request,
                 'Review Received Successfully! It will be posted soon. You can edit it on your Profile'
             )
-            return redirect('salon_details', name=name)
+            return redirect('show_salon', name=name)
     else:
         review_form = ReviewForm()
 
@@ -95,7 +95,7 @@ def salon_details(request, name):
             clientAppointmentAdd.totalCost = 900
             clientAppointmentAdd.save()
             messages.success(request, 'Appointment Successfuly booked')
-            return redirect('salon_details', name=name)
+            return redirect('show_salon', name=name)
     form = CustomerAppointmentForm()
 
     context = {

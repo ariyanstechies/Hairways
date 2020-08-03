@@ -16,7 +16,7 @@ class TestUrls(SimpleTestCase):
         self.assertEqual(resolve(url).func.view_class, SalonCreateView)
 
     def test_salon_details_url_resolves(self):
-        url = reverse('salon_details', args=['sample-salon-slug'])
+        url = reverse('show_salon', args=['sample-salon-slug'])
         self.assertEqual(resolve(url).func, salon_details)
 
     def test_register_url_resolves(self):

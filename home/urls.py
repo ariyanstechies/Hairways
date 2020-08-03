@@ -14,7 +14,7 @@ urlpatterns = [
 
     # Salons
     path('salon/new/', SalonCreateView.as_view(), name='new_salon'),
-    path('salon/<slug:name>/', salon_details, name='salon_details'),
+    path('salon/<slug:name>/', salon_details, name='show_salon'),
     path('salon/payment/', views.clientPayment, name='clientPayment'),
     path('add_salon', views.signup_steps, name='add_salon'),
 

@@ -39,11 +39,11 @@ def index(request):
 
 
 def faqs(request):
-    return render(request, "faqs/index.html")
+    return render(request, "pages/faqs.html")
 
 
 def about(request):
-    return render(request, "about/index.html")
+    return render(request, "pages/about.html")
 
 
 def transaction_progress(request):

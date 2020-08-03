@@ -318,7 +318,6 @@ def dashboard(request):
         return render(request, "dashboard/dashboard.html", context)
 
     else:
-        print('no salons')
         return render(request, "packing.html", {})
 
 

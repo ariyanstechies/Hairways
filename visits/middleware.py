@@ -15,13 +15,18 @@ class CounterMiddleware(object):
             pass
 
         if settings.URI_WITH_GET_PARAMS:
-            Visit.objects.add_uri_visit(request, request.get_full_path(), app_name)
+            Visit.objects.add_uri_visit(
+                request, request.get_full_path(), app_name)
         else:
             Visit.objects.add_uri_visit(request, request.path_info, app_name)
 
 
-class BotVisitorMiddleware(object):
+class BotVisitorMiddleware:
     """ Middleware for count uri visits for bots. """
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
     def is_user_agent_bot(self, user_agent):
         import re
         '''flag user agent as bot as long as it matches a regex patter in the BOTS_USER_AGENTS'''
@@ -31,12 +36,13 @@ class BotVisitorMiddleware(object):
 
         return False
 
-
     def __call__(self, request):
         user_agent = request.META.get("HTTP_USER_AGENT", None)
+
         if user_agent in settings.BOTS_USER_AGENTS:
             request.META.setdefault("IS_BOT", True)
-        elif not self.is_user_agent_bot(user_agent):
+        elif self.is_user_agent_bot(user_agent):
             request.META.setdefault("IS_BOT", True)
         else:
             request.META.setdefault("IS_BOT", False)
+        return self.get_response(request)

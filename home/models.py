@@ -11,6 +11,7 @@ from io import BytesIO
 from django.core.files.storage import default_storage
 from PIL import Image
 
+
 class User(AbstractUser):
     is_customer = models.BooleanField(default=False)
     is_vendor = models.BooleanField(default=False)
@@ -34,6 +35,7 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.user.first_name
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User,
@@ -60,6 +62,7 @@ class Profile(models.Model):
             memfile.close()
             img.close()
 
+
 class Location(models.Model):
     city = models.CharField(max_length=30)
     description = models.CharField(max_length=250,
@@ -78,7 +81,8 @@ class Gallery(models.Model):
     TYPES = (('Cover Image', 'Cover Image'),
              ('Card Image', 'Card Image'),
              ('Promo Image', 'Promo Image'))
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    image = models.FileField(_("Image"),
+                             upload_to='images/', null=True, blank=True)
     is_selected = models.BooleanField(default=False)
     image_type = models.CharField(max_length=60,
                                   choices=TYPES, default="Cover Image")
@@ -97,8 +101,8 @@ class Salon(models.Model):
     description = models.TextField(max_length=250)
     created_date = models.DateTimeField(default=timezone.now)
     vendor = models.OneToOneField(Vendor,
-                                 on_delete=models.CASCADE,
-                                 related_name='salons')
+                                  on_delete=models.CASCADE,
+                                  related_name='salons')
     paybill = models.IntegerField(null=True, blank=True)
     is_paid = models.BooleanField(default=False)
     location = models.OneToOneField(Location,

@@ -226,9 +226,3 @@ function checkSalon(starts_with) {
     $(thisAlert).removeClass('alert-validate');
   }
 })(jQuery);
-
-// Blog courusel
-// optional
-$('#blogCarousel').carousel({
-  interval: 5000
-});

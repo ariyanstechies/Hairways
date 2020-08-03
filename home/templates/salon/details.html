@@ -1,25 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load crispy_forms_tags %}
-{% block content %}
-{% load bootstrap4 %} {# import bootstrap4/bootstrap3 #}
-{% bootstrap_css %} {# Embed Bootstrap CSS #}
-{% bootstrap_javascript jquery='full' %} {# Embed Bootstrap JS+jQuery #}
-{{ form.media }} {# Adds date-picker required JS and CSS #}
+{% load bootstrap4 %}
 
-<div class="container">
-  {% if messages %}
-  {% for message in messages %}
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong class="text-success"></strong> {{ message }}
-    <button type="button" class="close" data-dismiss="alert"
-      aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  {% endfor %}
-  {% endif %}
-</div>
+{% block extra_js %}
+{{ form.media }}
+{% endblock extra_js %}
+
+{% block content %}
 <section>
   <div class="owl-carousel salon-details-slider owl-theme">
     <div class="item">
@@ -66,8 +53,6 @@
   </div>
 </section>
 
-
-<!-- body  -->
 <div class="container">
 
   <!-- Product Services Toggler -->
@@ -76,37 +61,34 @@
       <h4 class="text-teal mt-5">Products and Services</h4>
       <div class="mt-5 mb-5">
         <ul class="nav nav-justified services-products-toggler mt-3 mb-2">
-          <h5 class="nav-item"><a data-toggle="tab" href="#services"
-              class="active nav-link">Services</a></h5>
-          <h5 class="nav-item"><a data-toggle="tab" href="#products"
-              class="nav-link">Products</a></h5>
+          <h5 class="nav-item"><a data-toggle="tab" href="#services" class="active nav-link">Services</a></h5>
+          <h5 class="nav-item"><a data-toggle="tab" href="#products" class="nav-link">Products</a></h5>
         </ul>
       </div>
-    </section>
+  </section>
 
-    <!-- Sticky filter on phones and services / products displayed-->
-    <section>
-      {% if services or products %}
-      <div class="container-fluid card sticky-top d-block d-md-none d-lg-none"
-        style="background-color:white">
-        <div class="row align-items-center pt-3 justify-content-center">
-          <div class="col-3">
-            <div class="filters">
-              <h5><i class="ti-bolt text-teal"></i><span class="d-none
+  <!-- Sticky filter on phones and services / products displayed-->
+  <section>
+    {% if services or products %}
+    <div class="container-fluid card sticky-top d-block d-md-none d-lg-none" style="background-color:white">
+      <div class="row align-items-center pt-3 justify-content-center">
+        <div class="col-3">
+          <div class="filters">
+            <h5><i class="ti-bolt text-teal"></i><span class="d-none
                   d-md-inline"> Popular</span>
-              </h5>
-            </div>
+            </h5>
           </div>
-          <div class="col-3">
-            <div class="filters">
-              <h5><i class="ti-location-pin text-teal"></i><span class="d-none
+        </div>
+        <div class="col-3">
+          <div class="filters">
+            <h5><i class="ti-location-pin text-teal"></i><span class="d-none
                   d-md-inline"> Near me</span>
-              </h5>
-            </div>
+            </h5>
           </div>
-          <div class="col-3">
-            <div class="filters">
-              <h5><i class="ti-thumb-up text-teal"></i><span class="d-none
+        </div>
+        <div class="col-3">
+          <div class="filters">
+            <h5><i class="ti-thumb-up text-teal"></i><span class="d-none
                   d-md-inline"> Recommended</span></h4>
             </h5>
           </div>
@@ -128,8 +110,7 @@
           <div class="card mt-3 col-md-4 d-none d-md-block d-lg-block border-0">
             <p><i class="ti-bolt text-teal mr-2"></i><span class="text-muted
                 font-weight-bold">Popular</span></p>
-            <p><i class="ti-location-pin text-teal mr-2"></i><span
-                class="text-muted font-weight-bold">Near Me</span>
+            <p><i class="ti-location-pin text-teal mr-2"></i><span class="text-muted font-weight-bold">Near Me</span>
             </p>
             <p><i class="ti-thumb-up text-teal mr-2"></i><span class="text-muted
                 font-weight-bold">Recommended</span>
@@ -146,8 +127,7 @@
               </div>
               <div class="col-4">
                 <p class="mt-0">Ksh <b>{{service.cost}}</b></p>
-                <button class="btn not-clicked mr-0 py-0 mt-0"
-                  name="{{service.cost}}" id="{{service.id}}">Add</button>
+                <button class="btn not-clicked mr-0 py-0 mt-0" name="{{service.cost}}" id="{{service.id}}">Add</button>
               </div>
             </div>
             {% empty %}
@@ -163,8 +143,7 @@
           <div class="card mt-3 col-md-4 d-none d-sm-block border-0">
             <p><i class="ti-bolt text-teal mr-2"></i><span class="text-muted
                 font-weight-bold">Popular</span></p>
-            <p><i class="ti-location-pin text-teal mr-2"></i><span
-                class="text-muted font-weight-bold">Near Me</span>
+            <p><i class="ti-location-pin text-teal mr-2"></i><span class="text-muted font-weight-bold">Near Me</span>
             </p>
             <p><i class="ti-thumb-up text-teal mr-2"></i><span class="text-muted
                 font-weight-bold">Recommended</span>
@@ -181,8 +160,7 @@
               </div>
               <div class="col-4">
                 <p class="mt-0">Ksh <b>{{product.price}}</b></p>
-                <button class="btn not-clicked mr-0 py-0 mt-0"
-                  name="{{product.price}}" id="{{product.id}}">Add</button>
+                <button class="btn not-clicked mr-0 py-0 mt-0" name="{{product.price}}" id="{{product.id}}">Add</button>
               </div>
             </div>
             {% empty %}
@@ -334,8 +312,7 @@
   <div name="closed" class="cart ml-0 hide d-block d-sm-none">
     <div class="row cart-buttons-container mx-0">
       <div class="col-4 cart-amount container text-white">
-        <p class="mt-2 ml-2"><b class="cart-items-counter"
-            id="total_items_booked">0</b></p>
+        <p class="mt-2 ml-2"><b class="cart-items-counter" id="total_items_booked">0</b></p>
       </div>
       <div class="col-4 cart-icon-container">
         <div class="icon-container text-white col-4 rounded-circle">
@@ -357,8 +334,7 @@
           {% csrf_token %}
           <h5 class="text-teal my-2">Appointment Date</h5>
           {% bootstrap_form form %}
-          <input type="text" id="appointment_details" hidden
-            name="appointment">
+          <input type="text" id="appointment_details" hidden name="appointment">
           <button class="btn btn-outline-teal" type="submit">Place Appointment</button>
         </form>
       </div>
@@ -369,8 +345,7 @@
 <!-- Desktop version cart -->
 <section>
   <div class="desktop-cart d-none d-sm-block d-md-block">
-    <button name="hide" id="desktop_cart_button"
-      class="desktop-cart-icon-container hide btn btn-outline-teal my-auto
+    <button name="hide" id="desktop_cart_button" class="desktop-cart-icon-container hide btn btn-outline-teal my-auto
       text-center rounded-circle">
       <i class="desktop-cart-icon text-teal font-weight-bold my-auto py-3
         ti-shopping-cart"></i>
@@ -392,8 +367,7 @@
           {% csrf_token %}
           <h5 class="text-teal my-2">Appointment Date</h5>
           {% bootstrap_form form %}
-          <input type="text" id="appointment_details" hidden
-            name="appointment">
+          <input type="text" id="appointment_details" hidden name="appointment">
           <button class="btn btn-outline-teal" type="submit">Place Appointment</button>
         </form>
       </div>
@@ -401,7 +375,6 @@
 
   </div>
 </section>
-
 
 <!-- About section -->
 <section>
@@ -467,9 +440,7 @@
   </div>
 </section>
 
-<script
-  src="https://maps.googleapis.com/maps/api/js?key={{MAPS_API_KEY}}&callback=initMap"
-  async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{MAPS_API_KEY}}&callback=initMap" async defer></script>
 <!-- end of body  -->
 
 <script>
@@ -483,10 +454,10 @@
   // Display large cart
   $('#desktop_cart_button').on('click', function () {
     var desktop_cart_state = $('#desktop_cart_button').attr('name')
-    if (desktop_cart_state == 'hide'){
+    if (desktop_cart_state == 'hide') {
       $('#desktop_cart_container').removeClass('hide')
       $('#desktop_cart_button').attr('name', 'show')
-    }else{
+    } else {
       $('#desktop_cart_container').addClass('hide')
       $('#desktop_cart_button').attr('name', 'hide')
     }
@@ -557,7 +528,7 @@
   });
 
   // Remove item from cart
-  $('.remove_from_cart').on('click', '.col-2', function(){
+  $('.remove_from_cart').on('click', '.col-2', function () {
     console.log('i neeedto')
   });
 

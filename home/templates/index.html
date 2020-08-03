@@ -2,7 +2,7 @@
 {% load static %}
 {% load visits_tags %}
 {% block nav %}
-{% include "partials/index-header.html" %}
+{% include "partials/header.html" %}
 {% endblock %}
 {% block content %}
 <section class="block-31" style="position: relative;">
@@ -16,7 +16,7 @@
             <span class="subheading-sm">Welcome to</span>
             <h2 class="heading">{{ salon.name }}</h2>
             <p>
-              <a href="{% url 'salon_details' name=salon.slug %}" class="btn py-4 px-5 btn-in-slider"> Visit Salon</a>
+              <a href="{% url 'show_salon' name=salon.slug %}" class="btn py-4 px-5 btn-in-slider"> Visit Salon</a>
             </p>
           </div>
         </div>
@@ -56,63 +56,32 @@
         </div>
       </div>
       <div class="col-12 col-sm-3">
-        <input class="search-input form-control float-right col-sm-12 mb-3" placeholder="search by name">
+        <form method="get">
+          <input class="form-control mb-3" placeholder="search by name">
+        </form>
       </div>
     </div>
   </div>
 </section>
 <section>
   <div class="container">
-    <!-- SALONS CONTAINER -->
     <div class="row">
       <div class="card-deck">
         {% for salon in salons %}
         {% get_visits salon.slug as visits %}
-        <div class="col-sm-12 col-md-6 col-lg-4 card-min-height">
-          <div class="card salon-card mb-4 m-0">
-            <img class="card-img-top img-fluid" {% if salon.card_img %} src="{{salon.card_img}}" {% else %}
-              src="{% static 'images/salon.jpg'%}" {% endif %} alt="Card image cap">
-
-            <div class="card-body card-min-height">
-              <h4 class="card-title">
-                {{ salon.name | truncatewords:3 }}
-              </h4>
-              <ul class="list-unstyled list-inline rating mb-0">
-                {% for star in '12345' %}
-                {% if forloop.counter <= salon.rating %}
-                <li class="list-inline-item mr-0"><i class="metismenu-icon ti-star text-warning"></i></li>
-                {% else %}
-                <li class="list-inline-item mr-0"><i class="metismenu-icon ti-star text-dark"></i></li>
-                {% endif %}
-                {% endfor %}
-                <li class="list-inline-item">
-                  <p class="text-muted mb-2">
-                    {{ salon.rating }}
-                    ({{ salon.approved_reviews.count }})
-                  </p>
-                </li>
-              </ul>
-              <div class="mb-3">
-                <li data-toggle="tooltip" data-placement="top" title="Likes" class="list-inline-item mr-0">
-                  <i class="metismenu-icon ti-thumb-up text-success"></i>
-                  {{ salon.rating }}
-                </li>
-                <li data-toggle="tooltip" data-placement="top" title="Views" class="list-inline-item mr-0">
-                  <i class="metismenu-icon ml-2 ti-eye text-success"></i>
-                  {% if visits %}{{ visits }}{% else %}0{% endif %}
-                </li>
-                <li data-toggle="tooltip" data-placement="top" title="{{salon.town}}" class="list-inline-item mr-0">
-                  <i class="metismenu-icon ml-2 ti-location-pin text-success"></i>
-                  {{ salon.town | truncatewords:2 }}
-                </li>
-              </div>
-              <p data-toggle="tooltip" data-placement="top" title="{{salon.description}}" class="card-text">
-                {{ salon.description|truncatewords:10 }}
-              </p>
-              <p class="card-text text-center"><small class="text-muted"><a type="button"
-                    href="{% url 'salon_details' name=salon.slug %}"
-                    class="btn w-75 btn-outline-success btn-rounded text-center">Visit Salon</a></small></p>
-            </div>
+        <div class="card">
+          {% if salon.gallery.image %}
+          <img class="card-img-top" src="{{ salon.gallery.image.url }}" alt="{{ salon.name }} img">
+          {% else %}
+          <img class="card-img-top" src="https://placehold.it/450x300" alt="{{ salon.name }} img">
+          {% endif %}
+          <div class="card-body">
+            <h3 class="card-title">{{ salon.name | truncatewords:5 }}</h3>
+            <p class="card-text">{{ salon.description|truncatewords:15 }} </p>
+            <p class="card-text text-center">
+              <a type="button" href="{% url 'show_salon' name=salon.slug %}"
+                class="btn w-75 btn-outline-success btn-rounded text-center">Visit Salon</a>
+            </p>
           </div>
         </div>
         {% empty %}

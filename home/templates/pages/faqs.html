@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block faqs %}
-<link rel="stylesheet" href="{% static 'css/faqs.css' %}"> {% endblock %}
+
 {% block content %}
-<div class="w3-container intro  w3-center">
+<div class="container">
   {% for message in messages %}
   <div class="alert alert-success alert-dismissible fade show" role="alert">
     <strong class="text-success"></strong> {{ message }}
@@ -13,54 +11,53 @@
   </div>
   {% endfor %}
   <h2>Hairways frequently asked questions.</h2>
-  <p class="answer">We at hairways have tried our best to make our system easy to use,the following are
+  <p>We at hairways have tried our best to make our system easy to use,the following are
     some frequently asked questions. Also read our <span><a href="Terms_and_Conditions">Terms of Service</a></span>.
     If you cant find your questions answered bellow then please feel free to <b><i>contact us</i></b> </p>
 </div>
-<div class="w3-panel inner">
+<div class="container">
 
-  <h4><b>What is hairways?</b></h4>
-  <p class="answer">
+  <h3>What is hairways?</h3>
+  <p>
     Hairways is here to bridge the gap between Salon owners and their (prospective)Castomers
     We do this by providing Salons a platform to be found by their castumers. Castomers can see and rank
     Salons and review or write a short review of Salons they have visited.
     They can also book for Salon services from their Salon of via Hairways.</p>
 
-  <h4><b>How do I get my Salon listed?</b></h4>
-  <p class="answer">
+  <h3>How do I get my Salon listed?</h3>
+  <p>
     Simple just <i><a>create an account<a></i> with us and confirm Your
     email address. Then from your dashboard feed in your Salon details and choose your
     favourite plan. Once your subscription is confirmed your salon will be up and running.
   </p>
 
 
-  <h4><b>What is your pricing?</b></h4>
-  <p class="answer">
+  <h3>What is your pricing?</h3>
+  <p>
     We try to have friendly prices just to keep our servers running and give a token to give
     to our developers. You get a one month free after that you choose a plan starting from as
     low as <b>Ksh.950/Month</b> see our <b> <a href="pricing/">pricing</a></b> for more informantion
   </p>
 
-  <h4><b>Why is my Salon not listed in the front page?</b></h4>
-  <p class="answer">
+  <h3>Why is my Salon not listed in the front page?</h3>
+  <p>
     To be listed in the front page, you will need to upgrade your current subscription
     or find higher ranking by your custmers. Remind them to rate you on
-    </a href="https://hairways.co.ke">hairways.co.ke</a> after serving them.
+    <a href="http://hairwayskenya.com" aria-label="hairways kenya">Hairways Kenya</a> after serving them.
   </p>
 
 
-  <h4><b>How do you prevent unlegit ratings</b></h4>
-  <p class="answer">
+  <h3>How do you prevent unlegit ratings</h3>
+  <p>
     We have scrips dedicated for doing exarctly that. Also Viewers can only rate after
-    visiting the . The salon owner must also confirm their visiting.<i> "Hakuna mbuzi
-      kuruka kamba."</i>
+    visiting the . The salon owner must also confirm their visiting.<b> "Hakuna mbuzi
+      kuruka kamba."</b>
   </p>
 
-  <h4><b>How do I review,like and or rank a salon?</b></h4>
-  <p class="answer">
+  <h3>How do I review,like and or rank a salon?</h3>
+  <p>
     Before you can like,review and or rank a salon you have to book a service from
     that salon. However anyone can view all the above anytime.
   </p>
 </div>
-<!--end of inner questions and answers -->
-{% endblock %}
+{% endblock content %}
